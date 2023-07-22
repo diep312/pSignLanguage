@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.databinding.ActivityLoginBinding
+import com.ptit.signlanguage.ui.main.MainActivity
 import com.ptit.signlanguage.ui.register.RegisterActivity
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.security.MessageDigest
@@ -46,30 +47,16 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnNext.setOnClickListener {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun observerLiveData() {
         viewModel.apply {
 
-        }
-    }
-
-
-    // print hash key for login facebook
-    fun printHashKey(pContext: Context) {
-        try {
-            val info: PackageInfo = pContext.getPackageManager()
-                .getPackageInfo(pContext.getPackageName(), PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures) {
-                val md: MessageDigest = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                val hashKey: String = String(Base64.encode(md.digest(), 0))
-                Log.i(TAG, "printHashKey() Hash Key: $hashKey")
-            }
-        } catch (e: NoSuchAlgorithmException) {
-            Log.e(TAG, "printHashKey()", e)
-        } catch (e: Exception) {
-            Log.e(TAG, "printHashKey()", e)
         }
     }
 

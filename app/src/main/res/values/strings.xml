@@ -27,4 +27,10 @@
     <string name="str_enter_pass_again">Nhập lại mật khẩu</string>
     <string name="str_enter_name_show">Nhập tên hiển thị</string>
 
+    <string name="str_video_to_text">Video To Text</string>
+    <string name="str_text_to_video">Text To Video</string>
+    <string name="str_account">Account</string>
+    <string name="str_course">Course</string>
+
+
 </resources>

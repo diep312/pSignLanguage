@@ -1,16 +1,21 @@
 package com.ptit.signlanguage.ui.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.ptit.signlanguage.R
-import com.ptit.signlanguage.databinding.ActivityMainBinding
 import com.ptit.signlanguage.base.BaseActivity
+import com.ptit.signlanguage.databinding.ActivityMainBinding
+import com.ptit.signlanguage.ui.main.adapter.MainViewPagerAdapter
+import com.ptit.signlanguage.utils.Constants.PAGE_0
+import com.ptit.signlanguage.utils.Constants.PAGE_1
+import com.ptit.signlanguage.utils.Constants.PAGE_2
+import com.ptit.signlanguage.utils.Constants.PAGE_3
+import com.ptit.signlanguage.utils.Constants.PAGE_4
+import com.ptit.signlanguage.utils.Constants.TOTAL_SIZE_PAGE
 import com.ptit.signlanguage.view_model.ViewModelFactory
-import com.ptit.signlanguage.utils.Constants
-import com.ptit.signlanguage.utils.Constants.KEY_PHONE_NUMBER
-import com.ptit.signlanguage.utils.Status
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+    lateinit var myViewPagerAdapter : MainViewPagerAdapter
 
     override fun getContentLayout(): Int {
         return R.layout.activity_main
@@ -21,34 +26,60 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun initView() {
-//        viewModel.showLoading()
-//        viewModel.getUsers()
-
         setLightIconStatusBar(true)
+        binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity), 0, 0)
 
-        binding.tv.text = intent.getStringExtra(KEY_PHONE_NUMBER)
+
+        myViewPagerAdapter = MainViewPagerAdapter(this)
+        binding.vp.offscreenPageLimit = 4
+        binding.vp.adapter = myViewPagerAdapter
+        binding.vp.isUserInputEnabled = false
     }
 
     override fun initListener() {
+        binding.bnvMenu.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.btn_video_to_text -> {
+                    binding.vp.currentItem = PAGE_0
+                }
+                R.id.btn_text_to_video -> {
+                    binding.vp.currentItem = PAGE_1
+                }
+                R.id.btn_course -> {
+                    binding.vp.currentItem = PAGE_2
+                }
+                R.id.btn_account -> {
+                    binding.vp.currentItem = PAGE_3
+                }
+            }
+            true
+        }
+
+        binding.vp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when (position) {
+                    PAGE_0 -> {
+                        binding.bnvMenu.menu.findItem(R.id.btn_video_to_text).isChecked = true
+                    }
+                    PAGE_1 -> {
+                        binding.bnvMenu.menu.findItem(R.id.btn_text_to_video).isChecked = true
+                    }
+                    PAGE_2 -> {
+                        binding.bnvMenu.menu.findItem(R.id.btn_course).isChecked = true
+                    }
+                    PAGE_3 -> {
+                        binding.bnvMenu.menu.findItem(R.id.btn_account).isChecked = true
+                    }
+                }
+            }
+        })
+
     }
 
     override fun observerLiveData() {
         viewModel.apply {
-            viewModel.listUser.observe(this@MainActivity) {
-                viewModel.hideLoading()
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        Log.d(Constants.TAG_SUCCESS, it.data.toString())
-                    }
-                    Status.ERROR -> {
-                        Log.e(Constants.TAG_ERROR, it.message.toString())
-                    }
-                    Status.LOADING -> {
-                        Log.d(Constants.TAG_LOADING, "LOADING")
-                        it.data.toString()
-                    }
-                }
-            }
+
         }
     }
 

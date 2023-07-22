@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment<VM : BaseViewModel, BINDING : ViewDataBinding> : Fragment() {
 
     private lateinit var binding: BINDING
-    private lateinit var viewModel: VM
+    lateinit var viewModel: VM
     var loadingDialog: LoadingDialog? = null
 
     override fun onCreateView(

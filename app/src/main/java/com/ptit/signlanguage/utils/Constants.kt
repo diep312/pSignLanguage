@@ -10,4 +10,11 @@ object Constants {
     const val KEY_VERIFICATION_ID = "KEY_VERIFICATION_ID"
     const val FIRST_PHONE_VN = "+84"
     const val KEY_RESEND_TOKEN = "KEY_RESEND_TOKEN"
+
+    const val TOTAL_SIZE_PAGE = 4
+    const val PAGE_0 = 0
+    const val PAGE_1 = 1
+    const val PAGE_2 = 2
+    const val PAGE_3 = 3
+    const val PAGE_4 = 4
 }
