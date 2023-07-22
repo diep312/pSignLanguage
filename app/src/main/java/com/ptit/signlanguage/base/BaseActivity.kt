@@ -6,6 +6,8 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.text.Html
+import android.text.Spanned
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -105,5 +107,13 @@ abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : App
             }
         }
         window.decorView.systemUiVisibility = flags or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+    }
+
+    fun getTextHtml(stringResID : Int) : Spanned {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(getString(stringResID), Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            Html.fromHtml(getString(stringResID))
+        }
     }
 }
