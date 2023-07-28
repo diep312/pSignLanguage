@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imv_video"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@color/color_gray"
+            app:layout_constraintDimensionRatio="1:1.618"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="@dimen/dp8" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_radius_8"
+            android:backgroundTint="@color/colorYellow"
+            android:textColor="@color/black"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="@dimen/dp12"
+            android:paddingVertical="@dimen/dp8"
+            android:layout_marginBottom="@dimen/dp12"
+            android:text="Cấp độ 1"
+            android:id="@+id/btn_join" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

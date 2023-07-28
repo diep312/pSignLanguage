@@ -31,6 +31,7 @@
     <string name="str_text_to_video">Text To Video</string>
     <string name="str_account">Account</string>
     <string name="str_course">Course</string>
+    <string name="str_search">Tìm kiếm</string>
 
 
 </resources>

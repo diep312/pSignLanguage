@@ -26,7 +26,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun initView() {
-        setLightIconStatusBar(true)
+        setLightIconStatusBar(false)
+        setColorForStatusBar(R.color.color_primary)
         binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity), 0, 0)
 
 

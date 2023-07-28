@@ -17,4 +17,7 @@ object Constants {
     const val PAGE_2 = 2
     const val PAGE_3 = 3
     const val PAGE_4 = 4
+
+    const val HORIZONTAL = 0
+    const val VERTICAL = 1
 }

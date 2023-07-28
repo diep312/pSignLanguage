@@ -1,9 +1,9 @@
-package com.nguyencuong.lsrwlearnenglish.base
+package com.ptit.signlanguage.base
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.nguyencuong.lsrwlearnenglish.utils.Constants.HORIZONTAL
+import com.ptit.signlanguage.utils.Constants.HORIZONTAL
 
 class LinearItemDecoration(var spacing : Int, var direction : Int = HORIZONTAL) : RecyclerView.ItemDecoration() {
 

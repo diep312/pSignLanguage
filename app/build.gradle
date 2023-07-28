@@ -87,4 +87,7 @@ dependencies {
 
     // login facebook
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    // recyclerview
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
 }
