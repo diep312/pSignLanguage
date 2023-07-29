@@ -30,7 +30,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         setColorForStatusBar(R.color.color_primary)
         binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity), 0, 0)
 
-
         myViewPagerAdapter = MainViewPagerAdapter(this)
         binding.vp.offscreenPageLimit = 4
         binding.vp.adapter = myViewPagerAdapter

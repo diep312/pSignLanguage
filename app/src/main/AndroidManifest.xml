@@ -38,6 +38,11 @@
         <activity android:name=".ui.topic.TopicActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.word.ListWordActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.score.ActivityScore"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.ptit.signlanguage.base
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -115,5 +116,13 @@ abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : App
         } else {
             Html.fromHtml(getString(stringResID))
         }
+    }
+
+    fun pxToDp(px: Int): Int {
+        return (px / Resources.getSystem().displayMetrics.density).toInt()
+    }
+
+    fun dpToPx(dp: Int): Int {
+        return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 }

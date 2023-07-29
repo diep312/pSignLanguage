@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_radius_8"
+        android:backgroundTint="@color/white"
+        android:elevation="@dimen/dp4"
+        android:padding="@dimen/dp8">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imv_user"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/im_demo"
+            app:riv_corner_radius="@dimen/dp8"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp4"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="apple"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imv_user" />
+
+        <TextView
+            android:id="@+id/tv_label_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp4"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Bài đúng"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

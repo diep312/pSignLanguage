@@ -17,4 +17,10 @@
         <item name="android:fontFamily">@font/montserrat_medium</item>
 
     </style>
+
+    <style name="customRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/bg_rating_bar</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:maxHeight">10dp</item>
+    </style>
 </resources>
