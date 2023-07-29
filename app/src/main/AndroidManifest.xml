@@ -43,6 +43,9 @@
 
         <activity android:name=".ui.score.ActivityScore"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.score.PracticeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

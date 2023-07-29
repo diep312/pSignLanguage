@@ -1,83 +1,79 @@
-package com.ptit.signlanguage.ui.main.fragment
+package com.ptit.signlanguage.ui.score
 
 import android.Manifest
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.MediaController
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
-import com.ptit.signlanguage.base.BaseFragment
-import com.ptit.signlanguage.databinding.FragmentVideoToTextBinding
+import com.ptit.signlanguage.base.BaseActivity
+import com.ptit.signlanguage.databinding.ActivityPracticeBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
-
-class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBinding>() {
+class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() {
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
 
     override fun getContentLayout(): Int {
-        return R.layout.fragment_video_to_text
-    }
-
-    override fun observerLiveData() {
-        viewModel.apply {
-
-        }
+        return R.layout.activity_practice
     }
 
     override fun initView() {
-        val mediaController = MediaController(requireContext())
-        mediaController.setAnchorView(binding.vvVideo)
-        binding.vvVideo.setMediaController(mediaController)
+        setLightIconStatusBar(false)
+        setColorForStatusBar(R.color.color_primary)
+        binding.layout.setPadding(0, getStatusBarHeight(this@PracticeActivity), 0, 0)
+
     }
 
     override fun initListener() {
-        binding.btnRecord.setOnClickListener {
-            if (checkCamera()) {
-                getCameraPermission()
+        binding.imvRecord.setOnClickListener {
+            if(!isDoubleClick()) {
+                if (checkCamera()) {
+                    getCameraPermission()
+                }
             }
         }
-        binding.btnPickVideo.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "video/*")
-            startActivityForResult(intent, REQUEST_TAKE_GALLERY_VIDEO)
-        }
+
+        binding.imvBack.setOnClickListener { finish() }
+        binding.btnBack.setOnClickListener { finish() }
     }
 
-    private fun recordVideo() {
-        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-        startActivityForResult(intent, VIDEO_RECORD_CODE)
+    override fun observerLiveData() {
+
     }
 
     private fun checkCamera(): Boolean {
-        return requireActivity().packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
+        return binding.root.context.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
     }
 
     private fun getCameraPermission() {
         if (ContextCompat.checkSelfPermission(
-                requireContext(),
+                binding.root.context,
                 Manifest.permission.CAMERA
             ) == PackageManager.PERMISSION_DENIED
         ) {
             ActivityCompat.requestPermissions(
-                requireActivity(),
+                this,
                 arrayOf(Manifest.permission.CAMERA),
                 CAMERA_PERMISSION_CODE
             )
         } else {
             recordVideo()
         }
+    }
+
+    private fun recordVideo() {
+        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        startActivityForResult(intent, VIDEO_RECORD_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -88,24 +84,8 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     val videoUri = data?.data
                     val videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
-                    binding.vvVideo.setVideoPath(videoPath)
-                    binding.vvVideo.start()
-                }
-                Activity.RESULT_CANCELED -> {
-                    Log.d(TAG, "Cancel")
-                }
-                else -> {
-                    Log.e(TAG, "Error")
-                }
-            }
-        } else if (requestCode == REQUEST_TAKE_GALLERY_VIDEO) {
-            when (resultCode) {
-                RESULT_OK -> {
-                    val videoUri: Uri = data?.data!!
-                    val videoPath = parsePath(videoUri)
-                    Log.d(TAG, "$videoPath is the path that you need...")
-                    binding.vvVideo.setVideoPath(videoPath)
-                    binding.vvVideo.start()
+                    binding.vvRecord.setVideoPath(videoPath)
+                    binding.vvRecord.start()
                 }
                 Activity.RESULT_CANCELED -> {
                     Log.d(TAG, "Cancel")
@@ -119,18 +99,20 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 
     private fun parsePath(uri: Uri?): String? {
         val projection = arrayOf(MediaStore.Video.Media.DATA)
-        val cursor: Cursor? = requireActivity().contentResolver.query(uri!!, projection, null, null, null)
+        val cursor: Cursor? =
+            binding.root.context.contentResolver.query(uri!!, projection, null, null, null)
         return if (cursor != null) {
             val columnIndex: Int = cursor
                 .getColumnIndexOrThrow(MediaStore.Video.Media.DATA)
             cursor.moveToFirst()
-            cursor.getString(columnIndex)
+            val path = cursor.getString(columnIndex)
+            cursor.close()
+            return path
         } else null
     }
 
     companion object {
         private const val CAMERA_PERMISSION_CODE: Int = 100
         private const val VIDEO_RECORD_CODE: Int = 101
-        private const val REQUEST_TAKE_GALLERY_VIDEO: Int = 102
     }
 }
