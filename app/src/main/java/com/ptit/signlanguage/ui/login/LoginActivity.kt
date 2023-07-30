@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Base64
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
@@ -51,6 +53,22 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         binding.btnNext.setOnClickListener {
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.imvShowHidePass.setOnClickListener {
+            if (isPassShowed) {
+                isPassShowed = false
+                binding.imvShowHidePass.setImageResource(R.drawable.ic_eye_closed)
+                binding.edtPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
+                binding.edtPassword.setSelection(binding.edtPassword.length())
+            } else {
+                isPassShowed = true
+                binding.imvShowHidePass.setImageResource(R.drawable.ic_eye_open)
+                binding.edtPassword.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+                binding.edtPassword.setSelection(binding.edtPassword.length())
+            }
         }
     }
 
