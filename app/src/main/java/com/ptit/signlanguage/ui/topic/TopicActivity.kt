@@ -33,7 +33,7 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>() {
     }
 
     override fun initListener() {
-
+        binding.imvBack.setOnClickListener { finish() }
     }
 
     override fun observerLiveData() {

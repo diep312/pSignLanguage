@@ -39,7 +39,7 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
     }
 
     override fun initListener() {
-
+        binding.btnBack.setOnClickListener { finish() }
     }
 
     override fun observerLiveData() {

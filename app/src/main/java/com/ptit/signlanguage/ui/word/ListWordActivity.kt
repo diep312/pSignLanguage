@@ -40,6 +40,7 @@ class ListWordActivity : BaseActivity<MainViewModel, ActivityListWordBinding>() 
             val intent = Intent(this@ListWordActivity, ActivityScore::class.java)
             startActivity(intent)
         }
+        binding.imvBack.setOnClickListener { finish() }
     }
 
     override fun observerLiveData() {

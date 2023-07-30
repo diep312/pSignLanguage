@@ -28,7 +28,6 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
     }
 
     override fun initListener() {
-
+        binding.imvLogout.setOnClickListener { activity?.finish() }
     }
-
 }
