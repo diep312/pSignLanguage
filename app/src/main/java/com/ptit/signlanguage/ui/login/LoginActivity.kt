@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Base64
 import android.util.Log
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -42,6 +45,30 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         binding.layout.setPadding(0, getStatusBarHeight(this@LoginActivity), 0, 0)
 
         binding.tvRegister.text = getTextHtml(R.string.str_register_next)
+
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
+        val face = ResourcesCompat.getFont(this, R.font.montserrat_semi_bold)
+
+        binding.collapseToolbar.setCollapsedTitleTypeface(face)
+        binding.collapseToolbar.setExpandedTitleTypeface(face)
+        binding.collapseToolbar.title = getString(R.string.str_login)
+        binding.collapseToolbar.setCollapsedTitleTextColor(
+            ContextCompat.getColor(
+                this,
+                R.color.black
+            )
+        )
+        binding.collapseToolbar.setExpandedTitleColor(
+            ContextCompat.getColor(
+                this,
+                R.color.black
+            )
+        )
     }
 
     override fun initListener() {
