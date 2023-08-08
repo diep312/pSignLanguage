@@ -6,8 +6,6 @@
     <string name="str_forgot_pass">Quên mật khẩu?</string>
     <string name="str_login">Đăng nhập</string>
     <string name="str_or">Hoặc</string>
-    <string name="str_require_register"><![CDATA[Bạn chưa có tài khoản? <font color=\'#3D5CFF\'>Đăng ký</font>]]></string>
-    <string name="str_require_login"><![CDATA[Bạn đã có tài khoản? <font color=\'#3D5CFF\'>Đăng nhập</font>]]></string>
     <string name="str_require_send_otp"><![CDATA[Bạn không nhận được mã xác thực? <font color=\'#3D5CFF\'>Gửi lại</font>]]></string>
     <string name="str_name_show">Tên hiển thị</string>
     <string name="str_register">Đăng ký</string>
@@ -16,8 +14,8 @@
     <string name="str_verify_fail">Xác thực thất bại!</string>
     <string name="str_otp_fail">Mã xác thực không chính xác!</string>
     <string name="str_too_many_request">Vượt quá giới hạn! Vui lòng thử lại sau</string>
-    <string name="str_register_next"><![CDATA[Bạn chưa có tài khoản? <b>Đăng ký</b>]]></string>
-    <string name="str_login_next"><![CDATA[Bạn đã có tài khoản? <b>Đăng nhập</b>]]></string>
+    <string name="str_register_next"><![CDATA[<font color=\'#858597\'>Bạn chưa có tài khoản?</font> <font color=\'#000000\'><b>Đăng ký</b></font>]]></string>
+    <string name="str_login_next"><![CDATA[<font color=\'#858597\'>Bạn đã có tài khoản?</font> <font color=\'#000000\'><b>Đăng nhập</b></font>]]></string>
 
     <string name="str_enter_pass">Nhập mật khẩu</string>
     <string name="str_enter_email">Nhập email</string>

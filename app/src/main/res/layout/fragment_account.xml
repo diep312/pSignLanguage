@@ -30,11 +30,11 @@
                 android:id="@+id/imv_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dp8"
                 android:src="@drawable/ic_logout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:paddingVertical="@dimen/dp8"
                 app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -87,6 +87,8 @@
                     android:background="@drawable/bg_edt_v2"
                     android:hint="Nhập tên"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
@@ -102,7 +104,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/edt_name" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edt_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,7 +112,10 @@
                     android:background="@drawable/bg_edt_v2"
                     android:hint="Chọn ngày sinh"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
+                    app:drawableEndCompat="@drawable/ic_pick_date"
                     app:layout_constraintTop_toBottomOf="@id/tv_birthday" />
 
                 <TextView
@@ -133,6 +138,8 @@
                     android:background="@drawable/bg_edt_v2"
                     android:hint="Nhập địa chỉ"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
                     app:layout_constraintTop_toBottomOf="@id/tv_address" />
 
@@ -194,6 +201,8 @@
                     android:hint="Nhập email"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
                     app:layout_constraintTop_toBottomOf="@id/tv_email" />
 
@@ -218,6 +227,8 @@
                     android:hint="Nhập số điện thoại"
                     android:inputType="phone"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
                     app:layout_constraintTop_toBottomOf="@id/tv_phone" />
 
@@ -262,6 +273,8 @@
                     android:background="@drawable/bg_edt_v2"
                     android:hint="Nhập số hồ sơ"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
                     app:layout_constraintTop_toBottomOf="@id/tv_profile_num" />
 
@@ -285,6 +298,8 @@
                     android:background="@drawable/bg_edt_v2"
                     android:hint="Hồ sơ bởi"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
                     app:layout_constraintTop_toBottomOf="@id/tv_profile_by" />
 
@@ -308,6 +323,8 @@
                     android:background="@drawable/bg_edt_v2"
                     android:hint="Nhập số đăng ký"
                     android:padding="@dimen/dp12"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
                     app:layout_constraintTop_toBottomOf="@id/tv_register_num" />
 
@@ -318,6 +335,7 @@
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp12"
             android:background="@drawable/bg_btn"
             android:backgroundTint="@color/colorYellow"
             android:minWidth="0dp"
@@ -325,12 +343,11 @@
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
             android:text="Lưu thay đổi"
-            android:textSize="@dimen/sp14"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/sv_main"
+            android:textSize="@dimen/sp14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="@dimen/dp12"/>
+            app:layout_constraintTop_toBottomOf="@id/sv_main" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

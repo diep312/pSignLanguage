@@ -10,6 +10,7 @@ object Constants {
     const val KEY_VERIFICATION_ID = "KEY_VERIFICATION_ID"
     const val FIRST_PHONE_VN = "+84"
     const val KEY_RESEND_TOKEN = "KEY_RESEND_TOKEN"
+    const val KEY_TOKEN = "KEY_TOKEN"
 
     const val TOTAL_SIZE_PAGE = 4
     const val PAGE_0 = 0
@@ -20,4 +21,6 @@ object Constants {
 
     const val HORIZONTAL = 0
     const val VERTICAL = 1
+
+    const val DATE_SIMPLE_FORMAT: String = "dd-MM-yyyy"
 }
