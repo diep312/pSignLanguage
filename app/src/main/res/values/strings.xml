@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Sign Language</string>
     <string name="str_loading">Loading...</string>
+
+    <string name="api_default_error">Có lỗi xảy ra!</string>
+    <string name="str_authe">Tài khoản không hợp lệ/Nhập sai mật khẩu</string>
+    <string name="text_all_has_error_please_try">Có lỗi xảy ra, vui lòng thử lại!</string>
+    <string name="text_all_has_error_timeout">Kết nối thất bại!</string>
+    <string name="text_all_has_error_network">Lỗi kết nối mạng!</string>
+    <string name="str_back_press">Nhấn lần nữa để thoát!</string>
+
+
     <string name="str_phone_number">Số điện thoại</string>
     <string name="str_pass">Mật khẩu</string>
     <string name="str_forgot_pass">Quên mật khẩu?</string>

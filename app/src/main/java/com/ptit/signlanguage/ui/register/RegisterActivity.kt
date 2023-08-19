@@ -3,6 +3,8 @@ package com.ptit.signlanguage.ui.register
 import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Patterns
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
@@ -99,5 +101,15 @@ class RegisterActivity : BaseActivity<LoginViewModel, ActivityRegisterBinding>()
 
     override fun observerLiveData() {
     }
+
+//    fun validateUser(email : String, pass : String) : Boolean {
+//        if(email.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//            Toast.makeText(this@LoginActivity, "Email không hợp lệ", Toast.LENGTH_LONG).show()
+//            return false
+//        }
+//        if(pass.isEmpty() || pass.length < 6) {
+//
+//        }
+//    }
 
 }

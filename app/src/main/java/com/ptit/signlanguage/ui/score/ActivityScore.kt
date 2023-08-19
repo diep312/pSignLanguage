@@ -6,6 +6,7 @@ import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.base.GridThreeColumnDecoration
 import com.ptit.signlanguage.databinding.ActivityScoreBinding
+import com.ptit.signlanguage.network.model.response.Token
 import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.score.adapter.UserScoreAdapter
@@ -49,7 +50,7 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
     private fun fakeData(): MutableList<User> {
         val listTopic = mutableListOf<User>()
         for (t in 1..6) {
-            val user = User("", "", "", "")
+            val user = User("", "", "", Token("", ""))
             listTopic.add(user)
         }
         return listTopic

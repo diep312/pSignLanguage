@@ -1,12 +1,11 @@
 package com.ptit.signlanguage.network.model.response
 
 data class BaseResponse <T> (
-    val data: T,
-    val result: Boolean,
-    val code:Int
+    val body: T?,
+    val message: String
 )
 data class BaseArrayResponse <T> (
-    val body: List<T>,
+    val body: List<T>? = arrayListOf(),
     val message: String
 )
 data class BaseResponseNoBody (

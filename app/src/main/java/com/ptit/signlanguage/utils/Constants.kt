@@ -11,6 +11,7 @@ object Constants {
     const val FIRST_PHONE_VN = "+84"
     const val KEY_RESEND_TOKEN = "KEY_RESEND_TOKEN"
     const val KEY_TOKEN = "KEY_TOKEN"
+    const val KEY_PREF_DATA_LOGIN = "KEY_PREF_DATA_LOGIN"
 
     const val TOTAL_SIZE_PAGE = 4
     const val PAGE_0 = 0

@@ -1,37 +1,27 @@
 package com.ptit.signlanguage.ui.login
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.graphics.Typeface
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Base64
-import android.util.Log
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
-import com.facebook.CallbackManager
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityLoginBinding
+import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.MainActivity
 import com.ptit.signlanguage.ui.register.RegisterActivity
+import com.ptit.signlanguage.utils.Constants.KEY_PREF_DATA_LOGIN
+import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
-    private lateinit var callbackManager: CallbackManager
-    private val EMAIL = "email"
-
-    private val RC_SIGN_IN: Int = 0
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
     private var isPassShowed = false
-
+    private lateinit var prefsHelper: PreferencesHelper
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[LoginViewModel::class.java]
     }
@@ -44,8 +34,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         setLightIconStatusBar(true)
         binding.layout.setPadding(0, getStatusBarHeight(this@LoginActivity), 0, 0)
 
-        binding.tvRegister.text = getTextHtml(R.string.str_register_next)
 
+        binding.tvRegister.text = getTextHtml(R.string.str_register_next)
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationIcon(R.drawable.ic_back)
         binding.toolbar.setNavigationOnClickListener {
@@ -69,6 +59,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                 R.color.black
             )
         )
+
+        prefsHelper = PreferencesHelper(this@LoginActivity)
     }
 
     override fun initListener() {
@@ -78,8 +70,11 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         }
 
         binding.btnNext.setOnClickListener {
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
+            if (!isDoubleClick()) {
+                val email = binding.edtEmail.text.toString().trim()
+                val pass = binding.edtPassword.text.toString().trim()
+                viewModel.login(email, pass)
+            }
         }
 
         binding.imvShowHidePass.setOnClickListener {
@@ -101,8 +96,29 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun observerLiveData() {
         viewModel.apply {
-
+            loginResponse.observe(this@LoginActivity) {
+                if (it?.body != null) {
+                    val user = it.body
+                    user.pass = binding.edtPassword.text.trim().toString()
+                    user.email = binding.edtEmail.text.trim().toString()
+                    val dataLogin = GsonUtils.serialize(user, User::class.java)
+                    prefsHelper.save(KEY_PREF_DATA_LOGIN, dataLogin)
+                    goToMain()
+                } else {
+                    Toast.makeText(this@LoginActivity, it?.message.toString(), Toast.LENGTH_LONG).show()
+                }
+            }
+            errorMessage.observe(this@LoginActivity) {
+                Toast.makeText(this@LoginActivity, getString(it), Toast.LENGTH_LONG).show()
+            }
         }
     }
 
+    private fun goToMain() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
+    }
 }
+
+
