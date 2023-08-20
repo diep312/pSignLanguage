@@ -93,6 +93,7 @@
                         android:textColor="@color/text_color"
                         android:textColorHint="@color/text_color"
                         android:textSize="@dimen/sp14"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/edt_username" />
@@ -104,6 +105,7 @@
                         android:layout_marginVertical="@dimen/dp4"
                         android:layout_marginStart="@dimen/dp34"
                         android:background="@color/color_gray"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/edt_phone"
                         app:layout_constraintStart_toStartOf="@id/edt_phone"
                         app:layout_constraintTop_toTopOf="@id/edt_phone" />
@@ -112,6 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_phone"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/edt_phone"
                         app:layout_constraintEnd_toEndOf="@id/v_ver_phone"
                         app:layout_constraintStart_toStartOf="parent"

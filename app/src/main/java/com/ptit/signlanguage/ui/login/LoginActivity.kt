@@ -34,7 +34,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         setLightIconStatusBar(true)
         binding.layout.setPadding(0, getStatusBarHeight(this@LoginActivity), 0, 0)
 
-
         binding.tvRegister.text = getTextHtml(R.string.str_register_next)
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationIcon(R.drawable.ic_back)
@@ -117,7 +116,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     private fun goToMain() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
-        finishAffinity()
+        finish()
     }
 }
 

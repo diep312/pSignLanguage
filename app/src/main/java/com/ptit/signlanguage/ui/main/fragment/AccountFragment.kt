@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.FragmentAccountBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.utils.Constants
@@ -15,6 +16,7 @@ import java.util.*
 
 class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
     private lateinit var datePickerDialog: DatePickerDialog
+    private lateinit var prefsHelper: PreferencesHelper
     lateinit var calendar: Calendar
 
     private fun initDatePickerDialog() {
@@ -49,15 +51,40 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
     }
 
     override fun initView() {
+        prefsHelper = PreferencesHelper(binding.root.context)
         calendar = Calendar.getInstance()
         initDatePickerDialog()
     }
 
     override fun initListener() {
-        binding.imvLogout.setOnClickListener { activity?.finish() }
+        binding.imvLogout.setOnClickListener {
+            showDialogConfirmLogout()
+        }
 
         binding.edtBirthday.setOnClickListener {
             datePickerDialog.show()
         }
+    }
+
+    private fun showDialogConfirmLogout() {
+        val builder = AlertDialog.Builder(this@AccountFragment.context)
+        builder.setMessage(getString(R.string.str_confirm_logout))
+        builder.setCancelable(true)
+
+        builder.setPositiveButton(
+            getString(R.string.str_ok)
+        ) { _, _ ->
+            prefsHelper.remove(Constants.KEY_PREF_DATA_LOGIN)
+            activity?.finish()
+        }
+
+        builder.setNegativeButton(
+            getString(R.string.str_cancel)
+
+        ) { dialog, _ ->
+            dialog.cancel()
+
+        }
+        builder.create().show()
     }
 }

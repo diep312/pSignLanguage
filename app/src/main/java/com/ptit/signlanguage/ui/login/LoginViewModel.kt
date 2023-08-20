@@ -8,28 +8,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.network.api.ApiService
 import com.ptit.signlanguage.network.model.request.LoginRequest
+import com.ptit.signlanguage.network.model.request.RegisterRequest
 import com.ptit.signlanguage.network.model.response.BaseResponse
+import com.ptit.signlanguage.network.model.response.Token
 import com.ptit.signlanguage.network.model.response.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class LoginViewModel(private val apiService: ApiService) : BaseViewModel() {
-
-    var mtoken = MutableLiveData<String>()
-    fun getToken(account: GoogleSignInAccount?, context : Context) {
-        viewModelScope.launch {
-            try {
-                var token = ""
-                withContext(Dispatchers.IO) {
-                     token = getToken(context, account?.account!!,  "oauth2:profile email")
-                }
-                mtoken.postValue(token)
-            } catch (e : Exception) {
-                mtoken.postValue(e.message.toString())
-            }
-        }
-    }
 
     val loginResponse = MutableLiveData<BaseResponse<User?>?>()
     fun login(email : String, password : String) {
@@ -42,6 +29,24 @@ class LoginViewModel(private val apiService: ApiService) : BaseViewModel() {
                     result = apiService.login(loginRequest)
                 }
                 loginResponse.postValue(result)
+            } catch (e: Exception) {
+                handleApiError(e.cause)
+            }
+            hideLoading()
+        }
+    }
+
+    val registerResponse = MutableLiveData<BaseResponse<Token?>?>()
+    fun register(name : String, email : String, password : String) {
+        viewModelScope.launch {
+            showLoading()
+            val registerRequest = RegisterRequest(email, name, password)
+            val result: BaseResponse<Token?>?
+            try {
+                withContext(Dispatchers.IO) {
+                    result = apiService.register(registerRequest)
+                }
+                registerResponse.postValue(result)
             } catch (e: Exception) {
                 handleApiError(e.cause)
             }

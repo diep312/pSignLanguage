@@ -7,6 +7,9 @@
     <string name="text_all_has_error_please_try">Có lỗi xảy ra, vui lòng thử lại!</string>
     <string name="text_all_has_error_timeout">Kết nối thất bại!</string>
     <string name="text_all_has_error_network">Lỗi kết nối mạng!</string>
+    <string name="str_confirm_logout">Bạn có muốn đăng xuất không?</string>
+    <string name="str_ok">OK</string>
+    <string name="str_cancel">Hủy</string>
     <string name="str_back_press">Nhấn lần nữa để thoát!</string>
 
 
