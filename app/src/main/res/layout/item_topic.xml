@@ -5,20 +5,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_topic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp12"
-            android:layout_marginTop="@dimen/dp12"
-            android:text="Chủ đề 1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp16"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp24">
 
         <TextView
             android:id="@+id/tv_rank"
@@ -48,16 +36,16 @@
             android:textColor="@color/color_border"
             android:textSize="@dimen/sp12"
             app:layout_constraintStart_toEndOf="@id/tv_rank"
-            app:layout_constraintTop_toBottomOf="@id/tv_topic" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lesson"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_register"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/btn_register" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

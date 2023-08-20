@@ -32,7 +32,7 @@
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
             android:layout_marginBottom="@dimen/dp12"
-            android:text="Cấp độ 1"
+            android:text="Chủ đề 1"
             android:id="@+id/btn_join" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
