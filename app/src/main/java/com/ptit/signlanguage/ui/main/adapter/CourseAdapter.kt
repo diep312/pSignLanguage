@@ -8,18 +8,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemCourseBinding
 import com.ptit.signlanguage.network.model.response.Course
+import com.ptit.signlanguage.network.model.response.Subject
 import com.ptit.signlanguage.ui.topic.TopicActivity
+import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
-class CourseAdapter(var listCourse: MutableList<Course>) :
+class CourseAdapter(var litSubject: MutableList<Subject?>) :
     RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
 
-    fun replace(listCourse: MutableList<Course>) {
-        this.listCourse = listCourse
+    fun replace(litSubject : MutableList<Subject?>) {
+        this.litSubject = litSubject
         notifyDataSetChanged()
     }
 
     class CourseViewHolder(var binding: ItemCourseBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(course: Course) {
+        fun bind(subject : Subject?) {
+
+            binding.btnJoin.text = subject?.name ?: EMPTY_STRING
+
             binding.btnJoin.setOnClickListener {
                 val intent = Intent(binding.root.context, TopicActivity::class.java)
                 binding.root.context.startActivity(intent)
@@ -39,11 +44,11 @@ class CourseAdapter(var listCourse: MutableList<Course>) :
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        holder.bind(listCourse[position])
+        holder.bind(litSubject[position])
     }
 
     override fun getItemCount(): Int {
-        return listCourse.size
+        return litSubject.size
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.main.fragment
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ptit.signlanguage.R
@@ -24,7 +25,14 @@ class CourseFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
 
     override fun observerLiveData() {
         viewModel.apply {
-
+            listSubjectRes.observe(this@CourseFragment) {
+                if(it?.body != null) {
+                    adapter.replace(it.body.toMutableList())
+                }
+            }
+            errorMessage.observe(this@CourseFragment) {
+                Toast.makeText(this@CourseFragment.requireContext(), getString(it), Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -35,7 +43,8 @@ class CourseFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
         binding.rvCourse.setHasFixedSize(true)
         binding.rvCourse.addItemDecoration(GridItemDecoration(dpToPx(12)))
 
-        adapter.replace(fakeData())
+        viewModel.getListSubject()
+//        adapter.replace(fakeData())
     }
 
     override fun initListener() {
