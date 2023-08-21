@@ -38,10 +38,10 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         val dataLogin = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
         user = GsonUtils.deserialize(dataLogin, User::class.java)
 
-        if(user?.email.isNullOrEmpty() || user?.pass.isNullOrEmpty()) {
+        if(user?.email.isNullOrEmpty() || user?.password.isNullOrEmpty()) {
             goToLogin()
         } else {
-            viewModel.login(user?.email!!, user?.pass!!)
+            viewModel.login(user?.email!!, user?.password!!)
         }
     }
 
@@ -56,6 +56,7 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                     user?.token = it.body.token
                     val dataLogin = GsonUtils.serialize(user, User::class.java)
                     prefsHelper.save(Constants.KEY_PREF_DATA_LOGIN, dataLogin)
+                    prefsHelper.save(Constants.KEY_TOKEN, it.body.token?.accessToken)
                     goToMain()
                 } else {
                     Toast.makeText(this@SplashActivity, it?.message.toString(), Toast.LENGTH_LONG).show()

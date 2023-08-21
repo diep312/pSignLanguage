@@ -125,9 +125,10 @@ class RegisterActivity : BaseActivity<LoginViewModel, ActivityRegisterBinding>()
                     val name = binding.edtUsername.text.toString().trim()
                     val email = binding.edtEmail.text.toString().trim()
                     val pass = binding.edtPassword.text.toString().trim()
-                    val user = User(email, pass, name, it.body)
+                    val user = User(email = email, password = pass, name = name, token = it.body)
                     val dataLogin = GsonUtils.serialize(user, User::class.java)
                     prefsHelper.save(Constants.KEY_PREF_DATA_LOGIN, dataLogin)
+                    prefsHelper.save(Constants.KEY_TOKEN, it.body.accessToken)
                     goToMain()
                 }
             }

@@ -14,7 +14,7 @@ class ViewModelFactory() : ViewModelProvider.Factory {
             return MainViewModel(RetrofitBuilder.apiService) as T
         }
         else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(RetrofitBuilder.apiService) as T
+            return LoginViewModel(RetrofitBuilder.apiService, RetrofitBuilder.apiServiceLogin) as T
         }
         throw IllegalArgumentException("Unknown class name")
     }

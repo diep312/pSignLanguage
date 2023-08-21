@@ -15,6 +15,7 @@ import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.MainActivity
 import com.ptit.signlanguage.ui.register.RegisterActivity
 import com.ptit.signlanguage.utils.Constants.KEY_PREF_DATA_LOGIN
+import com.ptit.signlanguage.utils.Constants.KEY_TOKEN
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
@@ -98,10 +99,11 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             loginResponse.observe(this@LoginActivity) {
                 if (it?.body != null) {
                     val user = it.body
-                    user.pass = binding.edtPassword.text.trim().toString()
+                    user.password = binding.edtPassword.text.trim().toString()
                     user.email = binding.edtEmail.text.trim().toString()
                     val dataLogin = GsonUtils.serialize(user, User::class.java)
                     prefsHelper.save(KEY_PREF_DATA_LOGIN, dataLogin)
+                    prefsHelper.save(KEY_TOKEN, it.body.token?.accessToken)
                     goToMain()
                 } else {
                     Toast.makeText(this@LoginActivity, it?.message.toString(), Toast.LENGTH_LONG).show()

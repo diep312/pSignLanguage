@@ -7,7 +7,11 @@ import androidx.lifecycle.ViewModel
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.network.model.response.Message
 import com.ptit.signlanguage.utils.GsonUtils
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
+import java.io.File
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
@@ -47,8 +51,8 @@ abstract class BaseViewModel : ViewModel() {
                     responseMessage.postValue(error.message)
                 }
                 HttpsURLConnection.HTTP_UNAUTHORIZED -> errorMessage.postValue(R.string.str_authe)
-                HttpsURLConnection.HTTP_FORBIDDEN, HttpsURLConnection.HTTP_INTERNAL_ERROR, HttpsURLConnection.HTTP_NOT_FOUND -> responseMessage.postValue(
-                    error.message
+                HttpsURLConnection.HTTP_FORBIDDEN, HttpsURLConnection.HTTP_INTERNAL_ERROR, HttpsURLConnection.HTTP_NOT_FOUND -> errorMessage.postValue(
+                    R.string.api_default_error
                 )
                 else -> responseMessage.postValue(error.message)
             }
@@ -66,4 +70,8 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
+    fun toMultipartBody(name: String, file: File): MultipartBody.Part {
+        val reqFile = file.asRequestBody("video/*".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData(name, file.name, reqFile)
+    }
 }

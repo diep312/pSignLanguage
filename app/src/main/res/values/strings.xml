@@ -43,5 +43,6 @@
     <string name="str_course">Course</string>
     <string name="str_search">Tìm kiếm</string>
 
-
+    <string name="str_label_en">EN: %s</string>
+    <string name="str_label_vn">VN: %s</string>
 </resources>

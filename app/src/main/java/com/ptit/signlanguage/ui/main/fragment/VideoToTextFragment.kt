@@ -9,6 +9,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.MediaController
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,6 +19,7 @@ import com.ptit.signlanguage.base.BaseFragment
 import com.ptit.signlanguage.databinding.FragmentVideoToTextBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.view_model.ViewModelFactory
+import java.io.File
 
 
 class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBinding>() {
@@ -32,7 +34,17 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 
     override fun observerLiveData() {
         viewModel.apply {
-
+            videoToTextRes.observe(this@VideoToTextFragment) {
+                if (it?.body != null) {
+                    binding.layoutWrapAnswer.visibility = View.VISIBLE
+                    binding.tvEn.text = getString(R.string.str_label_en, it.body.action_en)
+                    binding.tvVn.text = getString(R.string.str_label_vn, it.body.action_vi)
+                }
+                Log.d(TAG, it.toString())
+            }
+            errorMessage.observe(this@VideoToTextFragment) {
+                Log.d(TAG, it.toString())
+            }
         }
     }
 
@@ -90,6 +102,12 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     Log.d(TAG, "$videoPath is the path that you need...")
                     binding.vvVideo.setVideoPath(videoPath)
                     binding.vvVideo.start()
+
+                    val file = File(videoPath)
+                    if (file != null) {
+                        binding.layoutWrapAnswer.visibility = View.GONE
+                        viewModel.videoToText(file)
+                    }
                 }
                 Activity.RESULT_CANCELED -> {
                     Log.d(TAG, "Cancel")
@@ -106,6 +124,12 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     Log.d(TAG, "$videoPath is the path that you need...")
                     binding.vvVideo.setVideoPath(videoPath)
                     binding.vvVideo.start()
+
+                    val file = File(videoPath)
+                    if (file != null) {
+                        binding.layoutWrapAnswer.visibility = View.GONE
+                        viewModel.videoToText(file)
+                    }
                 }
                 Activity.RESULT_CANCELED -> {
                     Log.d(TAG, "Cancel")
@@ -119,7 +143,8 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 
     private fun parsePath(uri: Uri?): String? {
         val projection = arrayOf(MediaStore.Video.Media.DATA)
-        val cursor: Cursor? = requireActivity().contentResolver.query(uri!!, projection, null, null, null)
+        val cursor: Cursor? =
+            requireActivity().contentResolver.query(uri!!, projection, null, null, null)
         return if (cursor != null) {
             val columnIndex: Int = cursor
                 .getColumnIndexOrThrow(MediaStore.Video.Media.DATA)

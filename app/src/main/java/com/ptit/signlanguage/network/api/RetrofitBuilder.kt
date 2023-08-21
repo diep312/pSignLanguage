@@ -14,10 +14,14 @@ import java.util.concurrent.TimeUnit
 object RetrofitBuilder {
 
     private var retrofit: Retrofit? = null
+    private var retrofitLogin: Retrofit? = null
     private var mToken = ""
     private const val TIME_OUT: Long = 10
     val apiService: ApiService by lazy {
         getRetrofit()!!.create(ApiService::class.java)
+    }
+    val apiServiceLogin: ApiServiceLogin by lazy {
+        getRetrofitLogin()!!.create(ApiServiceLogin::class.java)
     }
 
     private fun getRetrofit(): Retrofit? {
@@ -26,13 +30,14 @@ object RetrofitBuilder {
             if (mToken == EMPTY_STRING) {
                 mToken = PreferencesHelper(MyApplication.context).getString(Constants.KEY_TOKEN) ?: EMPTY_STRING
             }
-//            val interceptor = HttpLoggingInterceptor()
-//            interceptor.apply {
-//                interceptor.level = HttpLoggingInterceptor.Level.BODY
-//            }
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.apply {
+                interceptor.level = HttpLoggingInterceptor.Level.BODY
+            }
 //            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
             val httpClient = OkHttpClient.Builder()
+            httpClient.addInterceptor(interceptor)
             httpClient.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
             httpClient.readTimeout(TIME_OUT, TimeUnit.SECONDS)
 
@@ -52,5 +57,35 @@ object RetrofitBuilder {
         }
 
         return retrofit
+    }
+
+    private fun getRetrofitLogin(): Retrofit? {
+
+        if(retrofitLogin == null) {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.apply {
+                interceptor.level = HttpLoggingInterceptor.Level.BODY
+            }
+
+            val httpClient = OkHttpClient.Builder()
+            httpClient.addInterceptor(interceptor)
+            httpClient.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+            httpClient.readTimeout(TIME_OUT, TimeUnit.SECONDS)
+
+            httpClient.addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                    .addHeader("Content-Type", "application/json; charset=utf-8")
+                    .build()
+                chain.proceed(request)
+            }
+
+            retrofitLogin = Retrofit.Builder()
+                .baseUrl(BuildConfig.API_URL)
+                .client(httpClient.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build() //Doesn't require the adapter
+        }
+
+        return retrofitLogin
     }
 }

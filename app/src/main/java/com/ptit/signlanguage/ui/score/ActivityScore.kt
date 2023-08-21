@@ -50,7 +50,7 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
     private fun fakeData(): MutableList<User> {
         val listTopic = mutableListOf<User>()
         for (t in 1..6) {
-            val user = User("", "", "", Token("", ""))
+            val user = User()
             listTopic.add(user)
         }
         return listTopic
