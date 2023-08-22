@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginViewModel(private val apiService: ApiService, private val apiServiceLogin: ApiServiceLogin) : BaseViewModel() {
+class LoginViewModel(private val apiServiceLogin: ApiServiceLogin) : BaseViewModel() {
 
     val loginResponse = MutableLiveData<BaseResponse<User?>?>()
     fun login(email : String, password : String) {

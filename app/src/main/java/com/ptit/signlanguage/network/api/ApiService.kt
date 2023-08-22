@@ -17,4 +17,9 @@ interface ApiService {
 
     @GET("/api/v1/subject")
     suspend fun getListSubject(): BaseArrayResponse<Subject?>?
+
+    @GET("/api/v1/label")
+    suspend fun getListLabel(): BaseArrayResponse<Label?>?
+
+
 }

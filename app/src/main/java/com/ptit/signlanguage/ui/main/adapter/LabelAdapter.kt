@@ -8,16 +8,18 @@ import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.FragmentTextToVideoBinding
 import com.ptit.signlanguage.databinding.ItemLabelBinding
 import com.ptit.signlanguage.network.model.response.Label
+import com.ptit.signlanguage.utils.Constants
 
-class LabelAdapter(var listLabel: MutableList<Label>) : RecyclerView.Adapter<LabelAdapter.LabelViewHolder>() {
+class LabelAdapter(var listLabel: MutableList<Label?>) : RecyclerView.Adapter<LabelAdapter.LabelViewHolder>() {
 
-    fun replace(listLabel : MutableList<Label>) {
+    fun replace(listLabel : MutableList<Label?>) {
         this.listLabel = listLabel
         notifyDataSetChanged()
     }
 
     class LabelViewHolder(var binding: ItemLabelBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(label: Label) {
+        fun bind(label: Label?) {
+            binding.tvLabel.text = label?.labelVn ?: Constants.EMPTY_STRING
 
         }
     }

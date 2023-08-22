@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.network.api.ApiService
-import com.ptit.signlanguage.network.model.response.BaseArrayResponse
-import com.ptit.signlanguage.network.model.response.BaseResponse
-import com.ptit.signlanguage.network.model.response.Subject
-import com.ptit.signlanguage.network.model.response.VideoToTextResponse
+import com.ptit.signlanguage.network.model.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -43,6 +40,23 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
                     result = apiService.getListSubject()
                 }
                 listSubjectRes.postValue(result)
+            } catch (e: Exception) {
+                handleApiError(e.cause)
+            }
+            hideLoading()
+        }
+    }
+
+    val listLabelRes = MutableLiveData<BaseArrayResponse<Label?>?>()
+    fun getListLabel() {
+        viewModelScope.launch {
+            showLoading()
+            val result: BaseArrayResponse<Label?>?
+            try {
+                withContext(Dispatchers.IO) {
+                    result = apiService.getListLabel()
+                }
+                listLabelRes.postValue(result)
             } catch (e: Exception) {
                 handleApiError(e.cause)
             }

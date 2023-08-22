@@ -50,7 +50,7 @@ class ListWordActivity : BaseActivity<MainViewModel, ActivityListWordBinding>() 
     private fun fakeData(): MutableList<Label> {
         val listLabel = mutableListOf<Label>()
         for (i in 1..16) {
-            var label = Label(i.toString())
+            var label = Label()
             listLabel.add(label)
         }
         return listLabel

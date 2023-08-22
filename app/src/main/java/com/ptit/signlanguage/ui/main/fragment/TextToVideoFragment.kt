@@ -1,10 +1,10 @@
 package com.ptit.signlanguage.ui.main.fragment
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
 import com.ptit.signlanguage.databinding.FragmentTextToVideoBinding
-import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
 import com.ptit.signlanguage.view_model.ViewModelFactory
@@ -22,28 +22,25 @@ class TextToVideoFragment : BaseFragment<MainViewModel, FragmentTextToVideoBindi
 
     override fun observerLiveData() {
         viewModel.apply {
-
+            listLabelRes.observe(this@TextToVideoFragment) {
+                if (it?.body != null) {
+                    adapter.replace(it.body.toMutableList())
+                }
+            }
+            errorMessage.observe(this@TextToVideoFragment) {
+                Toast.makeText(binding.root.context, getString(it), Toast.LENGTH_LONG).show()
+            }
         }
     }
 
     override fun initView() {
         binding.rvLabel.adapter = adapter
 //        binding.rvLabel.addItemDecoration(LinearItemDecoration(dpToPx(12), VERTICAL))
-
-        adapter.replace(fakeData())
+        viewModel.getListLabel()
     }
 
     override fun initListener() {
 
-    }
-
-    fun fakeData(): MutableList<Label> {
-        val listLabel = mutableListOf<Label>()
-        for (i in 1..16) {
-            var label = Label(i.toString())
-            listLabel.add(label)
-        }
-        return listLabel
     }
 
 }
