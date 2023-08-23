@@ -77,18 +77,6 @@ dependencies {
     // roundedimageview
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    // Import the Firebase BoM
-    // SMS OTP
-    implementation platform('com.google.firebase:firebase-bom:30.3.2')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-auth'
-
-    // login google
-    implementation 'com.google.android.gms:play-services-auth:20.2.0'
-
-    // login facebook
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-
     // recyclerview
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 

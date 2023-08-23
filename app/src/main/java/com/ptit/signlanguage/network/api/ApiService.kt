@@ -21,5 +21,6 @@ interface ApiService {
     @GET("/api/v1/label")
     suspend fun getListLabel(): BaseArrayResponse<Label?>?
 
-
+    @GET("/api/v1/video")
+    suspend fun getVideo(@Query("label") label : String): BaseResponse<Video?>?
 }

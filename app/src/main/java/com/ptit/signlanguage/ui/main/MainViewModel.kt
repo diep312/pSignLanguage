@@ -64,4 +64,21 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         }
     }
 
+    val videoRes = MutableLiveData<BaseResponse<Video?>?>()
+    fun getVideo(label : String) {
+        viewModelScope.launch {
+            showLoading()
+            val result: BaseResponse<Video?>?
+            try {
+                withContext(Dispatchers.IO) {
+                    result = apiService.getVideo(label)
+                }
+                videoRes.postValue(result)
+            } catch (e: Exception) {
+                handleApiError(e.cause)
+            }
+            hideLoading()
+        }
+    }
+
 }

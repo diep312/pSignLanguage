@@ -24,4 +24,6 @@ object Constants {
     const val VERTICAL = 1
 
     const val DATE_SIMPLE_FORMAT: String = "dd-MM-yyyy"
+
+    const val KEY_LABEL = "KEY_LABEL"
 }
