@@ -6,16 +6,22 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
-import com.ptit.signlanguage.databinding.FragmentTextToVideoBinding
+import com.ptit.signlanguage.databinding.ItemEmptyBinding
 import com.ptit.signlanguage.databinding.ItemLabelBinding
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.ui.score.PracticeActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.KEY_LABEL
 
-class LabelAdapter(var listLabel: MutableList<Label?>) : RecyclerView.Adapter<LabelAdapter.LabelViewHolder>() {
+class LabelAdapter(var listLabel: MutableList<Label?>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    fun replace(listLabel : MutableList<Label?>) {
+    companion object {
+        const val TYPE_LABEL = 0
+        const val Type_HIDE = 1
+    }
+
+    fun replace(listLabel: MutableList<Label?>) {
         this.listLabel = listLabel
         notifyDataSetChanged()
     }
@@ -32,23 +38,48 @@ class LabelAdapter(var listLabel: MutableList<Label?>) : RecyclerView.Adapter<La
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LabelViewHolder {
-        val layoutInflater : LayoutInflater = LayoutInflater.from(parent.context)
-        val item = DataBindingUtil.inflate<ItemLabelBinding>(
-            layoutInflater,
-            R.layout.item_label,
-            parent,
-            false
-        )
-        return LabelViewHolder(item)
+    class EmptyViewHolder(var binding: ItemEmptyBinding) : RecyclerView.ViewHolder(binding.root) {
+
     }
 
-    override fun onBindViewHolder(holder: LabelViewHolder, position: Int) {
-        holder.bind(listLabel[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == TYPE_LABEL) {
+            val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
+            val item = DataBindingUtil.inflate<ItemLabelBinding>(
+                layoutInflater,
+                R.layout.item_label,
+                parent,
+                false
+            )
+            return LabelViewHolder(item)
+        } else {
+            val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
+            val item = DataBindingUtil.inflate<ItemEmptyBinding>(
+                layoutInflater,
+                R.layout.item_empty,
+                parent,
+                false
+            )
+            return EmptyViewHolder(item)
+        }
     }
 
     override fun getItemCount(): Int {
         return listLabel.size
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (getItemViewType(position) == TYPE_LABEL) {
+            (holder as LabelViewHolder).bind(listLabel[position])
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (listLabel[position]?.isShow == true) {
+            TYPE_LABEL
+        } else {
+            Type_HIDE
+        }
     }
 
 }

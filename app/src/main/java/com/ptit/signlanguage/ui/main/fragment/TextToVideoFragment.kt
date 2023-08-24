@@ -1,5 +1,8 @@
 package com.ptit.signlanguage.ui.main.fragment
 
+import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
@@ -40,7 +43,33 @@ class TextToVideoFragment : BaseFragment<MainViewModel, FragmentTextToVideoBindi
     }
 
     override fun initListener() {
+        binding.edtSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Handler().postDelayed({
+                    val item = binding.edtSearch.text.toString().trim()
+                    for (label in adapter.listLabel) {
+                        if(label?.labelEn?.contains(item, true) == true ||
+                            label?.labelVn?.contains(item, true) == true ) {
+                            label.isShow = true
+                        } else {
+                            label?.isShow = false
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                }, 100)
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
     }
+
+
 
 }
