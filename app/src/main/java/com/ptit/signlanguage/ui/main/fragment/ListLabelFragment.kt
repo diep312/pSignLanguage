@@ -12,7 +12,7 @@ import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
-class TextToVideoFragment : BaseFragment<MainViewModel, FragmentTextToVideoBinding>() {
+class ListLabelFragment : BaseFragment<MainViewModel, FragmentTextToVideoBinding>() {
     var adapter: LabelAdapter = LabelAdapter(mutableListOf())
 
     override fun initViewModel() {
@@ -25,12 +25,12 @@ class TextToVideoFragment : BaseFragment<MainViewModel, FragmentTextToVideoBindi
 
     override fun observerLiveData() {
         viewModel.apply {
-            listLabelRes.observe(this@TextToVideoFragment) {
+            listLabelRes.observe(this@ListLabelFragment) {
                 if (it?.body != null) {
                     adapter.replace(it.body.toMutableList())
                 }
             }
-            errorMessage.observe(this@TextToVideoFragment) {
+            errorMessage.observe(this@ListLabelFragment) {
                 Toast.makeText(binding.root.context, getString(it), Toast.LENGTH_LONG).show()
             }
         }

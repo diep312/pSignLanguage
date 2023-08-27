@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ptit.signlanguage.ui.main.fragment.AccountFragment
-import com.ptit.signlanguage.ui.main.fragment.CourseFragment
-import com.ptit.signlanguage.ui.main.fragment.TextToVideoFragment
+import com.ptit.signlanguage.ui.main.fragment.ListSubjectFragment
+import com.ptit.signlanguage.ui.main.fragment.ListLabelFragment
 import com.ptit.signlanguage.ui.main.fragment.VideoToTextFragment
 import com.ptit.signlanguage.utils.Constants.PAGE_0
 import com.ptit.signlanguage.utils.Constants.PAGE_1
@@ -20,8 +20,8 @@ class MainViewPagerAdapter(fragmentActivity: FragmentActivity) :
         listPage.clear()
 
         listPage.add(VideoToTextFragment())
-        listPage.add(TextToVideoFragment())
-        listPage.add(CourseFragment())
+        listPage.add(ListLabelFragment())
+        listPage.add(ListSubjectFragment())
         listPage.add(AccountFragment())
     }
 

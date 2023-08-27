@@ -12,7 +12,7 @@ import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.CourseAdapter
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
-class CourseFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
+class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
     var adapter: CourseAdapter = CourseAdapter(mutableListOf())
 
     override fun initViewModel() {
@@ -25,13 +25,13 @@ class CourseFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
 
     override fun observerLiveData() {
         viewModel.apply {
-            listSubjectRes.observe(this@CourseFragment) {
+            listSubjectRes.observe(this@ListSubjectFragment) {
                 if(it?.body != null) {
                     adapter.replace(it.body.toMutableList())
                 }
             }
-            errorMessage.observe(this@CourseFragment) {
-                Toast.makeText(this@CourseFragment.requireContext(), getString(it), Toast.LENGTH_LONG).show()
+            errorMessage.observe(this@ListSubjectFragment) {
+                Toast.makeText(this@ListSubjectFragment.requireContext(), getString(it), Toast.LENGTH_LONG).show()
             }
         }
     }
