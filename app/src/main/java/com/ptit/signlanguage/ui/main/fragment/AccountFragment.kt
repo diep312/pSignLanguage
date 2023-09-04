@@ -11,7 +11,6 @@ import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
