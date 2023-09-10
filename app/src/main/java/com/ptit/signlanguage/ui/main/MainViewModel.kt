@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.network.api.ApiService
+import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
+import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -81,4 +83,37 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         }
     }
 
+    val subjectInfoRes = MutableLiveData<BaseResponse<SubjectWrap?>?>()
+    fun getSubjectAllInfo(subjectID : Int) {
+        viewModelScope.launch {
+            showLoading()
+            val result: BaseResponse<SubjectWrap?>?
+            try {
+                withContext(Dispatchers.IO) {
+                    result = apiService.getAllInfoSubject(subjectID)
+                }
+                subjectInfoRes.postValue(result)
+            } catch (e: Exception) {
+                handleApiError(e.cause)
+            }
+            hideLoading()
+        }
+    }
+
+    val updateUserRes = MutableLiveData<BaseResponse<User?>>()
+    fun updateUser(updateUserRequest: UpdateUserRequest) {
+        viewModelScope.launch {
+            showLoading()
+            val result: BaseResponse<User?>
+            try {
+                withContext(Dispatchers.IO) {
+                    result = apiService.updateUser(updateUserRequest)
+                }
+                updateUserRes.postValue(result)
+            } catch (e: Exception) {
+                handleApiError(e.cause)
+            }
+            hideLoading()
+        }
+    }
 }

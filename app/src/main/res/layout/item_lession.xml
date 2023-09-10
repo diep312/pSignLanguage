@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@id/v_circle" />
 
         <TextView
-            android:id="@+id/rv_lesson"
+            android:id="@+id/tv_lesson"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp6"
@@ -84,6 +84,8 @@
             android:textColor="@color/color_border"
             android:textSize="@dimen/sp10"
             android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="@id/v_circle"
             app:layout_constraintEnd_toEndOf="@id/v_circle"
             app:layout_constraintStart_toStartOf="@id/v_circle"

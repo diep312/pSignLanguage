@@ -1,4 +1,4 @@
-package com.ptit.signlanguage.ui.word
+package com.ptit.signlanguage.ui.label
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
@@ -8,14 +8,13 @@ import com.ptit.signlanguage.base.LinearItemDecoration
 import com.ptit.signlanguage.databinding.ActivityListWordBinding
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.ui.main.MainViewModel
-import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
 import com.ptit.signlanguage.ui.score.ActivityScore
-import com.ptit.signlanguage.ui.word.adapter.ListWordAdapter
+import com.ptit.signlanguage.ui.label.adapter.ListLabelAdapter
 import com.ptit.signlanguage.utils.Constants.VERTICAL
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
-class ListWordActivity : BaseActivity<MainViewModel, ActivityListWordBinding>() {
-    var adapter: ListWordAdapter = ListWordAdapter(mutableListOf())
+class ListLabelActivity : BaseActivity<MainViewModel, ActivityListWordBinding>() {
+    var adapter: ListLabelAdapter = ListLabelAdapter(mutableListOf())
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
@@ -28,7 +27,7 @@ class ListWordActivity : BaseActivity<MainViewModel, ActivityListWordBinding>() 
     override fun initView() {
         setLightIconStatusBar(false)
         setColorForStatusBar(R.color.color_primary)
-        binding.layout.setPadding(0, getStatusBarHeight(this@ListWordActivity), 0, 0)
+        binding.layout.setPadding(0, getStatusBarHeight(this@ListLabelActivity), 0, 0)
 
         binding.rvWord.adapter = adapter
         binding.rvWord.addItemDecoration(LinearItemDecoration(dpToPx(12), VERTICAL))
@@ -37,7 +36,7 @@ class ListWordActivity : BaseActivity<MainViewModel, ActivityListWordBinding>() 
 
     override fun initListener() {
         binding.btnScore.setOnClickListener {
-            val intent = Intent(this@ListWordActivity, ActivityScore::class.java)
+            val intent = Intent(this@ListLabelActivity, ActivityScore::class.java)
             startActivity(intent)
         }
         binding.imvBack.setOnClickListener { finish() }

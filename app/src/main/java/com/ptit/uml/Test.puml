@@ -1,7 +1,0 @@
-@startuml
-@startuml
-autonumber
-Bob -> Alice : Authentication Request
-Bob <-- Alice : Authentication Response
-@enduml
-@enduml

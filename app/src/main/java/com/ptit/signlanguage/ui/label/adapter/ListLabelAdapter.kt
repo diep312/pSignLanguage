@@ -1,4 +1,4 @@
-package com.ptit.signlanguage.ui.word.adapter
+package com.ptit.signlanguage.ui.label.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,14 +10,14 @@ import com.ptit.signlanguage.databinding.ItemWordBinding
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.ui.score.PracticeActivity
 
-class ListWordAdapter(var listLabel: MutableList<Label>) :
-    RecyclerView.Adapter<ListWordAdapter.WordViewHolder>() {
+class ListLabelAdapter(var listLabel: MutableList<Label>) :
+    RecyclerView.Adapter<ListLabelAdapter.LabelViewHolder>() {
     fun replace(listLabel: MutableList<Label>) {
         this.listLabel = listLabel
         notifyDataSetChanged()
     }
 
-    inner class WordViewHolder(var binding: ItemWordBinding) :
+    inner class LabelViewHolder(var binding: ItemWordBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(label: Label) {
             binding.btnLearn.setOnClickListener {
@@ -27,7 +27,7 @@ class ListWordAdapter(var listLabel: MutableList<Label>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LabelViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val item = DataBindingUtil.inflate<ItemWordBinding>(
             layoutInflater,
@@ -35,10 +35,10 @@ class ListWordAdapter(var listLabel: MutableList<Label>) :
             parent,
             false
         )
-        return WordViewHolder(item)
+        return LabelViewHolder(item)
     }
 
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: LabelViewHolder, position: Int) {
         holder.bind(listLabel[position])
     }
 

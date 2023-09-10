@@ -279,11 +279,11 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_profile_num" />
 
                 <TextView
-                    android:id="@+id/tv_profile_by"
+                    android:id="@+id/tv_support"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp16"
-                    android:text="Hồ sơ bởi"
+                    android:text="Hỗ trợ bởi"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp14"
                     android:textStyle="bold"
@@ -291,29 +291,29 @@
                     app:layout_constraintTop_toBottomOf="@id/edt_profile_num" />
 
                 <EditText
-                    android:id="@+id/edt_profile_by"
+                    android:id="@+id/edt_support"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp6"
                     android:background="@drawable/bg_edt_v2"
-                    android:hint="Hồ sơ bởi"
+                    android:hint="Hỗ trợ bởi"
                     android:padding="@dimen/dp12"
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_color"
                     android:textSize="@dimen/sp13"
-                    app:layout_constraintTop_toBottomOf="@id/tv_profile_by" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_support" />
 
                 <TextView
                     android:id="@+id/tv_register_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp16"
-                    android:text="Số đăng ký"
+                    android:text="Đăng ký bởi"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp14"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edt_profile_by" />
+                    app:layout_constraintTop_toBottomOf="@id/edt_support" />
 
                 <EditText
                     android:id="@+id/edt_register_num"
@@ -321,7 +321,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp6"
                     android:background="@drawable/bg_edt_v2"
-                    android:hint="Nhập số đăng ký"
+                    android:hint="Đăng ký bởi"
                     android:padding="@dimen/dp12"
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_color"

@@ -1,15 +1,17 @@
 package com.ptit.signlanguage.ui.topic
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.databinding.ActivityTopicBinding
-import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.network.model.response.Lesson
-import com.ptit.signlanguage.network.model.response.Topic
+import com.ptit.signlanguage.network.model.response.Subject
+import com.ptit.signlanguage.network.model.response.Level
 import com.ptit.signlanguage.ui.main.MainViewModel
-import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
 import com.ptit.signlanguage.ui.topic.adapter.TopicAdapter
+import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
 class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>() {
@@ -29,7 +31,11 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>() {
         binding.layout.setPadding(0, getStatusBarHeight(this@TopicActivity), 0, 0)
 
         binding.rvTopic.adapter = adapter
-        adapter.replace(fakeData())
+        val subject : Subject? = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
+        subject?.let {
+            binding.tvNameTopic.text = subject.name
+            viewModel.getSubjectAllInfo(it.id)
+        }
     }
 
     override fun initListener() {
@@ -37,19 +43,13 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>() {
     }
 
     override fun observerLiveData() {
-
-    }
-
-    private fun fakeData(): MutableList<Topic> {
-        val listTopic = mutableListOf<Topic>()
-        for(t in 1 ..3) {
-            val topic = Topic()
-            for (l in 1..6) {
-                val lesson = Lesson()
-                topic.listLesson.add(lesson)
+        viewModel.apply {
+            subjectInfoRes.observe(this@TopicActivity) {
+                it?.body?.listLevel?.toMutableList()?.let { it1 -> adapter.replace(it1) }
             }
-            listTopic.add(topic)
+            errorMessage.observe(this@TopicActivity) {
+                Toast.makeText(this@TopicActivity, getString(it), Toast.LENGTH_LONG).show()
+            }
         }
-        return listTopic
     }
 }

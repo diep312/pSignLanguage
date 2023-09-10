@@ -1,5 +1,5 @@
 package com.ptit.signlanguage.network.model.response
 
-class Topic {
+class Level {
     var listLesson : MutableList<Lesson> = mutableListOf()
 }

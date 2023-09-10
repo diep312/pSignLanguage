@@ -10,6 +10,7 @@ import com.ptit.signlanguage.databinding.ItemCourseBinding
 import com.ptit.signlanguage.network.model.response.Course
 import com.ptit.signlanguage.network.model.response.Subject
 import com.ptit.signlanguage.ui.topic.TopicActivity
+import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
 class CourseAdapter(var litSubject: MutableList<Subject?>) :
@@ -27,6 +28,7 @@ class CourseAdapter(var litSubject: MutableList<Subject?>) :
 
             binding.btnJoin.setOnClickListener {
                 val intent = Intent(binding.root.context, TopicActivity::class.java)
+                intent.putExtra(Constants.KEY_SUBJECT, subject)
                 binding.root.context.startActivity(intent)
             }
         }

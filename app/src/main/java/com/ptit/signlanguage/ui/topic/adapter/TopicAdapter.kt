@@ -9,29 +9,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.GridThreeColumnDecoration
 import com.ptit.signlanguage.databinding.ItemTopicBinding
-import com.ptit.signlanguage.network.model.response.Topic
+import com.ptit.signlanguage.network.model.response.subjectWrap.Level
 
-class TopicAdapter(var listTopic: MutableList<Topic>) :
+class TopicAdapter(var listLevel: MutableList<Level?>) :
     RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
-    fun replace(listTopic: MutableList<Topic>) {
-        this.listTopic = listTopic
+    fun replace(listLevel: MutableList<Level?>) {
+        this.listLevel = listLevel
         notifyDataSetChanged()
     }
 
     inner class TopicViewHolder(var binding: ItemTopicBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(topic: Topic) {
+        fun bind(level: Level?) {
+            // name level
+            binding.tvRank.text = "Cấp độ ${level?.levelId ?: ""}"
+
+            // list label
             val adapter = LessonAdapter(mutableListOf())
             val gridLayoutManager = object : GridLayoutManager(binding.root.context, 3, GridLayoutManager.VERTICAL, false) {
                 override fun canScrollVertically(): Boolean {
                     return false
                 }
             }
-            binding.rvLesson.layoutManager = gridLayoutManager
-            binding.rvLesson.adapter = adapter
-            binding.rvLesson.setHasFixedSize(true)
-            binding.rvLesson.addItemDecoration(GridThreeColumnDecoration(3, dpToPx(8), true))
-            adapter.replace(topic.listLesson)
+            binding.rvLabel.layoutManager = gridLayoutManager
+            binding.rvLabel.adapter = adapter
+            binding.rvLabel.setHasFixedSize(true)
+            binding.rvLabel.addItemDecoration(GridThreeColumnDecoration(3, dpToPx(8), true))
+            level?.listLabel?.toMutableList()?.let { adapter.replace(it) }
         }
     }
 
@@ -47,11 +51,11 @@ class TopicAdapter(var listTopic: MutableList<Topic>) :
     }
 
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
-        holder.bind(listTopic[position])
+        holder.bind(listLevel[position])
     }
 
     override fun getItemCount(): Int {
-        return listTopic.size
+        return listLevel.size
     }
 
     fun pxToDp(px: Int): Int {

@@ -7,14 +7,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemLessionBinding
-import com.ptit.signlanguage.network.model.response.Lesson
-import com.ptit.signlanguage.ui.word.ListWordActivity
+import com.ptit.signlanguage.network.model.response.subjectWrap.Label
+import com.ptit.signlanguage.ui.score.PracticeActivity
+import com.ptit.signlanguage.utils.Constants
+import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
-class LessonAdapter(var listLesson: MutableList<Lesson>) :
+class LessonAdapter(var listLabel: MutableList<Label>) :
     RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
-    fun replace(listLesson: MutableList<Lesson>) {
-        this.listLesson = listLesson
+    fun replace(listLesson: MutableList<Label>) {
+        this.listLabel = listLesson
         notifyDataSetChanged()
     }
 
@@ -30,18 +32,22 @@ class LessonAdapter(var listLesson: MutableList<Lesson>) :
     }
 
     override fun onBindViewHolder(holder: LessonViewHolder, position: Int) {
-        holder.bind(listLesson[position])
+        holder.bind(listLabel[position])
     }
 
     override fun getItemCount(): Int {
-        return listLesson.size
+        return listLabel.size
     }
 
     class LessonViewHolder(var binding: ItemLessionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(lesson: Lesson) {
+        fun bind(label: Label?) {
+            binding.tvLesson.text = label?.labelVn ?: EMPTY_STRING
+
             binding.root.setOnClickListener {
-                val intent = Intent(binding.root.context, ListWordActivity::class.java)
+//                val intent = Intent(binding.root.context, ListWordActivity::class.java)
+                val intent = Intent(binding.root.context, PracticeActivity::class.java)
+                intent.putExtra(Constants.KEY_LABEL, label?.labelVn)
                 binding.root.context.startActivity(intent)
             }
         }

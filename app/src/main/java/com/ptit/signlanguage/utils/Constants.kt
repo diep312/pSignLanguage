@@ -23,7 +23,8 @@ object Constants {
     const val HORIZONTAL = 0
     const val VERTICAL = 1
 
-    const val DATE_SIMPLE_FORMAT: String = "dd-MM-yyyy"
+    const val DATE_SIMPLE_FORMAT: String = "yyyy-MM-dd"
 
     const val KEY_LABEL = "KEY_LABEL"
+    const val KEY_SUBJECT = "KEY_SUBJECT"
 }

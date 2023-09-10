@@ -1,6 +1,8 @@
 package com.ptit.signlanguage.network.api
 
+import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
+import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
@@ -23,4 +25,10 @@ interface ApiService {
 
     @GET("/api/v1/video")
     suspend fun getVideo(@Query("label") label : String): BaseResponse<Video?>?
+
+    @GET("/api/v1/list-labels-by-subjectId")
+    suspend fun getAllInfoSubject(@Query("subjectId") subjectId : Int): BaseResponse<SubjectWrap?>?
+
+    @PUT("/api/v1/user")
+    suspend fun updateUser(@Body updateUserRequest: UpdateUserRequest): BaseResponse<User?>
 }
