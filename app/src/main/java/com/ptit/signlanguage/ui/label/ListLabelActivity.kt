@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.base.LinearItemDecoration
-import com.ptit.signlanguage.databinding.ActivityListWordBinding
+import com.ptit.signlanguage.databinding.ActivityListLabelBinding
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.score.ActivityScore
@@ -13,7 +13,7 @@ import com.ptit.signlanguage.ui.label.adapter.ListLabelAdapter
 import com.ptit.signlanguage.utils.Constants.VERTICAL
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
-class ListLabelActivity : BaseActivity<MainViewModel, ActivityListWordBinding>() {
+class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>() {
     var adapter: ListLabelAdapter = ListLabelAdapter(mutableListOf())
 
     override fun initViewModel() {
@@ -21,7 +21,7 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListWordBinding>()
     }
 
     override fun getContentLayout(): Int {
-        return R.layout.activity_list_word
+        return R.layout.activity_list_label
     }
 
     override fun initView() {
