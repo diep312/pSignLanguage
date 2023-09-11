@@ -10,7 +10,8 @@ data class UpdateUserRequest(
     var name: String? = null,
     var phoneNumber: String? = null,
     var registerType: String? = null,
-    var supportedBy: String? = null
+    var supportedBy: String? = null,
+    var profileNumber : String? = null
 ) {
     fun convertUserToUpdateUserRequest(user: User) : UpdateUserRequest {
         val updateUserRequest = UpdateUserRequest()

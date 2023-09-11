@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.main
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.ptit.signlanguage.R
@@ -16,6 +17,7 @@ import com.ptit.signlanguage.view_model.ViewModelFactory
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     lateinit var myViewPagerAdapter : MainViewPagerAdapter
+    private var backPressedTime: Long = 0
 
     override fun getContentLayout(): Int {
         return R.layout.activity_main
@@ -83,5 +85,17 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
+    override fun onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity()
+        } else {
+            Toast.makeText(
+                this@MainActivity,
+                getString(R.string.str_back_press),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        backPressedTime = System.currentTimeMillis()
+    }
 
 }

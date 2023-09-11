@@ -2,6 +2,9 @@ package com.ptit.signlanguage.ui.main.fragment
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
@@ -10,6 +13,7 @@ import com.ptit.signlanguage.databinding.FragmentAccountBinding
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.MainViewModel
+import com.ptit.signlanguage.ui.splash.SplashActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 import com.ptit.signlanguage.utils.DateUtils
@@ -59,7 +63,15 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
 
     override fun observerLiveData() {
         viewModel.apply {
-            binding
+            updateUserRes.observe(this@AccountFragment) {
+                Log.d(TAG, it.toString())
+                val intent = Intent(this@AccountFragment.context, SplashActivity::class.java)
+                startActivity(intent)
+                this@AccountFragment.activity?.finishAffinity()
+            }
+            errorMessage.observe(this@AccountFragment) {
+                Toast.makeText(this@AccountFragment.context, getString(it), Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -75,6 +87,11 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
             binding.edtBirthday.text = this.dateOfBirth ?: EMPTY_STRING
             binding.edtAddress.setText(this.address ?: EMPTY_STRING)
             binding.edtEmail.setText(this.email ?: EMPTY_STRING)
+            if(this.language.equals("EN")) {
+                binding.rbEn.isChecked = true
+            } else {
+                binding.rbVn.isChecked = true
+            }
             binding.edtPhone.setText(this.phoneNumber ?: EMPTY_STRING)
             binding.edtProfileNum.setText(this.profileNumber ?: EMPTY_STRING)
             binding.edtSupport.setText(this.supportedBy ?: EMPTY_STRING)
@@ -95,16 +112,20 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
 
         binding.btnSave.setOnClickListener {
             if(!isDoubleClick()) {
-                var request = UpdateUserRequest()
+                val request = UpdateUserRequest()
                 request.address = binding.edtAddress.text.toString()
                 request.dateOfBirth = binding.edtBirthday.text.toString()
                 request.email = binding.edtEmail.text.toString()
-//                request.language = binding.edtEmail.text.toString()
+                if (binding.rbVn.isChecked) {
+                    request.language = "VI"
+                } else {
+                    request.language = "EN"
+                }
                 request.name = binding.edtName.text.toString()
                 request.phoneNumber = binding.edtPhone.text.toString()
                 request.registerType = binding.edtRegisterNum.text.toString()
                 request.supportedBy = binding.edtSupport.text.toString()
-                request.supportedBy = binding.edtProfileNum.text.toString()
+                request.profileNumber = binding.edtProfileNum.text.toString()
 
                 viewModel.updateUser(request)
             }

@@ -53,7 +53,9 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         viewModel.apply {
             loginResponse.observe(this@SplashActivity) {
                 if (it?.body != null) {
-                    user?.token = it.body.token
+                    val pass = user?.password
+                    user = it.body
+                    user?.password = pass
                     val dataLogin = GsonUtils.serialize(user, User::class.java)
                     prefsHelper.save(Constants.KEY_PREF_DATA_LOGIN, dataLogin)
                     prefsHelper.save(Constants.KEY_TOKEN, it.body.token?.accessToken)
