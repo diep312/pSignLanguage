@@ -10,8 +10,9 @@ import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.GridThreeColumnDecoration
 import com.ptit.signlanguage.databinding.ItemTopicBinding
 import com.ptit.signlanguage.network.model.response.subjectWrap.Level
+import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
-class TopicAdapter(var listLevel: MutableList<Level?>) :
+class TopicAdapter(var listLevel: MutableList<Level?>, val language : String) :
     RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     fun replace(listLevel: MutableList<Level?>) {
@@ -22,10 +23,10 @@ class TopicAdapter(var listLevel: MutableList<Level?>) :
     inner class TopicViewHolder(var binding: ItemTopicBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(level: Level?) {
             // name level
-            binding.tvRank.text = "Cấp độ ${level?.levelId ?: ""}"
+            binding.tvRank.text = binding.root.context.getString(R.string.str_level, level?.levelId ?: EMPTY_STRING)
 
             // list label
-            val adapter = LessonAdapter(mutableListOf())
+            val adapter = LessonAdapter(mutableListOf(), language)
             val gridLayoutManager = object : GridLayoutManager(binding.root.context, 3, GridLayoutManager.VERTICAL, false) {
                 override fun canScrollVertically(): Boolean {
                     return false

@@ -46,7 +46,7 @@
             android:minHeight="0dp"
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
-            android:text="Chọn"
+            android:text="@string/str_pick"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="@dimen/sp14"

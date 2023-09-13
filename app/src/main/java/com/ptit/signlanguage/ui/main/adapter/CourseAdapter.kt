@@ -13,7 +13,7 @@ import com.ptit.signlanguage.ui.topic.TopicActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
-class CourseAdapter(var litSubject: MutableList<Subject?>) :
+class CourseAdapter(var litSubject: MutableList<Subject?>, val language: String) :
     RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
 
     fun replace(litSubject : MutableList<Subject?>) {
@@ -21,10 +21,13 @@ class CourseAdapter(var litSubject: MutableList<Subject?>) :
         notifyDataSetChanged()
     }
 
-    class CourseViewHolder(var binding: ItemCourseBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CourseViewHolder(var binding: ItemCourseBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(subject : Subject?) {
-
-            binding.btnJoin.text = subject?.name ?: EMPTY_STRING
+            if(language == Constants.EN) {
+                binding.btnJoin.text = subject?.name ?: EMPTY_STRING
+            } else {
+                binding.btnJoin.text = subject?.name ?: EMPTY_STRING
+            }
 
             binding.btnJoin.setOnClickListener {
                 val intent = Intent(binding.root.context, TopicActivity::class.java)

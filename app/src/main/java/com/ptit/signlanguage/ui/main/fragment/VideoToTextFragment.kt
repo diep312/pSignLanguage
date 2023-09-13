@@ -16,13 +16,21 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.FragmentVideoToTextBinding
+import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.MainViewModel
+import com.ptit.signlanguage.utils.Constants
+import com.ptit.signlanguage.utils.Constants.EN
+import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.io.File
 
 
 class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBinding>() {
+
+    var user : User? = null
+    private lateinit var prefsHelper: PreferencesHelper
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
@@ -37,8 +45,12 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
             videoToTextRes.observe(this@VideoToTextFragment) {
                 if (it?.body != null) {
                     binding.layoutWrapAnswer.visibility = View.VISIBLE
-                    binding.tvEn.text = getString(R.string.str_label_en, it.body.action_en)
-                    binding.tvVn.text = getString(R.string.str_label_vn, it.body.action_vi)
+                    if(user?.language.equals(EN)) {
+                        binding.tvLabel.text = getString(R.string.str_label, it.body.action_en)
+                    } else {
+                        binding.tvLabel.text = getString(R.string.str_label, it.body.action_vi)
+                    }
+
                 }
                 Log.d(TAG, it.toString())
             }
@@ -52,6 +64,10 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
         val mediaController = MediaController(requireContext())
         mediaController.setAnchorView(binding.vvVideo)
         binding.vvVideo.setMediaController(mediaController)
+
+        prefsHelper = PreferencesHelper(binding.root.context)
+        val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
+        user = GsonUtils.deserialize(userJson, User::class.java)
     }
 
     override fun initListener() {

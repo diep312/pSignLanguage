@@ -13,6 +13,7 @@ import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityRegisterBinding
 import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.ui.login.LoginActivity
 import com.ptit.signlanguage.ui.login.LoginViewModel
 import com.ptit.signlanguage.ui.main.MainActivity
 import com.ptit.signlanguage.utils.Constants
@@ -129,7 +130,7 @@ class RegisterActivity : BaseActivity<LoginViewModel, ActivityRegisterBinding>()
                     val dataLogin = GsonUtils.serialize(user, User::class.java)
                     prefsHelper.save(Constants.KEY_PREF_DATA_LOGIN, dataLogin)
                     prefsHelper.save(Constants.KEY_TOKEN, it.body.accessToken)
-                    goToMain()
+                    goToLogin()
                 }
             }
             errorMessage.observe(this@RegisterActivity) {
@@ -175,6 +176,12 @@ class RegisterActivity : BaseActivity<LoginViewModel, ActivityRegisterBinding>()
         val intent = Intent(this@RegisterActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun goToLogin() {
+        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
     }
 
 }

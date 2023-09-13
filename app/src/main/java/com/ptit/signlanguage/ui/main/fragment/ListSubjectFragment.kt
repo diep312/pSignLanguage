@@ -6,14 +6,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
 import com.ptit.signlanguage.base.GridItemDecoration
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.FragmentCourseBinding
 import com.ptit.signlanguage.network.model.response.Course
+import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.CourseAdapter
+import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
+import com.ptit.signlanguage.utils.Constants
+import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
 class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
-    var adapter: CourseAdapter = CourseAdapter(mutableListOf())
+    lateinit var adapter: CourseAdapter
+    var user : User? = null
+    private lateinit var prefsHelper: PreferencesHelper
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
@@ -37,6 +44,16 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
     }
 
     override fun initView() {
+        prefsHelper = PreferencesHelper(binding.root.context)
+        val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
+        user = GsonUtils.deserialize(userJson, User::class.java)
+
+        adapter = if(user?.language.equals(Constants.EN)) {
+            CourseAdapter(mutableListOf(), Constants.EN)
+        } else {
+            CourseAdapter(mutableListOf(), Constants.VI)
+        }
+
         val gridLayoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
         binding.rvCourse.layoutManager = gridLayoutManager
         binding.rvCourse.adapter = adapter

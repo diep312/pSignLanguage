@@ -128,7 +128,7 @@
             android:minHeight="0dp"
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
-            android:text="Kiểm tra video"
+            android:text="@string/str_check"
             android:textColor="@color/black"
             android:textSize="@dimen/sp14"
             app:layout_constraintEnd_toEndOf="parent"

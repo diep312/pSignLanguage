@@ -12,7 +12,7 @@ import com.ptit.signlanguage.ui.score.PracticeActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
-class LessonAdapter(var listLabel: MutableList<Label>) :
+class LessonAdapter(var listLabel: MutableList<Label>, val language : String) :
     RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
     fun replace(listLesson: MutableList<Label>) {
@@ -39,15 +39,23 @@ class LessonAdapter(var listLabel: MutableList<Label>) :
         return listLabel.size
     }
 
-    class LessonViewHolder(var binding: ItemLessionBinding) :
+    inner class LessonViewHolder(var binding: ItemLessionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(label: Label?) {
-            binding.tvLesson.text = label?.labelVn ?: EMPTY_STRING
+            if(language == Constants.EN) {
+                binding.tvLesson.text = label?.labelEn ?: EMPTY_STRING
+            } else {
+                binding.tvLesson.text = label?.labelVn ?: EMPTY_STRING
+            }
 
             binding.root.setOnClickListener {
 //                val intent = Intent(binding.root.context, ListWordActivity::class.java)
                 val intent = Intent(binding.root.context, PracticeActivity::class.java)
-                intent.putExtra(Constants.KEY_LABEL, label?.labelVn)
+                if(language == Constants.EN) {
+                    intent.putExtra(Constants.KEY_LABEL, label?.labelEn)
+                } else {
+                    intent.putExtra(Constants.KEY_LABEL, label?.labelVn)
+                }
                 binding.root.context.startActivity(intent)
             }
         }

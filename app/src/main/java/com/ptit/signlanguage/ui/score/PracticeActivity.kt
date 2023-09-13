@@ -61,7 +61,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         binding.btnCheck.setOnClickListener {
             binding.imvCheck.visibility = View.GONE
             if(videoPath.isNullOrEmpty()) {
-                Toast.makeText(binding.root.context, "Bạn chưa chọn video!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(binding.root.context, getString(R.string.str_you_did_not_choose_video), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val file = File(videoPath)

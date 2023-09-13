@@ -1,23 +1,31 @@
 package com.ptit.signlanguage.ui.main
 
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityMainBinding
+import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.adapter.MainViewPagerAdapter
+import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.PAGE_0
 import com.ptit.signlanguage.utils.Constants.PAGE_1
 import com.ptit.signlanguage.utils.Constants.PAGE_2
 import com.ptit.signlanguage.utils.Constants.PAGE_3
-import com.ptit.signlanguage.utils.Constants.PAGE_4
-import com.ptit.signlanguage.utils.Constants.TOTAL_SIZE_PAGE
+import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
+import java.util.*
+
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     lateinit var myViewPagerAdapter : MainViewPagerAdapter
     private var backPressedTime: Long = 0
+    private lateinit var prefsHelper: PreferencesHelper
+    var user: User? = null
 
     override fun getContentLayout(): Int {
         return R.layout.activity_main
@@ -31,6 +39,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         setLightIconStatusBar(false)
         setColorForStatusBar(R.color.color_primary)
         binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity), 0, 0)
+
+        prefsHelper = PreferencesHelper(binding.root.context)
+        val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
+        user = GsonUtils.deserialize(userJson, User::class.java)
+        // config language
+        changeLanguage()
 
         myViewPagerAdapter = MainViewPagerAdapter(this)
         binding.vp.offscreenPageLimit = 4
@@ -96,6 +110,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             ).show()
         }
         backPressedTime = System.currentTimeMillis()
+    }
+
+    private fun changeLanguage() {
+        val resources: Resources = this@MainActivity.resources
+        val configuration: Configuration = resources.configuration
+
+        val locale = Locale(if(user?.language.equals("EN")) "en" else "vi")
+        configuration.setLocale(locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 
 }

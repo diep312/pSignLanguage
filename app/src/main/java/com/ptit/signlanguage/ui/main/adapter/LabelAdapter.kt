@@ -13,7 +13,7 @@ import com.ptit.signlanguage.ui.score.PracticeActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.KEY_LABEL
 
-class LabelAdapter(var listLabel: MutableList<Label?>) :
+class LabelAdapter(var listLabel: MutableList<Label?>, val language: String) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -26,21 +26,27 @@ class LabelAdapter(var listLabel: MutableList<Label?>) :
         notifyDataSetChanged()
     }
 
-    class LabelViewHolder(var binding: ItemLabelBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class LabelViewHolder(var binding: ItemLabelBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(label: Label?) {
-            binding.tvLabel.text = label?.labelVn ?: Constants.EMPTY_STRING
+            if(language == Constants.EN) {
+                binding.tvLabel.text = label?.labelEn ?: Constants.EMPTY_STRING
+            } else {
+                binding.tvLabel.text = label?.labelVn ?: Constants.EMPTY_STRING
+            }
 
             binding.btnNext.setOnClickListener {
                 val intent = Intent(binding.root.context, PracticeActivity::class.java)
-                intent.putExtra(KEY_LABEL, label?.labelVn)
+                if(language == Constants.EN) {
+                    intent.putExtra(KEY_LABEL, label?.labelEn)
+                } else {
+                    intent.putExtra(KEY_LABEL, label?.labelVn)
+                }
                 binding.root.context.startActivity(intent)
             }
         }
     }
 
-    class EmptyViewHolder(var binding: ItemEmptyBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class EmptyViewHolder(var binding: ItemEmptyBinding) : RecyclerView.ViewHolder(binding.root) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == TYPE_LABEL) {

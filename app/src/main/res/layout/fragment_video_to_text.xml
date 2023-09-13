@@ -73,7 +73,7 @@
                 app:tint="@color/white" />
 
             <TextView
-                android:id="@+id/tv_en"
+                android:id="@+id/tv_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp12"
@@ -83,19 +83,6 @@
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@id/imv_check"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_vn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp12"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="1"
-                android:text="VN:"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toEndOf="@id/imv_check"
-                app:layout_constraintTop_toBottomOf="@id/tv_en" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
