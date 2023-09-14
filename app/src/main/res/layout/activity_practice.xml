@@ -67,7 +67,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_word">
 
-            <com.google.android.exoplayer2.ui.PlayerView
+            <androidx.media3.ui.PlayerView
                 android:id="@+id/vv_guide"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

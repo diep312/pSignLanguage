@@ -13,8 +13,10 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MimeTypes
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.SimpleExoPlayer
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
@@ -23,6 +25,7 @@ import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.io.File
+
 
 class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() {
     private var label: String? = null
@@ -171,14 +174,14 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
     }
 
     private fun initializePlayer(uri: String) {
-        ExoPlayer.Builder(this)
+        val mediaItem: MediaItem = MediaItem.Builder()
+            .setUri(uri)
+            .setMimeType(MimeTypes.VIDEO_MP4) // Change the MIME type as needed
             .build()
-            .also { exoPlayer ->
-                binding.vvGuide.player = exoPlayer
-                val mediaItem = MediaItem.fromUri(Uri.parse(uri))
-                exoPlayer.setMediaItem(mediaItem)
-                exoPlayer.playWhenReady = true
-                exoPlayer.prepare()
-            }
+        val player: ExoPlayer = ExoPlayer.Builder(this).build()
+        binding.vvGuide.player = player
+        player.setMediaItem(mediaItem)
+        player.prepare()
+        player.play()
     }
 }
