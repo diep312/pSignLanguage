@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.ptit.signlanguage"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -83,4 +83,22 @@ dependencies {
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
 
     implementation("androidx.cardview:cardview:1.0.0")
+
+    // dependency for exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.19.1'
+
+// for core support in exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.19.1'
+
+// for adding dash support in our exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.19.1'
+
+// for adding hls support in exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.19.1'
+
+// for smooth streaming of video in our exoplayer.
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.19.1'
+
+// for generating default ui of exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.1'
 }
