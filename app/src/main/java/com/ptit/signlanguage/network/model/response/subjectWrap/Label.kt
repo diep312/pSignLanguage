@@ -6,4 +6,4 @@ data class Label(
     val labelVn: String,
     val levelId: Int,
     val subjectId: Int
-)
+) : java.io.Serializable

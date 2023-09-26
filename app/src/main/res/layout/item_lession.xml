@@ -80,7 +80,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp6"
             android:gravity="center"
-            android:text="Bài học 4"
             android:textColor="@color/color_border"
             android:textSize="@dimen/sp10"
             android:textStyle="bold"

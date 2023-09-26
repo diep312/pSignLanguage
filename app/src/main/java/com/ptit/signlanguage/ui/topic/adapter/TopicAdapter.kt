@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.topic.adapter
 
+import android.content.Intent
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +11,11 @@ import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.GridThreeColumnDecoration
 import com.ptit.signlanguage.databinding.ItemTopicBinding
 import com.ptit.signlanguage.network.model.response.subjectWrap.Level
+import com.ptit.signlanguage.ui.label.ListLabelActivity
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
+import com.ptit.signlanguage.utils.Constants.KEY_LEVEL
 
-class TopicAdapter(var listLevel: MutableList<Level?>, val language : String) :
+class TopicAdapter(var listLevel: MutableList<Level?>, val language : String, val callbackTopic: CallbackTopic) :
     RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
     fun replace(listLevel: MutableList<Level?>) {
@@ -37,6 +40,10 @@ class TopicAdapter(var listLevel: MutableList<Level?>, val language : String) :
             binding.rvLabel.setHasFixedSize(true)
             binding.rvLabel.addItemDecoration(GridThreeColumnDecoration(3, dpToPx(8), true))
             level?.listLabel?.toMutableList()?.let { adapter.replace(it) }
+
+            binding.tvRank.setOnClickListener {
+                callbackTopic.onClickTopic(level)
+            }
         }
     }
 
@@ -65,5 +72,9 @@ class TopicAdapter(var listLevel: MutableList<Level?>, val language : String) :
 
     fun dpToPx(dp: Int): Int {
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
+    }
+
+    interface CallbackTopic {
+        fun onClickTopic(level: Level?)
     }
 }

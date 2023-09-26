@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
@@ -24,7 +25,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/imv_logo"
@@ -35,7 +37,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -44,7 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp12"
-            android:text="Chủ đề 1"
             android:textColor="@color/black"
             android:textSize="@dimen/sp16"
             android:textStyle="bold"
@@ -57,7 +59,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp6"
-            android:text="Cấp độ 1"
             android:textColor="@color/color_text"
             android:textSize="@dimen/sp14"
             android:textStyle="normal"
@@ -91,7 +92,7 @@
             android:minHeight="0dp"
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
-            android:text="Xem điểm"
+            android:text="@string/str_view_points"
             android:textColor="@color/black"
             android:textSize="@dimen/sp14"
             app:layout_constraintBottom_toBottomOf="parent"

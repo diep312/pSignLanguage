@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.topic
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
@@ -8,16 +9,20 @@ import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityTopicBinding
 import com.ptit.signlanguage.network.model.response.Subject
 import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.network.model.response.subjectWrap.Level
+import com.ptit.signlanguage.ui.label.ListLabelActivity
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.topic.adapter.TopicAdapter
 import com.ptit.signlanguage.utils.Constants
+import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
-class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>() {
+class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), TopicAdapter.CallbackTopic {
     lateinit var adapter: TopicAdapter
     private lateinit var prefsHelper: PreferencesHelper
     var user: User? = null
+    var subject: Subject? = null
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -36,14 +41,14 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>() {
         user = GsonUtils.deserialize(userJson, User::class.java)
 
         adapter = if (user?.language.equals(Constants.EN)) {
-            TopicAdapter(mutableListOf(), Constants.EN)
+            TopicAdapter(mutableListOf(), Constants.EN, this)
         } else {
-            TopicAdapter(mutableListOf(), Constants.VI)
+            TopicAdapter(mutableListOf(), Constants.VI, this)
         }
         binding.rvTopic.adapter = adapter
-        val subject: Subject? = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
+        subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
         subject?.let {
-            binding.tvNameTopic.text = subject.name
+            binding.tvNameTopic.text = subject?.name ?: EMPTY_STRING
             viewModel.getSubjectAllInfo(it.id)
         }
     }
@@ -60,6 +65,15 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>() {
             errorMessage.observe(this@TopicActivity) {
                 Toast.makeText(this@TopicActivity, getString(it), Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    override fun onClickTopic(level: Level?) {
+        if(!isDoubleClick()) {
+            val intent = Intent(binding.root.context, ListLabelActivity::class.java)
+            intent.putExtra(Constants.KEY_LEVEL, level)
+            intent.putExtra(Constants.KEY_SUBJECT, subject)
+            binding.root.context.startActivity(intent)
         }
     }
 }

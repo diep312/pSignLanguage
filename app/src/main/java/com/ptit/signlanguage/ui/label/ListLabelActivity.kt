@@ -5,16 +5,24 @@ import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.base.LinearItemDecoration
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityListLabelBinding
 import com.ptit.signlanguage.network.model.response.Label
+import com.ptit.signlanguage.network.model.response.Subject
+import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.network.model.response.subjectWrap.Level
+import com.ptit.signlanguage.ui.label.adapter.ListLabelAdapter
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.score.ActivityScore
-import com.ptit.signlanguage.ui.label.adapter.ListLabelAdapter
+import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.VERTICAL
+import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
 class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>() {
-    var adapter: ListLabelAdapter = ListLabelAdapter(mutableListOf())
+    lateinit var adapter: ListLabelAdapter
+    private lateinit var prefsHelper: PreferencesHelper
+    var user: User? = null
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
@@ -29,9 +37,25 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>(
         setColorForStatusBar(R.color.color_primary)
         binding.layout.setPadding(0, getStatusBarHeight(this@ListLabelActivity), 0, 0)
 
+        prefsHelper = PreferencesHelper(binding.root.context)
+        val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
+        user = GsonUtils.deserialize(userJson, User::class.java)
+
+        val subject: Subject? = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
+        val level: Level? = intent.getSerializableExtra(Constants.KEY_LEVEL) as Level?
+
+        binding.tvRank.text = getString(R.string.str_level, level?.levelId.toString())
+        if (user?.language.equals(Constants.EN)) {
+            binding.tvNameTopic.text = subject?.name
+            adapter = ListLabelAdapter(mutableListOf(), Constants.EN)
+        } else {
+            binding.tvNameTopic.text = subject?.name
+            adapter = ListLabelAdapter(mutableListOf(), Constants.VI)
+        }
+
         binding.rvWord.adapter = adapter
         binding.rvWord.addItemDecoration(LinearItemDecoration(dpToPx(12), VERTICAL))
-        adapter.replace(fakeData())
+        level?.listLabel?.toMutableList()?.let { adapter.replace(it) }
     }
 
     override fun initListener() {

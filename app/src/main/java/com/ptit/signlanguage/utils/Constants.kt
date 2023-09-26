@@ -12,6 +12,7 @@ object Constants {
     const val KEY_RESEND_TOKEN = "KEY_RESEND_TOKEN"
     const val KEY_TOKEN = "KEY_TOKEN"
     const val KEY_PREF_DATA_LOGIN = "KEY_PREF_DATA_LOGIN"
+    const val KEY_LEVEL = "KEY_LEVEL"
 
     const val TOTAL_SIZE_PAGE = 4
     const val PAGE_0 = 0

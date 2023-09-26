@@ -35,7 +35,6 @@
             android:minHeight="0dp"
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
-            android:text="Chủ đề 1"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="@dimen/sp12"
