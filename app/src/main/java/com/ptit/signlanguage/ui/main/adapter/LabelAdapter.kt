@@ -9,7 +9,7 @@ import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemEmptyBinding
 import com.ptit.signlanguage.databinding.ItemLabelBinding
 import com.ptit.signlanguage.network.model.response.Label
-import com.ptit.signlanguage.ui.score.PracticeActivity
+import com.ptit.signlanguage.ui.score.VideoViewActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.KEY_LABEL
 
@@ -23,20 +23,21 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String) :
 
     fun replace(listLabel: MutableList<Label?>) {
         this.listLabel = listLabel
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, itemCount)
     }
 
-    inner class LabelViewHolder(var binding: ItemLabelBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class LabelViewHolder(var binding: ItemLabelBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(label: Label?) {
-            if(language == Constants.EN) {
+            if (language == Constants.EN) {
                 binding.tvLabel.text = label?.labelEn ?: Constants.EMPTY_STRING
             } else {
                 binding.tvLabel.text = label?.labelVn ?: Constants.EMPTY_STRING
             }
 
             binding.btnNext.setOnClickListener {
-                val intent = Intent(binding.root.context, PracticeActivity::class.java)
-                if(language == Constants.EN) {
+                val intent = Intent(binding.root.context, VideoViewActivity::class.java)
+                if (language == Constants.EN) {
                     intent.putExtra(KEY_LABEL, label?.labelEn)
                 } else {
                     intent.putExtra(KEY_LABEL, label?.labelVn)
@@ -46,7 +47,7 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String) :
         }
     }
 
-    class EmptyViewHolder(var binding: ItemEmptyBinding) : RecyclerView.ViewHolder(binding.root) {}
+    class EmptyViewHolder(var binding: ItemEmptyBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == TYPE_LABEL) {

@@ -2,6 +2,7 @@ package com.ptit.signlanguage.network.api
 
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
+import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import okhttp3.MultipartBody
 import retrofit2.http.*

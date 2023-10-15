@@ -15,7 +15,7 @@
             android:layout_width="@dimen/dp128"
             android:layout_height="@dimen/dp128"
             android:scaleType="centerCrop"
-            android:src="@drawable/im_demo"
+            android:src="@drawable/ic_no_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

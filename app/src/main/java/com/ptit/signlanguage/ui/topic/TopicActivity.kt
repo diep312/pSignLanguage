@@ -48,7 +48,11 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
         binding.rvTopic.adapter = adapter
         subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
         subject?.let {
-            binding.tvNameTopic.text = subject?.name ?: EMPTY_STRING
+            if (user?.language.equals(Constants.EN)) {
+                binding.tvNameTopic.text = subject?.name_en ?: EMPTY_STRING
+            } else {
+                binding.tvNameTopic.text = subject?.name ?: EMPTY_STRING
+            }
             viewModel.getSubjectAllInfo(it.id)
         }
     }

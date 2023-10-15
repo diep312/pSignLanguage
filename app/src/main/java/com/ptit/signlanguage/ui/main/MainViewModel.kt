@@ -6,6 +6,7 @@ import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.network.api.ApiService
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
+import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

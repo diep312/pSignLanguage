@@ -46,11 +46,10 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                 if (it?.body != null) {
                     binding.layoutWrapAnswer.visibility = View.VISIBLE
                     if(user?.language.equals(EN)) {
-                        binding.tvLabel.text = getString(R.string.str_label, it.body.action_en)
+                        binding.tvLabel.text = getString(R.string.str_label, it.body.prediction[0].action_name)
                     } else {
-                        binding.tvLabel.text = getString(R.string.str_label, it.body.action_vi)
+                        binding.tvLabel.text = getString(R.string.str_label, it.body.prediction[0].action_name)
                     }
-
                 }
                 Log.d(TAG, it.toString())
             }

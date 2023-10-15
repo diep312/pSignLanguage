@@ -22,6 +22,7 @@ import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityPracticeBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
+import com.ptit.signlanguage.ui.main.fragment.VideoToTextFragment
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.io.File
@@ -78,6 +79,13 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                 viewModel.videoToText(file)
             }
         }
+        binding.imvPick.setOnClickListener {
+            if(!isDoubleClick()) {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "video/*")
+                startActivityForResult(intent, REQUEST_TAKE_GALLERY_VIDEO)
+            }
+        }
     }
 
     override fun observerLiveData() {
@@ -91,10 +99,12 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
             videoToTextRes.observe(this@PracticeActivity) {
                 if (it?.body != null) {
                     binding.imvCheck.visibility = View.VISIBLE
-                    if (label?.lowercase()?.equals(it.body.action_vi.lowercase()) == true) {
-                        binding.imvCheck.setImageResource(R.drawable.ic_check_true)
-                    } else {
-                        binding.imvCheck.setImageResource(R.drawable.ic_check_close)
+                    for(prediction in it.body.prediction) {
+                        if (label?.lowercase()?.equals(prediction.action_name.lowercase()) == true) {
+                            binding.imvCheck.setImageResource(R.drawable.ic_check_true)
+                        } else {
+                            binding.imvCheck.setImageResource(R.drawable.ic_check_close)
+                        }
                     }
                 }
                 Log.d(TAG, it.toString())
@@ -151,6 +161,22 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                     Log.e(TAG, "Error")
                 }
             }
+        } else if (requestCode == REQUEST_TAKE_GALLERY_VIDEO) {
+            when (resultCode) {
+                RESULT_OK -> {
+                    val videoUri: Uri = data?.data!!
+                    videoPath = parsePath(videoUri)
+                    Log.d(TAG, "$videoPath is the path that you need...")
+                    binding.vvRecord.setVideoPath(videoPath)
+                    binding.vvRecord.start()
+                }
+                Activity.RESULT_CANCELED -> {
+                    Log.d(TAG, "Cancel")
+                }
+                else -> {
+                    Log.e(TAG, "Error")
+                }
+            }
         }
     }
 
@@ -171,6 +197,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
     companion object {
         private const val CAMERA_PERMISSION_CODE: Int = 100
         private const val VIDEO_RECORD_CODE: Int = 101
+        private const val REQUEST_TAKE_GALLERY_VIDEO: Int = 102
     }
 
     private fun initializePlayer(uri: String) {

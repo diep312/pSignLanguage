@@ -15,7 +15,7 @@ class ListLabelAdapter(var listLabel: MutableList<Label>, val language : String)
     RecyclerView.Adapter<ListLabelAdapter.LabelViewHolder>() {
     fun replace(listLabel: MutableList<Label>) {
         this.listLabel = listLabel
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, itemCount)
     }
 
     inner class LabelViewHolder(var binding: ItemWordBinding) :
@@ -30,6 +30,11 @@ class ListLabelAdapter(var listLabel: MutableList<Label>, val language : String)
 
             binding.btnLearn.setOnClickListener {
                 val intent = Intent(binding.root.context, PracticeActivity::class.java)
+                if(language == Constants.EN) {
+                    intent.putExtra(Constants.KEY_LABEL, label.labelEn)
+                } else {
+                    intent.putExtra(Constants.KEY_LABEL, label.labelVn)
+                }
                 binding.root.context.startActivity(intent)
             }
         }

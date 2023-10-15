@@ -46,7 +46,7 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>(
 
         binding.tvRank.text = getString(R.string.str_level, level?.levelId.toString())
         if (user?.language.equals(Constants.EN)) {
-            binding.tvNameTopic.text = subject?.name
+            binding.tvNameTopic.text = subject?.name_en
             adapter = ListLabelAdapter(mutableListOf(), Constants.EN)
         } else {
             binding.tvNameTopic.text = subject?.name
