@@ -2,17 +2,18 @@ package com.ptit.signlanguage.ui.score.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemUserScoreBinding
-import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.network.model.response.score_with_subject.Score
 
-class UserScoreAdapter(var listUser: MutableList<User>) :
+class UserScoreAdapter(var listScore: MutableList<Score>) :
     RecyclerView.Adapter<UserScoreAdapter.UserScoreViewHolder>() {
 
-    fun replace(listUser: MutableList<User>) {
-        this.listUser = listUser
+    fun replace(listScore: MutableList<Score>) {
+        this.listScore = listScore
         notifyDataSetChanged()
     }
 
@@ -28,17 +29,19 @@ class UserScoreAdapter(var listUser: MutableList<User>) :
     }
 
     override fun onBindViewHolder(holder: UserScoreViewHolder, position: Int) {
-        holder.bind(listUser[position])
+        holder.bind(listScore[position])
     }
 
     override fun getItemCount(): Int {
-        return listUser.size
+        return listScore.size
     }
 
     class UserScoreViewHolder(var binding: ItemUserScoreBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
-
+        fun bind(score: Score) {
+            binding.tvUsername.text = score.userName
+            binding.tvScore.text = score.scoreAverage.toString()
+            binding.imvUser.setImageDrawable(ContextCompat.getDrawable(binding.root.context, R.drawable.ic_user_default))
         }
     }
 }

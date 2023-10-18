@@ -115,6 +115,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     val videoUri = data?.data
                     val videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
+                    binding.imvDefault.visibility = View.GONE
                     binding.vvVideo.setVideoPath(videoPath)
                     binding.vvVideo.start()
 
@@ -137,6 +138,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     val videoUri: Uri = data?.data!!
                     val videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
+                    binding.imvDefault.visibility = View.GONE
                     binding.vvVideo.setVideoPath(videoPath)
                     binding.vvVideo.start()
 

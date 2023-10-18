@@ -3,8 +3,11 @@ package com.ptit.signlanguage.network.api
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
 import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
+import com.ptit.signlanguage.network.model.response.check_video.CheckVideoRes
+import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWithSubject
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -17,6 +20,10 @@ interface ApiService {
     @Multipart
     @POST("/api/v1/predict")
     suspend fun videoToText(@Part file: MultipartBody.Part): BaseResponse<VideoToTextResponse?>?
+
+    @Multipart
+    @POST("/api/v1/checkVideo")
+    suspend fun checkVideo(@Part("label") label : RequestBody, @Part file: MultipartBody.Part): BaseResponse<CheckVideoRes?>?
 
     @GET("/api/v1/subject")
     suspend fun getListSubject(): BaseArrayResponse<Subject?>?
@@ -32,4 +39,9 @@ interface ApiService {
 
     @PUT("/api/v1/user")
     suspend fun updateUser(@Body updateUserRequest: UpdateUserRequest): BaseResponse<User?>
+
+    @FormUrlEncoded
+    @POST("/api/v1/scoreWithSubject")
+    suspend fun getScoreWithSubject(@Field("levelIds") levelIds : Int, @Field("subjectIds") subjectIds : Int): BaseResponse<ScoreWithSubject?>?
+
 }

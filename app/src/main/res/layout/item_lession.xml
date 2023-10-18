@@ -65,7 +65,6 @@
             android:id="@+id/tv_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="35 điểm"
             android:textColor="@color/white"
             android:textSize="@dimen/sp10"
             android:textStyle="bold"

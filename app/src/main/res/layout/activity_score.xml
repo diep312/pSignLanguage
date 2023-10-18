@@ -242,7 +242,7 @@
             android:minHeight="0dp"
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
-            android:text="Trở lại"
+            android:text="@string/str_back"
             android:textSize="@dimen/sp14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

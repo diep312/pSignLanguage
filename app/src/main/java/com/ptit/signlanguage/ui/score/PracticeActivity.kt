@@ -16,13 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.SimpleExoPlayer
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityPracticeBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
-import com.ptit.signlanguage.ui.main.fragment.VideoToTextFragment
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.io.File
@@ -56,6 +54,8 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
     override fun initListener() {
         binding.imvRecord.setOnClickListener {
             if (!isDoubleClick()) {
+                binding.imvCheck.visibility = View.GONE
+                binding.tvScore.visibility = View.GONE
                 if (checkCamera()) {
                     getCameraPermission()
                 }
@@ -65,6 +65,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         binding.imvBack.setOnClickListener { finish() }
         binding.btnCheck.setOnClickListener {
             binding.imvCheck.visibility = View.GONE
+            binding.tvScore.visibility = View.GONE
             if (videoPath.isNullOrEmpty()) {
                 Toast.makeText(
                     binding.root.context,
@@ -76,11 +77,13 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
             val file = File(videoPath)
             if (file != null) {
 //                binding.layoutWrapAnswer.visibility = View.GONE
-                viewModel.videoToText(file)
+                label?.let { it1 -> viewModel.checkVideo(file, it1) }
             }
         }
         binding.imvPick.setOnClickListener {
-            if(!isDoubleClick()) {
+            if (!isDoubleClick()) {
+                binding.imvCheck.visibility = View.GONE
+                binding.tvScore.visibility = View.GONE
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "video/*")
                 startActivityForResult(intent, REQUEST_TAKE_GALLERY_VIDEO)
@@ -96,21 +99,23 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                 }
             }
 
-            videoToTextRes.observe(this@PracticeActivity) {
+            checkVideoRes.observe(this@PracticeActivity) {
                 if (it?.body != null) {
                     binding.imvCheck.visibility = View.VISIBLE
-                    for(prediction in it.body.prediction) {
-                        if (label?.lowercase()?.equals(prediction.action_name.lowercase()) == true) {
-                            binding.imvCheck.setImageResource(R.drawable.ic_check_true)
-                        } else {
-                            binding.imvCheck.setImageResource(R.drawable.ic_check_close)
-                        }
+                    binding.tvScore.visibility = View.VISIBLE
+                    binding.tvScore.text = it.body.score.toString()
+                    if (it.body.score >= 50) {
+                        binding.imvCheck.setImageResource(R.drawable.ic_check_true)
+                    } else {
+                        binding.imvCheck.setImageResource(R.drawable.ic_check_close)
                     }
                 }
                 Log.d(TAG, it.toString())
             }
+
             errorMessage.observe(this@PracticeActivity) {
-                binding.imvCheck.visibility = View.VISIBLE
+                binding.imvCheck.visibility = View.GONE
+                binding.tvScore.visibility = View.GONE
                 Toast.makeText(binding.root.context, getString(it), Toast.LENGTH_LONG).show()
                 Log.d(TAG, it.toString())
             }
@@ -151,6 +156,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                     val videoUri = data?.data
                     videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
+                    binding.imvDefault.visibility = View.GONE
                     binding.vvRecord.setVideoPath(videoPath)
                     binding.vvRecord.start()
                 }
@@ -167,6 +173,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                     val videoUri: Uri = data?.data!!
                     videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
+                    binding.imvDefault.visibility = View.GONE
                     binding.vvRecord.setVideoPath(videoPath)
                     binding.vvRecord.start()
                 }

@@ -23,6 +23,8 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>(
     lateinit var adapter: ListLabelAdapter
     private lateinit var prefsHelper: PreferencesHelper
     var user: User? = null
+    var subject: Subject? = null
+    var level: Level? = null
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
@@ -41,8 +43,8 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>(
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
         user = GsonUtils.deserialize(userJson, User::class.java)
 
-        val subject: Subject? = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
-        val level: Level? = intent.getSerializableExtra(Constants.KEY_LEVEL) as Level?
+        subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
+        level = intent.getSerializableExtra(Constants.KEY_LEVEL) as Level?
 
         binding.tvRank.text = getString(R.string.str_level, level?.levelId.toString())
         if (user?.language.equals(Constants.EN)) {
@@ -61,6 +63,8 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>(
     override fun initListener() {
         binding.btnScore.setOnClickListener {
             val intent = Intent(this@ListLabelActivity, ActivityScore::class.java)
+            intent.putExtra(Constants.KEY_LEVEL, level)
+            intent.putExtra(Constants.KEY_SUBJECT, subject)
             startActivity(intent)
         }
         binding.imvBack.setOnClickListener { finish() }

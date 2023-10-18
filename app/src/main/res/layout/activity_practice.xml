@@ -60,8 +60,8 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp12"
             android:layout_marginTop="@dimen/dp12"
-            android:outlineProvider="background"
             android:background="@color/transparent"
+            android:outlineProvider="background"
             app:cardCornerRadius="@dimen/dp8"
             app:layout_constraintDimensionRatio="1.6:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,13 +70,13 @@
 
             <androidx.media3.ui.PlayerView
                 android:id="@+id/vv_guide"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:background="@color/color_gray"
                 android:backgroundTint="@color/color_gray"
-                android:layout_width="match_parent"
                 app:default_artwork="@color/color_gray"
-                app:use_artwork="true"
-                android:layout_height="match_parent"
-                android:layout_gravity="center" />
+                app:use_artwork="true" />
 
         </androidx.cardview.widget.CardView>
 
@@ -84,9 +84,9 @@
             android:id="@+id/layout_wrap_video_record"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/transparent"
             android:layout_marginHorizontal="@dimen/dp12"
             android:layout_marginTop="@dimen/dp12"
+            android:background="@color/transparent"
             android:outlineProvider="background"
             app:cardCornerRadius="@dimen/dp8"
             app:layout_constraintDimensionRatio="1.6:1"
@@ -94,14 +94,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_video_guile">
 
-            <ImageView
-                android:id="@+id/imv_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:elevation="@dimen/dp11"
-                android:visibility="gone"
-                android:src="@drawable/ic_check_true" />
 
             <VideoView
                 android:id="@+id/vv_record"
@@ -109,6 +101,15 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:elevation="@dimen/dp10" />
+
+            <ImageView
+                android:id="@+id/imv_default"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:elevation="@dimen/dp11"
+                android:src="@drawable/im_video_default" />
+
         </androidx.cardview.widget.CardView>
 
         <ImageView
@@ -132,14 +133,43 @@
             android:src="@drawable/ic_upload"
             app:layout_constraintBottom_toBottomOf="@id/layout_wrap_video_record"
             app:layout_constraintEnd_toEndOf="@id/layout_wrap_video_record"
-            tools:ignore="ContentDescription"
-            app:tint="@color/color_gray" />
+            app:tint="@color/black"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp12"
+            android:text="Scored"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btn_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/imv_check"
+            app:layout_constraintTop_toBottomOf="@id/layout_wrap_video_record" />
+
+        <ImageView
+            android:id="@+id/imv_check"
+            android:layout_width="@dimen/dp24"
+            android:layout_height="@dimen/dp24"
+            android:src="@drawable/ic_check_true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/btn_check"
+            app:layout_constraintEnd_toStartOf="@id/tv_score"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_wrap_video_record" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp12"
+            android:layout_marginBottom="@dimen/dp12"
             android:background="@drawable/bg_btn"
             android:backgroundTint="@color/colorYellow"
             android:minWidth="0dp"
@@ -149,9 +179,9 @@
             android:text="@string/str_check"
             android:textColor="@color/black"
             android:textSize="@dimen/sp14"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_wrap_video_record" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,14 +6,20 @@ import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.base.GridThreeColumnDecoration
 import com.ptit.signlanguage.databinding.ActivityScoreBinding
+import com.ptit.signlanguage.network.model.response.Subject
 import com.ptit.signlanguage.network.model.response.Token
 import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.network.model.response.subjectWrap.Level
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.score.adapter.UserScoreAdapter
+import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
 class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
     var adapter: UserScoreAdapter = UserScoreAdapter(mutableListOf())
+    var subject: Subject? = null
+    var level: Level? = null
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -36,7 +42,13 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
         binding.rvUser.adapter = adapter
         binding.rvUser.setHasFixedSize(true)
         binding.rvUser.addItemDecoration(GridThreeColumnDecoration(3, dpToPx(12), true))
-        adapter.replace(fakeData())
+
+        subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
+        level = intent.getSerializableExtra(Constants.KEY_LEVEL) as Level?
+
+        if(level?.levelId != null && subject?.id != null) {
+            viewModel.getScoreWithSubject(level?.levelId!!, subject?.id!!)
+        }
     }
 
     override fun initListener() {
@@ -44,15 +56,10 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
     }
 
     override fun observerLiveData() {
-
-    }
-
-    private fun fakeData(): MutableList<User> {
-        val listTopic = mutableListOf<User>()
-        for (t in 1..6) {
-            val user = User()
-            listTopic.add(user)
+        viewModel.apply {
+            scoreWithSubject.observe(this@ActivityScore) {
+                it?.body?.scoreList?.toMutableList()?.let { scores -> adapter.replace(scores) }
+            }
         }
-        return listTopic
     }
 }

@@ -15,42 +15,40 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/im_demo"
+            android:src="@drawable/ic_user_default"
             app:riv_corner_radius="@dimen/dp8"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_label"
+            android:id="@+id/tv_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp4"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="apple"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp16"
+            android:textSize="@dimen/sp12"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imv_user" />
 
         <TextView
-            android:id="@+id/tv_label_2"
+            android:id="@+id/tv_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp4"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="Bài đúng"
             android:textColor="@color/black"
             android:textSize="@dimen/sp10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_label" />
+            app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

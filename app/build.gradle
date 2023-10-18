@@ -31,6 +31,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        applicationVariants.all{
+            variant ->
+                variant.outputs.each{
+                    output->
+                        project.ext { appName = 'SignLanguage' }
+                        def formattedDate = new Date().format('yyyy-MM-dd_HH:mm:ss')
+                        def newName = "debug_" + appName + "_v" + versionName + ".apk"
+                        output.outputFileName  = newName
+                }
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
