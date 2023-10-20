@@ -7,8 +7,7 @@ import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.base.GridThreeColumnDecoration
 import com.ptit.signlanguage.databinding.ActivityScoreBinding
 import com.ptit.signlanguage.network.model.response.Subject
-import com.ptit.signlanguage.network.model.response.Token
-import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.network.model.response.score_with_subject.Score
 import com.ptit.signlanguage.network.model.response.subjectWrap.Level
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.score.adapter.UserScoreAdapter
@@ -33,11 +32,12 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
         setColorForStatusBar(R.color.color_primary)
         binding.layout.setPadding(0, getStatusBarHeight(this@ActivityScore), 0, 0)
 
-        val gridLayoutManager = object : GridLayoutManager(binding.root.context, 3, GridLayoutManager.VERTICAL, false) {
-            override fun canScrollVertically(): Boolean {
-                return false
+        val gridLayoutManager =
+            object : GridLayoutManager(binding.root.context, 3, VERTICAL, false) {
+                override fun canScrollVertically(): Boolean {
+                    return false
+                }
             }
-        }
         binding.rvUser.layoutManager = gridLayoutManager
         binding.rvUser.adapter = adapter
         binding.rvUser.setHasFixedSize(true)
@@ -46,7 +46,7 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
         subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
         level = intent.getSerializableExtra(Constants.KEY_LEVEL) as Level?
 
-        if(level?.levelId != null && subject?.id != null) {
+        if (level?.levelId != null && subject?.id != null) {
             viewModel.getScoreWithSubject(level?.levelId!!, subject?.id!!)
         }
     }
@@ -58,7 +58,15 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
     override fun observerLiveData() {
         viewModel.apply {
             scoreWithSubject.observe(this@ActivityScore) {
-                it?.body?.scoreList?.toMutableList()?.let { scores -> adapter.replace(scores) }
+                val listResult = it?.body?.scoreList?.toMutableList()
+                if(!listResult.isNullOrEmpty()) {
+                    adapter.replace(listResult)
+                    var sumScore = 0.0
+                    for(score : Score in listResult) {
+                        sumScore += score.scoreAverage
+                    }
+                    binding.tvScoreAverage.text = (sumScore / listResult.size).toInt().toString()
+                }
             }
         }
     }

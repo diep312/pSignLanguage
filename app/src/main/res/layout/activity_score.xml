@@ -107,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/layout_num_correct"
+                app:layout_constraintEnd_toStartOf="@id/layout_average"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -116,6 +116,7 @@
                     android:id="@+id/rtb_rank_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +136,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_num_correct"
+                android:id="@+id/layout_average"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -145,10 +146,10 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_num_correct"
+                    android:id="@+id/tv_score_average"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp20"
                     android:textStyle="bold"
@@ -157,25 +158,26 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_label_num_correct"
+                    android:id="@+id/tv_label_score_average"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Số câu đúng"
+                    android:text="@string/str_average"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp10"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_num_correct" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_score_average" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_total_score"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/layout_num_correct"
+                app:layout_constraintStart_toEndOf="@id/layout_average"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
@@ -209,6 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp10"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_rank"

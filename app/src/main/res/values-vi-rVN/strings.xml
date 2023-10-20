@@ -67,4 +67,5 @@
     <string name="str_profile">Hồ sơ</string>
     <string name="str_view_points">Điểm</string>
     <string name="str_back">Trở lại</string>
+    <string name="str_average">Trung bình</string>
 </resources>

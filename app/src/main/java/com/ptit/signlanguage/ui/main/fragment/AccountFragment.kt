@@ -141,6 +141,7 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
             getString(R.string.str_ok)
         ) { _, _ ->
             prefsHelper.remove(Constants.KEY_PREF_DATA_LOGIN)
+            prefsHelper.remove(Constants.KEY_TOKEN)
             activity?.finish()
         }
 

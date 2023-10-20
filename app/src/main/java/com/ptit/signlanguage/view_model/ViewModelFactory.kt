@@ -11,7 +11,7 @@ class ViewModelFactory() : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(RetrofitBuilder.apiService) as T
+            return MainViewModel(RetrofitBuilder.getApiService()!!) as T
         }
         else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(RetrofitBuilder.apiServiceLogin) as T
