@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">Sign Language</string>
+    <string name="str_loading">Loading...</string>
+
+    <string name="api_default_error">An error occurred!</string>
+    <string name="str_authe">Invalid account / Wrong password entered</string>
+    <string name="text_all_has_error_please_try">An error occurred. Please try again!</string>
+    <string name="text_all_has_error_timeout">Connection failed!</string>
+    <string name="text_all_has_error_network">Network connection error!</string>
+    <string name="str_confirm_logout">Do you want to logout?</string>
+    <string name="str_ok">OK</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_back_press">Click again to exit!</string>
+
+    <string name="str_phone_number">Phone number</string>
+    <string name="str_pass">Password</string>
+    <string name="str_forgot_pass">Forgot password?</string>
+    <string name="str_login">Login</string>
+    <string name="str_or">Or</string>
+    <string name="str_require_send_otp"><![CDATA[Didn\'t receive the verification code? <font color=\'#3D5CFF\'>Send again</font>]]></string>
+    <string name="str_name_show">Display name</string>
+    <string name="str_register">Register</string>
+    <string name="str_pass_repeat">Enter password again</string>
+    <string name="str_verify_register">Authenticate and create account</string>
+    <string name="str_verify_fail">Authentication failed!</string>
+    <string name="str_otp_fail">Authentication code is incorrect!</string>
+    <string name="str_too_many_request">Exceed! Please try again later</string>
+    <string name="str_register_next"><![CDATA[<font color=\'#858597\'>Do you not have an account?</font> <font color=\'#000000\'><b>Register</b></font>]]></string>
+    <string name="str_login_next"><![CDATA[<font color=\'#858597\'>Do you already have an account?</font> <font color=\'#000000\'><b>Log in</b></font>]]></string>
+
+    <string name="str_enter_pass">Enter password</string>
+    <string name="str_enter_email">Enter email</string>
+    <string name="str_welcome_again">Welcome back</string>
+    <string name="str_create_account_here">Create a new account here</string>
+    <string name="str_enter_phone">Enter your phone number</string>
+    <string name="str_enter_pass_again">Enter the password again</string>
+    <string name="str_enter_name_show">Enter a display name</string>
+
+    <string name="str_video_to_text">Video To Text</string>
+    <string name="str_text_to_video">Text To Video</string>
+    <string name="str_account">Account</string>
+    <string name="str_course">Course</string>
+    <string name="str_search">Search</string>
+
+    <string name="str_label">Label: %s</string>
+    <string name="str_full_name">Full name</string>
+    <string name="str_enter_name">Enter name</string>
+    <string name="str_date_of_birth">Date of birth</string>
+    <string name="str_choose_date_of_birth">Choose date of birth</string>
+    <string name="str_address">Address</string>
+    <string name="str_enter_address">Enter address</string>
+    <string name="str_language">Enter language</string>
+    <string name="str_vietnamese">Vietnamese</string>
+    <string name="str_english">English</string>
+    <string name="str_email">Email</string>
+    <string name="str_account_information">Account information</string>
+    <string name="str_profile_number">Profile number</string>
+    <string name="str_enter_profile_number">Enter profile number</string>
+    <string name="str_support_by">Support by</string>
+    <string name="str_register_by">Register by</string>
+    <string name="str_save_changes">Save changes</string>
+    <string name="str_pick">Pick</string>
+    <string name="str_check">Check video</string>
+    <string name="str_level">Level %s</string>
+    <string name="str_you_did_not_choose_video">You haven\'t selected any videos yet!</string>
+    <string name="str_profile">Profile</string>
+    <string name="str_view_points">Points</string>
+    <string name="str_back">Back</string>
+    <string name="str_average">Average</string>
+</resources>

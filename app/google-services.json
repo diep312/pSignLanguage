@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:103102911841:android:fdedfa54279e3b28146120",
         "android_client_info": {
-          "package_name": "com.nguyencuong.mybasekotlin"
+          "package_name": "com.ptit.signlanguage"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "103102911841-fs6sa2h89mimjsl4igtdrb4ducpbnlir.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.nguyencuong.mybasekotlin",
+            "package_name": "com.ptit.signlanguage",
             "certificate_hash": "ae05e9e674bddf5de23b1016f729c57d3b71fcb3"
           }
         },
