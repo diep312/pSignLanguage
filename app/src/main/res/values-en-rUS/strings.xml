@@ -36,9 +36,9 @@
     <string name="str_enter_pass_again">Enter the password again</string>
     <string name="str_enter_name_show">Enter a display name</string>
 
-    <string name="str_video_to_text">Video To Text</string>
-    <string name="str_text_to_video">Text To Video</string>
-    <string name="str_account">Account</string>
+    <string name="str_video_to_text">Translate</string>
+    <string name="str_text_to_video">Search</string>
+    <string name="str_account">Settings</string>
     <string name="str_course">Course</string>
     <string name="str_search">Search</string>
 

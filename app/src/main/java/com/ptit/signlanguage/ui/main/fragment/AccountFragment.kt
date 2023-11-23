@@ -83,6 +83,7 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
         user = GsonUtils.deserialize(userJson, User::class.java)
         user?.apply {
+            binding.tvShowName.text = this.name ?: EMPTY_STRING
             binding.edtName.setText(this.name ?: EMPTY_STRING)
             binding.edtBirthday.text = this.dateOfBirth ?: EMPTY_STRING
             binding.edtAddress.setText(this.address ?: EMPTY_STRING)
