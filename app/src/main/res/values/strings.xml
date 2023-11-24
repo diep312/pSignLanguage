@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Sign Language</string>
+    <string name="str_loading">Loading...</string>
+
+    <string name="api_default_error">Có lỗi xảy ra!</string>
+    <string name="str_authe">Tài khoản không hợp lệ/Nhập sai mật khẩu</string>
+    <string name="text_all_has_error_please_try">Có lỗi xảy ra, vui lòng thử lại!</string>
+    <string name="text_all_has_error_timeout">Kết nối thất bại!</string>
+    <string name="text_all_has_error_network">Lỗi kết nối mạng!</string>
+    <string name="str_confirm_logout">Bạn có muốn đăng xuất không?</string>
+    <string name="str_ok">OK</string>
+    <string name="str_cancel">Hủy</string>
+    <string name="str_back_press">Nhấn lần nữa để thoát!</string>
+
+
+    <string name="str_phone_number">Số điện thoại</string>
+    <string name="str_pass">Mật khẩu</string>
+    <string name="str_forgot_pass">Forgot password?</string>
+    <string name="str_login">Đăng nhập</string>
+    <string name="str_or">Hoặc</string>
+    <string name="str_require_send_otp"><![CDATA[Bạn không nhận được mã xác thực? <font color=\'#3D5CFF\'>Gửi lại</font>]]></string>
+    <string name="str_name_show">Tên hiển thị</string>
+    <string name="str_register">Đăng ký</string>
+    <string name="str_pass_repeat">Nhập lại mật khẩu</string>
+    <string name="str_verify_register">Xác thực và tạo tài khoản</string>
+    <string name="str_verify_fail">Xác thực thất bại!</string>
+    <string name="str_otp_fail">Mã xác thực không chính xác!</string>
+    <string name="str_too_many_request">Vượt quá giới hạn! Vui lòng thử lại sau</string>
+    <string name="str_register_next"><![CDATA[<font color=\'#858597\'>Don’t have an account yet? Register now!</font> <font color=\'#000000\'><b>Đăng ký</b></font>]]></string>
+    <string name="str_login_next"><![CDATA[<font color=\'#858597\'>Bạn đã có tài khoản?</font> <font color=\'#000000\'><b>Đăng nhập</b></font>]]></string>
+
+    <string name="str_enter_pass">Nhập mật khẩu</string>
+    <string name="str_enter_email">Nhập email</string>
+    <string name="str_welcome_again">Đăng nhập</string>
+    <string name="str_create_account_here">Đăng ký</string>
+    <string name="str_enter_phone">Nhập số điện thoại</string>
+    <string name="str_enter_pass_again">Nhập lại mật khẩu</string>
+    <string name="str_enter_name_show">Nhập tên hiển thị</string>
+
+    <string name="str_video_to_text">Translate</string>
+    <string name="str_text_to_video">Search</string>
+    <string name="str_account">Account</string>
+    <string name="str_course">Course</string>
+    <string name="str_search">Tìm kiếm...</string>
+
+    <string name="str_label">Nhãn: %s</string>
+    <string name="str_full_name">Họ tên</string>
+    <string name="str_enter_name">Nhập tên</string>
+    <string name="str_date_of_birth">Ngày sinh</string>
+    <string name="str_choose_date_of_birth">Chọn ngày sinh</string>
+    <string name="str_address">Địa chỉ</string>
+    <string name="str_enter_address">Nhập địa chỉ</string>
+    <string name="str_language">Ngôn ngữ</string>
+    <string name="str_vietnamese">Tiếng Việt</string>
+    <string name="str_english">Tiếng Anh</string>
+    <string name="str_email">Email</string>
+    <string name="str_account_information">Thông tin tài khoản</string>
+    <string name="str_profile_number">Số hồ sơ</string>
+    <string name="str_enter_profile_number">Nhập số hồ sơ</string>
+    <string name="str_support_by">Hỗ trợ bởi</string>
+    <string name="str_register_by">Đăng ký bởi</string>
+    <string name="str_save_changes">Lưu thay đổi</string>
+    <string name="str_pick">Chọn</string>
+    <string name="str_check">Kiểm tra video</string>
+    <string name="str_level">Cấp độ %s</string>
+    <string name="str_you_did_not_choose_video">Bạn chưa chọn video!</string>
+    <string name="str_profile">Hồ sơ</string>
+    <string name="str_view_points">Xem điểm</string>
+    <string name="str_back">Trở lại</string>
+    <string name="str_average">Trung bình</string>
+</resources>

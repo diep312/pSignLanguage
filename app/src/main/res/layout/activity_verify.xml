@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imv_otp"
+            android:src="@drawable/ic_otp"
+            android:scaleType="center"
+            android:padding="@dimen/dp14"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/imv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:padding="@dimen/dp16" />
+
+        <TextView
+            android:id="@+id/tv_phone_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imv_otp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/text_color"
+            android:text="Mã xác thực đã được gửi đến 0353408342" />
+
+        <include
+            android:id="@+id/layout_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp14"
+            layout="@layout/layout_otp_view"
+            app:layout_constraintTop_toBottomOf="@id/tv_phone_verify"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_time_count_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp24"
+            app:layout_constraintTop_toBottomOf="@id/layout_otp"
+            android:textColor="@color/text_color"
+            android:layout_marginHorizontal="@dimen/dp14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/btn_verify"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_time_count_down"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/bg_btn"
+            android:layout_marginTop="@dimen/dp32"
+            android:text="@string/str_verify_register"
+            android:textAllCaps="true"
+            android:layout_marginHorizontal="@dimen/dp14"
+            android:paddingVertical="@dimen/dp8"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp16" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

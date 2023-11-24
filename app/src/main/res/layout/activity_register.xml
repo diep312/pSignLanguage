@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="583dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="@dimen/dp16"
+                    android:paddingTop="@dimen/dp16"
+                    android:paddingBottom="@dimen/dp48">
+
+                    <TextView
+                        android:id="@+id/tv_label_create_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/str_create_account_here"
+                        android:textColor="@color/primary"
+                        android:textSize="48dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/edt_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/dp20"
+                        android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
+                        android:ellipsize="end"
+                        android:hint="@string/str_enter_name_show"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="256"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp12"
+                        android:paddingStart="@dimen/dp56"
+                        android:paddingEnd="@dimen/dp12"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="@dimen/sp14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_label_create_account" />
+
+                    <View
+                        android:id="@+id/v_ver_username"
+                        android:layout_width="@dimen/dp1"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="@dimen/dp4"
+                        android:layout_marginStart="@dimen/dp34"
+                        android:background="@color/color_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_username"
+                        app:layout_constraintStart_toStartOf="@id/edt_username"
+                        app:layout_constraintTop_toTopOf="@id/edt_username" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_user"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_username"
+                        app:layout_constraintEnd_toEndOf="@id/v_ver_username"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edt_username" />
+
+                    <EditText
+                        android:id="@+id/edt_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:background="@drawable/bg_edt"
+                        android:ellipsize="end"
+                        android:hint="@string/str_enter_phone"
+                        android:inputType="phone"
+                        android:lines="1"
+                        android:maxLength="256"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp12"
+                        android:paddingStart="@dimen/dp56"
+                        android:paddingEnd="@dimen/dp12"
+                        android:textColor="@color/text_color"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="@dimen/sp14"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edt_username" />
+
+                    <View
+                        android:id="@+id/v_ver_phone"
+                        android:layout_width="@dimen/dp1"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="@dimen/dp4"
+                        android:layout_marginStart="@dimen/dp34"
+                        android:background="@color/color_gray"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_phone"
+                        app:layout_constraintStart_toStartOf="@id/edt_phone"
+                        app:layout_constraintTop_toTopOf="@id/edt_phone" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_phone"
+                        app:layout_constraintEnd_toEndOf="@id/v_ver_phone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edt_phone" />
+
+                    <EditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
+                        android:ellipsize="end"
+                        android:hint="@string/str_enter_email"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
+                        android:maxLength="256"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp12"
+                        android:paddingStart="@dimen/dp56"
+                        android:paddingEnd="@dimen/dp12"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="@dimen/sp14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edt_phone" />
+
+                    <View
+                        android:id="@+id/v_ver_email"
+                        android:layout_width="@dimen/dp1"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="@dimen/dp4"
+                        android:layout_marginStart="@dimen/dp34"
+                        android:background="@color/color_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_email"
+                        app:layout_constraintStart_toStartOf="@id/edt_email"
+                        app:layout_constraintTop_toTopOf="@id/edt_email" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_email"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_email"
+                        app:layout_constraintEnd_toEndOf="@id/v_ver_email"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edt_email" />
+
+                    <EditText
+                        android:id="@+id/edt_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
+                        android:ellipsize="end"
+                        android:hint="@string/str_enter_pass"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:maxLength="16"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp12"
+                        android:paddingStart="@dimen/dp56"
+                        android:paddingEnd="@dimen/dp44"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="@dimen/sp14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edt_email" />
+
+                    <View
+                        android:id="@+id/v_ver_pass"
+                        android:layout_width="@dimen/dp1"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="@dimen/dp4"
+                        android:layout_marginStart="@dimen/dp34"
+                        android:background="@color/color_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_password"
+                        app:layout_constraintStart_toStartOf="@id/edt_password"
+                        app:layout_constraintTop_toTopOf="@id/edt_password" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_lock"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_password"
+                        app:layout_constraintEnd_toEndOf="@id/v_ver_pass"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edt_password" />
+
+                    <ImageView
+                        android:id="@+id/imv_show_hide_pass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp12"
+                        android:src="@drawable/ic_eye_open"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_password"
+                        app:layout_constraintRight_toRightOf="@id/edt_password"
+                        app:layout_constraintTop_toTopOf="@id/edt_password" />
+
+                    <EditText
+                        android:id="@+id/edt_pass_again"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
+                        android:ellipsize="end"
+                        android:hint="@string/str_enter_pass_again"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:maxLength="256"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp12"
+                        android:paddingStart="@dimen/dp56"
+                        android:paddingEnd="@dimen/dp12"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color"
+                        android:textSize="@dimen/sp14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edt_password" />
+
+                    <View
+                        android:id="@+id/v_ver_pass_again"
+                        android:layout_width="@dimen/dp1"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="@dimen/dp4"
+                        android:layout_marginStart="@dimen/dp34"
+                        android:background="@color/color_gray"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_pass_again"
+                        app:layout_constraintStart_toStartOf="@id/edt_pass_again"
+                        app:layout_constraintTop_toTopOf="@id/edt_pass_again" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_lock"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_pass_again"
+                        app:layout_constraintEnd_toEndOf="@id/v_ver_pass_again"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/edt_pass_again" />
+
+                    <ImageView
+                        android:id="@+id/imv_show_hide_pass_again"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp12"
+                        android:src="@drawable/ic_eye_open"
+                        app:layout_constraintBottom_toBottomOf="@id/edt_pass_again"
+                        app:layout_constraintRight_toRightOf="@id/edt_pass_again"
+                        app:layout_constraintTop_toTopOf="@id/edt_pass_again" />
+
+                    <TextView
+                        android:id="@+id/tv_forgot_pass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp14"
+                        android:paddingVertical="@dimen/dp12"
+                        android:text="Bằng việc đăng ký, bạn đồng ý với điều khoản và chính sách"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edt_pass_again" />
+
+                    <Button
+                        android:id="@+id/btn_next"
+                        android:layout_width="131dp"
+                        android:layout_height="41dp"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/btn_login"
+                        android:backgroundTint="@color/button_login"
+                        android:text="@string/str_create_account_here"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass" />
+
+                    <TextView
+                        android:id="@+id/tv_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp24"
+                        android:text="@string/str_login_next"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/btn_next" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imv_back"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:padding="@dimen/dp12"-->
+        <!--            android:src="@drawable/ic_back"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--        <ScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:fillViewport="true"-->
+        <!--            android:background="@drawable/bg_act_login"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/imv_back">-->
+
+        <!--            -->
+        <!--        </ScrollView>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

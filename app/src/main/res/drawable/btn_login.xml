@@ -1,0 +1,5 @@
+<!-- round_button.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:radius="20dp" /> <!-- Điều này đặt bán kính bo góc -->
+</shape>
