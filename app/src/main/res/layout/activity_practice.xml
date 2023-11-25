@@ -12,7 +12,7 @@
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp56"
-            android:background="@color/color_primary"
+            android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -24,49 +24,34 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white"
+                app:tint="@color/black"
                 tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/imv_logo"
+            <TextView
+                android:id="@+id/tv_word"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_logo"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white"
-                tools:ignore="ContentDescription" />
+                android:text="Từ 2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp20"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="184dp"
+                tools:layout_editor_absoluteY="10dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tv_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp16"
-            android:text="Từ 2"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp20"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_action_bar" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/layout_video_guile"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp12"
-            android:layout_marginTop="@dimen/dp12"
             android:background="@color/transparent"
             android:outlineProvider="background"
             app:cardCornerRadius="@dimen/dp8"
             app:layout_constraintDimensionRatio="1.6:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_word">
+            app:layout_constraintTop_toBottomOf="@+id/layout_action_bar">
 
             <androidx.media3.ui.PlayerView
                 android:id="@+id/vv_guide"

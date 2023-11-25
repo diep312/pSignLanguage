@@ -30,4 +30,7 @@
     <color name="color_text">#999999</color>
     <color name="color_border">#6ACAFF</color>
     <color name="color_blue_light">#b4e5ff</color>
+    <color name="primary">#143EC0</color>
+    <color name="button_login">#106FE0</color>
+
 </resources>

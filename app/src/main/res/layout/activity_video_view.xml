@@ -11,67 +11,72 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp86"
-            android:layout_marginTop="4dp"
-            android:background="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="-41dp">
-
-            <TextView
-                android:id="@+id/tv_word"
-                android:layout_width="239dp"
-                android:layout_height="54dp"
-                android:text="Từ 2"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp34"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="@dimen/dp56"
+            android:background="@color/color_primary"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:padding="@dimen/dp12"
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black"
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/imv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white"
                 tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/tv_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp16"
+            android:text="Từ 2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp20"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_action_bar" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/layout_video_guile"
-            android:layout_width="356dp"
-            android:layout_height="219dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp12"
+            android:layout_marginTop="@dimen/dp12"
             android:background="@color/transparent"
             android:outlineProvider="background"
             app:cardCornerRadius="@dimen/dp8"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1.6:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_action_bar"
-            app:layout_constraintVertical_bias="0.117">
+            app:layout_constraintTop_toBottomOf="@id/tv_word">
 
             <androidx.media3.ui.PlayerView
                 android:id="@+id/vv_guide"
                 android:layout_width="match_parent"
-                android:layout_height="223dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/color_gray"
                 android:backgroundTint="@color/color_gray"
                 app:default_artwork="@color/color_gray"
-                app:use_artwork="true">
-
-            </androidx.media3.ui.PlayerView>
+                app:use_artwork="true" />
 
         </androidx.cardview.widget.CardView>
 

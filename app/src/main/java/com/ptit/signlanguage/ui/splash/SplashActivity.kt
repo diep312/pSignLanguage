@@ -2,6 +2,7 @@ package com.ptit.signlanguage.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R

@@ -10,32 +10,29 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp86"
-            android:background="@color/white"
+            android:layout_height="@dimen/dp56"
             android:padding="@dimen/dp8"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="238dp"
-                android:layout_height="52dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:textSize="31dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="@string/str_search"
-                android:textAlignment="center"
-                android:textColor="@color/color_primary"
-                android:textSize="34sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/primary"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.852" />
+                tools:layout_editor_absoluteY="8dp">
+
+            </TextView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/edt_search"
-            android:layout_width="329dp"
-            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp12"
             android:background="@drawable/bg_edit_search"
             android:drawableEnd="@drawable/ic_search"
@@ -45,8 +42,6 @@
             android:padding="@dimen/dp12"
             android:textSize="@dimen/sp13"
             app:layout_constraintBottom_toTopOf="@id/rv_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_action_bar" />
 
         <androidx.recyclerview.widget.RecyclerView

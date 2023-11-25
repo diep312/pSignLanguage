@@ -31,14 +31,14 @@
 
     <string name="str_enter_pass">Nhập mật khẩu</string>
     <string name="str_enter_email">Nhập email</string>
-    <string name="str_welcome_again">Chào mừng bạn quay trở lại</string>
+    <string name="str_welcome_again">Đăng nhập</string>
     <string name="str_create_account_here">Tạo tài khoản mới ở đây</string>
     <string name="str_enter_phone">Nhập số điện thoại</string>
     <string name="str_enter_pass_again">Nhập lại mật khẩu</string>
     <string name="str_enter_name_show">Nhập tên hiển thị</string>
 
-    <string name="str_video_to_text">Translate</string>
-    <string name="str_text_to_video">Search</string>
+    <string name="str_video_to_text">Video To Text</string>
+    <string name="str_text_to_video">Text To Video</string>
     <string name="str_account">Account</string>
     <string name="str_course">Course</string>
     <string name="str_search">Tìm kiếm</string>

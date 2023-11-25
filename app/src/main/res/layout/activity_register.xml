@@ -10,11 +10,13 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="583dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,16 +31,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
+                        android:fontFamily="@font/montserrat_bold"
                         android:text="@string/str_create_account_here"
+                        android:textColor="@color/primary"
+                        android:textSize="48dp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/edt_username"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp48"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="@dimen/dp20"
                         android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_name_show"
                         android:inputType="text"
@@ -123,9 +130,10 @@
                     <EditText
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_email"
                         android:inputType="textEmailAddress"
@@ -165,9 +173,10 @@
                     <EditText
                         android:id="@+id/edt_password"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_pass"
                         android:inputType="textPassword"
@@ -217,9 +226,10 @@
                     <EditText
                         android:id="@+id/edt_pass_again"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_edt"
+                        android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_pass_again"
                         android:inputType="textPassword"
@@ -279,16 +289,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/edt_pass_again" />
 
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    <Button
                         android:id="@+id/btn_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp24"
-                        android:background="@color/color_primary"
-                        android:padding="@dimen/dp12"
-                        android:src="@drawable/ic_next"
-                        android:tintMode="@color/white"
+                        android:layout_width="131dp"
+                        android:layout_height="41dp"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/btn_login"
+                        android:backgroundTint="@color/button_login"
+                        android:text="@string/str_create_account_here"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass" />
 
                     <TextView
@@ -303,31 +313,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp120"
-                android:background="@color/white"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/collapse_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-                    app:expandedTitleMargin="@dimen/dp16"
-                    app:expandedTitleTextAppearance="@style/collapsed_app_bar"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        app:contentInsetStart="0dp"
-                        app:contentInsetStartWithNavigation="0dp"
-                        app:layout_collapseMode="pin" />
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-            </com.google.android.material.appbar.AppBarLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
