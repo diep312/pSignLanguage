@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-49dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvView"
         android:layout_width="125sp"
         android:layout_height="163sp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/bg_radius_8"
-        android:backgroundTint="@color/color_primary"
+        android:backgroundTint="#0065DE"
         app:cardCornerRadius="15dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-49dp">
 
 
             <View
@@ -39,6 +43,7 @@
                 android:id="@+id/v_circle"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/item_ring"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@+id/v_wrap"
@@ -58,9 +63,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_score"
                 app:layout_constraintEnd_toEndOf="@+id/v_wrap"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/v_wrap"
                 app:layout_constraintTop_toBottomOf="@+id/v_circle"
-                app:layout_constraintVertical_bias="0.631" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tv_score"

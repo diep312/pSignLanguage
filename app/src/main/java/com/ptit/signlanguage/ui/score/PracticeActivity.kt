@@ -156,7 +156,6 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                     val videoUri = data?.data
                     videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
-                    binding.imvDefault.visibility = View.GONE
                     binding.vvRecord.setVideoPath(videoPath)
                     binding.vvRecord.start()
                 }
@@ -173,7 +172,6 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                     val videoUri: Uri = data?.data!!
                     videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
-                    binding.imvDefault.visibility = View.GONE
                     binding.vvRecord.setVideoPath(videoPath)
                     binding.vvRecord.start()
                 }
