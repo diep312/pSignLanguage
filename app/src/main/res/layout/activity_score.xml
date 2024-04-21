@@ -13,7 +13,7 @@
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
             android:layout_height="89dp"
-            android:background="@color/white"
+            android:background="@color/color_bg"
             android:padding="@dimen/dp8"
             app:layout_constraintTop_toTopOf="parent">
 

@@ -7,7 +7,7 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/color_bg">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
@@ -34,7 +34,7 @@
                         android:fontFamily="@font/montserrat_bold"
                         android:text="@string/str_welcome_again"
                         android:textColor="@color/primary"
-                        android:textSize="48dp"
+                        android:textSize="48sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,7 +142,7 @@
                         android:fontFamily="@font/montserrat_bold"
                         android:padding="@dimen/dp14"
                         android:text="@string/str_forgot_pass"
-                        android:textColor="@color/color_text"
+                        android:textColor="@color/color_highlight"
                         android:textSize="@dimen/sp14"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.937"
@@ -151,12 +151,12 @@
 
                     <Button
                         android:id="@+id/btn_next"
-                        android:layout_width="131dp"
-                        android:layout_height="41dp"
+                        android:layout_width="168dp"
+                        android:layout_height="42dp"
                         android:layout_marginTop="25dp"
                         android:background="@drawable/btn_login"
-                        android:backgroundTint="@color/button_login"
-                        android:text="@string/str_welcome_again"
+                        app:backgroundTint="@color/button_login"
+                        android:text="@string/str_login"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass" />
@@ -181,7 +181,7 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@color/white"
+                android:background="@color/color_bg"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
             </com.google.android.material.appbar.AppBarLayout>

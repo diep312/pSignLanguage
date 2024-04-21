@@ -35,10 +35,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     override fun initView() {
         setLightIconStatusBar(true)
         binding.layout.setPadding(0, getStatusBarHeight(this@LoginActivity), 0, 0)
-
         binding.tvRegister.text = getTextHtml(R.string.str_register_next)
-
-
         prefsHelper = PreferencesHelper(this@LoginActivity)
     }
 

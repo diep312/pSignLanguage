@@ -5,81 +5,55 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-49dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvView"
-        android:layout_width="125sp"
-        android:layout_height="163sp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/bg_radius_8"
-        android:backgroundTint="#0065DE"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-49dp">
+            android:layout_width="125sp"
+            android:layout_height="193sp"
+            android:layout_marginStart="16dp">
 
-
-            <View
-                android:id="@+id/v_wrap"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:backgroundTint="@color/white"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvView"
+                android:layout_width="125sp"
+                android:layout_height="163sp"
+                android:background="@drawable/bg_radius_8"
+                android:backgroundTint="#0065DE"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1.25"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent">
+
+            </androidx.cardview.widget.CardView>
 
             <View
                 android:id="@+id/v_circle"
                 android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/item_ring"
+                android:layout_height="88dp"
+                android:background="@drawable/bg_btn_register_topic"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="@+id/v_wrap"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/tv_lesson"
                 android:layout_width="110dp"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp6"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="2"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp14"
+                android:textSize="@dimen/sp16"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tv_score"
-                app:layout_constraintEnd_toEndOf="@+id/v_wrap"
+                app:layout_constraintBottom_toBottomOf="@+id/cvView"
+                app:layout_constraintEnd_toEndOf="@+id/cvView"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/v_wrap"
-                app:layout_constraintTop_toBottomOf="@+id/v_circle"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/tv_score"
-                android:layout_width="110dp"
-                android:layout_height="20dp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp10"
-                app:layout_constraintBottom_toBottomOf="@id/v_wrap"
-                app:layout_constraintEnd_toEndOf="@id/v_wrap"
-                app:layout_constraintStart_toStartOf="@id/v_wrap"
-                app:layout_constraintTop_toBottomOf="@id/v_circle"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_circle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+
 </layout>

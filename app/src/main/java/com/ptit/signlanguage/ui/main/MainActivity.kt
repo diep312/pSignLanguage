@@ -36,9 +36,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun initView() {
-        setLightIconStatusBar(false)
-        setColorForStatusBar(R.color.color_primary)
-        binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity), 0, 0)
+        setLightIconStatusBar(true)
+        setColorForStatusBar(R.color.color_bg)
+
+        binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity) - 20, 0, 0)
 
         prefsHelper = PreferencesHelper(binding.root.context)
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
@@ -90,6 +91,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                 }
             }
         })
+
+        if(binding.vp.currentItem == PAGE_0){
+            setLightIconStatusBar(false)
+            setColorForStatusBar(R.color.color_primary)
+        }
+        else{
+            setLightIconStatusBar(true)
+            setColorForStatusBar(R.color.color_bg)
+        }
 
     }
 

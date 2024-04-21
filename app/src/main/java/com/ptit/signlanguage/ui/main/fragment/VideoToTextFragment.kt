@@ -45,11 +45,19 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
             videoToTextRes.observe(this@VideoToTextFragment) {
                 if (it?.body != null) {
                     binding.layoutWrapAnswer.visibility = View.VISIBLE
+                    binding.vvVideo.visibility = View.VISIBLE
+                    binding.ivIllu.visibility = View.INVISIBLE
+                    binding.tvTranslatedesc.visibility = View.INVISIBLE
+                    binding.btnRecord.text = getString(R.string.str_again)
+
                     if(user?.language.equals(EN)) {
                         binding.tvLabel.text = getString(R.string.str_label, it.body.prediction[0].action_name)
                     } else {
                         binding.tvLabel.text = getString(R.string.str_label, it.body.prediction[0].action_name)
                     }
+                }
+                else{
+                    binding.ivIllu.visibility = View.VISIBLE
                 }
                 Log.d(TAG, it.toString())
             }
@@ -62,8 +70,10 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     override fun initView() {
         val mediaController = MediaController(requireContext())
         mediaController.setAnchorView(binding.vvVideo)
+        mediaController.setMediaPlayer(binding.vvVideo)
         binding.vvVideo.setMediaController(mediaController)
 
+        binding.vvVideo.visibility = View.INVISIBLE
         prefsHelper = PreferencesHelper(binding.root.context)
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
         user = GsonUtils.deserialize(userJson, User::class.java)

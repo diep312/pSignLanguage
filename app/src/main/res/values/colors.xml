@@ -6,8 +6,8 @@
     <color name="color_secondary">#E0E0FA</color>
     <color name="color_accent">#CBF2FF</color>
     <color name="color_additonal">#292B2F</color>
+    <color name="color_gray">#D9D9D9</color>
 
-    <color name="color_gray">#C1C7D0</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

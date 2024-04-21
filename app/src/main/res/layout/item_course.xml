@@ -5,8 +5,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvItemCourse"
-        android:layout_width="181dp"
+        android:id="@+id/btn_join"
+        android:layout_width="wrap_content"
         app:cardElevation="0dp"
         android:layout_height="wrap_content">
 
@@ -14,46 +14,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_radius_8"
-            android:backgroundTint="@color/color_accent">
+            android:backgroundTint="@color/color_accent"
+            android:padding="8dp">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imv_video"
-                android:layout_width="158dp"
-                android:layout_height="190dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="@dimen/dp145"
+                android:layout_height="@dimen/dp100"
                 android:scaleType="centerCrop"
-                android:src="@drawable/im_default"
-                app:layout_constraintDimensionRatio="1.618:1"
-                app:layout_constraintHorizontal_bias="0.483"
+                android:src="@drawable/ic_no_image"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:riv_corner_radius_top_left="@dimen/dp15"
+                app:riv_corner_radius_bottom_left="@dimen/dp15"
+                app:riv_corner_radius_bottom_right="@dimen/dp15"
                 app:riv_corner_radius_top_right="@dimen/dp15" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_join"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp50"
-                android:backgroundTint="@color/color_accent"
-                android:elevation="@dimen/dp1"
-                android:ellipsize="end"
-                android:lines="1"
-                android:maxLines="1"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:paddingHorizontal="@dimen/dp12"
-                android:paddingVertical="@dimen/dp8"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textColor="@color/color_primary"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imv_video" />
+           <TextView
+               android:id="@+id/tv_courselabel"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Subject"
+               android:layout_marginTop="@dimen/dp8"
+               app:layout_constraintTop_toBottomOf="@id/imv_video"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               android:textAlignment="center"
+               android:fontFamily="@font/montserrat_bold"
+               android:textColor="@color/color_primary"
+               android:textSize="@dimen/dp18"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

@@ -58,8 +58,7 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         binding.rvCourse.layoutManager = gridLayoutManager
         binding.rvCourse.adapter = adapter
         binding.rvCourse.setHasFixedSize(true)
-        binding.rvCourse.addItemDecoration(GridItemDecoration(dpToPx(12)))
-
+        binding.rvCourse.addItemDecoration(GridItemDecoration(dpToPx(20)))
         viewModel.getListSubject()
 //        adapter.replace(fakeData())
     }

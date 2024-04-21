@@ -67,4 +67,9 @@
     <string name="str_view_points">Points</string>
     <string name="str_back">Back</string>
     <string name="str_average">Average</string>
+    <string name="str_translate_desc">Use powerful AI-powered technology to help instantly translate ASL to written text.</string>
+    <string name="str_use_camera">Use my camera</string>
+    <string name="str_go_to_folder">Pick a file from my gallery</string>
+    <string name="str_again">Translate another word</string>
+    <string name="str_novid">No video found. Try recording one!</string>
 </resources>

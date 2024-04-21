@@ -12,9 +12,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp64"
-            android:background="@color/white"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:background="@color/color_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
 
             <ImageView
                 android:id="@+id/imv_back"
@@ -24,8 +25,11 @@
                 android:padding="@dimen/dp12"
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_name_topic"
+                app:layout_constraintHorizontal_bias="0.188"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.111"
                 app:tint="@color/black" />
 
             <TextView
@@ -39,12 +43,48 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.108" />
+
+            <RelativeLayout
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp120"
+                android:layout_marginHorizontal="@dimen/dp24"
+                android:layout_marginTop="@dimen/dp24"
+                android:background="@drawable/bg_radius_20"
+                android:backgroundTint="@color/color_highlight"
+                android:padding="@dimen/dp20"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_topic"
+                tools:layout_editor_absoluteX="0dp">
+
+                <ImageView
+                    android:id="@+id/imv_books"
+                    android:layout_width="@dimen/dp85"
+                    android:layout_height="@dimen/dp110"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/im_stackbooks" />
+
+                <TextView
+                    android:layout_width="225dp"
+                    android:layout_height="65dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:layout_toLeftOf="@id/imv_books"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Practice your sign language!"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp20" />
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_topic"
+            android:padding="@dimen/dp20"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"

@@ -5,7 +5,9 @@ import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.GridThreeColumnDecoration
@@ -30,15 +32,10 @@ class TopicAdapter(var listLevel: MutableList<Level?>, val language : String, va
 
             // list label
             val adapter = LessonAdapter(mutableListOf(), language)
-            val gridLayoutManager = object : GridLayoutManager(binding.root.context, 3, GridLayoutManager.VERTICAL, false) {
-                override fun canScrollVertically(): Boolean {
-                    return false
-                }
-            }
-            binding.rvLabel.layoutManager = gridLayoutManager
+            val layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+            binding.rvLabel.layoutManager = layoutManager
             binding.rvLabel.adapter = adapter
             binding.rvLabel.setHasFixedSize(true)
-            binding.rvLabel.addItemDecoration(GridThreeColumnDecoration(3, dpToPx(8), true))
             level?.listLabel?.toMutableList()?.let { adapter.replace(it) }
 
             binding.tvRank.setOnClickListener {

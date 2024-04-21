@@ -25,9 +25,9 @@ class CourseAdapter(var litSubject: MutableList<Subject?>, val language: String)
     inner class CourseViewHolder(var binding: ItemCourseBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(subject : Subject?) {
             if(language == Constants.EN) {
-                binding.btnJoin.text = subject?.name_en ?: EMPTY_STRING
+                binding.tvCourselabel.text = subject?.name_en ?: EMPTY_STRING
             } else {
-                binding.btnJoin.text = subject?.name ?: EMPTY_STRING
+                binding.tvCourselabel.text = subject?.name ?: EMPTY_STRING
             }
 
             binding.btnJoin.setOnClickListener {

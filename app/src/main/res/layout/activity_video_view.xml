@@ -12,7 +12,7 @@
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp56"
-            android:background="@color/white"
+            android:background="@color/color_bg"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="16dp">
 
@@ -71,6 +71,80 @@
                 app:use_artwork="true" />
 
         </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/time_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
+            android:paddingHorizontal="40dp"
+            android:layout_marginTop="48dp">
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/color_primary"/>
+
+            <TextView
+                android:id="@+id/tv_curtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_light"
+                android:text="0:00"
+                android:textColor="@color/color_gray" />
+
+            <TextView
+                android:id="@+id/tv_totaltime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_light"
+                android:textColor="@color/color_gray"
+                android:text="0:00"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/time_seekbar"
+            android:layout_marginTop="45dp"
+            android:paddingHorizontal="60dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_skip_back"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/btn_prev"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_skip_back"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:scaleX='-1'
+                android:id="@+id/btn_next"/>
+
+            <ImageView
+                android:id="@+id/btn_play"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:padding="20dp"
+                android:background="@drawable/bg_radius_30"
+                android:backgroundTint="@color/color_primary"
+                android:src="@drawable/ic_play" />
+
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
