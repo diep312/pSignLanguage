@@ -32,8 +32,8 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
     }
 
     override fun initView() {
-        setLightIconStatusBar(false)
-        setColorForStatusBar(R.color.color_primary)
+        setLightIconStatusBar(true)
+        setColorForStatusBar(R.color.color_bg)
         binding.layout.setPadding(0, getStatusBarHeight(this@TopicActivity), 0, 0)
 
         prefsHelper = PreferencesHelper(binding.root.context)

@@ -35,32 +35,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     override fun initView() {
         setLightIconStatusBar(true)
         binding.layout.setPadding(0, getStatusBarHeight(this@LoginActivity), 0, 0)
-
         binding.tvRegister.text = getTextHtml(R.string.str_register_next)
-        setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationIcon(R.drawable.ic_back)
-        binding.toolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
-
-        val face = ResourcesCompat.getFont(this, R.font.montserrat_semi_bold)
-
-        binding.collapseToolbar.setCollapsedTitleTypeface(face)
-        binding.collapseToolbar.setExpandedTitleTypeface(face)
-        binding.collapseToolbar.title = getString(R.string.str_login)
-        binding.collapseToolbar.setCollapsedTitleTextColor(
-            ContextCompat.getColor(
-                this,
-                R.color.black
-            )
-        )
-        binding.collapseToolbar.setExpandedTitleColor(
-            ContextCompat.getColor(
-                this,
-                R.color.black
-            )
-        )
-
         prefsHelper = PreferencesHelper(this@LoginActivity)
     }
 
@@ -69,7 +44,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
-
         binding.btnNext.setOnClickListener {
             if (!isDoubleClick()) {
                 val email = binding.edtEmail.text.toString().trim()

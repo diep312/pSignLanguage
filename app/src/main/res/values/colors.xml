@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_app">#324A59</color>
-    <color name="color_primary">#324A59</color>
-    <color name="color_gray">#C1C7D0</color>
+    <color name="color_primary">#143EC0</color>
+    <color name="color_highlight">#0099D2</color>
+    <color name="color_secondary">#E0E0FA</color>
+    <color name="color_accent">#CBF2FF</color>
+    <color name="color_additonal">#292B2F</color>
+    <color name="color_gray">#D9D9D9</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -22,8 +27,11 @@
     <color name="colorOrange">#DA6363</color>
     <color name="colorYellow">#FACF39</color>
 
-    <color name="color_bg">#F5F7F8</color>
+    <color name="color_bg">#F9F9FF</color>
     <color name="color_text">#999999</color>
     <color name="color_border">#6ACAFF</color>
     <color name="color_blue_light">#b4e5ff</color>
+    <color name="primary">#143EC0</color>
+    <color name="button_login">#106FE0</color>
+
 </resources>

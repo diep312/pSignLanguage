@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.exoplayer.ExoPlayer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
@@ -31,6 +32,8 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
     private lateinit var prefsHelper: PreferencesHelper
     private var videoPath: String? = null
 
+
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -39,15 +42,22 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         return R.layout.activity_practice
     }
 
+
     override fun initView() {
-        setLightIconStatusBar(false)
-        setColorForStatusBar(R.color.color_primary)
+        setLightIconStatusBar(true)
+        setColorForStatusBar(R.color.color_bg)
         binding.layout.setPadding(0, getStatusBarHeight(this@PracticeActivity), 0, 0)
 
         label = intent.getStringExtra(Constants.KEY_LABEL)
+
         if (!label.isNullOrEmpty()) {
             binding.tvWord.text = label
             viewModel.getVideo(label!!)
+        }
+
+        BottomSheetBehavior.from(binding.bottom).apply{
+            peekHeight=300
+            this.state=BottomSheetBehavior.STATE_COLLAPSED
         }
     }
 
@@ -76,7 +86,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
             }
             val file = File(videoPath)
             if (file != null) {
-//                binding.layoutWrapAnswer.visibility = View.GONE
+                binding.imVidview.visibility = View.GONE
                 label?.let { it1 -> viewModel.checkVideo(file, it1) }
             }
         }
@@ -95,7 +105,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         viewModel.apply {
             videoRes.observe(this@PracticeActivity) {
                 if (!it?.body?.video_url.isNullOrEmpty()) {
-                    it?.body?.video_url?.let { it1 -> initializePlayer(it1) }
+                    it?.body?.video_url?.let { it -> initializePlayer(it) }
                 }
             }
 
@@ -103,7 +113,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                 if (it?.body != null) {
                     binding.imvCheck.visibility = View.VISIBLE
                     binding.tvScore.visibility = View.VISIBLE
-                    binding.tvScore.text = it.body.score.toString()
+                    binding.tvScore.text =  "Score: " + it.body.score.toString()
                     if (it.body.score >= 50) {
                         binding.imvCheck.setImageResource(R.drawable.ic_check_true)
                     } else {
@@ -156,7 +166,6 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                     val videoUri = data?.data
                     videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
-                    binding.imvDefault.visibility = View.GONE
                     binding.vvRecord.setVideoPath(videoPath)
                     binding.vvRecord.start()
                 }
@@ -173,7 +182,6 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
                     val videoUri: Uri = data?.data!!
                     videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
-                    binding.imvDefault.visibility = View.GONE
                     binding.vvRecord.setVideoPath(videoPath)
                     binding.vvRecord.start()
                 }
@@ -218,4 +226,6 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         player.prepare()
         player.play()
     }
+
+
 }

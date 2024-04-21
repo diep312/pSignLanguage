@@ -28,7 +28,7 @@ class ActivityScore : BaseActivity<MainViewModel, ActivityScoreBinding>() {
     }
 
     override fun initView() {
-        setLightIconStatusBar(false)
+        setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_primary)
         binding.layout.setPadding(0, getStatusBarHeight(this@ActivityScore), 0, 0)
 

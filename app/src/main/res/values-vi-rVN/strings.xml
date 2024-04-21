@@ -31,7 +31,7 @@
 
     <string name="str_enter_pass">Nhập mật khẩu</string>
     <string name="str_enter_email">Nhập email</string>
-    <string name="str_welcome_again">Chào mừng bạn quay trở lại</string>
+    <string name="str_welcome_again">Đăng nhập</string>
     <string name="str_create_account_here">Tạo tài khoản mới ở đây</string>
     <string name="str_enter_phone">Nhập số điện thoại</string>
     <string name="str_enter_pass_again">Nhập lại mật khẩu</string>
@@ -68,4 +68,9 @@
     <string name="str_view_points">Điểm</string>
     <string name="str_back">Trở lại</string>
     <string name="str_average">Trung bình</string>
+    <string name="str_translate_desc">Sử dụng công nghệ AI để dịch ngôn ngữ ASL sang ngôn ngữ viết ngay lập tức.</string>
+    <string name="str_use_camera">Sử dụng camera</string>
+    <string name="str_go_to_folder">Chọn file từ album</string>
+    <string name="str_again">Dịch một từ khác</string>
+    <string name="str_novid">Không tìm thấy video. Hãy thử quay một cái video!</string>
 </resources>

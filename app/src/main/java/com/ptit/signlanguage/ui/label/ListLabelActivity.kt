@@ -35,8 +35,8 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>(
     }
 
     override fun initView() {
-        setLightIconStatusBar(false)
-        setColorForStatusBar(R.color.color_primary)
+        setLightIconStatusBar(true)
+        setColorForStatusBar(R.color.color_bg)
         binding.layout.setPadding(0, getStatusBarHeight(this@ListLabelActivity), 0, 0)
 
         prefsHelper = PreferencesHelper(binding.root.context)

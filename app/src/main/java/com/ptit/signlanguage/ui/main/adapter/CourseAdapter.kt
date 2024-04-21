@@ -3,6 +3,7 @@ package com.ptit.signlanguage.ui.main.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
@@ -24,9 +25,9 @@ class CourseAdapter(var litSubject: MutableList<Subject?>, val language: String)
     inner class CourseViewHolder(var binding: ItemCourseBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(subject : Subject?) {
             if(language == Constants.EN) {
-                binding.btnJoin.text = subject?.name_en ?: EMPTY_STRING
+                binding.tvCourselabel.text = subject?.name_en ?: EMPTY_STRING
             } else {
-                binding.btnJoin.text = subject?.name ?: EMPTY_STRING
+                binding.tvCourselabel.text = subject?.name ?: EMPTY_STRING
             }
 
             binding.btnJoin.setOnClickListener {

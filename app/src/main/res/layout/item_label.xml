@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -7,14 +8,15 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp12"
         android:background="@drawable/bg_radius_8"
-        android:backgroundTint="@color/color_primary"
+        android:backgroundTint="#CBF2FF"
         android:layout_marginBottom="@dimen/dp12"
-        android:padding="@dimen/dp8">
+        android:padding="@dimen/dp8"
+        android:id="@+id/btn_next">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imv_label"
             android:layout_width="@dimen/dp128"
-            android:layout_height="@dimen/dp128"
+            android:layout_height="@dimen/dp90"
             android:scaleType="centerCrop"
             android:src="@drawable/im_default"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,34 +26,38 @@
 
         <TextView
             android:id="@+id/tv_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="214dp"
+            android:layout_height="32dp"
             android:layout_marginHorizontal="@dimen/dp8"
             android:ellipsize="end"
+            android:fontFamily="@font/montserrat_bold"
             android:maxLines="3"
             android:text="Nhãn"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp14"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imv_label"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_next"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/bg_radius_8"
-            android:backgroundTint="@color/colorYellow"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:paddingHorizontal="@dimen/dp12"
             android:paddingVertical="@dimen/dp8"
+            android:src="@drawable/ic_save"
             android:text="@string/str_pick"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="@dimen/sp14"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

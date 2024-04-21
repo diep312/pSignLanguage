@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/color_bg">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -21,24 +24,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="@dimen/dp16"
-                    android:paddingTop="@dimen/dp16"
-                    android:paddingBottom="@dimen/dp48">
+                    android:paddingTop="@dimen/dp20">
 
                     <TextView
                         android:id="@+id/tv_label_welcome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp8"
+                        android:fontFamily="@font/montserrat_bold"
                         android:text="@string/str_welcome_again"
+                        android:textColor="@color/primary"
+                        android:textSize="48sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp48"
-                        android:background="@drawable/bg_edt"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="48dp"
+                        android:background="@drawable/bg_btn"
+                        android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_email"
                         android:inputType="textEmailAddress"
@@ -78,9 +84,10 @@
                     <EditText
                         android:id="@+id/edt_password"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
-                        android:background="@drawable/bg_edt"
+                        android:background="@drawable/bg_btn"
+                        android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_pass"
                         android:inputType="textPassword"
@@ -131,66 +138,65 @@
                         android:id="@+id/tv_forgot_pass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp14"
-                        android:padding="@dimen/dp12"
+                        android:layout_marginTop="28dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:padding="@dimen/dp14"
                         android:text="@string/str_forgot_pass"
-                        android:textColor="@color/black"
+                        android:textColor="@color/color_highlight"
                         android:textSize="@dimen/sp14"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.937"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/edt_password" />
 
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    <Button
                         android:id="@+id/btn_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp96"
-                        android:background="@color/color_primary"
-                        android:padding="@dimen/dp12"
-                        android:src="@drawable/ic_next"
-                        android:tintMode="@color/white"
+                        android:layout_width="168dp"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/btn_login"
+                        app:backgroundTint="@color/button_login"
+                        android:text="@string/str_login"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass" />
 
                     <TextView
                         android:id="@+id/tv_register"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp96"
+                        android:layout_marginTop="50dp"
                         android:text="@string/str_register_next"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/btn_next" />
 
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.core.widget.NestedScrollView>
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp120"
-                android:background="@color/white"
+                android:layout_height="30dp"
+                android:background="@color/color_bg"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/collapse_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-                    app:expandedTitleMargin="@dimen/dp16"
-                    app:expandedTitleTextAppearance="@style/collapsed_app_bar"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        app:contentInsetStart="0dp"
-                        app:contentInsetStartWithNavigation="0dp"
-                        app:layout_collapseMode="pin" />
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
-
             </com.google.android.material.appbar.AppBarLayout>
+
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:src="@drawable/br_login2x"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

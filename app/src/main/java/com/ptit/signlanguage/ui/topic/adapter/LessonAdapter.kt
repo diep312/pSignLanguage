@@ -49,7 +49,6 @@ class LessonAdapter(var listLabel: MutableList<Label>, val language : String) :
             }
 
             binding.root.setOnClickListener {
-//                val intent = Intent(binding.root.context, ListWordActivity::class.java)
                 val intent = Intent(binding.root.context, PracticeActivity::class.java)
                 if(language == Constants.EN) {
                     intent.putExtra(Constants.KEY_LABEL, label?.labelEn)
