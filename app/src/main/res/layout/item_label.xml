@@ -26,13 +26,13 @@
 
         <TextView
             android:id="@+id/tv_label"
-            android:layout_width="214dp"
+            android:layout_width="0dp"
             android:layout_height="32dp"
-            android:layout_marginHorizontal="@dimen/dp8"
+            android:layout_marginStart="@dimen/dp8"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_bold"
             android:maxLines="3"
-            android:text="Nhãn"
+            android:text="Label"
             android:textColor="@color/black"
             android:textSize="@dimen/sp24"
             app:layout_constraintBottom_toBottomOf="parent"
