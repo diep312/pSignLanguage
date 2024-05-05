@@ -11,13 +11,13 @@ import androidx.media3.common.MimeTypes
 import androidx.media3.exoplayer.ExoPlayer
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
-import com.ptit.signlanguage.databinding.ActivityVideoViewBinding
+import com.ptit.signlanguage.databinding.AcivityVideoViewBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.util.concurrent.TimeUnit
 
-class VideoViewActivity : BaseActivity<MainViewModel, ActivityVideoViewBinding>() {
+class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>() {
     private var label: String? = null
     private var mediaPlayer: MediaPlayer? = null
 
@@ -26,7 +26,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, ActivityVideoViewBinding>(
     }
 
     override fun getContentLayout(): Int {
-        return R.layout.activity_video_view
+        return R.layout.acivity_video_view
     }
 
     override fun initView() {
@@ -40,15 +40,15 @@ class VideoViewActivity : BaseActivity<MainViewModel, ActivityVideoViewBinding>(
             binding.tvWord.text = label
             viewModel.getVideo(label!!)
         }
-
-        binding.tvTotaltime!!.text = convertoMMSS(binding.vvGuide.player!!.duration.toString())
+//
+//        binding.tvTotaltime.text = convertoMMSS(binding.vvGuide.player!!.duration.toString())
 
     }
 
     override fun initListener() {
         binding.imvBack.setOnClickListener { finish() }
-        binding.btnNext!!.setOnClickListener{}
-        binding.btnPrev!!.setOnClickListener{}
+        binding.btnNext.setOnClickListener{}
+        binding.btnPrev.setOnClickListener{}
     }
 
     override fun observerLiveData() {
