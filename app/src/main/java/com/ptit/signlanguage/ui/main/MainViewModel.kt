@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ptit.signlanguage.base.BaseViewModel
@@ -13,12 +14,11 @@ import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.nio.charset.StandardCharsets
+import kotlin.system.measureTimeMillis
 
 class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
 
@@ -30,10 +30,17 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
             val result: BaseResponse<VideoToTextResponse?>?
             try {
                 withContext(Dispatchers.IO) {
-                    result = apiService.videoToText(part)
+                    var time = measureTimeMillis {
+                        result = apiService.videoToText(part)
+                        Log.d("TAG", result.toString())
+                    }
+                    Log.d("TAG", time.toString())
+
                 }
                 videoToTextRes.postValue(result)
+
             } catch (e: Exception) {
+                Log.d("TAG", "$e")
                 handleApiError(e.cause)
             }
             hideLoading()

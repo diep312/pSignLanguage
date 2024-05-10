@@ -24,11 +24,9 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
-
     override fun getContentLayout(): Int {
         return R.layout.acivity_video_view
     }
-
     override fun initView() {
         setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_bg)
@@ -37,7 +35,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         label = intent.getStringExtra(Constants.KEY_LABEL)
 
         if (!label.isNullOrEmpty()) {
-            binding.tvWord.text = label
+            binding.tvWord.text = intent.getStringExtra("fix")
             viewModel.getVideo(label!!)
         }
 //
@@ -59,7 +57,6 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                     Log.d(TAG, it!!.body!!.video_url!!.toString())
                 }
             }
-
             errorMessage.observe(this@VideoViewActivity) {
                 Toast.makeText(binding.root.context, getString(it), Toast.LENGTH_LONG).show()
                 Log.d(TAG, it.toString())
@@ -73,6 +70,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             val mediaItem: MediaItem = MediaItem.fromUri(uri)
             exoPlayer.setMediaItem(mediaItem)
         }
+
         player.play()
     }
 

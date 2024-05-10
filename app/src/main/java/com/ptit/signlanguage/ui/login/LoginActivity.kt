@@ -48,8 +48,10 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             if (!isDoubleClick()) {
                 val email = binding.edtEmail.text.toString().trim()
                 val pass = binding.edtPassword.text.toString().trim()
-                viewModel.login(email, pass)
+//                viewModel.login(email, pass)
+                goToMain()
             }
+
         }
 
         binding.imvShowHidePass.setOnClickListener {

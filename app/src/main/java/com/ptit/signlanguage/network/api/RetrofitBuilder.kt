@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.network.api
 
+import android.util.Log
 import com.ptit.signlanguage.BuildConfig
 import com.ptit.signlanguage.base.MyApplication
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
@@ -89,6 +90,9 @@ object RetrofitBuilder {
             val request = chain.request().newBuilder()
                 .addHeader("Content-Type", "application/json; charset=utf-8")
                 .addHeader("Authorization", "Bearer $mToken")
+                .also {
+                    Log.d("Tag", "Bearer $mToken")
+                }
                 .build()
             chain.proceed(request)
         }

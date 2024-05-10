@@ -1,8 +1,12 @@
 package com.ptit.signlanguage.ui.main
 
+import android.Manifest
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.ptit.signlanguage.R
@@ -38,7 +42,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun initView() {
         setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_bg)
-
+        verifyStoragePermissions(this)
         binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity) - 20, 0, 0)
 
         prefsHelper = PreferencesHelper(binding.root.context)
@@ -131,4 +135,25 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
 
+    private val REQUEST_EXTERNAL_STORAGE = 1
+    private val PERMISSIONS_STORAGE = arrayOf<String>(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
+
+    private fun verifyStoragePermissions(activity: Activity?) {
+        // Check if we have write permission
+        val permission = ActivityCompat.checkSelfPermission(
+            activity!!,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                activity,
+                PERMISSIONS_STORAGE,
+                REQUEST_EXTERNAL_STORAGE
+            )
+        }
+    }
 }
