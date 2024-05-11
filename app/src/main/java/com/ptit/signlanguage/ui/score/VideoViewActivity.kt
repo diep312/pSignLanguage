@@ -1,13 +1,10 @@
 package com.ptit.signlanguage.ui.score
-
-import android.content.pm.ActivityInfo
-import android.content.res.Configuration
-import android.media.MediaPlayer
+import android.os.Handler
 import android.util.Log
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.media3.common.MediaItem
-import androidx.media3.common.MimeTypes
 import androidx.media3.exoplayer.ExoPlayer
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
@@ -17,9 +14,9 @@ import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.util.concurrent.TimeUnit
 
+
 class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>() {
     private var label: String? = null
-    private var mediaPlayer: MediaPlayer? = null
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
@@ -38,15 +35,10 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             binding.tvWord.text = intent.getStringExtra("fix")
             viewModel.getVideo(label!!)
         }
-//
-//        binding.tvTotaltime.text = convertoMMSS(binding.vvGuide.player!!.duration.toString())
-
     }
 
     override fun initListener() {
         binding.imvBack.setOnClickListener { finish() }
-        binding.btnNext.setOnClickListener{}
-        binding.btnPrev.setOnClickListener{}
     }
 
     override fun observerLiveData() {
@@ -65,17 +57,56 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     }
 
     private fun initializePlayer(uri: String) {
+        val seekBar = binding.seekBar;
+        val currentTimeTv = binding.tvCurtime;
+        val pausePlay = binding.btnPlay;
         val player: ExoPlayer = ExoPlayer.Builder(this).build().also{
             exoPlayer -> binding.vvGuide.player = exoPlayer
             val mediaItem: MediaItem = MediaItem.fromUri(uri)
             exoPlayer.setMediaItem(mediaItem)
+            exoPlayer.playWhenReady = true
+        }
+        player.prepare()
+        player.play()
+
+
+        binding.btnPlay.setOnClickListener(){
+            if(player.isPlaying){
+                player.pause()
+                pausePlay.setImageResource(R.drawable.ic_pause)
+            }
+            else{
+                player.play()
+                pausePlay.setImageResource(R.drawable.ic_play)
+            }
         }
 
-        player.play()
+        this@VideoViewActivity.runOnUiThread(object : Runnable {
+            override fun run() {
+                //Seekbar progress là dạng int từ 0 - 100% -> cần chuyển position theo tỷ lệ duration của toàn bộ vid
+                binding.tvTotaltime.setText(convertToMMSS(player.duration))
+                seekBar.setProgress(((player.currentPosition.toFloat() / player.duration.toFloat()) * 100).toInt())
+                currentTimeTv.setText(convertToMMSS(player.currentPosition))
+                Handler().postDelayed(this, 100)
+            }
+        })
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if(fromUser) {
+                    player.seekTo((player.duration.toFloat() * (progress.toFloat() / 100)).toLong())
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+
     }
 
-    private fun convertoMMSS(duration: String): String{
-        val milisecs = duration.toLong()
+    private fun convertToMMSS(milisecs: Long): String{
         return String.format("%02d:%02d",
             TimeUnit.MILLISECONDS.toMinutes(milisecs) % TimeUnit.HOURS.toMinutes(1),
             TimeUnit.MILLISECONDS.toSeconds(milisecs) % TimeUnit.HOURS.toSeconds(1)
