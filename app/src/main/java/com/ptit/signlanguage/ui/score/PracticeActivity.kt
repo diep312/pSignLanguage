@@ -47,12 +47,12 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_bg)
         binding.layout.setPadding(0, getStatusBarHeight(this@PracticeActivity), 0, 0)
-
+        var labelVn = intent.getStringExtra("fix")
         label = intent.getStringExtra(Constants.KEY_LABEL)
 
         if (!label.isNullOrEmpty()) {
             binding.tvWord.text = label
-            viewModel.getVideo(label!!)
+            viewModel.getVideo(labelVn!!)
         }
 
         BottomSheetBehavior.from(binding.bottom).apply{
