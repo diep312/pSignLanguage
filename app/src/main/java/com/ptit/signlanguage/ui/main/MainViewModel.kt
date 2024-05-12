@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.network.api.ApiService
+import com.ptit.signlanguage.network.api.RetrofitBuilder
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
 import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
@@ -22,16 +23,16 @@ import kotlin.system.measureTimeMillis
 
 class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
 
-    val videoToTextRes = MutableLiveData<BaseResponse<VideoToTextResponse?>?>()
+    val videoToTextRes = MutableLiveData<VideoToTextResponse?>()
     fun videoToText(file: File) {
         viewModelScope.launch {
             showLoading()
-            val part = toMultipartBody("file", file)
-            val result: BaseResponse<VideoToTextResponse?>?
+            val part = toMultipartBody("video", file)
+            val result: VideoToTextResponse?
             try {
                 withContext(Dispatchers.IO) {
                     var time = measureTimeMillis {
-                        result = apiService.videoToText(part)
+                        result = RetrofitBuilder.apiAiSide!!.videoToText(part)
                         Log.d("TAG", result.toString())
                     }
                     Log.d("TAG", time.toString())
@@ -132,15 +133,15 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         }
     }
 
-    val checkVideoRes = MutableLiveData<BaseResponse<CheckVideoRes?>?>()
+    val checkVideoRes = MutableLiveData<VideoToTextResponse?>()
     fun checkVideo(file: File, label: String) {
         viewModelScope.launch {
             showLoading()
-            val part = toMultipartBody("file", file)
-            val result: BaseResponse<CheckVideoRes?>?
+            val part = toMultipartBody("video", file)
+            val result: VideoToTextResponse?
             try {
                 withContext(Dispatchers.IO) {
-                    result = apiService.checkVideo(label.toRequestBody("text/plain".toMediaTypeOrNull()), part)
+                    result = RetrofitBuilder.apiAiSide!!.videoToText(part)
                 }
                 checkVideoRes.postValue(result)
             } catch (e: Exception) {

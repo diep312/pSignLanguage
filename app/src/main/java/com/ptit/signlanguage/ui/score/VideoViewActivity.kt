@@ -149,7 +149,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             override fun run() {
                 binding.seekBar.progress = (player.currentPosition / 1000).toInt()
                 binding.tvCurtime.text = convertToMMSS(player.currentPosition)
-                Handler().postDelayed(this, 1000)
+                Handler().postDelayed(this, 100)
             }
         })
     }

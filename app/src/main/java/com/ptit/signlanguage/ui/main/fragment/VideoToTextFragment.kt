@@ -43,7 +43,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     override fun observerLiveData() {
         viewModel.apply {
             videoToTextRes.observe(this@VideoToTextFragment) {
-                if (it?.body != null) {
+                if (it != null) {
                     binding.layoutWrapAnswer.visibility = View.VISIBLE
                     binding.vvVideo.visibility = View.VISIBLE
                     binding.ivIllu.visibility = View.INVISIBLE
@@ -51,9 +51,9 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     binding.btnRecord.text = getString(R.string.str_again)
 
                     if(user?.language.equals(EN)) {
-                        binding.tvLabel.text = getString(R.string.str_label, it.body.prediction[0].action_name)
+                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
                     } else {
-                        binding.tvLabel.text = getString(R.string.str_label, it.body.prediction[0].action_name)
+                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
                     }
                 }
                 else{
