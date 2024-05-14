@@ -75,24 +75,59 @@
 
             </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imv_pick"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+<!--            <ImageView-->
+<!--                android:id="@+id/imv_pick"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:background="@drawable/bg_radius_30"-->
+<!--                android:backgroundTint="@color/color_primary"-->
+<!--                android:elevation="@dimen/dp11"-->
+<!--                android:padding="@dimen/dp12"-->
+<!--                android:src="@drawable/ic_upload"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/layout_video_guile"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                app:layout_constraintHorizontal_bias="0.695"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:tint="@color/white"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+            <TextView
+                android:id="@+id/imv_record"
+                android:layout_width="match_parent"
+                android:layout_height="46sp"
                 android:background="@drawable/bg_radius_30"
                 android:backgroundTint="@color/color_primary"
-                android:elevation="@dimen/dp11"
                 android:padding="@dimen/dp12"
-                android:src="@drawable/ic_upload"
-                app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
+                android:text="@string/str_use_camera"
+                android:layout_marginHorizontal="@dimen/dp18"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_marginTop="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_video_guile"
+                app:tint="@color/color_gray" />
+            <TextView
+                android:id="@+id/imv_pick"
+                android:layout_width="match_parent"
+                android:layout_height="46sp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_radius_30"
+                android:backgroundTint="@color/color_primary"
+                android:fontFamily="@font/montserrat_regular"
+                android:padding="@dimen/dp12"
+                android:text="@string/str_go_to_folder"
+                android:layout_marginHorizontal="@dimen/dp18"
+                android:textAlignment="center"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="32dp"
-                app:layout_constraintHorizontal_bias="0.695"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tint="@color/white"
-                tools:ignore="ContentDescription" />
-
+                app:layout_constraintTop_toBottomOf="@+id/imv_record"
+                app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/imv_check"
@@ -100,25 +135,26 @@
                 android:layout_height="@dimen/dp24"
                 android:src="@drawable/ic_check_true"
                 android:visibility="gone"
-                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintBottom_toTopOf="@+id/layout_video_guile"
+                app:layout_constraintEnd_toStartOf="@+id/layout_video_guile"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="32dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imv_record"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/bg_radius_30"
-                android:backgroundTint="@color/color_primary"
-                android:elevation="@dimen/dp10"
-                android:padding="@dimen/dp12"
-                android:src="@drawable/ic_record"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imv_pick"
-                app:layout_constraintHorizontal_bias="0.578"
-                app:layout_constraintStart_toStartOf="parent"
-                app:tint="@color/white"
-                tools:ignore="ContentDescription" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imv_record"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:background="@drawable/bg_radius_30"-->
+<!--                android:backgroundTint="@color/color_primary"-->
+<!--                android:elevation="@dimen/dp10"-->
+<!--                android:padding="@dimen/dp12"-->
+<!--                android:src="@drawable/ic_record"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/imv_pick"-->
+<!--                app:layout_constraintHorizontal_bias="0.578"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:tint="@color/white"-->
+<!--                tools:ignore="ContentDescription" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
