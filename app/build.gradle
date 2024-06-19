@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.ptit.signlanguage"
-        minSdk 21
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0.0"
@@ -105,4 +105,10 @@ dependencies {
 
     // For building media playback UIs
     implementation "androidx.media3:media3-ui:$media3_version"
+
+    // Tensorflow
+    implementation 'org.tensorflow:tensorflow-lite:2.15.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.3.1'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.8.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
 }

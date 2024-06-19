@@ -7,10 +7,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.MediaController
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -42,27 +44,45 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 
     override fun observerLiveData() {
         viewModel.apply {
-            videoToTextRes.observe(this@VideoToTextFragment) {
+//            videoToTextRes.observe(this@VideoToTextFragment) {
+//                if (it != null) {
+//                    binding.layoutWrapAnswer.visibility = View.VISIBLE
+//                    binding.vvVideo.visibility = View.VISIBLE
+//                    binding.ivIllu.visibility = View.INVISIBLE
+//                    binding.tvTranslatedesc.visibility = View.INVISIBLE
+//                    binding.btnRecord.text = getString(R.string.str_again)
+//
+//                    if(user?.language.equals(EN)) {
+//                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
+//                    } else {
+//                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
+//                    }
+//                }
+//                else{
+//                    binding.ivIllu.visibility = View.VISIBLE
+//                }
+//                Log.d(TAG, it.toString())
+//            }
+//            errorMessage.observe(this@VideoToTextFragment) {
+//                Log.d(TAG, it.toString())
+//            }
+            // * Mobile detect */
+            viewModel.bestPredict.observe(this@VideoToTextFragment){
                 if (it != null) {
                     binding.layoutWrapAnswer.visibility = View.VISIBLE
                     binding.vvVideo.visibility = View.VISIBLE
                     binding.ivIllu.visibility = View.INVISIBLE
                     binding.tvTranslatedesc.visibility = View.INVISIBLE
                     binding.btnRecord.text = getString(R.string.str_again)
-
                     if(user?.language.equals(EN)) {
-                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
+                        binding.tvLabel.text = getString(R.string.str_label, it)
                     } else {
-                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
+                        binding.tvLabel.text = getString(R.string.str_label, it)
                     }
                 }
                 else{
                     binding.ivIllu.visibility = View.VISIBLE
                 }
-                Log.d(TAG, it.toString())
-            }
-            errorMessage.observe(this@VideoToTextFragment) {
-                Log.d(TAG, it.toString())
             }
         }
     }
@@ -117,6 +137,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == VIDEO_RECORD_CODE) {
