@@ -47,12 +47,12 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_bg)
         binding.layout.setPadding(0, getStatusBarHeight(this@PracticeActivity), 0, 0)
-
+        var labelVn = intent.getStringExtra("fix")
         label = intent.getStringExtra(Constants.KEY_LABEL)
 
         if (!label.isNullOrEmpty()) {
             binding.tvWord.text = label
-            viewModel.getVideo(label!!)
+            viewModel.getVideo(labelVn!!)
         }
 
         BottomSheetBehavior.from(binding.bottom).apply{
@@ -110,13 +110,15 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
             }
 
             checkVideoRes.observe(this@PracticeActivity) {
-                if (it?.body != null) {
+                if (it != null) {
                     binding.imvCheck.visibility = View.VISIBLE
                     binding.tvScore.visibility = View.VISIBLE
-                    binding.tvScore.text =  "Score: " + it.body.score.toString()
-                    if (it.body.score >= 50) {
+
+                    if (it.prediction[0].action_name == label) {
+                        binding.tvScore.text =  "Score: " + "${it.prediction[0].action_score * 10} / 10"
                         binding.imvCheck.setImageResource(R.drawable.ic_check_true)
                     } else {
+                        binding.tvScore.text =  "Score: " + "0 / 10"
                         binding.imvCheck.setImageResource(R.drawable.ic_check_close)
                     }
                 }

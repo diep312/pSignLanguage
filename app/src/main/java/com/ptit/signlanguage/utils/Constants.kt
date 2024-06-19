@@ -31,4 +31,7 @@ object Constants {
 
     const val EN = "EN"
     const val VI = "VI"
+
+    const val API_AI_URL = "http://ptitsignlanguage.edu.vn/"
+    const val API_KEY = "W8W6K-3N7KK-PXB9H-8TD8W-BWTH9"
 }

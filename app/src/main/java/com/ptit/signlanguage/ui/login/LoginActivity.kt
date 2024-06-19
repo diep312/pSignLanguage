@@ -50,6 +50,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                 val pass = binding.edtPassword.text.toString().trim()
                 viewModel.login(email, pass)
             }
+
         }
 
         binding.imvShowHidePass.setOnClickListener {

@@ -11,7 +11,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp56"
+            android:layout_height="wrap_content"
             android:background="@color/color_bg"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="16dp">
@@ -30,13 +30,17 @@
 
             <TextView
                 android:id="@+id/tv_word"
-                android:layout_width="128dp"
-                android:layout_height="35dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
                 android:text="Từ 2"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="@dimen/sp30"
+                android:ellipsize="end"
                 android:textStyle="bold"
+                android:maxLines="1"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -55,7 +59,7 @@
             android:background="@color/transparent"
             android:outlineProvider="background"
             app:cardCornerRadius="@dimen/dp8"
-            app:layout_constraintDimensionRatio="1.6:1"
+            app:layout_constraintDimensionRatio="1.76:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_action_bar">
@@ -68,7 +72,8 @@
                 android:background="@color/color_gray"
                 android:backgroundTint="@color/color_gray"
                 app:default_artwork="@color/color_gray"
-                app:use_artwork="true" />
+                app:use_artwork="true"
+                app:auto_show="false"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -95,7 +100,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_light"
-                android:text="0:00"
+                android:text="--:--"
                 android:textColor="@color/color_gray" />
 
             <TextView
@@ -107,7 +112,7 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_light"
                 android:textColor="@color/color_gray"
-                android:text="0:00"/>
+                android:text="--:--"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -117,31 +122,25 @@
             android:layout_marginTop="45dp"
             android:paddingHorizontal="60dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_skip_back"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/btn_prev"/>
+
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_skip_back"
+                android:src="@drawable/ic_replay_clicked"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:scaleX='-1'
-                android:id="@+id/btn_next"/>
+                android:id="@+id/btn_replay"/>
 
             <ImageView
                 android:id="@+id/btn_play"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
-                android:padding="20dp"
                 android:background="@drawable/bg_radius_30"
                 android:backgroundTint="@color/color_primary"
+                android:padding="20dp"
                 android:src="@drawable/ic_play" />
 
         </RelativeLayout>
