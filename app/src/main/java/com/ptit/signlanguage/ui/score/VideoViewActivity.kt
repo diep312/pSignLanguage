@@ -4,6 +4,7 @@ import android.util.Log
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.state.ToggleableState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -53,7 +54,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             videoRes.observe(this@VideoViewActivity) {
                 if (!it?.body?.video_url.isNullOrEmpty()) {
                     it?.body?.video_url?.let { it1 -> initializePlayer(it1) }
-                    Log.d(TAG, it!!.body!!.video_url!!.toString())
+                    Log.d(TAG, it!!.body!!.video_url)
                 }
             }
             errorMessage.observe(this@VideoViewActivity) {
@@ -64,13 +65,21 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     }
     private fun btnPlay(){
         binding.btnPlay.setOnClickListener(){
-            if(player.isPlaying){
-                player.pause()
-                playerState.postValue(false)
+            if(::player.isInitialized){
+                if(player.isPlaying){
+                    player.pause()
+                    playerState.postValue(false)
+                }
+                else{
+                    player.play()
+                    playerState.postValue(true)
+                }
             }
             else{
-                player.play()
-                playerState.postValue(true)
+                Toast.makeText(this, "Video not found", Toast.LENGTH_SHORT).show()
+                // Avoiding crashing app since the player hasn't been initialized.
+                player = ExoPlayer.Builder(this).build()
+                onBackPressed()
             }
         }
 //        binding.btnReplay.setOnClickListener(){
