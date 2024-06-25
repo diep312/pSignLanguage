@@ -92,7 +92,6 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
         mediaController.setAnchorView(binding.vvVideo)
         mediaController.setMediaPlayer(binding.vvVideo)
         binding.vvVideo.setMediaController(mediaController)
-
         binding.vvVideo.visibility = View.INVISIBLE
         prefsHelper = PreferencesHelper(binding.root.context)
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
