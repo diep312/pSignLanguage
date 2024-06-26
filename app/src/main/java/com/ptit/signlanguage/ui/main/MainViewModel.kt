@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.main
 
+import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.os.Build
 import android.util.Log
@@ -34,7 +35,7 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
     val videoToTextRes = MutableLiveData<VideoToTextResponse?>()
     val bestPredict = MutableLiveData<String?>()
     @RequiresApi(Build.VERSION_CODES.P)
-    fun videoToText(file: File) {
+    fun videoToText(file: File, context: Context) {
 //        viewModelScope.launch {
 //            showLoading()
 //            val part = toMultipartBody("video", file)
@@ -59,26 +60,28 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         // ======Handle on Mobile ========
         viewModelScope.launch {
             showLoading()
-            val retriever = MediaMetadataRetriever()
-            val inputStream = FileInputStream(file.absoluteFile)
-            retriever.setDataSource(inputStream.fd)
-            val framesArray = Detection.getListFrames(retriever)
-            Detection.createClassifier(context)
-            Detection.reset()
-            var s = Prediction("None", 0f)
-            for(i in 1..3){
-                for(frame in framesArray){
-                    s = Detection.processImage(context,frame)
-                    delay(50)
-                    Log.d("StreamVideoClassifier", s.label + " " + s.score)
-                }
-            }
-            bestPredict.postValue(s.toString())
-            Detection.reset()
+            predictLabel(file,context)
             hideLoading()
         }
     }
-
+    @RequiresApi(Build.VERSION_CODES.P)
+    private suspend fun predictLabel(file: File,context: Context): Prediction{
+        val retriever = MediaMetadataRetriever()
+        val inputStream = FileInputStream(file.absoluteFile)
+        retriever.setDataSource(inputStream.fd)
+        val framesArray = Detection.getListFrames(retriever)
+        Detection.createClassifier(context)
+        Detection.reset()
+        var s = Prediction("None", 0f)
+        for(frame in framesArray){
+            s = Detection.processImage(context,frame)
+            delay(50)
+            Log.d("StreamVideoClassifier", s.label + " " + s.score)
+        }
+        bestPredict.postValue(s.toString())
+        Detection.reset()
+        return s
+    }
     val listSubjectRes = MutableLiveData<BaseArrayResponse<Subject?>?>()
     fun getListSubject() {
         viewModelScope.launch {
@@ -164,18 +167,24 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         }
     }
 
-    val checkVideoRes = MutableLiveData<VideoToTextResponse?>()
-    fun checkVideo(file: File, label: String) {
+    val checkVideoRes = MutableLiveData<Prediction?>()
+    @RequiresApi(Build.VERSION_CODES.P)
+    fun checkVideo(file: File, context: Context) {
         viewModelScope.launch {
             showLoading()
-            val part = toMultipartBody("video", file)
-            val result: VideoToTextResponse?
+//            val part = toMultipartBody("file", file)
+//            val result: BaseResponse<CheckVideoRes?>?
+//            try {
+//                withContext(Dispatchers.IO) {
+//
+//                }
+//                checkVideoRes.postValue(result)
+//            } catch (e: Exception) {
+//                handleApiError(e.cause)
+//            }
             try {
-                withContext(Dispatchers.IO) {
-                    result = RetrofitBuilder.apiAiSide!!.videoToText(part)
-                }
-                checkVideoRes.postValue(result)
-            } catch (e: Exception) {
+                checkVideoRes.postValue(predictLabel(file,context))
+            }catch(e: Exception) {
                 handleApiError(e.cause)
             }
             hideLoading()

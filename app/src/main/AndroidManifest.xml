@@ -31,7 +31,8 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".ui.predict.RealtimeDetectActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.register.RegisterActivity"
             android:screenOrientation="portrait"

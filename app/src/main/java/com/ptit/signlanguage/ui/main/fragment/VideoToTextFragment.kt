@@ -21,7 +21,9 @@ import com.ptit.signlanguage.base.BaseFragment
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.FragmentVideoToTextBinding
 import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.ui.main.MainActivity
 import com.ptit.signlanguage.ui.main.MainViewModel
+import com.ptit.signlanguage.ui.predict.RealtimeDetectActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EN
 import com.ptit.signlanguage.utils.GsonUtils
@@ -44,6 +46,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 
     override fun observerLiveData() {
         viewModel.apply {
+            /** Observer server handle **/
 //            videoToTextRes.observe(this@VideoToTextFragment) {
 //                if (it != null) {
 //                    binding.layoutWrapAnswer.visibility = View.VISIBLE
@@ -51,7 +54,6 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 //                    binding.ivIllu.visibility = View.INVISIBLE
 //                    binding.tvTranslatedesc.visibility = View.INVISIBLE
 //                    binding.btnRecord.text = getString(R.string.str_again)
-//
 //                    if(user?.language.equals(EN)) {
 //                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
 //                    } else {
@@ -92,6 +94,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
         mediaController.setAnchorView(binding.vvVideo)
         mediaController.setMediaPlayer(binding.vvVideo)
         binding.vvVideo.setMediaController(mediaController)
+
         binding.vvVideo.visibility = View.INVISIBLE
         prefsHelper = PreferencesHelper(binding.root.context)
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
@@ -103,6 +106,8 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
             if (checkCamera()) {
                 getCameraPermission()
             }
+            val intent = Intent(context, RealtimeDetectActivity::class.java)
+            startActivityForResult(intent, VIDEO_RECORD_CODE)
         }
         binding.btnPickVideo.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
@@ -112,8 +117,10 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     }
 
     private fun recordVideo() {
-        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-        startActivityForResult(intent, VIDEO_RECORD_CODE)
+//        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+//        startActivityForResult(intent, VIDEO_RECORD_CODE)
+//        val intent  = Intent(activity, RealtimeDetectActivity::class.java)
+//        startActivity(intent)
     }
 
     private fun checkCamera(): Boolean {
@@ -144,14 +151,13 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                 RESULT_OK -> {
                     val videoUri = data?.data
                     val videoPath = parsePath(videoUri)
-                    Log.d(TAG, "$videoPath is the path that you need...")
                     binding.vvVideo.setVideoPath(videoPath)
                     binding.vvVideo.start()
 
                     val file = File(videoPath)
                     if (file != null) {
                         binding.layoutWrapAnswer.visibility = View.GONE
-                        viewModel.videoToText(file)
+                        viewModel.videoToText(file, requireContext())
                     }
                 }
                 Activity.RESULT_CANCELED -> {
@@ -173,7 +179,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     val file = File(videoPath)
                     if (file != null) {
                         binding.layoutWrapAnswer.visibility = View.GONE
-                        viewModel.videoToText(file)
+                        viewModel.videoToText(file, requireContext())
                     }
                 }
                 Activity.RESULT_CANCELED -> {
