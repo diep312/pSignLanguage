@@ -2,12 +2,15 @@ package com.ptit.signlanguage.ui.predict
 
 import android.Manifest
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Handler
 import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.camera.core.CameraSelector
@@ -40,7 +43,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionBinding>(), ImageAnalysis.Analyzer {
+class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionBinding>() {
 
     private lateinit var cameraExecutor: ExecutorService
     private var mLastAnalysisResultTime: Long = 0
@@ -48,6 +51,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
     private var permissionGranted: Boolean = false
     private var recording: Recording? = null
     private var recordState: Boolean = false
+    private var modeRecording: Boolean = false
     private val selector by lazy {
         QualitySelector.from(
         Quality.HD,
@@ -68,6 +72,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
     override fun initView() {
         setColorForStatusBar(R.color.color_status_camera)
         binding.apply {
+            countDown.visibility = View.GONE
             backbtn.setOnClickListener{
                 onBackPressedDispatcher.onBackPressed()
             }
@@ -90,12 +95,43 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
                     recordbtn.setImageResource(R.drawable.recording1)
 
                 }else{
-                    initRecorder()
-                    recordbtn.setImageResource(R.drawable.recording)
-                    recordState = true
+                    if(modeRecording){
+                        binding.countDown.visibility = View.VISIBLE
+                        viewModel.startTimer()
+                        Handler().postDelayed(
+                            {
+                                initRecorder()
+                                recordbtn.setImageResource(R.drawable.recording)
+                                recordState = true
+                                binding.countDown.visibility = View.GONE
+                        }, 3000)
+
+                    }else{
+                        initRecorder()
+                        recordbtn.setImageResource(R.drawable.recording)
+                        recordState = true
+                    }
+                }
+            }
+            manual.setOnClickListener{
+                showManualDialog()
+            }
+            recordMode.setOnClickListener{
+                if(!modeRecording){
+                    recordMode.setImageResource(R.drawable.group)
+                    modeRecording = true
+                }else{
+                    recordMode.setImageResource(R.drawable.group_unclick)
+                    modeRecording = false
                 }
             }
         }
+    }
+
+    private fun showManualDialog(){
+        val dialog = ManualDialogFragment()
+        dialog.show(supportFragmentManager, "Test")
+
     }
     @OptIn(UnstableApi::class)
     private fun initRecorder(){
@@ -134,10 +170,10 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
             .Builder(contentResolver, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
             .setContentValues(contentValues)
             .build()
-
         recording = videoCapture.output
             .prepareRecording(this, mediaStoreOutputOptions)
             .start(ContextCompat.getMainExecutor(this), recordingListener)
+
 
     }
     private fun startCamera() {
@@ -177,6 +213,9 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
 
     override fun observerLiveData() {
         viewModel.apply {
+            countdown.observe(this@RealtimeDetectActivity) {
+                binding.countDown.text = (it/1000).toString()
+            }
         }
     }
     private fun getCameraPermission(){
@@ -208,17 +247,6 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
         setResult(RESULT_OK, data )
         this.finish()
     }
-    override fun analyze(image: ImageProxy) {
-        if (SystemClock.elapsedRealtime() - mLastAnalysisResultTime < 2000) {
-            image.close()
-            return
-        }else{
-            CoroutineScope(Dispatchers.IO).launch {
-                viewModel.analyzeImage(applicationContext,image)
-                mLastAnalysisResultTime = SystemClock.elapsedRealtime()
-                image.close()
-            }
-        }
-    }
+
 
 }

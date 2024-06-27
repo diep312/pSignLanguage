@@ -40,6 +40,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/previewCamera" />
+                <TextView
+                    android:id="@+id/countDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="@color/white"
+                    android:textSize="50sp"
+                    app:layout_constraintTop_toTopOf="@id/previewCamera"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -102,6 +113,7 @@
             app:layout_constraintTop_toTopOf="@+id/recordbtn" />
 
         <ImageView
+            android:id="@+id/recordMode"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/group_unclick"
@@ -109,5 +121,7 @@
             app:layout_constraintEnd_toStartOf="@+id/recordbtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -74,5 +74,6 @@
     <string name="str_again">Translate another word</string>
     <string name="str_novid">No video found. Try recording one!</string>
     <string name="translate">Translate</string>
+    <string name="dialogFragment1">For best accuracy prediction, it is recommended that your whole body be visible inside the camera frame.</string>
 
 </resources>
