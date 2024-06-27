@@ -135,7 +135,7 @@ object Detection {
     @RequiresApi(Build.VERSION_CODES.P)
     fun getListFrames(mmr: MediaMetadataRetriever): Array<Bitmap> {
         var frames = emptyArray<Bitmap>()
-        val NUM_FRAMES = 8
+        val NUM_FRAMES = 16
         val duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
         val numberFrames = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_FRAME_COUNT)
         Log.d("StreamVideoClassifier", "Video length: $duration ms")

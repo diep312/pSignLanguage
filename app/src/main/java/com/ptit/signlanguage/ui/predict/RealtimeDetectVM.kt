@@ -50,7 +50,6 @@ class RealtimeDetectVM: BaseViewModel() {
                         _countdown.value = 1
                     }
                 }
-
             }
         )
     }
