@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="16dp">
+
+            <ImageView
+                android:id="@+id/imv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp12"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_word"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="20dp"
+                android:text="Từ 2"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp30"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:maxLines="1"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.523" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_video_guile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:layout_marginTop="60dp"
+            android:background="@color/transparent"
+            android:outlineProvider="background"
+            app:cardCornerRadius="@dimen/dp8"
+            app:layout_constraintDimensionRatio="1.76:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_action_bar">
+
+            <androidx.media3.ui.PlayerView
+                android:id="@+id/vv_guide"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/color_gray"
+                android:backgroundTint="@color/color_gray"
+                app:default_artwork="@color/color_gray"
+                app:use_artwork="true"
+                app:auto_show="false"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/time_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
+            android:paddingHorizontal="40dp"
+            android:layout_marginTop="48dp">
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/color_primary"/>
+
+            <TextView
+                android:id="@+id/tv_curtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_light"
+                android:text="--:--"
+                android:textColor="@color/color_gray" />
+
+            <TextView
+                android:id="@+id/tv_totaltime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_light"
+                android:textColor="@color/color_gray"
+                android:text="--:--"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/time_seekbar"
+            android:layout_marginTop="45dp"
+            android:paddingHorizontal="60dp">
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_replay_clicked"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:scaleX='-1'
+                android:id="@+id/btn_replay"/>
+
+            <ImageView
+                android:id="@+id/btn_play"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_radius_30"
+                android:backgroundTint="@color/color_primary"
+                android:padding="20dp"
+                android:src="@drawable/ic_play" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

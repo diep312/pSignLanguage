@@ -1,5 +1,7 @@
 package com.ptit.signlanguage.network.model.response
 
+import android.media.Image
+
 data class Subject(
     val id: Int,
     val name: String,

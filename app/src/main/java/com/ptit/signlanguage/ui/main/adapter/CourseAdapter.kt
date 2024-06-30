@@ -1,6 +1,7 @@
 package com.ptit.signlanguage.ui.main.adapter
 
 import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -17,19 +18,33 @@ import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 class CourseAdapter(var litSubject: MutableList<Subject?>, val language: String) :
     RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
 
+        // Fix cứng sẽ xóa sau
+    private val listFixedImage : List<Int> = listOf(
+        R.drawable.p1,
+        R.drawable.p2,
+        R.drawable.p3,
+        R.drawable.p4,
+        R.drawable.p5,
+        R.drawable.p6,
+        R.drawable.p7,
+        R.drawable.p8,
+        R.drawable.p9,
+        R.drawable.p10,
+        R.drawable.p11,
+    )
     fun replace(litSubject : MutableList<Subject?>) {
         this.litSubject = litSubject
         notifyDataSetChanged()
     }
 
     inner class CourseViewHolder(var binding: ItemCourseBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(subject : Subject?) {
+        fun bind(subject : Subject?, position: Int) {
             if(language == Constants.EN) {
                 binding.tvCourselabel.text = subject?.name_en ?: EMPTY_STRING
             } else {
                 binding.tvCourselabel.text = subject?.name ?: EMPTY_STRING
             }
-
+            binding.imvVideo.setImageResource(listFixedImage[position])
             binding.btnJoin.setOnClickListener {
                 val intent = Intent(binding.root.context, TopicActivity::class.java)
                 intent.putExtra(Constants.KEY_SUBJECT, subject)
@@ -50,7 +65,7 @@ class CourseAdapter(var litSubject: MutableList<Subject?>, val language: String)
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        holder.bind(litSubject[position])
+        holder.bind(litSubject[position], position)
     }
 
     override fun getItemCount(): Int {

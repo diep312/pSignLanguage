@@ -6,10 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -61,6 +63,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun initListener() {
         binding.imvRecord.setOnClickListener {
             if (!isDoubleClick()) {
@@ -87,7 +90,7 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
             val file = File(videoPath)
             if (file != null) {
                 binding.imVidview.visibility = View.GONE
-                label?.let { it1 -> viewModel.checkVideo(file, it1) }
+                label?.let { it1 -> viewModel.checkVideo(file, this) }
             }
         }
         binding.imvPick.setOnClickListener {
@@ -110,15 +113,15 @@ class PracticeActivity : BaseActivity<MainViewModel, ActivityPracticeBinding>() 
             }
 
             checkVideoRes.observe(this@PracticeActivity) {
-                if (it?.body != null) {
+                if (it != null) {
                     binding.imvCheck.visibility = View.VISIBLE
                     binding.tvScore.visibility = View.VISIBLE
-                    binding.tvScore.text =  "Score: " + it.body.score.toString()
-                    if (it.body.score >= 50) {
-                        binding.imvCheck.setImageResource(R.drawable.ic_check_true)
-                    } else {
-                        binding.imvCheck.setImageResource(R.drawable.ic_check_close)
-                    }
+                    binding.tvScore.text =  "Score: ${Math.round(it.score*100)}/100"
+//                    if (it.score >= 50) {
+//                        binding.imvCheck.setImageResource(R.drawable.ic_check_true)
+//                    } else {
+//                        binding.imvCheck.setImageResource(R.drawable.ic_check_close)
+//                    }
                 }
                 Log.d(TAG, it.toString())
             }

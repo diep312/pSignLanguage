@@ -5,12 +5,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.network.api.RetrofitBuilder
 import com.ptit.signlanguage.ui.login.LoginViewModel
 import com.ptit.signlanguage.ui.main.MainViewModel
+import com.ptit.signlanguage.ui.predict.RealtimeDetectVM
 
 class ViewModelFactory() : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(RetrofitBuilder.getApiService()!!) as T
+        }
+        else if(modelClass.isAssignableFrom(RealtimeDetectVM::class.java)){
+            return RealtimeDetectVM() as T
         }
         else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(RetrofitBuilder.apiServiceLogin) as T

@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.network.api
 
+import android.util.Log
 import com.ptit.signlanguage.BuildConfig
 import com.ptit.signlanguage.base.MyApplication
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
@@ -18,8 +19,23 @@ object RetrofitBuilder {
     private var mToken = ""
     private const val TIME_OUT: Long = 10
     private var apiService: ApiService? = null
+    private var retrofitAiSide: Retrofit? = null
+
+
+    val apiAiSide: ApiPredictService? by lazy {
+        initRetrofitAiSide()
+        getRetrofitAiSide()!!.create(ApiPredictService::class.java)
+    }
+
     val apiServiceLogin: ApiServiceLogin by lazy {
         getRetrofitLogin()!!.create(ApiServiceLogin::class.java)
+    }
+
+    private fun getRetrofitAiSide(): Retrofit?{
+        if(retrofitAiSide == null){
+            initRetrofitAiSide()
+        }
+        return retrofitAiSide
     }
 
     fun getApiService(): ApiService? {
@@ -89,6 +105,9 @@ object RetrofitBuilder {
             val request = chain.request().newBuilder()
                 .addHeader("Content-Type", "application/json; charset=utf-8")
                 .addHeader("Authorization", "Bearer $mToken")
+                .also {
+                    Log.d("Tag", "Bearer $mToken")
+                }
                 .build()
             chain.proceed(request)
         }
@@ -98,5 +117,31 @@ object RetrofitBuilder {
             .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build() //Doesn't require the adapter
+    }
+
+    private fun initRetrofitAiSide() {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.apply {
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(interceptor)
+        httpClient.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+        httpClient.readTimeout(TIME_OUT, TimeUnit.SECONDS)
+
+        httpClient.addInterceptor { chain ->
+            val request = chain.request().newBuilder()
+                .addHeader("Content-Type", "multipart/form-data")
+                .addHeader("APIKEY", Constants.API_KEY)
+                .build()
+            chain.proceed(request)
+        }
+        retrofitAiSide = Retrofit.Builder()
+            .baseUrl(Constants.API_AI_URL)
+            .client(httpClient.build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build() //Doesn't require the adapter
+
     }
 }

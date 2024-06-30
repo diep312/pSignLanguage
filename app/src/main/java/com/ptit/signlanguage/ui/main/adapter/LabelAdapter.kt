@@ -22,7 +22,7 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String) :
     }
 
     fun replace(listLabel: MutableList<Label?>) {
-        this.listLabel = listLabel
+        this.listLabel = listLabel.subList(11, listLabel.size)
         notifyItemRangeChanged(0, itemCount)
     }
 
@@ -37,10 +37,11 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String) :
 
             binding.btnNext.setOnClickListener {
                 val intent = Intent(binding.root.context, VideoViewActivity::class.java)
+                intent.putExtra(KEY_LABEL, label?.labelVn)
                 if (language == Constants.EN) {
-                    intent.putExtra(KEY_LABEL, label?.labelEn)
-                } else {
-                    intent.putExtra(KEY_LABEL, label?.labelVn)
+                    intent.putExtra("fix", label?.labelEn)
+                }else{
+                    intent.putExtra("fix", label?.labelVn)
                 }
                 binding.root.context.startActivity(intent)
             }
