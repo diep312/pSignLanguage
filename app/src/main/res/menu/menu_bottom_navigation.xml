@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btn_video_to_text"
+        android:icon="@drawable/icon_camera"
+        android:title="@string/str_video_to_text" />
+
+    <item android:id="@+id/btn_text_to_video"
+        android:title="@string/str_text_to_video"
+        android:icon="@drawable/icon_search" />
+
+    <item android:id="@+id/btn_course"
+        android:title="@string/str_course"
+        android:icon="@drawable/icon_book" />
+
+    <item android:id="@+id/btn_account"
+        android:title="@string/str_account"
+        android:icon="@drawable/icon_settings" />
+</menu>
