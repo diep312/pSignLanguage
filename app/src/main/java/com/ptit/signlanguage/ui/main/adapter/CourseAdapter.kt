@@ -17,7 +17,8 @@ import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
 class CourseAdapter(var litSubject: MutableList<Subject?>, val language: String) :
     RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
-        // Soon delete it
+
+        // Fix cứng sẽ xóa sau
     private val listFixedImage : List<Int> = listOf(
         R.drawable.p1,
         R.drawable.p2,

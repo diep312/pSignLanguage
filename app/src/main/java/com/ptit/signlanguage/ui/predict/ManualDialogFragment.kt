@@ -8,16 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.ptit.signlanguage.R
-import com.ptit.signlanguage.ui.predict.fragment.Fragment1
-import com.ptit.signlanguage.ui.predict.fragment.Fragment2
-import com.ptit.signlanguage.ui.predict.fragment.Fragment3
+import com.ptit.signlanguage.ui.predict.adapter.SlideAdapter
+import com.ptit.signlanguage.ui.predict.adapter.SlideItem
+
 
 class ManualDialogFragment : DialogFragment() {
-    private var order = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,31 +28,54 @@ class ManualDialogFragment : DialogFragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.dialog_manual, container, false)
 
-        // Add the inner fragment
-        if (savedInstanceState == null) {
-            val transaction = childFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment, Fragment1())
-            transaction.commit()
-        }
-        val nextBtn = view.findViewById<Button>(R.id.nextBtn)
+        val slidesItemAdapter = SlideAdapter(
+            listOf(
+                SlideItem(
+                    slideImage = R.drawable.im_slide_1,
+                    slideTitle = getString(R.string.str_slidetitle_1),
+                    slideDescription = getString(R.string.str_slidedesc_1)
+                ),
+                SlideItem(
+                    slideImage = R.drawable.im_slide_2,
+                    slideTitle = getString(R.string.str_slidetitle_2),
+                    slideDescription = getString(R.string.str_slidedesc_2)
+                ),
+                SlideItem(
+                    slideImage = R.drawable.im_slide_3,
+                    slideTitle = getString(R.string.str_slidetitle_3),
+                    slideDescription = getString(R.string.str_slidedesc_3)
+                ),
+            )
+        )
+
+        val dialogViewPager = view.findViewById<ViewPager2>(R.id.vp_slides)
+        dialogViewPager.adapter = slidesItemAdapter
+
+        val slideCountText = view.findViewById<TextView>(R.id.tv_slide_count)
+        slideCountText.text = "%d/%d".format(dialogViewPager.currentItem + 1, slidesItemAdapter.itemCount)
+
+        val nextBtn = view.findViewById<ImageView>(R.id.nextBtn)
         nextBtn.setOnClickListener{
-            if(order == 0 || order == 1){
-                initReplace(++order)
+            if(dialogViewPager.currentItem < slidesItemAdapter.itemCount - 1){
+                dialogViewPager.currentItem = dialogViewPager.currentItem + 1
+                slideCountText.text = "%d/%d".format(dialogViewPager.currentItem + 1, slidesItemAdapter.itemCount)
             }
             else{
                 dialog?.dismiss()
             }
         }
 
+
         return view
     }
+
     override fun onStart() {
         super.onStart()
         dialog?.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -57,13 +83,5 @@ class ManualDialogFragment : DialogFragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
-    private fun initReplace(order: Int){
-        childFragmentManager.beginTransaction().replace(R.id.fragment,
-            when(order){
-                0 -> Fragment1()
-                1 -> Fragment2()
-                2 -> Fragment3()
-                else -> {Fragment3()}
-            }).commit()
-    }
+
 }

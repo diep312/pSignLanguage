@@ -2,20 +2,16 @@ package com.ptit.signlanguage.ui.predict
 
 import android.Manifest
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Handler
-import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.video.FallbackStrategy
@@ -43,7 +39,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionBinding>() {
+class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionBinding>(), ConfirmationDialogFragment.VideoPreviewListener {
 
     private lateinit var cameraExecutor: ExecutorService
     private var mLastAnalysisResultTime: Long = 0
@@ -52,17 +48,22 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
     private var recording: Recording? = null
     private var recordState: Boolean = false
     private var modeRecording: Boolean = false
+    private lateinit var currentVideoUri: Uri
+
     private val selector by lazy {
         QualitySelector.from(
         Quality.HD,
         FallbackStrategy.higherQualityOrLowerThan(Quality.SD)
     ) }
+
     private val recorder by lazy {
         Recorder.Builder()
             .setQualitySelector(selector)
             .build()
     }
+
     private val videoCapture by lazy { VideoCapture.withOutput(recorder) }
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[RealtimeDetectVM::class.java]
     }
@@ -88,6 +89,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
                 currentSide_Camera = currentSide_Camera xor 1
                 startCamera()
             }
+
             recordbtn.setOnClickListener{
                 if(recordState){
                     recording?.stop()
@@ -131,8 +133,8 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
     private fun showManualDialog(){
         val dialog = ManualDialogFragment()
         dialog.show(supportFragmentManager, "Test")
-
     }
+
     @OptIn(UnstableApi::class)
     private fun initRecorder(){
         val recordingListener = Consumer<VideoRecordEvent> { event ->
@@ -146,8 +148,8 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
                     val msg = if (!event.hasError()) {
                         "Video capture succeeded"
                             .also {
-                                viewModel.resultString.postValue(RealtimeDetectVM.AnalysisResult(event.outputResults.outputUri.path  ?: "null"))
-                                returnURI(event.outputResults.outputUri)
+                                currentVideoUri = event.outputResults.outputUri
+                                showVideoPreviewDialog(currentVideoUri)
                             }
                     } else {
                         // update app state when the capture failed.
@@ -240,13 +242,28 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
         private const val FRONT_CAMERA = 0
         private const val imageSize = 96
     }
+
     private fun returnURI(uri: Uri){
         val data = Intent()
         data.setData(uri)
         Log.d("Link", uri.toString())
-        setResult(RESULT_OK, data )
+        setResult(RESULT_OK, data)
         this.finish()
     }
 
+    private fun showVideoPreviewDialog(videoUri: Uri) {
+        val dialog = ConfirmationDialogFragment()
+        dialog.setVideoUri(videoUri)
+        dialog.show(supportFragmentManager, "VideoPreview")
+    }
 
+    override fun onKeepVideo() {
+        viewModel.resultString.postValue(RealtimeDetectVM.AnalysisResult(currentVideoUri.path ?: "null"))
+        returnURI(currentVideoUri)
+    }
+
+    override fun onDiscardVideo() {
+        contentResolver.delete(currentVideoUri, null, null)
+        Toast.makeText(this, "Video discarded", Toast.LENGTH_SHORT).show()
+    }
 }

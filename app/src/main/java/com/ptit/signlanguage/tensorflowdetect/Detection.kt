@@ -171,7 +171,7 @@ object Detection {
                     .setMaxResult(MAX_RESULT)
                     .setNumThreads(numThread)
                     .build()
-            val modelFile = "model_3.tflite"
+            val modelFile = "model.tflite"
 
             videoClassifier = VideoClassifier.createFromFileAndLabelsAndOptions(
                 context,
