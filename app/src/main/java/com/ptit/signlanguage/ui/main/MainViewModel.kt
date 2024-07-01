@@ -73,10 +73,12 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         Detection.createClassifier(context)
         Detection.reset()
         var s = Prediction("None", 0f)
-        for(frame in framesArray){
-            s = Detection.processImage(context,frame)
-            delay(50)
-            Log.d("StreamVideoClassifier", s.label + " " + s.score)
+        for( t in 1 until 2){
+            for(frame in framesArray){
+                s = Detection.processImage(context,frame)
+                delay(50)
+                Log.d("StreamVideoClassifier", s.label + " " + s.score)
+            }
         }
         bestPredict.postValue(s.toString())
         Detection.reset()
