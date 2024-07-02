@@ -50,10 +50,13 @@ class ManualDialogFragment : DialogFragment() {
 
         val dialogViewPager = view.findViewById<ViewPager2>(R.id.vp_slides)
         dialogViewPager.adapter = slidesItemAdapter
-
         val slideCountText = view.findViewById<TextView>(R.id.tv_slide_count)
-        slideCountText.text = "%d/%d".format(dialogViewPager.currentItem + 1, slidesItemAdapter.itemCount)
-
+        dialogViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                slideCountText.text = "%d/%d".format(dialogViewPager.currentItem + 1, slidesItemAdapter.itemCount)
+            }
+        })
         val nextBtn = view.findViewById<ImageView>(R.id.nextBtn)
         nextBtn.setOnClickListener{
             if(dialogViewPager.currentItem < slidesItemAdapter.itemCount - 1){
@@ -83,5 +86,4 @@ class ManualDialogFragment : DialogFragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
-
 }

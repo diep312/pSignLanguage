@@ -236,7 +236,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
     }
     companion object {
         private const val CAMERA_PERMISSION_CODE: Int = 100
-        private const val VIDEO_RECORD_CODE: Int = 101
+        const val VIDEO_RECORD_CODE: Int = 101
         private const val REQUEST_TAKE_GALLERY_VIDEO: Int = 102
         private const val BACK_CAMERA = 1
         private const val FRONT_CAMERA = 0

@@ -30,7 +30,7 @@ import java.io.FileInputStream
 import java.nio.charset.StandardCharsets
 import kotlin.system.measureTimeMillis
 
-class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
+open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
 
     val videoToTextRes = MutableLiveData<VideoToTextResponse?>()
     val bestPredict = MutableLiveData<String?>()
@@ -65,7 +65,7 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         }
     }
     @RequiresApi(Build.VERSION_CODES.P)
-    private suspend fun predictLabel(file: File,context: Context): Prediction{
+    suspend fun predictLabel(file: File,context: Context): Prediction{
         val retriever = MediaMetadataRetriever()
         val inputStream = FileInputStream(file.absoluteFile)
         retriever.setDataSource(inputStream.fd)
@@ -75,7 +75,7 @@ class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         var s = Prediction("None", 0f)
         for(frame in framesArray){
             s = Detection.processImage(context,frame)
-            delay(50)
+            delay(80)
             Log.d("StreamVideoClassifier", s.label + " " + s.score)
         }
         bestPredict.postValue(s.toString())

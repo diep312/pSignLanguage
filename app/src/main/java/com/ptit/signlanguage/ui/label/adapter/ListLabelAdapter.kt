@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemWordBinding
 import com.ptit.signlanguage.network.model.response.subjectWrap.Label
-import com.ptit.signlanguage.ui.score.PracticeActivity
+import com.ptit.signlanguage.ui.score.PracticeCameraActivity
 import com.ptit.signlanguage.utils.Constants
 
 class ListLabelAdapter(var listLabel: MutableList<Label>, val language : String) :
@@ -29,7 +29,7 @@ class ListLabelAdapter(var listLabel: MutableList<Label>, val language : String)
             }
 
             binding.btnLearn.setOnClickListener {
-                val intent = Intent(binding.root.context, PracticeActivity::class.java)
+                val intent = Intent(binding.root.context, PracticeCameraActivity::class.java)
                 if(language == Constants.EN) {
                     intent.putExtra(Constants.KEY_LABEL, label.labelEn)
                 } else {
