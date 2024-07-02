@@ -143,16 +143,18 @@ object Detection {
         val frameStep: Int
         if (numberFrames!=null) {
             frameStep = (numberFrames.toDouble()/ NUM_FRAMES).roundToInt()
-            for (i in 0 until NUM_FRAMES){
-                var frame = i*frameStep
-                if(frame >= numberFrames.toInt()){
-                    frame = numberFrames.toInt()-1
-                }
-                val bitmap = mmr.getFrameAtIndex(frame)
-                if (bitmap!=null) {
-                    frames += bitmap
-                } else{
-                    Log.d("No bitmap", "Found no bitmap at frame: $frame")
+            for(time in 1 .. 2){
+                for (i in 0 until NUM_FRAMES){
+                    var frame = i*frameStep
+                    if(frame >= numberFrames.toInt()){
+                        frame = numberFrames.toInt()-1
+                    }
+                    val bitmap = mmr.getFrameAtIndex(frame)
+                    if (bitmap!=null) {
+                        frames += bitmap
+                    } else{
+                        Log.d("No bitmap", "Found no bitmap at frame: $frame")
+                    }
                 }
             }
         }
