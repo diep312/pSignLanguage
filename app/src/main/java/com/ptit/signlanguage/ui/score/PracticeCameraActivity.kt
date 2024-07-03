@@ -12,6 +12,7 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
@@ -30,10 +31,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.util.Consumer
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
+import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -54,18 +57,26 @@ import java.io.File
 import java.util.Date
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeBinding>(), ConfirmationDialogFragment.VideoPreviewListener {
     private var label: String? = null
+    private var labelId : String? = null
+    private var labelScore : String? = null
     private var videoPath: String? = null
     private lateinit var cameraExecutor: ExecutorService
     private var mLastAnalysisResultTime: Long = 0
-    private var currentSide_Camera = PracticeCameraActivity.BACK_CAMERA
+    private var currentSide_Camera = PracticeCameraActivity.FRONT_CAMERA
     private var permissionGranted: Boolean = false
     private var recording: Recording? = null
     private var recordState: Boolean = false
     private var modeRecording: Boolean = false
     private lateinit var currentVideoUri: Uri
+    private var playerState = MutableLiveData(false)
+    private lateinit var player: ExoPlayer
+    private var replayState = true
+
+
 
     private val selector by lazy {
         QualitySelector.from(
@@ -81,6 +92,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
     private val videoCapture by lazy { VideoCapture.withOutput(recorder) }
 
+//    VIEW INITIALIZATION
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[PracticeViewModel::class.java]
     }
@@ -89,21 +101,46 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
 
     override fun initView() {
-        setLightIconStatusBar(true)
-        setColorForStatusBar(R.color.color_bg)
+        setLightIconStatusBar(false)
+        setColorForStatusBar(R.color.color_camera)
+        val bindingBackground = binding.vDimBackground
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottom)
+
         binding.rootLayout.setPadding(0, getStatusBarHeight(this@PracticeCameraActivity), 0, 0)
 
         label = intent.getStringExtra(Constants.KEY_LABEL)
+        labelScore = intent.getStringExtra("SCORE")
+        labelId = intent.getStringExtra("ID")
+
+        if (labelScore == null){
+            labelScore = "0"
+        }
 
         if (!label.isNullOrEmpty()) {
-            binding.translate.text = label
+            binding.translate.text = intent.getStringExtra("fix")
             viewModel.getVideo(label!!)
         }
 
-        BottomSheetBehavior.from(binding.bottom).apply{
-            peekHeight= 150
-            this.state= BottomSheetBehavior.STATE_COLLAPSED
-        }
+        bottomSheetBehavior.peekHeight = 264
+
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                    bindingBackground.visibility = View.GONE
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // Handle slide offset to control dim background
+                if (slideOffset > 0) {
+                    bindingBackground.visibility = View.VISIBLE
+                    bindingBackground.alpha = slideOffset * 0.5f
+                } else {
+                    bindingBackground.visibility = View.GONE
+                }
+            }
+        })
+
         viewModel.isLoading.postValue(true)
         binding.apply {
             countDown.visibility = View.GONE
@@ -164,6 +201,8 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         }
         viewModel.isLoading.postValue(false)
     }
+
+//    HANDLING MANUAL
     private fun showManualDialog(){
         val dialog = ManualDialogFragment()
         dialog.show(supportFragmentManager, "Test")
@@ -231,20 +270,104 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                 if(it != null && it >= 0){
                     val dialog = ResultDialog()
                     dialog.setScore(it)
+//                    if(it > labelScore!!.toInt()){
+//                        viewModel.updateUserScore(labelId!!.toInt(), it.toFloat())
+//                    }
                     dialog.show(supportFragmentManager, "Test")
                 }
             }
         }
     }
+
+//    PLAYER HANDLING
     private fun initializePlayer(uri: String) {
-        val player = ExoPlayer.Builder(this).build().also{  exoPlayer ->
+        val seekBar = binding.seekBar
+        player = ExoPlayer.Builder(this).build().also{  exoPlayer ->
             binding.sampleVideo.player = exoPlayer
+            binding.sampleVideo.elevation = 20f
             val mediaItem: MediaItem = MediaItem.fromUri(uri)
             exoPlayer.setMediaItem(mediaItem)
         }
         player.prepare()
         player.play()
+        binding.btnPlay.setOnClickListener(){
+            if(!player.isLoading){
+                if(player.isPlaying){
+                    player.pause()
+                    playerState.postValue(false)
+                }
+                else{
+                    player.play()
+                    playerState.postValue(true)
+                }
+            }
+            else{
+                Toast.makeText(this, "Video not found", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        playerState.observe(this@PracticeCameraActivity){
+            if(it){
+                binding.btnPlay.setImageResource(R.drawable.ic_pause)
+            }else{
+                binding.btnPlay.setImageResource(R.drawable.ic_play)
+            }
+        }
+
+        playerState.postValue(false)
+        player.addListener(object : Player.Listener{
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+                if(playbackState == Player.STATE_READY){
+                    updateRunTime()
+                    binding.tvTotaltime.text = convertToMMSS(player.duration)
+                    seekBar.max = (player.duration / 1000).toInt()
+                    player.play().also {
+                        playerState.postValue(true)
+                    }
+                }
+                if(playbackState == Player.STATE_ENDED){
+                    if(replayState){
+                        player.seekTo(0)
+                        player.play()
+                    }else{
+                        playerState.postValue(false)
+                    }
+                }
+            }
+        })
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if(fromUser) {
+                    player.seekTo((player.duration.toFloat() * (progress.toFloat() / 100)).toLong())
+                }
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
+
     }
+
+    private fun convertToMMSS(milisecs: Long): String{
+        return String.format("%02d:%02d",
+            TimeUnit.MILLISECONDS.toMinutes(milisecs) % TimeUnit.HOURS.toMinutes(1),
+            TimeUnit.MILLISECONDS.toSeconds(milisecs) % TimeUnit.HOURS.toSeconds(1)
+        )
+    }
+    fun updateRunTime(){
+        this@PracticeCameraActivity.runOnUiThread(object : Runnable {
+            override fun run() {
+                binding.seekBar.progress = (player.currentPosition / 1000).toInt()
+                binding.tvCurtime.text = convertToMMSS(player.currentPosition)
+                Handler().postDelayed(this, 100)
+            }
+        })
+    }
+
     private fun startCamera() {
 
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -347,4 +470,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         contentResolver.delete(currentVideoUri, null, null)
         Toast.makeText(this, "Video discarded", Toast.LENGTH_SHORT).show()
     }
+
+
 }

@@ -7,15 +7,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemLessionBinding
-import com.ptit.signlanguage.network.model.response.subjectWrap.Label
+import com.ptit.signlanguage.network.model.response.subjectWrap.LabelWithScore
 import com.ptit.signlanguage.ui.score.PracticeCameraActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
-class LessonAdapter(var listLabel: MutableList<Label>, val language : String) :
+class LessonAdapter(var listLabel: MutableList<LabelWithScore>, val language : String) :
     RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
-    fun replace(listLesson: MutableList<Label>) {
+    fun replace(listLesson: MutableList<LabelWithScore>) {
         this.listLabel = listLesson
         notifyDataSetChanged()
     }
@@ -41,21 +41,31 @@ class LessonAdapter(var listLabel: MutableList<Label>, val language : String) :
 
     inner class LessonViewHolder(var binding: ItemLessionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(label: Label?) {
+        fun bind(label: LabelWithScore?) {
             if(language == Constants.EN) {
                 binding.tvLesson.text = label?.labelEn ?: EMPTY_STRING
             } else {
                 binding.tvLesson.text = label?.labelVn ?: EMPTY_STRING
             }
 
+
+            if(label?.latestScore == null){
+                binding.tvPoints.text = "0 points"
+            }
+            else{
+                binding.tvPoints.text = "%.0f".format(label.latestScore)
+            }
+
             binding.root.setOnClickListener {
                 val intent = Intent(binding.root.context, PracticeCameraActivity::class.java)
-                intent.putExtra("fix", label?.labelVn)
+                intent.putExtra(Constants.KEY_LABEL, label?.labelVn)
                 if(language == Constants.EN) {
-                    intent.putExtra(Constants.KEY_LABEL, label?.labelEn)
+                    intent.putExtra("fix", label?.labelEn)
                 } else {
-                    intent.putExtra(Constants.KEY_LABEL, label?.labelVn)
+                    intent.putExtra("fix", label?.labelVn)
                 }
+                intent.putExtra("SCORE", label?.latestScore)
+                intent.putExtra("ID", label?.id)
                 binding.root.context.startActivity(intent)
             }
         }

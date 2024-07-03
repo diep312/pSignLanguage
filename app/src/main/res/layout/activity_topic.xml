@@ -46,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.108" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp120"
@@ -57,28 +57,27 @@
                 android:padding="@dimen/dp20"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_name_topic"
-                tools:layout_editor_absoluteX="0dp">
+                tools:layout_editor_absoluteX="24dp"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:id="@+id/imv_books"
                     android:layout_width="@dimen/dp85"
                     android:layout_height="@dimen/dp110"
-                    android:layout_alignParentLeft="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/im_stackbooks" />
+                <Space
+                    android:layout_height="0dp"
+                    android:layout_width="30dp"/>
 
                 <TextView
-                    android:layout_width="225dp"
-                    android:layout_height="65dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="25dp"
-                    android:layout_toLeftOf="@id/imv_books"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="Practice your sign language!"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp20" />
-            </RelativeLayout>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

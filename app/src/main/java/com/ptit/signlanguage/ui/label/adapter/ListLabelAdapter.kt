@@ -7,20 +7,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemWordBinding
-import com.ptit.signlanguage.network.model.response.subjectWrap.Label
+import com.ptit.signlanguage.network.model.response.subjectWrap.LabelWithScore
 import com.ptit.signlanguage.ui.score.PracticeCameraActivity
 import com.ptit.signlanguage.utils.Constants
 
-class ListLabelAdapter(var listLabel: MutableList<Label>, val language : String) :
+class ListLabelAdapter(var listLabel: MutableList<LabelWithScore>, val language : String) :
     RecyclerView.Adapter<ListLabelAdapter.LabelViewHolder>() {
-    fun replace(listLabel: MutableList<Label>) {
+    fun replace(listLabel: MutableList<LabelWithScore>) {
         this.listLabel = listLabel
         notifyItemRangeChanged(0, itemCount)
     }
 
     inner class LabelViewHolder(var binding: ItemWordBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(label: Label) {
+        fun bind(label: LabelWithScore) {
 
             if(language == Constants.EN) {
                 binding.tvLabel.text = label.labelEn ?: Constants.EMPTY_STRING
@@ -30,11 +30,9 @@ class ListLabelAdapter(var listLabel: MutableList<Label>, val language : String)
 
             binding.btnLearn.setOnClickListener {
                 val intent = Intent(binding.root.context, PracticeCameraActivity::class.java)
-                if(language == Constants.EN) {
-                    intent.putExtra(Constants.KEY_LABEL, label.labelEn)
-                } else {
-                    intent.putExtra(Constants.KEY_LABEL, label.labelVn)
-                }
+
+                intent.putExtra(Constants.KEY_LABEL, label.labelVn)
+
                 binding.root.context.startActivity(intent)
             }
         }

@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.network.api
 
+import com.ptit.signlanguage.network.model.request.UpdateScoreRequest
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
 import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
@@ -39,6 +40,12 @@ interface ApiService {
 
     @PUT("/api/v1/user")
     suspend fun updateUser(@Body updateUserRequest: UpdateUserRequest): BaseResponse<User?>
+
+    @GET("/api/v1/topUserScoresOfLabel")
+    suspend fun getTopUserScoreOfLabel(@Query("labelId") labelId: Int): BaseResponse<User?>
+
+    @POST("/api/v1/postUserScore")
+    suspend fun postUserScore(@Body postUserScore: UpdateScoreRequest): BaseResponseNoBody
 
     @FormUrlEncoded
     @POST("/api/v1/scoreWithSubject")

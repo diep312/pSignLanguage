@@ -11,6 +11,7 @@ import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.base.MyApplication.Companion.context
 import com.ptit.signlanguage.network.api.ApiService
 import com.ptit.signlanguage.network.api.RetrofitBuilder
+import com.ptit.signlanguage.network.model.request.UpdateScoreRequest
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
 import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
@@ -205,6 +206,28 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
                 handleApiError(e.cause)
             }
             hideLoading()
+        }
+    }
+
+    fun updateUserScore(labelId: Int, score: Float){
+        viewModelScope.launch {
+            showLoading()
+            val result: BaseResponseNoBody
+            try{
+                withContext(Dispatchers.IO) {
+                    result = apiService.postUserScore(UpdateScoreRequest(labelId, score))
+                }
+            }
+            catch (e: Exception) {
+                handleApiError(e.cause)
+            }
+            hideLoading()
+        }
+    }
+    fun getTopScoreOfLabel(labelId: Int){
+        viewModelScope.launch {
+            showLoading()
+
         }
     }
 }
