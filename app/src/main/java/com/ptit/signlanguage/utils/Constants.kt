@@ -13,6 +13,8 @@ object Constants {
     const val KEY_TOKEN = "KEY_TOKEN"
     const val KEY_PREF_DATA_LOGIN = "KEY_PREF_DATA_LOGIN"
     const val KEY_LEVEL = "KEY_LEVEL"
+    const val LABEL_ID = "ID"
+    const val LABEL_SCORE = "SCORE"
 
     const val TOTAL_SIZE_PAGE = 4
     const val PAGE_0 = 0

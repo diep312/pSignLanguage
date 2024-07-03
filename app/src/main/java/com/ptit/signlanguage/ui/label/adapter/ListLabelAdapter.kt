@@ -30,9 +30,15 @@ class ListLabelAdapter(var listLabel: MutableList<LabelWithScore>, val language 
 
             binding.btnLearn.setOnClickListener {
                 val intent = Intent(binding.root.context, PracticeCameraActivity::class.java)
-
                 intent.putExtra(Constants.KEY_LABEL, label.labelVn)
-
+                intent.putExtra(Constants.LABEL_SCORE, label.latestScore)
+                intent.putExtra(Constants.LABEL_ID, label.id)
+                if(language == Constants.EN){
+                    intent.putExtra("fix", label.labelEn)
+                }
+                else{
+                    intent.putExtra("fix", label.labelVn)
+                }
                 binding.root.context.startActivity(intent)
             }
         }

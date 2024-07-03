@@ -135,13 +135,16 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                 if (slideOffset > 0) {
                     bindingBackground.visibility = View.VISIBLE
                     bindingBackground.alpha = slideOffset * 0.5f
+                    binding.previewCamera.visibility = View.GONE
                 } else {
                     bindingBackground.visibility = View.GONE
+                    binding.previewCamera.visibility = View.VISIBLE
                 }
             }
         })
 
         viewModel.isLoading.postValue(true)
+
         binding.apply {
             countDown.visibility = View.GONE
             backbtn.setOnClickListener{
@@ -369,7 +372,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     }
 
     private fun startCamera() {
-
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
             // Used to bind the lifecycle of cameras to the lifecycle owner

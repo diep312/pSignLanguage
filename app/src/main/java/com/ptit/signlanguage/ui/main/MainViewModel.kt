@@ -17,6 +17,7 @@ import com.ptit.signlanguage.network.model.response.*
 import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
 import com.ptit.signlanguage.network.model.response.check_video.CheckVideoRes
 import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWithSubject
+import com.ptit.signlanguage.network.model.response.score_with_subject.UserScore
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import com.ptit.signlanguage.ui.tensorflowdetect.Detection
 import com.ptit.signlanguage.ui.tensorflowdetect.Prediction
@@ -224,10 +225,22 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
             hideLoading()
         }
     }
+
+    val topUsers = MutableLiveData<BaseArrayResponse<UserScore>?>()
     fun getTopScoreOfLabel(labelId: Int){
         viewModelScope.launch {
             showLoading()
-
+            val result: BaseArrayResponse<UserScore>?
+            try{
+                withContext(Dispatchers.IO) {
+                    result = apiService.getTopUserScoreOfLabel(labelId)
+                }
+                topUsers.postValue(result)
+            }
+            catch (e: Exception) {
+                handleApiError(e.cause)
+            }
+            hideLoading()
         }
     }
 }

@@ -53,7 +53,7 @@ class LessonAdapter(var listLabel: MutableList<LabelWithScore>, val language : S
                 binding.tvPoints.text = "0 points"
             }
             else{
-                binding.tvPoints.text = "%.0f".format(label.latestScore)
+                binding.tvPoints.text = "%d points".format(label.latestScore.toInt())
             }
 
             binding.root.setOnClickListener {
