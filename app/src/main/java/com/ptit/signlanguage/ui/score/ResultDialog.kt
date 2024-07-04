@@ -26,11 +26,11 @@ class ResultDialog : DialogFragment() {
             }
             score in 50..80 -> {
                 scoreText.text = "%d/100".format(score)
-                sentence.text = "Good"
+                sentence.text = "Good, but needs improvement."
             }
             score in 81..100 -> {
                 scoreText.text = "%d/100".format(score)
-                sentence.text = "Perfect"
+                sentence.text = "Perfect!"
             }
         }
         return view

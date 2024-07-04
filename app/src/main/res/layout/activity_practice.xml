@@ -10,7 +10,6 @@
         android:background="@color/color_camera"
         >
 
-
         <TextView
             android:id="@+id/translate"
             android:layout_width="wrap_content"
@@ -53,6 +52,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/recording1"
+            app:layout_constraintVertical_bias="0.35"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +73,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/group_unclick"
+            app:layout_constraintVertical_bias="0.35"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/recordbtn"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,24 +84,31 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/black"
             android:layout_marginTop="40dp"
             app:cardCornerRadius="30dp"
+            android:elevation="-3dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toBottomOf="@id/translate">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:clipChildren="true">
 
                 <androidx.camera.view.PreviewView
                     android:id="@+id/previewCamera"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:background="@color/white"
-                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:scaleType="fillCenter"
-                    tools:backgroundTint="@color/black" />
+                    android:elevation="-3dp"
+                   />
+
 
                 <ImageView
                     android:layout_width="100dp"
@@ -110,7 +118,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/previewCamera" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:elevation="@dimen/dp2"/>
 
                 <TextView
                     android:id="@+id/countDown"
@@ -126,20 +135,37 @@
                     android:textSize="50sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/previewCamera" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:elevation="@dimen/dp2"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/vDimBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:visibility="gone"
+            android:alpha="0"
+            android:elevation="@dimen/dp10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        </View>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/outer_bottom"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/dp10"
             android:background="@drawable/bg_radius_30_top"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottom"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_radius_30_top"
                 android:backgroundTint="@color/primary"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -149,8 +175,8 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginTop="@dimen/dp5"
-                    android:src="@drawable/keyboard_arrow_up_24dp_fill0_wght400_grad0_opsz24"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/keyboard_arrow_up_24dp_fill0_wght400_grad0_opsz24"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -159,23 +185,116 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="@string/sample_video"
                     android:textColor="@color/white"
                     android:textSize="24sp"
-                    android:layout_marginTop="@dimen/dp10"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/peekBar" />
 
-                <androidx.media3.ui.PlayerView
-                    android:id="@+id/sampleVideo"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvSampleVideo"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="@dimen/dp10"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/transparent"
+                    android:outlineProvider="background"
+                    app:cardCornerRadius="@dimen/dp8"
+                    app:layout_constraintDimensionRatio="1.76:1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView">
+
+                    <androidx.media3.ui.PlayerView
+                        android:id="@+id/sampleVideo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@color/color_gray"
+                        android:backgroundTint="@color/color_gray"
+                        android:visibility="visible"
+                        app:default_artwork="@color/color_gray"
+                        app:use_artwork="true"
+                        app:use_controller="false" />
+                </androidx.cardview.widget.CardView>
+
+
+                <RelativeLayout
+                    android:id="@+id/time_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:paddingHorizontal="40dp"
+                    app:layout_constraintTop_toBottomOf="@id/cvSampleVideo">
+
+                    <SeekBar
+                        android:id="@+id/seek_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/color_primary" />
+
+                    <TextView
+                        android:id="@+id/tv_curtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/seek_bar"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="--:--"
+                        android:textColor="@color/color_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_totaltime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/seek_bar"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="--:--"
+                        android:textColor="@color/color_gray" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/controlLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:paddingHorizontal="60dp"
+                    app:layout_constraintTop_toBottomOf="@id/time_seekbar">
+
+                    <ImageView
+                        android:id="@+id/btn_replay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:scaleX='-1'
+                        android:src="@drawable/ic_replay_clicked"
+                        app:tint="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/btn_play"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_radius_30"
+                        android:backgroundTint="@color/colorYellow"
+                        android:padding="20dp"
+                        android:src="@drawable/ic_play" />
+
+                </RelativeLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp40"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView" />
+                    app:layout_constraintTop_toBottomOf="@id/controlLayout" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

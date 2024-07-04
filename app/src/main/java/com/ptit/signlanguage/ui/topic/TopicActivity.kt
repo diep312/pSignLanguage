@@ -45,6 +45,7 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
         } else {
             TopicAdapter(mutableListOf(), Constants.VI, this)
         }
+
         binding.rvTopic.adapter = adapter
         subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
         subject?.let {
