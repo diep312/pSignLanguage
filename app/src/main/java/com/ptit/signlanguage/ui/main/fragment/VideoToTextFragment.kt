@@ -21,7 +21,6 @@ import com.ptit.signlanguage.base.BaseFragment
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.FragmentVideoToTextBinding
 import com.ptit.signlanguage.network.model.response.User
-import com.ptit.signlanguage.ui.main.MainActivity
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.predict.RealtimeDetectActivity
 import com.ptit.signlanguage.utils.Constants
@@ -30,19 +29,15 @@ import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.io.File
 
-
 class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBinding>() {
-
-    var user : User? = null
+    var user: User? = null
     private lateinit var prefsHelper: PreferencesHelper
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
 
-    override fun getContentLayout(): Int {
-        return R.layout.fragment_video_to_text
-    }
+    override fun getContentLayout(): Int = R.layout.fragment_video_to_text
 
     override fun observerLiveData() {
         viewModel.apply {
@@ -69,20 +64,19 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 //                Log.d(TAG, it.toString())
 //            }
             // * Mobile detect */
-            viewModel.bestPredict.observe(this@VideoToTextFragment){
+            viewModel.bestPredict.observe(this@VideoToTextFragment) {
                 if (it != null) {
                     binding.layoutWrapAnswer.visibility = View.VISIBLE
                     binding.vvVideo.visibility = View.VISIBLE
                     binding.ivIllu.visibility = View.INVISIBLE
                     binding.tvTranslatedesc.visibility = View.INVISIBLE
                     binding.btnRecord.text = getString(R.string.str_again)
-                    if(user?.language.equals(EN)) {
+                    if (user?.language.equals(EN)) {
                         binding.tvLabel.text = getString(R.string.str_label, it)
                     } else {
                         binding.tvLabel.text = getString(R.string.str_label, it)
                     }
-                }
-                else{
+                } else {
                     binding.ivIllu.visibility = View.VISIBLE
                 }
             }
@@ -123,20 +117,18 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
 //        startActivity(intent)
     }
 
-    private fun checkCamera(): Boolean {
-        return requireActivity().packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
-    }
+    private fun checkCamera(): Boolean = requireActivity().packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
 
     private fun getCameraPermission() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.CAMERA
+                Manifest.permission.CAMERA,
             ) == PackageManager.PERMISSION_DENIED
         ) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.CAMERA),
-                CAMERA_PERMISSION_CODE
+                CAMERA_PERMISSION_CODE,
             )
         } else {
             recordVideo()
@@ -144,7 +136,11 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == VIDEO_RECORD_CODE) {
             when (resultCode) {
@@ -197,11 +193,14 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
         val cursor: Cursor? =
             requireActivity().contentResolver.query(uri!!, projection, null, null, null)
         return if (cursor != null) {
-            val columnIndex: Int = cursor
-                .getColumnIndexOrThrow(MediaStore.Video.Media.DATA)
+            val columnIndex: Int =
+                cursor
+                    .getColumnIndexOrThrow(MediaStore.Video.Media.DATA)
             cursor.moveToFirst()
             cursor.getString(columnIndex)
-        } else null
+        } else {
+            null
+        }
     }
 
     companion object {

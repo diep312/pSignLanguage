@@ -1,6 +1,5 @@
 package com.ptit.signlanguage.ui.tensorflowdetect
 
-import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
@@ -12,7 +11,6 @@ import android.os.Environment
 import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
-import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
 import java.io.File
 import java.io.FileOutputStream
@@ -29,7 +27,11 @@ object Detection {
     private var videoClassifier: VideoClassifier? = null
     private var numThread = 4
     private var frames: Array<Bitmap> = arrayOf<Bitmap>()
-    fun processImage(context: Context, bitmap: Bitmap): Prediction {
+
+    fun processImage(
+        context: Context,
+        bitmap: Bitmap,
+    ): Prediction {
         // Ensure that only one frame is processed at any given moment.
         var res = Prediction("", 0f)
         synchronized(lock) {
@@ -39,60 +41,74 @@ object Detection {
             // Check to ensure that we only run inference at a frequency required by the
             // model, within an acceptable error range (e.g. 10%). Discard the frames
             // that comes too early.
-            if (diff * MODEL_FPS >= 1000  * (1 - MODEL_FPS_ERROR_RANGE)) {
+            if (diff * MODEL_FPS >= 1000 * (1 - MODEL_FPS_ERROR_RANGE)) {
                 lastInferenceStartTime = currentTime
                 videoClassifier?.let { classifier ->
-                        // Convert the captured frame to Bitmap.
-                        val imageBitmap = Bitmap.createBitmap(
+                    // Convert the captured frame to Bitmap.
+                    val imageBitmap =
+                        Bitmap.createBitmap(
                             bitmap.width,
                             bitmap.height,
-                            Bitmap.Config.ARGB_8888
+                            Bitmap.Config.ARGB_8888,
                         )
 //                        CalculateUtils.yuvToRgb(image, imageBitmap)
 
-                        // Rotate the image to the correct orientation.
-                        val rotateMatrix = Matrix()
-                        val rotatedBitmap = Bitmap.createBitmap(
-                            imageBitmap, 0, 0, bitmap.width, bitmap.height,
-                            rotateMatrix, false
+                    // Rotate the image to the correct orientation.
+                    val rotateMatrix = Matrix()
+                    val rotatedBitmap =
+                        Bitmap.createBitmap(
+                            imageBitmap,
+                            0,
+                            0,
+                            bitmap.width,
+                            bitmap.height,
+                            rotateMatrix,
+                            false,
                         )
 //                        saveBitmap(context, bitmap)
-                        // Run inference using the TFLite model.
-                        val startTimeForReference = SystemClock.uptimeMillis()
-                        val results = classifier.classify(bitmap)
-                        val endTimeForReference =
-                            SystemClock.uptimeMillis() - startTimeForReference
-                        val inputFps = 1000f / diff
+                    // Run inference using the TFLite model.
+                    val startTimeForReference = SystemClock.uptimeMillis()
+                    val results = classifier.classify(bitmap)
+                    val endTimeForReference =
+                        SystemClock.uptimeMillis() - startTimeForReference
+                    val inputFps = 1000f / diff
 //                        showResults(results, endTimeForReference, inputFps)
 
-                        if (inputFps < MODEL_FPS * (1 - MODEL_FPS_ERROR_RANGE)) {
-                            Log.w(
-                                TAG, "Current input FPS ($inputFps) is " +
-                                        "significantly lower than the TFLite model's " +
-                                        "expected FPS ($MODEL_FPS). It's likely because " +
-                                        "model inference takes too long on this device."
-                            )
-                        }
-//                        res =  results[0].label + results[0].score
-                        res = Prediction(results[0].label, results[0].score)
+                    if (inputFps < MODEL_FPS * (1 - MODEL_FPS_ERROR_RANGE)) {
+                        Log.w(
+                            TAG,
+                            "Current input FPS ($inputFps) is " +
+                                "significantly lower than the TFLite model's " +
+                                "expected FPS ($MODEL_FPS). It's likely because " +
+                                "model inference takes too long on this device.",
+                        )
                     }
+//                        res =  results[0].label + results[0].score
+                    res = Prediction(results[0].label, results[0].score)
                 }
             }
+        }
         return res
     }
-    private fun contentValues() : ContentValues {
+
+    private fun contentValues(): ContentValues {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/png")
-        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000);
-        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
         return values
     }
+
     fun reset() {
         synchronized(lock) {
             videoClassifier?.reset()
         }
     }
-    fun saveBitmap(context: Context, handBitmap: Bitmap) {
+
+    fun saveBitmap(
+        context: Context,
+        handBitmap: Bitmap,
+    ) {
         if (android.os.Build.VERSION.SDK_INT >= 29) {
             val values = contentValues()
             values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/" + "SignLanguage")
@@ -122,7 +138,11 @@ object Detection {
             }
         }
     }
-    private fun saveImageToStream(bitmap: Bitmap, outputStream: OutputStream?) {
+
+    private fun saveImageToStream(
+        bitmap: Bitmap,
+        outputStream: OutputStream?,
+    ) {
         if (outputStream != null) {
             try {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
@@ -132,6 +152,7 @@ object Detection {
             }
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.P)
     fun getListFrames(mmr: MediaMetadataRetriever): Array<Bitmap> {
         var frames = emptyArray<Bitmap>()
@@ -141,27 +162,26 @@ object Detection {
         Log.d("StreamVideoClassifier", "Video length: $duration ms")
 
         val frameStep: Int
-        if (numberFrames!=null) {
-            frameStep = (numberFrames.toDouble()/ NUM_FRAMES).roundToInt()
-            for(time in 1 .. 2){
-                for (i in 0 until NUM_FRAMES){
-                    var frame = i*frameStep
-                    if(frame >= numberFrames.toInt()){
-                        frame = numberFrames.toInt()-1
-                    }
-                    val bitmap = mmr.getFrameAtIndex(frame)
-                    if (bitmap!=null) {
-                        frames += bitmap
-                    } else{
-                        Log.d("No bitmap", "Found no bitmap at frame: $frame")
-                    }
+
+        if (numberFrames != null) {
+            frameStep = (numberFrames.toDouble() / NUM_FRAMES).roundToInt()
+            for (i in 0 until NUM_FRAMES) {
+                var frame = i * frameStep
+                if (frame >= numberFrames.toInt()) {
+                    frame = numberFrames.toInt() - 1
+                }
+                val bitmap = mmr.getFrameAtIndex(frame)
+                if (bitmap != null) {
+                    frames += bitmap
+                } else {
+                    Log.d("No bitmap", "Found no bitmap at frame: $frame")
                 }
             }
         }
         Log.d("StreamVideoClassifier", "Found ${frames.size} frames")
-        this.frames = frames
         return frames
     }
+
     fun createClassifier(context: Context) {
         synchronized(lock) {
             if (videoClassifier != null) {
@@ -169,18 +189,20 @@ object Detection {
                 videoClassifier = null
             }
             val options =
-                VideoClassifier.VideoClassifierOptions.builder()
+                VideoClassifier.VideoClassifierOptions
+                    .builder()
                     .setMaxResult(MAX_RESULT)
                     .setNumThreads(numThread)
                     .build()
             val modelFile = "model_3.tflite"
 
-            videoClassifier = VideoClassifier.createFromFileAndLabelsAndOptions(
-                context,
-                modelFile,
-                "labels.txt",
-                options
-            )
+            videoClassifier =
+                VideoClassifier.createFromFileAndLabelsAndOptions(
+                    context,
+                    modelFile,
+                    "labels.txt",
+                    options,
+                )
 
             Log.d(TAG, "Classifier created.")
         }
