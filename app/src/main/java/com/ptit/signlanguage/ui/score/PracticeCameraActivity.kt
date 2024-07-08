@@ -42,6 +42,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityPracticeBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.predict.ConfirmationDialogFragment
@@ -66,6 +67,9 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     private var videoPath: String? = null
     private lateinit var cameraExecutor: ExecutorService
     private var mLastAnalysisResultTime: Long = 0
+    private val mPref by lazy {
+        PreferencesHelper(this)
+    }
     private var currentSide_Camera = PracticeCameraActivity.FRONT_CAMERA
     private var permissionGranted: Boolean = false
     private var recording: Recording? = null
@@ -372,6 +376,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     }
 
     private fun startCamera() {
+        mPref.save(RealtimeDetectActivity.CAMERA_SIDE, FRONT_CAMERA)
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
             // Used to bind the lifecycle of cameras to the lifecycle owner

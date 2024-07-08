@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
@@ -27,6 +28,7 @@ import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EN
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
+import kotlinx.coroutines.launch
 import java.io.File
 
 class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBinding>() {
@@ -171,7 +173,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     Log.d(TAG, "$videoPath is the path that you need...")
                     binding.vvVideo.setVideoPath(videoPath)
                     binding.vvVideo.start()
-
+                    prefsHelper.save(RealtimeDetectActivity.CAMERA_SIDE, RealtimeDetectActivity.BACK_CAMERA)
                     val file = File(videoPath)
                     if (file != null) {
                         binding.layoutWrapAnswer.visibility = View.GONE

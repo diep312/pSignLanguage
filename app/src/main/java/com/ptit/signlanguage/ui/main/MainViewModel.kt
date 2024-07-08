@@ -61,9 +61,11 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
 //        }
         // ======Handle on Mobile ========
         viewModelScope.launch {
-            showLoading()
-            predictLabel(file,context)
-            hideLoading()
+                showLoading()
+                withContext(Dispatchers.Default){
+                    predictLabel(file,context)
+                }
+                hideLoading()
         }
     }
     @RequiresApi(Build.VERSION_CODES.P)
@@ -80,7 +82,9 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
             delay(80)
             Log.d("StreamVideoClassifier", s.label + " " + s.score)
         }
-        bestPredict.postValue(s.toString())
+        withContext(Dispatchers.Main){
+            bestPredict.postValue(s.toString())
+        }
         Detection.reset()
         return s
     }

@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.media3.common.util.UnstableApi
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityPredictionBinding
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import kotlinx.coroutines.CoroutineScope
@@ -43,11 +44,12 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
 
     private lateinit var cameraExecutor: ExecutorService
     private var mLastAnalysisResultTime: Long = 0
-    private var currentSide_Camera = BACK_CAMERA
+    private var currentSide_Camera: Int = BACK_CAMERA
     private var permissionGranted: Boolean = false
     private var recording: Recording? = null
     private var recordState: Boolean = false
     private var modeRecording: Boolean = false
+    private lateinit var mPref: PreferencesHelper
     private lateinit var currentVideoUri: Uri
 
     private val selector by lazy {
@@ -72,6 +74,11 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
 
     override fun initView() {
         setColorForStatusBar(R.color.color_status_camera)
+        mPref = PreferencesHelper(applicationContext)
+        currentSide_Camera = mPref.getInt(CAMERA_SIDE)
+        if(currentSide_Camera == -1){
+            currentSide_Camera = FRONT_CAMERA
+        }
         binding.apply {
             countDown.visibility = View.GONE
             backbtn.setOnClickListener{
@@ -87,6 +94,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
             }
             flip.setOnClickListener{
                 currentSide_Camera = currentSide_Camera xor 1
+                mPref.save(CAMERA_SIDE, currentSide_Camera)
                 startCamera()
             }
 
@@ -238,9 +246,10 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
         private const val CAMERA_PERMISSION_CODE: Int = 100
         const val VIDEO_RECORD_CODE: Int = 101
         private const val REQUEST_TAKE_GALLERY_VIDEO: Int = 102
-        private const val BACK_CAMERA = 1
-        private const val FRONT_CAMERA = 0
+        const val BACK_CAMERA = 1
+        const val FRONT_CAMERA = 0
         private const val imageSize = 96
+        const val CAMERA_SIDE = "camera_side"
     }
 
     private fun returnURI(uri: Uri){

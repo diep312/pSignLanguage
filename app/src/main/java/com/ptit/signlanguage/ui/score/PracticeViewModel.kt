@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -57,13 +58,13 @@ class PracticeViewModel(
         prediction: Prediction,
         labelChosen: String,
     ) {
-        when (prediction.label) {
-            labelChosen.lowercase(Locale.ROOT) -> {
-                _score.value = (prediction.score * 100).toInt()
-            }
-            else -> {
-                _score.value = 0
-            }
+        Log.d("TAG", prediction.label)
+        Log.d("TAG", labelChosen)
+        if(prediction.label.lowercase(Locale.ROOT).trim() == labelChosen.lowercase(Locale.ROOT).trim()) {
+            _score.value = (prediction.score * 100).toInt()
+        }
+        else{
+            _score.value = 0
         }
     }
 

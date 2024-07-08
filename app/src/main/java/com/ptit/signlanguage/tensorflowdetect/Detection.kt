@@ -12,6 +12,8 @@ import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.ptit.signlanguage.data.prefs.PreferencesHelper
+import com.ptit.signlanguage.ui.predict.RealtimeDetectActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -26,7 +28,6 @@ object Detection {
     private var lastInferenceStartTime: Long = 0
     private var videoClassifier: VideoClassifier? = null
     private var numThread = 4
-    private var frames: Array<Bitmap> = arrayOf<Bitmap>()
 
     fun processImage(
         context: Context,
@@ -34,6 +35,7 @@ object Detection {
     ): Prediction {
         // Ensure that only one frame is processed at any given moment.
         var res = Prediction("", 0f)
+        val cameraSide = PreferencesHelper(context).getInt(RealtimeDetectActivity.CAMERA_SIDE)
         synchronized(lock) {
             val currentTime = SystemClock.uptimeMillis()
             val diff = currentTime - lastInferenceStartTime
@@ -54,21 +56,28 @@ object Detection {
 //                        CalculateUtils.yuvToRgb(image, imageBitmap)
 
                     // Rotate the image to the correct orientation.
-                    val rotateMatrix = Matrix()
+                    val matrix = Matrix().apply { postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f) }
                     val rotatedBitmap =
                         Bitmap.createBitmap(
-                            imageBitmap,
+                            bitmap,
                             0,
                             0,
                             bitmap.width,
                             bitmap.height,
-                            rotateMatrix,
+                            matrix,
                             false,
                         )
-//                        saveBitmap(context, bitmap)
+//                        saveBitmap(context, rotatedBitmap)
                     // Run inference using the TFLite model.
                     val startTimeForReference = SystemClock.uptimeMillis()
-                    val results = classifier.classify(bitmap)
+                    val results = when(cameraSide){
+                        RealtimeDetectActivity.BACK_CAMERA -> {
+                            classifier.classify(bitmap)
+                        }
+                        else -> {
+                            classifier.classify(rotatedBitmap)
+                        }
+                    }
                     val endTimeForReference =
                         SystemClock.uptimeMillis() - startTimeForReference
                     val inputFps = 1000f / diff
