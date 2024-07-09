@@ -15,11 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.ptit.signlanguage.R
+import com.ptit.signlanguage.base.BaseDialogFragment
 import com.ptit.signlanguage.ui.predict.adapter.SlideAdapter
 import com.ptit.signlanguage.ui.predict.adapter.SlideItem
 
 
-class ManualDialogFragment : DialogFragment() {
+class ManualDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,14 +73,6 @@ class ManualDialogFragment : DialogFragment() {
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)

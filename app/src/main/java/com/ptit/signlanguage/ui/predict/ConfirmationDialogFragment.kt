@@ -10,8 +10,9 @@ import android.widget.ImageView
 import android.widget.VideoView
 import androidx.fragment.app.DialogFragment
 import com.ptit.signlanguage.R
+import com.ptit.signlanguage.base.BaseDialogFragment
 
-class ConfirmationDialogFragment : DialogFragment() {
+class ConfirmationDialogFragment : BaseDialogFragment() {
 
     interface VideoPreviewListener {
         fun onKeepVideo()
@@ -21,14 +22,6 @@ class ConfirmationDialogFragment : DialogFragment() {
     private var listener: VideoPreviewListener? = null
     private lateinit var videoUri: Uri
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.ptit.signlanguage.R
+import com.ptit.signlanguage.base.BaseDialogFragment
 
-class ResultDialog : DialogFragment() {
+class ResultDialog : BaseDialogFragment() {
     private var score: Int = 0
 
     override fun onCreateView(
@@ -40,12 +41,4 @@ class ResultDialog : DialogFragment() {
         this.score = score
     }
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-        )
-        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
-    }
 }
