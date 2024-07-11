@@ -20,23 +20,23 @@ object RetrofitBuilder {
     private const val TIME_OUT: Long = 10
     private var apiService: ApiService? = null
     private var retrofitAiSide: Retrofit? = null
-
-
-    val apiAiSide: ApiPredictService? by lazy {
-        initRetrofitAiSide()
-        getRetrofitAiSide()!!.create(ApiPredictService::class.java)
-    }
+//
+//
+//    val apiAiSide: ApiPredictService? by lazy {
+//        initRetrofitAiSide()
+//        getRetrofitAiSide()!!.create(ApiPredictService::class.java)
+//    }
 
     val apiServiceLogin: ApiServiceLogin by lazy {
         getRetrofitLogin()!!.create(ApiServiceLogin::class.java)
     }
 
-    private fun getRetrofitAiSide(): Retrofit?{
-        if(retrofitAiSide == null){
-            initRetrofitAiSide()
-        }
-        return retrofitAiSide
-    }
+//    private fun getRetrofitAiSide(): Retrofit?{
+//        if(retrofitAiSide == null){
+//            initRetrofitAiSide()
+//        }
+//        return retrofitAiSide
+//    }
 
     fun getApiService(): ApiService? {
         if (apiService == null) {
@@ -119,29 +119,29 @@ object RetrofitBuilder {
             .build() //Doesn't require the adapter
     }
 
-    private fun initRetrofitAiSide() {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.apply {
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
-        }
-
-        val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor(interceptor)
-        httpClient.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-        httpClient.readTimeout(TIME_OUT, TimeUnit.SECONDS)
-
-        httpClient.addInterceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("Content-Type", "multipart/form-data")
-                .addHeader("APIKEY", Constants.API_KEY)
-                .build()
-            chain.proceed(request)
-        }
-        retrofitAiSide = Retrofit.Builder()
-            .baseUrl(Constants.API_AI_URL)
-            .client(httpClient.build())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build() //Doesn't require the adapter
-
-    }
+//    private fun initRetrofitAiSide() {
+//        val interceptor = HttpLoggingInterceptor()
+//        interceptor.apply {
+//            interceptor.level = HttpLoggingInterceptor.Level.BODY
+//        }
+//
+//        val httpClient = OkHttpClient.Builder()
+//        httpClient.addInterceptor(interceptor)
+//        httpClient.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+//        httpClient.readTimeout(TIME_OUT, TimeUnit.SECONDS)
+//
+//        httpClient.addInterceptor { chain ->
+//            val request = chain.request().newBuilder()
+//                .addHeader("Content-Type", "multipart/form-data")
+//                .addHeader("APIKEY", Constants.API_KEY)
+//                .build()
+//            chain.proceed(request)
+//        }
+//        retrofitAiSide = Retrofit.Builder()
+//            .baseUrl(Constants.API_AI_URL)
+//            .client(httpClient.build())
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build() //Doesn't require the adapter
+//
+//    }
 }

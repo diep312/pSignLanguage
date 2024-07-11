@@ -17,12 +17,13 @@ import com.ptit.signlanguage.databinding.AcivityVideoViewBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
+import kotlinx.coroutines.delay
 import java.util.concurrent.TimeUnit
 
 
 class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>() {
     private var label: String? = null
-    private lateinit var player: ExoPlayer
+    private var player: ExoPlayer? = null
     private var playerState = MutableLiveData(false)
     private var replayState = true
     override fun initViewModel() {
@@ -53,8 +54,11 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         viewModel.apply {
             videoRes.observe(this@VideoViewActivity) {
                 if (!it?.body?.video_url.isNullOrEmpty()) {
-                    it?.body?.video_url?.let { it1 -> initializePlayer(it1) }
+                    it?.body?.video_url?.let { it1 -> initializePlayer(it1)}
                     Log.d(TAG, it!!.body!!.video_url)
+                }
+                else{
+                    Toast.makeText(binding.root.context, R.string.video_not_available, Toast.LENGTH_SHORT).show()
                 }
             }
             errorMessage.observe(this@VideoViewActivity) {
@@ -65,20 +69,18 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     }
     private fun btnPlay(){
         binding.btnPlay.setOnClickListener(){
-            if(::player.isInitialized){
-                if(player.isPlaying){
-                    player.pause()
+            if(player != null){
+                if(player!!.isPlaying){
+                    player!!.pause()
                     playerState.postValue(false)
                 }
                 else{
-                    player.play()
+                    player!!.play()
                     playerState.postValue(true)
                 }
             }
             else{
                 Toast.makeText(this, "Video not found", Toast.LENGTH_SHORT).show()
-                // Avoiding crashing app since the player hasn't been initialized.
-                player = ExoPlayer.Builder(this).build()
                 onBackPressed()
             }
         }
@@ -99,8 +101,9 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             binding.vvGuide.player = exoPlayer
             val mediaItem: MediaItem = MediaItem.fromUri(uri)
             exoPlayer.setMediaItem(mediaItem)
+            exoPlayer.volume = 0f
         }
-        player.prepare()
+        player!!.prepare()
         btnPlay()
         playerState.observe(this@VideoViewActivity){
             if(it){
@@ -110,21 +113,21 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             }
         }
         playerState.postValue(false)
-        player.addListener(object : Player.Listener{
+        player!!.addListener(object : Player.Listener{
             override fun onPlaybackStateChanged(playbackState: Int) {
                 super.onPlaybackStateChanged(playbackState)
                 if(playbackState == Player.STATE_READY){
                     updateRunTime()
-                    binding.tvTotaltime.text = convertToMMSS(player.duration)
-                    seekBar.max = (player.duration / 1000).toInt()
-                    player.play().also {
+                    binding.tvTotaltime.text = convertToMMSS(player!!.duration)
+                    seekBar.max = (player!!.duration / 1000).toInt()
+                    player!!.play().also {
                         playerState.postValue(true)
                     }
                 }
                 if(playbackState == Player.STATE_ENDED){
                     if(replayState){
-                        player.seekTo(0)
-                        player.play()
+                        player!!.seekTo(0)
+                        player!!.play()
                     }else{
                         playerState.postValue(false)
                     }
@@ -134,7 +137,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if(fromUser) {
-                    player.seekTo((player.duration.toFloat() * (progress.toFloat() / 100)).toLong())
+                    player!!.seekTo((player!!.duration.toFloat() * (progress.toFloat() / 100)).toLong())
                 }
             }
 
@@ -156,14 +159,14 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     fun updateRunTime(){
         this@VideoViewActivity.runOnUiThread(object : Runnable {
             override fun run() {
-                binding.seekBar.progress = (player.currentPosition / 1000).toInt()
-                binding.tvCurtime.text = convertToMMSS(player.currentPosition)
+                binding.seekBar.progress = ((player?.currentPosition ?: 0) / 1000).toInt()
+                binding.tvCurtime.text = player?.let { convertToMMSS(it.currentPosition) }
                 Handler().postDelayed(this, 100)
             }
         })
     }
     override fun onDestroy() {
         super.onDestroy()
-        player.release()
+        player?.release()
     }
 }

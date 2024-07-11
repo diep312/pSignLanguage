@@ -101,7 +101,7 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_light"
                 android:text="--:--"
-                android:textColor="@color/color_gray" />
+                android:textColor="#6f747c" />
 
             <TextView
                 android:id="@+id/tv_totaltime"
@@ -111,7 +111,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_light"
-                android:textColor="@color/color_gray"
+                android:textColor="#6f747c"
                 android:text="--:--"/>
         </RelativeLayout>
 

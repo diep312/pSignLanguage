@@ -74,4 +74,12 @@
     <string name="str_again">Dịch một từ khác</string>
     <string name="str_novid">Không tìm thấy video. Hãy thử quay một cái video!</string>
     <string name="sample_video">Hướng dẫn</string>
+    <string name="translate">Dịch</string>
+    <string name="str_slidetitle_1">Giữ khoảng cách</string>
+    <string name="str_slidedesc_1">Để cho kết quả chính xác nhất, đảm bảo phần thân năm trong khung hình</string>
+    <string name="str_slidetitle_2">Sử dụng biểu tưởng chỉ dẫn</string>
+        <string name="str_slidedesc_2">Hướng đầu của bạn theo chỉ dẫn để có khoảng cách phù hợp.</string>
+    <string name="str_slidetitle_3">Bắt đầu quay!</string>
+    <string name="str_slidedesc_3">Khi khoảng cách phù hợp, ấn nút quay và quay video.</string>
+    <string name="video_not_available">Video không có sẵn</string>
 </resources>

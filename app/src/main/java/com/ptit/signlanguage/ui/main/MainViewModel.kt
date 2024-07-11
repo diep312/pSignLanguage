@@ -240,6 +240,7 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
                     result = apiService.getTopUserScoreOfLabel(labelId)
                 }
                 topUsers.postValue(result)
+                Log.d("TopScore", result!!.body?.get(0)!!.score.toString())
             }
             catch (e: Exception) {
                 handleApiError(e.cause)

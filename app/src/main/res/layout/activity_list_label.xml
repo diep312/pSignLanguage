@@ -66,8 +66,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_score"
-                android:layout_width="102dp"
-                android:layout_height="38dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@color/color_bg"
                 android:elevation="0dp"
@@ -76,7 +76,8 @@
                 android:paddingHorizontal="@dimen/dp12"
                 android:paddingVertical="@dimen/dp8"
                 android:text="@string/str_view_points"
-                android:textColor="@color/color_gray"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="#2b2d30"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

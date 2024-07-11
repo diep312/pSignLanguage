@@ -67,7 +67,6 @@ object Detection {
                             matrix,
                             false,
                         )
-//                        saveBitmap(context, rotatedBitmap)
                     // Run inference using the TFLite model.
                     val startTimeForReference = SystemClock.uptimeMillis()
                     val results = when(cameraSide){
@@ -78,8 +77,6 @@ object Detection {
                             classifier.classify(rotatedBitmap)
                         }
                     }
-                    val endTimeForReference =
-                        SystemClock.uptimeMillis() - startTimeForReference
                     val inputFps = 1000f / diff
 //                        showResults(results, endTimeForReference, inputFps)
 

@@ -113,6 +113,7 @@
             android:src="@drawable/flip_camera_android_fill0_wght400_grad0_opsz24"
             app:layout_constraintBottom_toBottomOf="@+id/recordbtn"
             app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/btn_effect_clicked"
             app:layout_constraintStart_toEndOf="@+id/recordbtn"
             app:layout_constraintTop_toTopOf="@+id/recordbtn" />
 

@@ -29,20 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cardView"
+        android:weightSum="3"
         android:padding="@dimen/dp20">
-        <ImageView
-            android:id="@+id/btn_check"
-            android:layout_width="@dimen/dp70"
-            android:layout_height="@dimen/dp70"
-            android:background="@drawable/bg_radius_30"
-            android:backgroundTint="@color/primary"
-            android:src="@drawable/ic_check"
-            app:tint="@color/white"
-            android:padding="@dimen/dp10"/>
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="3"/>
         <ImageView
             android:id="@+id/btn_discard"
             android:layout_width="@dimen/dp70"
@@ -52,5 +40,17 @@
             android:src="@drawable/ic_close"
             app:tint="@color/white"
             android:padding="@dimen/dp10"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+        <ImageView
+            android:id="@+id/btn_check"
+            android:layout_width="@dimen/dp70"
+            android:layout_height="@dimen/dp70"
+            android:background="@drawable/bg_radius_30"
+            android:backgroundTint="@color/primary"
+            android:src="@drawable/ic_check"
+            app:tint="@color/white"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

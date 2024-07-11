@@ -81,4 +81,5 @@
     <string name="str_slidetitle_3">Start recording!</string>
     <string name="str_slidedesc_3">Once you’re in position press the record button and record a video.</string>
     <string name="sample_video">Sample Video</string>
+    <string name="video_not_available">Video not available</string>
 </resources>

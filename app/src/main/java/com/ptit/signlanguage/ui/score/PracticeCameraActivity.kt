@@ -132,6 +132,12 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                 if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                     bindingBackground.visibility = View.GONE
                 }
+                if (newState == BottomSheetBehavior.STATE_EXPANDED){
+                    binding.peekBar.setImageResource(R.drawable.keyboard_arrow_down_24dp_e8eaed_fill0_wght400_grad0_opsz24)
+                }
+                if(newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    binding.peekBar.setImageResource(R.drawable.keyboard_arrow_up_24dp_fill0_wght400_grad0_opsz24)
+                }
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -294,6 +300,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
             binding.sampleVideo.elevation = 20f
             val mediaItem: MediaItem = MediaItem.fromUri(uri)
             exoPlayer.setMediaItem(mediaItem)
+            exoPlayer.volume = 0f
         }
         player.prepare()
         player.play()
@@ -478,5 +485,9 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         Toast.makeText(this, "Video discarded", Toast.LENGTH_SHORT).show()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        player.release()
+    }
 
 }
