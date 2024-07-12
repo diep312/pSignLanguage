@@ -37,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chủ đề 1"
+                android:fontFamily="@font/lexend_bold"
                 android:textColor="@color/color_primary"
                 android:textSize="34sp"
                 android:textStyle="bold"
@@ -73,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/lexend_medium"
                     android:text="Practice your sign language!"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp20" />

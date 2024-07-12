@@ -1,6 +1,7 @@
 package com.ptit.signlanguage.ui.score
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
@@ -118,6 +119,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                 super.onPlaybackStateChanged(playbackState)
                 if(playbackState == Player.STATE_READY){
                     updateRunTime()
+                    binding.animVideoLoader.visibility = View.GONE
                     binding.tvTotaltime.text = convertToMMSS(player!!.duration)
                     seekBar.max = (player!!.duration / 1000).toInt()
                     player!!.play().also {

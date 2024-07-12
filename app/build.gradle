@@ -123,4 +123,8 @@ dependencies {
     // JavaCV
 //    implementation("org.bytedeco:javacv-platform:1.5.10")
 
+
+    //Lottie Animation
+    implementation 'com.airbnb.android:lottie:6.4.1'
+
 }
