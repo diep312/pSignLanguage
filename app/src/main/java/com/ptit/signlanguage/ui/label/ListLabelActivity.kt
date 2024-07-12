@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.base.LinearItemDecoration
+import com.ptit.signlanguage.data.prefs.IPreferencesHelper
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityListLabelBinding
 import com.ptit.signlanguage.network.model.response.Label
@@ -21,7 +22,7 @@ import com.ptit.signlanguage.view_model.ViewModelFactory
 
 class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>() {
     lateinit var adapter: ListLabelAdapter
-    private lateinit var prefsHelper: PreferencesHelper
+    private lateinit var prefsHelper: IPreferencesHelper
     var user: User? = null
     var subject: Subject? = null
     var level: Level? = null
@@ -74,12 +75,4 @@ class ListLabelActivity : BaseActivity<MainViewModel, ActivityListLabelBinding>(
 
     }
 
-    private fun fakeData(): MutableList<Label> {
-        val listLabel = mutableListOf<Label>()
-        for (i in 1..16) {
-            var label = Label()
-            listLabel.add(label)
-        }
-        return listLabel
-    }
 }

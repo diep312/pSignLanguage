@@ -9,5 +9,7 @@ import retrofit2.http.Part
 interface ApiPredictService {
     @Multipart
     @POST("/signlanguage/predict")
-    suspend fun videoToText(@Part video: MultipartBody.Part): VideoToTextResponse?
+    suspend fun videoToText(
+        @Part video: MultipartBody.Part,
+    ): VideoToTextResponse?
 }

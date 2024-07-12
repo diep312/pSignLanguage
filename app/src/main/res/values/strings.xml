@@ -73,5 +73,13 @@
     <string name="str_go_to_folder">Pick a file from my gallery</string>
     <string name="str_again">Translate another word</string>
     <string name="str_novid">No video found. Try recording one!</string>
-
+    <string name="translate">Translate</string>
+    <string name="str_slidetitle_1">Keep a distance</string>
+    <string name="str_slidedesc_1">For best accuracy prediction, it is recommended that your whole body be visible inside the camera frame.</string>
+    <string name="str_slidetitle_2">Use the indication</string>
+    <string name="str_slidedesc_2">Guide your head to the indication to measure the appropriate distance.</string>
+    <string name="str_slidetitle_3">Start recording!</string>
+    <string name="str_slidedesc_3">Once you’re in position press the record button and record a video.</string>
+    <string name="sample_video">Video demonstration</string>
+    <string name="video_not_available">Video not available</string>
 </resources>

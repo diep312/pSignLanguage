@@ -7,15 +7,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemLessionBinding
-import com.ptit.signlanguage.network.model.response.subjectWrap.Label
-import com.ptit.signlanguage.ui.score.PracticeActivity
+import com.ptit.signlanguage.network.model.response.subjectWrap.LabelWithScore
+import com.ptit.signlanguage.ui.score.PracticeCameraActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
-class LessonAdapter(var listLabel: MutableList<Label>, val language : String) :
+class LessonAdapter(var listLabel: MutableList<LabelWithScore>, val language : String) :
     RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
 
-    fun replace(listLesson: MutableList<Label>) {
+    fun replace(listLesson: MutableList<LabelWithScore>) {
         this.listLabel = listLesson
         notifyDataSetChanged()
     }
@@ -41,16 +41,23 @@ class LessonAdapter(var listLabel: MutableList<Label>, val language : String) :
 
     inner class LessonViewHolder(var binding: ItemLessionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(label: Label?) {
+        fun bind(label: LabelWithScore?) {
             if(language == Constants.EN) {
                 binding.tvLesson.text = label?.labelEn ?: EMPTY_STRING
             } else {
                 binding.tvLesson.text = label?.labelVn ?: EMPTY_STRING
             }
 
+            if(label?.latestScore == null){
+                binding.tvPoints.text = "0 points"
+            }
+            else{
+                binding.tvPoints.text = "%d points".format(label.latestScore)
+            }
+
             binding.root.setOnClickListener {
 //                val intent = Intent(binding.root.context, ListWordActivity::class.java)
-                val intent = Intent(binding.root.context, PracticeActivity::class.java)
+                val intent = Intent(binding.root.context, PracticeCameraActivity::class.java)
                 if(language == Constants.EN) {
                     intent.putExtra(Constants.KEY_LABEL, label?.labelEn)
                 } else {

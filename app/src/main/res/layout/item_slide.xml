@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+    <ImageView
+        android:id="@+id/img_slide"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp170"
+        android:adjustViewBounds="true"/>
+
+    <TextView
+        android:id="@+id/tv_slidetitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lexend_bold"
+        android:textAlignment="center"
+        android:text="Keep a distance!"
+        android:textSize="25sp"
+        android:paddingVertical="@dimen/sp28"
+        android:textColor="@color/black" />
+    <TextView
+        android:id="@+id/tv_slidedesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/str_slidedesc_1"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:paddingHorizontal="15sp"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

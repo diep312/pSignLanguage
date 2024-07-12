@@ -30,7 +30,7 @@
             android:layout_height="32dp"
             android:layout_marginStart="@dimen/dp8"
             android:ellipsize="end"
-            android:fontFamily="@font/montserrat_bold"
+            android:fontFamily="@font/lexend_bold"
             android:maxLines="3"
             android:text="Label"
             android:textColor="@color/black"

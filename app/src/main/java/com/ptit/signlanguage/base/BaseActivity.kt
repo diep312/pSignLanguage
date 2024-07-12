@@ -17,7 +17,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
 abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : AppCompatActivity() {
-
     protected lateinit var viewModel: VM
     protected lateinit var binding: BINDING
     protected lateinit var TAG: String
@@ -49,6 +48,7 @@ abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : App
     abstract fun initViewModel()
 
     abstract fun getContentLayout(): Int
+
     private fun observerDefaultLiveData() {
         viewModel.isLoading.observe(this) {
             if (it) {
@@ -60,7 +60,9 @@ abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : App
     }
 
     abstract fun initView()
+
     abstract fun initListener()
+
     abstract fun observerLiveData()
 
     open fun isDoubleClick(): Boolean {
@@ -101,28 +103,24 @@ abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : App
         window.statusBarColor = 0x00000000
         var flags: Int = window.decorView.systemUiVisibility
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            flags = if (isLight) {
-                View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            } else {
-                0
-            }
+            flags =
+                if (isLight) {
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                } else {
+                    0
+                }
         }
         window.decorView.systemUiVisibility = flags or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 
-    fun getTextHtml(stringResID : Int) : Spanned {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+    fun getTextHtml(stringResID: Int): Spanned =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(getString(stringResID), Html.FROM_HTML_MODE_COMPACT)
         } else {
             Html.fromHtml(getString(stringResID))
         }
-    }
 
-    fun pxToDp(px: Int): Int {
-        return (px / Resources.getSystem().displayMetrics.density).toInt()
-    }
+    fun pxToDp(px: Int): Int = (px / Resources.getSystem().displayMetrics.density).toInt()
 
-    fun dpToPx(dp: Int): Int {
-        return (dp * Resources.getSystem().displayMetrics.density).toInt()
-    }
+    fun dpToPx(dp: Int): Int = (dp * Resources.getSystem().displayMetrics.density).toInt()
 }

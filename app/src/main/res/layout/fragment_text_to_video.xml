@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/lexend_bold"
                 android:text="@string/str_search"
                 android:textColor="@color/primary"
                 android:textSize="34sp"
@@ -42,6 +42,7 @@
             android:background="@drawable/bg_edit_search"
             android:drawableEnd="@drawable/ic_search"
             android:hint="@string/str_search"
+            android:fontFamily="@font/roboto_regular"
             android:lines="1"
             android:maxLines="1"
             android:padding="@dimen/dp12"

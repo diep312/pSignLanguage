@@ -5,7 +5,9 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -39,6 +41,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun initView() {
         setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_bg)
@@ -136,16 +139,20 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private val REQUEST_EXTERNAL_STORAGE = 1
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private val PERMISSIONS_STORAGE = arrayOf<String>(
         Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_MEDIA_VIDEO,
+        Manifest.permission.MANAGE_EXTERNAL_STORAGE
     )
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun verifyStoragePermissions(activity: Activity?) {
         // Check if we have write permission
         val permission = ActivityCompat.checkSelfPermission(
             activity!!,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
         )
         if (permission != PackageManager.PERMISSION_GRANTED) {
             // We don't have permission so prompt the user

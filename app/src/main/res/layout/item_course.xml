@@ -9,12 +9,13 @@
         android:layout_width="wrap_content"
         app:cardElevation="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_radius_8"
-        android:backgroundTint="@color/color_accent">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/bg_radius_8"
+            android:backgroundTint="@color/color_accent"
             android:padding="9dp">
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -42,7 +43,7 @@
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                android:textAlignment="center"
-               android:fontFamily="@font/montserrat_bold"
+               android:fontFamily="@font/roboto_bold"
                android:textColor="@color/color_primary"
                android:textSize="@dimen/dp16"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

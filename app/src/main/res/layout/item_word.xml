@@ -20,19 +20,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="@dimen/dp8" />
-
-        <TextView
-            android:id="@+id/tv_label"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp13"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+        <LinearLayout
+            android:id="@+id/textLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/imv_label"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/dp13">
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="@dimen/dp200"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="Label"
+                android:layout_marginBottom="@dimen/dp6"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_highlight"
+                android:text="0 points"
+                android:textSize="@dimen/sp14" />
+        </LinearLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_learn"
@@ -42,15 +57,14 @@
             android:backgroundTint="@color/color_primary"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text=">"
-            android:fontFamily="@font/montserrat_bold"
             android:textAllCaps="true"
+            android:drawableStart="@drawable/arrow_forward_ios_24dp_e8eaed_fill0_wght400_grad0_opsz24"
+            android:paddingStart="@dimen/dp8"
+            android:paddingEnd="@dimen/dp8"
             android:textColor="@color/white"
-            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="@dimen/dp18"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_label"
+            android:layout_marginEnd="30dp"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

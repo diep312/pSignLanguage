@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.topic.adapter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.ptit.signlanguage.utils.Constants.KEY_LEVEL
 class TopicAdapter(var listLevel: MutableList<Level?>, val language : String, val callbackTopic: CallbackTopic) :
     RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
 
+    @SuppressLint("NotifyDataSetChanged")
     fun replace(listLevel: MutableList<Level?>) {
         this.listLevel = listLevel
         notifyDataSetChanged()

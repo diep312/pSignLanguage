@@ -37,7 +37,7 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String) :
 
             binding.btnNext.setOnClickListener {
                 val intent = Intent(binding.root.context, VideoViewActivity::class.java)
-                intent.putExtra(KEY_LABEL, label?.labelVn)
+                intent.putExtra(Constants.KEY_LABEL, label?.labelVn)
                 if (language == Constants.EN) {
                     intent.putExtra("fix", label?.labelEn)
                 }else{
