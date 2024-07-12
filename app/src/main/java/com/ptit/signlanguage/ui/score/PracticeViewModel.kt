@@ -38,7 +38,9 @@ class PracticeViewModel(
     class AnalysisResult(
         val result: String,
     )
-
+    fun resetCounter() {
+        _countdown.value = 4000
+    }
     fun startTimer() {
         handler.post(
             object : Runnable {

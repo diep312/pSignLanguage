@@ -182,6 +182,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
                 }else{
                     if(modeRecording){
+                        viewModel.resetCounter()
                         binding.countDown.visibility = View.VISIBLE
                         viewModel.startTimer()
                         Handler().postDelayed(
