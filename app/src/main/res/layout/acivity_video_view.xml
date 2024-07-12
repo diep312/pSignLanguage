@@ -33,6 +33,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:paddingVertical="20dp"
+                android:fontFamily="@font/lexend_bold"
                 android:text="Từ 2"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -40,7 +41,6 @@
                 android:ellipsize="end"
                 android:textStyle="bold"
                 android:maxLines="1"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -74,6 +74,18 @@
                 app:default_artwork="@color/color_gray"
                 app:use_artwork="true"
                 app:auto_show="false"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/anim_video_loader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:lottie_rawRes="@raw/video_loader"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                />
 
         </androidx.cardview.widget.CardView>
 
