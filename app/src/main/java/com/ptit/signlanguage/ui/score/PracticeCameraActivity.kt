@@ -371,7 +371,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
             override fun run() {
                 binding.seekBar.progress = (player.currentPosition / 1000).toInt()
                 binding.tvCurtime.text = convertToMMSS(player.currentPosition)
-                Handler.postDelayed(this, 100)
+                Handler().postDelayed(this, 100)
             }
         })
     }
