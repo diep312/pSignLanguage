@@ -106,6 +106,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
 
                 }else{
                     if(modeRecording){
+                        viewModel.resetCounter()
                         binding.countDown.visibility = View.VISIBLE
                         viewModel.startTimer()
                         Handler().postDelayed(
@@ -115,7 +116,6 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
                                 recordState = true
                                 binding.countDown.visibility = View.GONE
                         }, 3000)
-
                     }else{
                         initRecorder()
                         recordbtn.setImageResource(R.drawable.recording)

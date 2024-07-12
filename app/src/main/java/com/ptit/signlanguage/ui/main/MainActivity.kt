@@ -143,7 +143,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private val PERMISSIONS_STORAGE = arrayOf<String>(
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_MEDIA_VIDEO
+        Manifest.permission.READ_MEDIA_VIDEO,
+        Manifest.permission.MANAGE_EXTERNAL_STORAGE
     )
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -151,7 +152,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         // Check if we have write permission
         val permission = ActivityCompat.checkSelfPermission(
             activity!!,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
         )
         if (permission != PackageManager.PERMISSION_GRANTED) {
             // We don't have permission so prompt the user

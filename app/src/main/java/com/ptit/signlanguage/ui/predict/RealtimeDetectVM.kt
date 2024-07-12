@@ -39,6 +39,10 @@ class RealtimeDetectVM: BaseViewModel() {
     var resultString: MutableLiveData<AnalysisResult> = MutableLiveData<AnalysisResult>()
     class AnalysisResult(val result: String)
 
+    fun resetCounter() {
+        _countdown.value = 4000
+    }
+
     fun startTimer() {
         handler.post(
             object : Runnable{
