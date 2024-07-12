@@ -9,6 +9,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -29,13 +30,10 @@ import androidx.camera.video.VideoCapture
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.core.util.Consumer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
-import androidx.media3.common.MimeTypes
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
@@ -44,16 +42,11 @@ import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.ActivityPracticeBinding
-import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.predict.ConfirmationDialogFragment
 import com.ptit.signlanguage.ui.predict.ManualDialogFragment
 import com.ptit.signlanguage.ui.predict.RealtimeDetectActivity
-import com.ptit.signlanguage.ui.predict.RealtimeDetectVM
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.File
 import java.util.Date
 import java.util.concurrent.ExecutorService
@@ -378,7 +371,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
             override fun run() {
                 binding.seekBar.progress = (player.currentPosition / 1000).toInt()
                 binding.tvCurtime.text = convertToMMSS(player.currentPosition)
-                Handler().postDelayed(this, 100)
+                Handler.postDelayed(this, 100)
             }
         })
     }
