@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## Giới thiệu dự án
 
-[![Product Name Screen Shot][product-screenshot]]
+![Product Name Screen Shot][product-screenshot]
 
 Theo như điều tra quốc gia người khuyết tật Việt Nam năm 2016, Việt Nam có khoảng 6.3 triệu người câm và điếc, trong đó 2 triệu là người cả câm cả điếc. 
 Một số lượng lớn người này sinh sống ở những khu vực hẻo lánh và không có điều kiện được tiếp cận những dịch vụ giáo dục và khám bệnh. Dự án này sẽ hướng tới việc
