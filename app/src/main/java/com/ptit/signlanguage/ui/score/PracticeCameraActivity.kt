@@ -334,6 +334,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                 super.onPlaybackStateChanged(playbackState)
                 if(playbackState == Player.STATE_READY){
                     updateRunTime()
+                    binding.animVideoLoader.visibility = View.GONE
                     binding.tvTotaltime.text = convertToMMSS(player.duration)
                     seekBar.max = (player.duration / 1000).toInt()
                     player.play().also {
