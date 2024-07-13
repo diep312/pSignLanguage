@@ -8,18 +8,31 @@
         android:layout_height="match_parent"
         android:background="#143EC0"
         >
-
+        <ImageView
+            android:layout_width="@dimen/dp150"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:background="@drawable/ic_app_icon"
+            android:backgroundTint="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_app_name"
+            app:layout_constraintVertical_bias="0.9"
+            />
         <TextView
+            android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pSLR"
+            android:text="@string/app_name"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55"
             android:textColor="@color/white"
-            android:fontFamily="@font/montserrat_bold">
+            android:fontFamily="@font/lexend_bold">
 
         </TextView>
 
