@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sign Language</string>
+    <string name="app_name">CoSign</string>
     <string name="str_loading">Loading...</string>
 
     <string name="api_default_error">Có lỗi xảy ra!</string>
