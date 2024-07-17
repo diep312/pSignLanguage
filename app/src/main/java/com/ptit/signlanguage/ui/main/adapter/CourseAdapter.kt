@@ -25,12 +25,13 @@ class CourseAdapter(var litSubject: MutableList<Subject?>, val language: String)
         R.drawable.p3,
         R.drawable.p4,
         R.drawable.p5,
+            R.drawable.p7,
+            R.drawable.p9,
+            R.drawable.p11,
         R.drawable.p6,
-        R.drawable.p7,
-        R.drawable.p8,
-        R.drawable.p9,
+
         R.drawable.p10,
-        R.drawable.p11,
+            R.drawable.p8,
     )
     fun replace(litSubject : MutableList<Subject?>) {
         this.litSubject = litSubject

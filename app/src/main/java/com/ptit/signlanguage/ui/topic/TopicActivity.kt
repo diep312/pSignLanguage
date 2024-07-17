@@ -81,4 +81,11 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
             binding.root.context.startActivity(intent)
         }
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        viewModel.apply {
+            getSubjectAllInfo(subject?.id ?: 0)
+        }
+    }
 }

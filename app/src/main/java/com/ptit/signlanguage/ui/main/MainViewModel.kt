@@ -37,7 +37,7 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
     val videoToTextRes = MutableLiveData<VideoToTextResponse?>()
     val bestPredict = MutableLiveData<String?>()
     @RequiresApi(Build.VERSION_CODES.P)
-    fun videoToText(file: File, context: Context) {
+    fun videoToText(file: File, context: Context, label: String) {
 //        viewModelScope.launch {
 //            showLoading()
 //            val part = toMultipartBody("video", file)
@@ -63,18 +63,18 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         viewModelScope.launch {
                 showLoading()
                 withContext(Dispatchers.Default){
-                    predictLabel(file,context)
+                    predictLabel(file,context, label)
                 }
                 hideLoading()
         }
     }
     @RequiresApi(Build.VERSION_CODES.P)
-    suspend fun predictLabel(file: File,context: Context): Prediction{
+    suspend fun predictLabel(file: File,context: Context, label: String): Prediction{
         val retriever = MediaMetadataRetriever()
         val inputStream = FileInputStream(file.absoluteFile)
         retriever.setDataSource(inputStream.fd)
         val framesArray = Detection.getListFrames(retriever)
-        Detection.createClassifier(context)
+        Detection.createClassifier(context, label)
         Detection.reset()
         var s = Prediction("None", 0f)
         for(frame in framesArray){
@@ -173,29 +173,29 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         }
     }
 
-    val checkVideoRes = MutableLiveData<Prediction?>()
-    @RequiresApi(Build.VERSION_CODES.P)
-    fun checkVideo(file: File, context: Context) {
-        viewModelScope.launch {
-            showLoading()
-//            val part = toMultipartBody("file", file)
-//            val result: BaseResponse<CheckVideoRes?>?
+//    val checkVideoRes = MutableLiveData<Prediction?>()
+//    @RequiresApi(Build.VERSION_CODES.P)
+//    fun checkVideo(file: File, context: Context) {
+//        viewModelScope.launch {
+//            showLoading()
+////            val part = toMultipartBody("file", file)
+////            val result: BaseResponse<CheckVideoRes?>?
+////            try {
+////                withContext(Dispatchers.IO) {
+////
+////                }
+////                checkVideoRes.postValue(result)
+////            } catch (e: Exception) {
+////                handleApiError(e.cause)
+////            }
 //            try {
-//                withContext(Dispatchers.IO) {
-//
-//                }
-//                checkVideoRes.postValue(result)
-//            } catch (e: Exception) {
+//                checkVideoRes.postValue(predictLabel(file,context))
+//            }catch(e: Exception) {
 //                handleApiError(e.cause)
 //            }
-            try {
-                checkVideoRes.postValue(predictLabel(file,context))
-            }catch(e: Exception) {
-                handleApiError(e.cause)
-            }
-            hideLoading()
-        }
-    }
+//            hideLoading()
+//        }
+//    }
 
     val scoreWithSubject = MutableLiveData<BaseResponse<ScoreWithSubject?>?>()
     fun getScoreWithSubject(levelIds : Int, subjectIds : Int) {
@@ -217,14 +217,17 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
     fun updateUserScore(labelId: Int, score: Float){
         viewModelScope.launch {
             showLoading()
-            val result: BaseResponseNoBody
+            val result: BaseResponse<UserScore>
             try{
                 withContext(Dispatchers.IO) {
-                    result = apiService.postUserScore(UpdateScoreRequest(labelId, score))
+                    Log.d("UserScore","Updated " +  score.toString())
+                    result = apiService.postUserScore(labelId, score)
+                    Log.d("UserScore","Updated " +  result.body?.score.toString())
                 }
             }
             catch (e: Exception) {
                 handleApiError(e.cause)
+                Log.d("UserScore", e.toString())
             }
             hideLoading()
         }
@@ -248,4 +251,5 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
             hideLoading()
         }
     }
+
 }

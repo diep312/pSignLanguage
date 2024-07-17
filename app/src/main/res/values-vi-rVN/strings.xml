@@ -38,9 +38,9 @@
     <string name="str_enter_name_show">Nhập tên hiển thị</string>
 
     <string name="str_video_to_text">Dịch</string>
-    <string name="str_text_to_video">Text To Video</string>
-    <string name="str_account">Account</string>
-    <string name="str_course">Course</string>
+    <string name="str_text_to_video">Từ điển</string>
+    <string name="str_account">Tài khoản</string>
+    <string name="str_course">Khoá học</string>
     <string name="str_search">Tìm kiếm</string>
 
     <string name="str_label">Nhãn: %s</string>
@@ -82,4 +82,6 @@
     <string name="str_slidetitle_3">Bắt đầu quay!</string>
     <string name="str_slidedesc_3">Khi khoảng cách phù hợp, ấn nút quay và quay video.</string>
     <string name="video_not_available">Video không có sẵn</string>
+    <string name="practice_your_sign_language">Luyện tập ngôn ngữ kí hiệu!</string>
+    <string name="points">điểm</string>
 </resources>

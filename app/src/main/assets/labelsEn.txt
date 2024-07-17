@@ -1,50 +1,50 @@
-celebrate
-comfort
-apply
-worry
-close
-patient
-know
-present
-ministry of health
-quarantine
-tempt
-thank
-need
-accept
-run
-wait
-pain
-teach
-hate
-help
-admire
-sacrifice
-cough
-marry
-declare
-face mask
-quarantine area
-infect
-worry
-rest
-miss
-slander
-vomit
-penalize
-interview
-recover
-share
-fever
-exercise
-visit
-lost
-like
-love
-incubate
-support
-obey
-virus
-ask for permission
-discharge (from hospital)
-love
+Celebrate
+Comfort
+Apply
+Worry
+Close
+Patient
+Know
+Present
+Ministry Of Health
+Quarantine
+Tempt
+Thank
+Need
+Accept
+Run
+Wait
+Pain
+Teach
+Hate
+Help
+Admire
+Sacrifice
+Cough
+Marry
+Declare
+Mask
+Quarantine Area
+Infect
+Worry
+Rest
+Miss
+Slander
+Vomit
+Penalize
+Interview
+Recover
+Share
+Fever
+Exercise
+Visit
+Lost
+Like
+Love
+Incubate
+Support
+Obey
+Virus
+Ask For Permission
+Discharge (From Hospital)
+Love

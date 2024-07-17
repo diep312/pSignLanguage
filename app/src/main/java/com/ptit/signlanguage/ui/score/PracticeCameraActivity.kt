@@ -108,7 +108,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         label = intent.getStringExtra(Constants.KEY_LABEL)
         labelScore = intent.getStringExtra("SCORE")
         labelId = intent.getStringExtra("ID")
-
+        Log.d("TAG", "onCreate: $labelId $label $labelScore")
         if (labelScore == null){
             labelScore = "0"
         }
@@ -235,7 +235,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                         // update app state when the capture failed.
                         recording?.close()
                         recording = null
-
                         "Video capture ends with error: ${event.error}"
                     }
                     Toast.makeText(this, msg, Toast.LENGTH_SHORT)
@@ -278,7 +277,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                     val dialog = ResultDialog()
                     dialog.setScore(it)
 //                    if(it > labelScore!!.toInt()){
-//                        viewModel.updateUserScore(labelId!!.toInt(), it.toFloat())
+                        viewModel.updateUserScore(labelId!!.toInt(), it.toFloat())
 //                    }
                     dialog.show(supportFragmentManager, "Test")
                 }
@@ -449,7 +448,8 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     @RequiresApi(Build.VERSION_CODES.P)
     private fun scoreLabel(uri: Uri){
         viewModel.apply {
-            predictVideo(File(parsePath(uri), ""), this@PracticeCameraActivity, label!!)
+            predictVideo(File(parsePath(uri), ""), this@PracticeCameraActivity, label!!, labelId!!.toInt())
+
         }
     }
     private fun parsePath(uri: Uri?): String? {
@@ -471,7 +471,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onKeepVideo() {
-        viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
+//        viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
         scoreLabel(currentVideoUri)
     }
 
@@ -482,7 +482,9 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
     override fun onDestroy() {
         super.onDestroy()
-        player.release()
+        if(::player.isInitialized){
+            player.release()
+        }
     }
 
 }

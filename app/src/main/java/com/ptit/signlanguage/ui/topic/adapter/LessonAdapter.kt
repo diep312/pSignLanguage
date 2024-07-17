@@ -1,8 +1,11 @@
 package com.ptit.signlanguage.ui.topic.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
@@ -41,6 +44,7 @@ class LessonAdapter(var listLabel: MutableList<LabelWithScore>, val language : S
 
     inner class LessonViewHolder(var binding: ItemLessionBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @Composable
         fun bind(label: LabelWithScore?) {
             if(language == Constants.EN) {
                 binding.tvLesson.text = label?.labelEn ?: EMPTY_STRING
@@ -53,6 +57,11 @@ class LessonAdapter(var listLabel: MutableList<LabelWithScore>, val language : S
                 binding.tvPoints.text = "0 points"
             }
             else{
+                if(label.latestScore < 40){
+                    binding.status.setImageResource(R.drawable.icons8_reject)
+                }else{
+                    binding.status.setImageResource(R.drawable.icons8_accept)
+                }
                 binding.tvPoints.text = "%d points".format(label.latestScore.toInt())
             }
 
@@ -64,8 +73,9 @@ class LessonAdapter(var listLabel: MutableList<LabelWithScore>, val language : S
                 } else {
                     intent.putExtra("fix", label?.labelVn)
                 }
-                intent.putExtra("SCORE", label?.latestScore)
-                intent.putExtra("ID", label?.id)
+                Log.d("RCV", label?.id.toString())
+                intent.putExtra("SCORE", label?.latestScore.toString())
+                intent.putExtra("ID", label?.id.toString())
                 binding.root.context.startActivity(intent)
             }
         }

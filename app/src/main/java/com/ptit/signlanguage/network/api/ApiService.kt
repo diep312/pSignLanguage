@@ -58,8 +58,12 @@ interface ApiService {
     @GET("/api/v1/topUserScoresOfLabel")
     suspend fun getTopUserScoreOfLabel(@Query("labelId") labelId: Int): BaseArrayResponse<UserScore>
 
+    @FormUrlEncoded
     @POST("/api/v1/postUserScore")
-    suspend fun postUserScore(@Body postUserScore: UpdateScoreRequest): BaseResponseNoBody
+    suspend fun postUserScore(
+        @Field("labelId") labelId: Int,
+        @Field("score") score: Float,
+    ): BaseResponse<UserScore>
 
     @FormUrlEncoded
     @POST("/api/v1/scoreWithSubject")
