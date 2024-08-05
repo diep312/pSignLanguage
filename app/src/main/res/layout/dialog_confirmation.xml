@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@id/cardView"
         android:weightSum="3"
         android:padding="@dimen/dp20">
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_discard"
             android:layout_width="@dimen/dp70"
             android:layout_height="@dimen/dp70"
@@ -44,7 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="3"/>
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_check"
             android:layout_width="@dimen/dp70"
             android:layout_height="@dimen/dp70"

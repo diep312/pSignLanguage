@@ -6,13 +6,16 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.DisposableEffect
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ptit.signlanguage.network.api.ApiService
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.tensorflowdetect.Prediction
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.Locale
 
@@ -60,13 +63,11 @@ class PracticeViewModel(
         prediction: Prediction,
         labelChosen: String,
     ) {
-        Log.d("TAG", prediction.label)
-        Log.d("TAG", labelChosen)
         if(prediction.label.lowercase(Locale.ROOT).trim() == labelChosen.lowercase(Locale.ROOT).trim()) {
-            _score.value = (prediction.score * 100).toInt()
+            _score.postValue( (prediction.score * 100).toInt())
         }
         else{
-            _score.value = 0
+            _score.postValue(0)
         }
     }
 
@@ -75,11 +76,15 @@ class PracticeViewModel(
         file: File,
         context: Context,
         label: String,
+        labelId: Int
     ) {
         viewModelScope.launch {
             showLoading()
-            val predict = predictLabel(file, context)
-            setScore(predict, label)
+            withContext(Dispatchers.Default){
+                val predict = predictLabel(file, context, "labels.txt")
+                setScore(predict, label)
+            }
+//            updateUserScore(labelId, predict.score)
             hideLoading()
         }
     }

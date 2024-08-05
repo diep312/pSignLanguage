@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Sign Language</string>
-    <string name="str_loading">Loading...</string>
+    <string name="app_name">CoSign</string>
+    <string name="str_loading">Đang xử lý...</string>
 
     <string name="api_default_error">Có lỗi xảy ra!</string>
     <string name="str_authe">Tài khoản không hợp lệ/Nhập sai mật khẩu</string>
@@ -37,11 +37,11 @@
     <string name="str_enter_pass_again">Nhập lại mật khẩu</string>
     <string name="str_enter_name_show">Nhập tên hiển thị</string>
 
-    <string name="str_video_to_text">Translate</string>
-    <string name="str_text_to_video">Search</string>
-    <string name="str_account">Account</string>
-    <string name="str_course">Course</string>
-    <string name="str_search">Search</string>
+    <string name="str_video_to_text">Dịch</string>
+    <string name="str_text_to_video">Tìm kiếm</string>
+    <string name="str_account">Tài khoản</string>
+    <string name="str_course">Khoá hoc</string>
+    <string name="str_search">Tìm kiếm</string>
 
     <string name="str_label">Nhãn: %s</string>
     <string name="str_full_name">Họ tên</string>
@@ -82,4 +82,6 @@
     <string name="str_slidedesc_3">Once you’re in position press the record button and record a video.</string>
     <string name="sample_video">Video demonstration</string>
     <string name="video_not_available">Video not available</string>
+    <string name="practice_your_sign_language">Luyện tập ngôn ngữ kí hiệu!</string>
+    <string name="points">điểm</string>
 </resources>

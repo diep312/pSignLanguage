@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lexend_medium"
-                    android:text="Practice your sign language!"
+                    android:text="@string/practice_your_sign_language"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp20" />
             </LinearLayout>

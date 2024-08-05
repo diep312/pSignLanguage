@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : AppCompatActivity() {
     protected lateinit var viewModel: VM
@@ -52,9 +55,13 @@ abstract class BaseActivity<VM : BaseViewModel, BINDING : ViewDataBinding> : App
     private fun observerDefaultLiveData() {
         viewModel.isLoading.observe(this) {
             if (it) {
-                loadingDialog.show()
+                CoroutineScope(Dispatchers.Main).launch{
+                    loadingDialog.show()
+                }
             } else {
-                loadingDialog.hide()
+                CoroutineScope(Dispatchers.Main).launch {
+                    loadingDialog.hide()
+                }
             }
         }
     }

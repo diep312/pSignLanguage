@@ -188,7 +188,7 @@ object Detection {
         return frames
     }
 
-    fun createClassifier(context: Context) {
+    fun createClassifier(context: Context, labelFile: String) {
         synchronized(lock) {
             if (videoClassifier != null) {
                 videoClassifier?.close()
@@ -206,7 +206,7 @@ object Detection {
                 VideoClassifier.createFromFileAndLabelsAndOptions(
                     context,
                     modelFile,
-                    "labels.txt",
+                    labelFile,
                     options,
                 )
 

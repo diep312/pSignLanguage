@@ -22,7 +22,7 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String) :
     }
 
     fun replace(listLabel: MutableList<Label?>) {
-        this.listLabel = listLabel.subList(11, listLabel.size)
+        this.listLabel = listLabel
         notifyItemRangeChanged(0, itemCount)
     }
 

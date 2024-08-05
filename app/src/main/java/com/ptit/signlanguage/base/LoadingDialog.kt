@@ -21,14 +21,14 @@ class LoadingDialog(var context: Context) {
         dialog?.setContentView(R.layout.custom_dialog_loading)
         val window: Window? = dialog?.window
         window?.let {
-            window.setLayout(
+            it.setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
             )
-            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             val layoutParams = window.attributes
             layoutParams.gravity = Gravity.CENTER
-            window.attributes = layoutParams
+            it.attributes = layoutParams
 
             dialog?.setCancelable(false)
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sign Language</string>
+    <string name="app_name">CoSign</string>
     <string name="str_loading">Loading...</string>
 
     <string name="api_default_error">An error occurred!</string>
@@ -81,4 +81,6 @@
     <string name="str_slidetitle_3">Start recording!</string>
     <string name="str_slidedesc_3">Once you’re in position press the record button and record a video.</string>
     <string name="video_not_available">Video not available</string>
+    <string name="practice_your_sign_language">Practice your sign language!</string>
+    <string name="points">diee</string>
 </resources>

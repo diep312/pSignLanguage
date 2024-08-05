@@ -26,6 +26,7 @@ import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.predict.RealtimeDetectActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EN
+import com.ptit.signlanguage.utils.Constants.VI
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ import java.io.File
 class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBinding>() {
     var user: User? = null
     private lateinit var prefsHelper: PreferencesHelper
-
+    private var labelType: String = ""
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -95,6 +96,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
         prefsHelper = PreferencesHelper(binding.root.context)
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
         user = GsonUtils.deserialize(userJson, User::class.java)
+        labelType = if (user?.language == EN) "labelsEn.txt" else "labels.txt"
     }
 
     override fun initListener() {
@@ -155,7 +157,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     val file = File(videoPath)
                     if (file != null) {
                         binding.layoutWrapAnswer.visibility = View.GONE
-                        viewModel.videoToText(file, requireContext())
+                        viewModel.videoToText(file, requireContext(), labelType)
                     }
                 }
                 Activity.RESULT_CANCELED -> {
@@ -177,7 +179,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     val file = File(videoPath)
                     if (file != null) {
                         binding.layoutWrapAnswer.visibility = View.GONE
-                        viewModel.videoToText(file, requireContext())
+                        viewModel.videoToText(file, requireContext(), labelType)
                     }
                 }
                 Activity.RESULT_CANCELED -> {
