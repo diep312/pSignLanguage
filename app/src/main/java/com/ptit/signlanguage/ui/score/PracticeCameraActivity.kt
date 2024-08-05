@@ -67,6 +67,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     private var permissionGranted: Boolean = false
     private var recording: Recording? = null
     private var recordState: Boolean = false
+    private var countdown: Boolean = false
     private var modeRecording: Boolean = false
     private lateinit var currentVideoUri: Uri
     private var playerState = MutableLiveData(false)
@@ -169,23 +170,28 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
             recordbtn.setOnClickListener{
                 if(recordState){
-                    recording?.stop()
-                    recordState = false
-                    recordbtn.setImageResource(R.drawable.recording1)
+                    if(!modeRecording || !countdown){
+                        recording?.stop()
+                        recordState = false
+                        recordbtn.setImageResource(R.drawable.recording1)
+                    }
 
                 }else{
                     if(modeRecording){
                         viewModel.resetCounter()
                         binding.countDown.visibility = View.VISIBLE
                         viewModel.startTimer()
+                        countdown = true
+                        recordState = true
                         Handler().postDelayed(
                             {
-                                initRecorder()
-                                recordbtn.setImageResource(R.drawable.recording)
-                                recordState = true
+                                if(recordState){
+                                    initRecorder()
+                                    countdown = false
+                                    recordbtn.setImageResource(R.drawable.recording)
+                                }
                                 binding.countDown.visibility = View.GONE
                             }, 3000)
-
                     }else{
                         initRecorder()
                         recordbtn.setImageResource(R.drawable.recording)

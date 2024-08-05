@@ -47,6 +47,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
     private var currentSide_Camera: Int = BACK_CAMERA
     private var permissionGranted: Boolean = false
     private var recording: Recording? = null
+    private var countdown: Boolean = false
     private var recordState: Boolean = false
     private var modeRecording: Boolean = false
     private lateinit var mPref: PreferencesHelper
@@ -100,20 +101,26 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
 
             recordbtn.setOnClickListener{
                 if(recordState){
-                    recording?.stop()
-                    recordState = false
-                    recordbtn.setImageResource(R.drawable.recording1)
+                    if(!modeRecording || !countdown){
+                        recording?.stop()
+                        recordState = false
+                        recordbtn.setImageResource(R.drawable.recording1)
+                    }
 
                 }else{
                     if(modeRecording){
                         viewModel.resetCounter()
                         binding.countDown.visibility = View.VISIBLE
                         viewModel.startTimer()
+                        countdown = true
+                        recordState = true
                         Handler().postDelayed(
                             {
-                                initRecorder()
-                                recordbtn.setImageResource(R.drawable.recording)
-                                recordState = true
+                                if(recordState){
+                                    initRecorder()
+                                    countdown = false
+                                    recordbtn.setImageResource(R.drawable.recording)
+                                }
                                 binding.countDown.visibility = View.GONE
                         }, 3000)
                     }else{

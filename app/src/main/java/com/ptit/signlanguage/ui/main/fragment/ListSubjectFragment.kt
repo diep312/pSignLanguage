@@ -34,7 +34,10 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         viewModel.apply {
             listSubjectRes.observe(this@ListSubjectFragment) {
                 if(it?.body != null) {
-                    adapter.replace(it.body.toMutableList())
+                    val list = it.body.toMutableList().apply {
+                        sortBy { it!!.id }
+                    }
+                    adapter.replace(list)
                 }
             }
             errorMessage.observe(this@ListSubjectFragment) {
