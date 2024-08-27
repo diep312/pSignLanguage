@@ -293,6 +293,10 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
 //    PLAYER HANDLING
     private fun initializePlayer(uri: String) {
+        uri.apply {
+            replace("ptitsignlanguage.edu.vn", "113.22.56.109:5005")
+        }
+        Log.d("TAG", uri)
         val seekBar = binding.seekBar
         player = ExoPlayer.Builder(this).build().also{  exoPlayer ->
             binding.sampleVideo.player = exoPlayer

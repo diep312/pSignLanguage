@@ -46,11 +46,9 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         }
 
     }
-
     override fun initListener() {
         binding.imvBack.setOnClickListener { finish() }
     }
-
     override fun observerLiveData() {
         viewModel.apply {
             videoRes.observe(this@VideoViewActivity) {
@@ -97,10 +95,14 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     }
     @Synchronized
     private fun initializePlayer(uri: String) {
+
+        val prefixURL = "http://ptitsignlanguage.edu.vn"
+        var videoPath = uri.replace(prefixURL,"http://113.22.56.109:5005",true)
+        Log.d("TAG", videoPath)
         val seekBar = binding.seekBar
         player = ExoPlayer.Builder(this).build().also{  exoPlayer ->
             binding.vvGuide.player = exoPlayer
-            val mediaItem: MediaItem = MediaItem.fromUri(uri)
+            val mediaItem: MediaItem = MediaItem.fromUri(videoPath)
             exoPlayer.setMediaItem(mediaItem)
             exoPlayer.volume = 0f
         }
