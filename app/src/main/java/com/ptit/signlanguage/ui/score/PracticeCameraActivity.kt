@@ -459,7 +459,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     private fun scoreLabel(uri: Uri){
         viewModel.apply {
             predictVideo(File(parsePath(uri), ""), this@PracticeCameraActivity, label!!, labelId!!.toInt())
-
         }
     }
     private fun parsePath(uri: Uri?): String? {

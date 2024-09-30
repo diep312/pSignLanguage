@@ -19,6 +19,7 @@ package com.ptit.signlanguage.ui.tensorflowdetect
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Size
+import com.ptit.signlanguage.base.MyApplication.Companion.context
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.FileUtil
@@ -129,7 +130,9 @@ class VideoClassifier private constructor(
         // As this model is stateful, ensure there's only one inference going on at once.
         synchronized(lock) {
             // Prepare inputs.
+
             val tensorImage = preprocessInputImage(inputBitmap)
+//            Detection.saveBitmap(context = context, tensorImage.bitmap)
             inputState[IMAGE_INPUT_NAME] = tensorImage.buffer
 
             // Initialize a placeholder to store the output objects.
@@ -171,7 +174,7 @@ class VideoClassifier private constructor(
             add(ResizeOp(inputHeight, inputWidth, ResizeOp.ResizeMethod.BILINEAR))
             add(NormalizeOp(INPUT_MEAN, INPUT_STD))
         }.build()
-        val tensorImage = TensorImage(DataType.UINT8)
+        val tensorImage = TensorImage(DataType.FLOAT32)
         tensorImage.load(bitmap)
         return imageProcessor.process(tensorImage)
     }

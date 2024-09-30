@@ -45,44 +45,44 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     override fun observerLiveData() {
         viewModel.apply {
             /** Observer server handle **/
-//            videoToTextRes.observe(this@VideoToTextFragment) {
-//                if (it != null) {
-//                    binding.layoutWrapAnswer.visibility = View.VISIBLE
-//                    binding.vvVideo.visibility = View.VISIBLE
-//                    binding.ivIllu.visibility = View.INVISIBLE
-//                    binding.tvTranslatedesc.visibility = View.INVISIBLE
-//                    binding.btnRecord.text = getString(R.string.str_again)
-//                    if(user?.language.equals(EN)) {
-//                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
-//                    } else {
-//                        binding.tvLabel.text = getString(R.string.str_label, it.prediction[0].action_name)
-//                    }
-//                }
-//                else{
-//                    binding.ivIllu.visibility = View.VISIBLE
-//                }
-//                Log.d(TAG, it.toString())
-//            }
-//            errorMessage.observe(this@VideoToTextFragment) {
-//                Log.d(TAG, it.toString())
-//            }
-            // * Mobile detect */
-            viewModel.bestPredict.observe(this@VideoToTextFragment) {
+            videoToTextRes.observe(this@VideoToTextFragment) {
                 if (it != null) {
                     binding.layoutWrapAnswer.visibility = View.VISIBLE
                     binding.vvVideo.visibility = View.VISIBLE
                     binding.ivIllu.visibility = View.INVISIBLE
                     binding.tvTranslatedesc.visibility = View.INVISIBLE
                     binding.btnRecord.text = getString(R.string.str_again)
-                    if (user?.language.equals(EN)) {
-                        binding.tvLabel.text = getString(R.string.str_label, it)
+                    if(user?.language.equals(EN)) {
+                        binding.tvLabel.text = getString(R.string.str_label, it.action_name + "\nScore: ${it.action_score}")
                     } else {
-                        binding.tvLabel.text = getString(R.string.str_label, it)
+                        binding.tvLabel.text = getString(R.string.str_label, it.action_name + "\nScore: ${it.action_score}")
                     }
-                } else {
+                }
+                else{
                     binding.ivIllu.visibility = View.VISIBLE
                 }
+                Log.d(TAG, it.toString())
             }
+            errorMessage.observe(this@VideoToTextFragment) {
+                Log.d(TAG, it.toString())
+            }
+            // * Mobile detect */
+//            viewModel.bestPredict.observe(this@VideoToTextFragment) {
+//                if (it != null) {
+//                    binding.layoutWrapAnswer.visibility = View.VISIBLE
+//                    binding.vvVideo.visibility = View.VISIBLE
+//                    binding.ivIllu.visibility = View.INVISIBLE
+//                    binding.tvTranslatedesc.visibility = View.INVISIBLE
+//                    binding.btnRecord.text = getString(R.string.str_again)
+//                    if (user?.language.equals(EN)) {
+//                        binding.tvLabel.text = getString(R.string.str_label, it)
+//                    } else {
+//                        binding.tvLabel.text = getString(R.string.str_label, it)
+//                    }
+//                } else {
+//                    binding.ivIllu.visibility = View.VISIBLE
+//                }
+//            }
         }
     }
 
@@ -104,8 +104,9 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
             if (checkCamera()) {
                 getCameraPermission()
             }
-            val intent = Intent(context, RealtimeDetectActivity::class.java)
-            startActivityForResult(intent, VIDEO_RECORD_CODE)
+//            val intent = Intent(context, RealtimeDetectActivity::class.java)
+//            startActivityForResult(intent, VIDEO_RECORD_CODE)
+            recordVideo()
         }
         binding.btnPickVideo.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
@@ -115,10 +116,10 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     }
 
     private fun recordVideo() {
-//        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        startActivityForResult(intent, VIDEO_RECORD_CODE)
+//        val intent  = Intent(context, RealtimeDetectActivity::class.java)
 //        startActivityForResult(intent, VIDEO_RECORD_CODE)
-//        val intent  = Intent(activity, RealtimeDetectActivity::class.java)
-//        startActivity(intent)
     }
 
     private fun checkCamera(): Boolean = requireActivity().packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
@@ -135,7 +136,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                 CAMERA_PERMISSION_CODE,
             )
         } else {
-            recordVideo()
+//            recordVideo()
         }
     }
 
@@ -159,6 +160,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                         binding.layoutWrapAnswer.visibility = View.GONE
                         viewModel.videoToText(file, requireContext(), labelType)
                     }
+
                 }
                 Activity.RESULT_CANCELED -> {
                     Log.d(TAG, "Cancel")

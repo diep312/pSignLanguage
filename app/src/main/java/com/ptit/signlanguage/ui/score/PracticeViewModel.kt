@@ -81,8 +81,8 @@ class PracticeViewModel(
         viewModelScope.launch {
             showLoading()
             withContext(Dispatchers.Default){
-                val predict = predictLabel(file, context, "labels.txt")
-                setScore(predict, label)
+//                val predict = predictLabel(file, context, "labels.txt")
+//                setScore(predict, label)
             }
 //            updateUserScore(labelId, predict.score)
             hideLoading()

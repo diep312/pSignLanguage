@@ -187,6 +187,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
             .Builder(contentResolver, MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
             .setContentValues(contentValues)
             .build()
+
         recording = videoCapture.output
             .prepareRecording(this, mediaStoreOutputOptions)
             .start(ContextCompat.getMainExecutor(this), recordingListener)

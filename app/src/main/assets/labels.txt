@@ -1,50 +1,83 @@
-Ăn Mừng
-An Ủi
-Áp Dụng
-Băn Khoăn
-Bế Mạc
-Bệnh Nhân
-Biết
-Biểu Tặng
-Bộ Y Tế
-Cách Ly
-Cám Dỗ
-Cảm Ơn
-Cần
-Chấp Nhận
-Chạy
-Chờ
-Đau
-Dạy Dỗ
-Ghét
-Giúp
-Hâm Mộ
-Hy Sinh
-Ho
-Kết Hôn
-Khai Báo
-Khẩu Trang
-Khu Cách Ly
-Lây Bệnh
-Lo Lắng
-Nghỉ Ngơi
-Nhớ
-Nói Xấu
-Nôn Ói
-Phạt
-Phỏng Vấn
-Phục Hồi
-San Sẻ
-Sốt
-Tập Luyện
-Thăm
-Thất Lạc
-Thích
-Thương
-Ủ Bệnh
-Ủng Hộ
-Vâng Lời
-Virus
-Xin Phép
-Xuất Viện
+Anh ấy
+Ban ngày
+Ban đêm
+Bàn
+Bàn tay
+Bạn bao nhiêu tuổi
+Bạn khỏe không
+Bạn thân
+Bạn tên gì
+Bệnh viện
+Cao
+Chiều
+Chào
+Chân
+Chúng ta
+Chậm lại
+Con chim
+Con gấu
+Cá
+Có thể
+Cô ấy
+Cơ thể
+Cảm ơn
+Cứu
+Dễ
+Giường
+Giỏi
+Giờ
+Giữ gìn sức khỏe nhé
+Gạo
+Gặp lại sau nhe
+Hiểu
+Hôm nay
+Họ
+Học sinh
+Khóc
+Làm
+Lấy
+Mua
+Mời vào
+Nghe
+Ngón tay
+Nhà
+Nhìn
+Nhầm
+Nhỏ
+Nói
+Năm
+Nước
+Nặng
+Phía sau
+Phía trước
+Rau
+Rẽ phải
+Rẽ trái
+Sử dụng
+Thấp
+Thịt
+Thức dậy
+Thức ăn
+To
+Trưa
+Trường học
+Tuần
+Tôi
+Tôi bị ốm
+Tôi cần đi bệnh viện
+Tối
+Uống
+Xa
+Xe máy
+Xe đạp
+Xin chào
+Xin lỗi
+Xúc động
+Xấu hổ
 Yêu
+Ô tô
+Ăn
+Đi
+Đầu
+Đẹp
+Đồng ý

@@ -14,6 +14,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.ui.predict.RealtimeDetectActivity
+import com.ptit.signlanguage.utils.Constants
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -47,13 +48,13 @@ object Detection {
                 lastInferenceStartTime = currentTime
                 videoClassifier?.let { classifier ->
                     // Convert the captured frame to Bitmap.
-                    val imageBitmap =
-                        Bitmap.createBitmap(
-                            bitmap.width,
-                            bitmap.height,
-                            Bitmap.Config.ARGB_8888,
-                        )
-//                        CalculateUtils.yuvToRgb(image, imageBitmap)
+//                    val imageBitmap =
+//                        Bitmap.createBitmap(
+//                            bitmap.width,
+//                            bitmap.height,
+//                            Bitmap.Config.ARGB_8888,
+//                        )
+////                        CalculateUtils.yuvToRgb(image, imageBitmap)
 
                     // Rotate the image to the correct orientation.
                     val matrix = Matrix().apply { postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f) }
@@ -162,7 +163,7 @@ object Detection {
     @RequiresApi(Build.VERSION_CODES.P)
     fun getListFrames(mmr: MediaMetadataRetriever): Array<Bitmap> {
         var frames = emptyArray<Bitmap>()
-        val NUM_FRAMES = 16
+        val NUM_FRAMES = 20
         val duration = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
         val numberFrames = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_FRAME_COUNT)
         Log.d("StreamVideoClassifier", "Video length: $duration ms")
@@ -171,7 +172,7 @@ object Detection {
 
         if (numberFrames != null) {
             frameStep = (numberFrames.toDouble() / NUM_FRAMES).roundToInt()
-            for (i in 0 until NUM_FRAMES) {
+            for (i in 2 until NUM_FRAMES-2) {
                 var frame = i * frameStep
                 if (frame >= numberFrames.toInt()) {
                     frame = numberFrames.toInt() - 1
@@ -200,7 +201,7 @@ object Detection {
                     .setMaxResult(MAX_RESULT)
                     .setNumThreads(numThread)
                     .build()
-            val modelFile = "model_3.tflite"
+            val modelFile = Constants.MODELFILE
 
             videoClassifier =
                 VideoClassifier.createFromFileAndLabelsAndOptions(

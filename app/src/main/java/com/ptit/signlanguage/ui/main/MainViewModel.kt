@@ -20,8 +20,10 @@ import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWith
 import com.ptit.signlanguage.network.model.response.score_with_subject.UserScore
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import com.ptit.signlanguage.ui.tensorflowdetect.Detection
-import com.ptit.signlanguage.ui.tensorflowdetect.Prediction
+//import com.ptit.signlanguage.ui.tensorflowdetect.Prediction
 import kotlinx.coroutines.Dispatchers
+import com.ptit.signlanguage.network.model.response.VideoToText.Prediction
+
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -34,60 +36,61 @@ import kotlin.system.measureTimeMillis
 
 open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
 
-    val videoToTextRes = MutableLiveData<VideoToTextResponse?>()
+    val videoToTextRes = MutableLiveData<Prediction?>()
     val bestPredict = MutableLiveData<String?>()
     @RequiresApi(Build.VERSION_CODES.P)
     fun videoToText(file: File, context: Context, label: String) {
-//        viewModelScope.launch {
-//            showLoading()
-//            val part = toMultipartBody("video", file)
-//            val result: VideoToTextResponse?
-//            try {
-//                withContext(Dispatchers.IO) {
-//                    var time = measureTimeMillis {
-//                        result = RetrofitBuilder.apiAiSide!!.videoToText(part)
-//                        Log.d("TAG", result.toString())
-//                    }
-//                    Log.d("TAG", time.toString())
-//
-//                }
-//                videoToTextRes.postValue(result)
-//
-//            } catch (e: Exception) {
-//                Log.d("TAG", "$e")
-//                handleApiError(e.cause)
-//            }
-//            hideLoading()
-//        }
-        // ======Handle on Mobile ========
         viewModelScope.launch {
-                showLoading()
-                withContext(Dispatchers.Default){
-                    predictLabel(file,context, label)
+            showLoading()
+            val part = toMultipartBody("video", file)
+            val result: VideoToTextResponse?
+            try {
+                withContext(Dispatchers.IO) {
+                    var time = measureTimeMillis {
+                        result = RetrofitBuilder.apiAiSide!!.videoToText(part)
+                    }
+                    Log.d("TAG", time.toString())
+
                 }
-                hideLoading()
+                videoToTextRes.postValue(result?.prediction?.get(0))
+
+            } catch (e: Exception) {
+                Log.d("TAG", "$e")
+                handleApiError(e.cause)
+            }
+            hideLoading()
         }
+        // ======Handle on Mobile ========
+//        viewModelScope.launch {
+//                showLoading()
+//                withContext(Dispatchers.Default){
+//                    predictLabel(file,context, label)
+//                }
+//                hideLoading()
+//        }
     }
-    @RequiresApi(Build.VERSION_CODES.P)
-    suspend fun predictLabel(file: File,context: Context, label: String): Prediction{
-        val retriever = MediaMetadataRetriever()
-        val inputStream = FileInputStream(file.absoluteFile)
-        retriever.setDataSource(inputStream.fd)
-        val framesArray = Detection.getListFrames(retriever)
-        Detection.createClassifier(context, label)
-        Detection.reset()
-        var s = Prediction("None", 0f)
-        for(frame in framesArray){
-            s = Detection.processImage(context,frame)
-            delay(80)
-            Log.d("StreamVideoClassifier", s.label + " " + s.score)
-        }
-        withContext(Dispatchers.Main){
-            bestPredict.postValue(s.toString())
-        }
-        Detection.reset()
-        return s
-    }
+//    @RequiresApi(Build.VERSION_CODES.P)
+//    suspend fun predictLabel(file: File,context: Context, label: String): Prediction{
+//        val retriever = MediaMetadataRetriever()
+//        val inputStream = FileInputStream(file.absoluteFile)
+//        retriever.setDataSource(inputStream.fd)
+//        val framesArray = Detection.getListFrames(retriever)
+//        Detection.createClassifier(context, label)
+//        Detection.reset()
+////        var s = Prediction("None", 0f)
+//        var s = Prediction(0,"",0.0)
+//        for(frame in framesArray){
+//            s = Detection.processImage(context,frame)
+//            delay(80)
+//            Log.d("StreamVideoClassifier", s.label + " " + s.score)
+//        }
+//        withContext(Dispatchers.Main){
+//            bestPredict.postValue(s.toString())
+//        }
+//        Detection.reset()
+//        return s
+//    }
+
     val listSubjectRes = MutableLiveData<BaseArrayResponse<Subject?>?>()
     fun getListSubject() {
         viewModelScope.launch {
