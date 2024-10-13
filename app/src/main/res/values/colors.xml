@@ -38,4 +38,6 @@
 
     <color name="color_status_camera">#1e1f22</color>
     <color name="color_camera">#282a2e</color>
+    <color name="blue_background">#143EC0</color>
+    <color name="blue_button_filled">#0065de</color>
 </resources>

@@ -14,6 +14,7 @@ import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.login.LoginActivity
 import com.ptit.signlanguage.ui.login.LoginViewModel
 import com.ptit.signlanguage.ui.main.MainActivity
+import com.ptit.signlanguage.ui.welcome.WelcomeActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
@@ -82,7 +83,7 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     private fun goToLogin() {
-        val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+        val intent = Intent(this@SplashActivity, WelcomeActivity::class.java)
         startActivity(intent)
         finish()
     }

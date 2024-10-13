@@ -67,22 +67,22 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                 Log.d(TAG, it.toString())
             }
             // * Mobile detect */
-//            viewModel.bestPredict.observe(this@VideoToTextFragment) {
-//                if (it != null) {
-//                    binding.layoutWrapAnswer.visibility = View.VISIBLE
-//                    binding.vvVideo.visibility = View.VISIBLE
-//                    binding.ivIllu.visibility = View.INVISIBLE
-//                    binding.tvTranslatedesc.visibility = View.INVISIBLE
-//                    binding.btnRecord.text = getString(R.string.str_again)
-//                    if (user?.language.equals(EN)) {
-//                        binding.tvLabel.text = getString(R.string.str_label, it)
-//                    } else {
-//                        binding.tvLabel.text = getString(R.string.str_label, it)
-//                    }
-//                } else {
-//                    binding.ivIllu.visibility = View.VISIBLE
-//                }
-//            }
+            viewModel.bestPredict.observe(this@VideoToTextFragment) {
+                if (it != null) {
+                    binding.layoutWrapAnswer.visibility = View.VISIBLE
+                    binding.vvVideo.visibility = View.VISIBLE
+                    binding.ivIllu.visibility = View.INVISIBLE
+                    binding.tvTranslatedesc.visibility = View.INVISIBLE
+                    binding.btnRecord.text = getString(R.string.str_again)
+                    if (user?.language.equals(EN)) {
+                        binding.tvLabel.text = getString(R.string.str_label, it)
+                    } else {
+                        binding.tvLabel.text = getString(R.string.str_label, it)
+                    }
+                } else {
+                    binding.ivIllu.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
@@ -104,8 +104,6 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
             if (checkCamera()) {
                 getCameraPermission()
             }
-//            val intent = Intent(context, RealtimeDetectActivity::class.java)
-//            startActivityForResult(intent, VIDEO_RECORD_CODE)
             recordVideo()
         }
         binding.btnPickVideo.setOnClickListener {
@@ -116,15 +114,13 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     }
 
     private fun recordVideo() {
-        val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        val intent  = Intent(context, RealtimeDetectActivity::class.java)
         startActivityForResult(intent, VIDEO_RECORD_CODE)
-//        val intent  = Intent(context, RealtimeDetectActivity::class.java)
-//        startActivityForResult(intent, VIDEO_RECORD_CODE)
     }
 
     private fun checkCamera(): Boolean = requireActivity().packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)
 
-    private fun getCameraPermission() {
+    private fun getCameraPermission() { 
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.CAMERA,
@@ -135,8 +131,6 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                 arrayOf(Manifest.permission.CAMERA),
                 CAMERA_PERMISSION_CODE,
             )
-        } else {
-//            recordVideo()
         }
     }
 
@@ -173,12 +167,13 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
             when (resultCode) {
                 RESULT_OK -> {
                     val videoUri: Uri = data?.data!!
+
                     val videoPath = parsePath(videoUri)
                     Log.d(TAG, "$videoPath is the path that you need...")
                     binding.vvVideo.setVideoPath(videoPath)
                     binding.vvVideo.start()
                     prefsHelper.save(RealtimeDetectActivity.CAMERA_SIDE, RealtimeDetectActivity.BACK_CAMERA)
-                    val file = File(videoPath)
+                    val file = videoPath?.let { File(it) }
                     if (file != null) {
                         binding.layoutWrapAnswer.visibility = View.GONE
                         viewModel.videoToText(file, requireContext(), labelType)

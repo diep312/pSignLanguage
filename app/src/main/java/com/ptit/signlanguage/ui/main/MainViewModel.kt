@@ -14,24 +14,16 @@ import com.ptit.signlanguage.network.api.RetrofitBuilder
 import com.ptit.signlanguage.network.model.request.UpdateScoreRequest
 import com.ptit.signlanguage.network.model.request.UpdateUserRequest
 import com.ptit.signlanguage.network.model.response.*
+import com.ptit.signlanguage.network.model.response.VideoToText.Prediction
 import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
 import com.ptit.signlanguage.network.model.response.check_video.CheckVideoRes
 import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWithSubject
 import com.ptit.signlanguage.network.model.response.score_with_subject.UserScore
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
-import com.ptit.signlanguage.ui.tensorflowdetect.Detection
-//import com.ptit.signlanguage.ui.tensorflowdetect.Prediction
 import kotlinx.coroutines.Dispatchers
-import com.ptit.signlanguage.network.model.response.VideoToText.Prediction
-
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import java.io.FileInputStream
-import java.nio.charset.StandardCharsets
 import kotlin.system.measureTimeMillis
 
 open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
@@ -52,7 +44,7 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
                     Log.d("TAG", time.toString())
 
                 }
-                videoToTextRes.postValue(result?.prediction?.get(0))
+                bestPredict.postValue(result?.prediction)
 
             } catch (e: Exception) {
                 Log.d("TAG", "$e")
@@ -60,37 +52,7 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
             }
             hideLoading()
         }
-        // ======Handle on Mobile ========
-//        viewModelScope.launch {
-//                showLoading()
-//                withContext(Dispatchers.Default){
-//                    predictLabel(file,context, label)
-//                }
-//                hideLoading()
-//        }
     }
-//    @RequiresApi(Build.VERSION_CODES.P)
-//    suspend fun predictLabel(file: File,context: Context, label: String): Prediction{
-//        val retriever = MediaMetadataRetriever()
-//        val inputStream = FileInputStream(file.absoluteFile)
-//        retriever.setDataSource(inputStream.fd)
-//        val framesArray = Detection.getListFrames(retriever)
-//        Detection.createClassifier(context, label)
-//        Detection.reset()
-////        var s = Prediction("None", 0f)
-//        var s = Prediction(0,"",0.0)
-//        for(frame in framesArray){
-//            s = Detection.processImage(context,frame)
-//            delay(80)
-//            Log.d("StreamVideoClassifier", s.label + " " + s.score)
-//        }
-//        withContext(Dispatchers.Main){
-//            bestPredict.postValue(s.toString())
-//        }
-//        Detection.reset()
-//        return s
-//    }
-
     val listSubjectRes = MutableLiveData<BaseArrayResponse<Subject?>?>()
     fun getListSubject() {
         viewModelScope.launch {
@@ -176,29 +138,6 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
         }
     }
 
-//    val checkVideoRes = MutableLiveData<Prediction?>()
-//    @RequiresApi(Build.VERSION_CODES.P)
-//    fun checkVideo(file: File, context: Context) {
-//        viewModelScope.launch {
-//            showLoading()
-////            val part = toMultipartBody("file", file)
-////            val result: BaseResponse<CheckVideoRes?>?
-////            try {
-////                withContext(Dispatchers.IO) {
-////
-////                }
-////                checkVideoRes.postValue(result)
-////            } catch (e: Exception) {
-////                handleApiError(e.cause)
-////            }
-//            try {
-//                checkVideoRes.postValue(predictLabel(file,context))
-//            }catch(e: Exception) {
-//                handleApiError(e.cause)
-//            }
-//            hideLoading()
-//        }
-//    }
 
     val scoreWithSubject = MutableLiveData<BaseResponse<ScoreWithSubject?>?>()
     fun getScoreWithSubject(levelIds : Int, subjectIds : Int) {

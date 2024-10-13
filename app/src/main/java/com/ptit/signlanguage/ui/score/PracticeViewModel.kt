@@ -12,7 +12,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ptit.signlanguage.network.api.ApiService
 import com.ptit.signlanguage.ui.main.MainViewModel
-import com.ptit.signlanguage.ui.tensorflowdetect.Prediction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -59,17 +58,17 @@ class PracticeViewModel(
         )
     }
 
-    private fun setScore(
-        prediction: Prediction,
-        labelChosen: String,
-    ) {
-        if(prediction.label.lowercase(Locale.ROOT).trim() == labelChosen.lowercase(Locale.ROOT).trim()) {
-            _score.postValue( (prediction.score * 100).toInt())
-        }
-        else{
-            _score.postValue(0)
-        }
-    }
+//    private fun setScore(
+//        prediction: Prediction,
+//        labelChosen: String,
+//    ) {
+//        if(prediction.label.lowercase(Locale.ROOT).trim() == labelChosen.lowercase(Locale.ROOT).trim()) {
+//            _score.postValue( (prediction.score * 100).toInt())
+//        }
+//        else{
+//            _score.postValue(0)
+//        }
+//    }
 
     @RequiresApi(Build.VERSION_CODES.P)
     fun predictVideo(
