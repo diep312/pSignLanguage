@@ -40,7 +40,7 @@
     <string name="str_video_to_text">Dịch Từ</string>
     <string name="str_text_to_video">Tìm kiếm</string>
     <string name="str_account">Tài khoản</string>
-    <string name="str_course">Khoá hoc</string>
+    <string name="str_course">Khoá học</string>
     <string name="str_search">Tìm kiếm</string>
 
     <string name="str_label">Nhãn: %s</string>
@@ -88,4 +88,5 @@
     <string name="let_s_start">Let\'s start</string>
     <string name="apps_setting">Apps Setting</string>
     <string name="language">Language</string>
+    <string name="recent_course">Recent_Course</string>
 </resources>

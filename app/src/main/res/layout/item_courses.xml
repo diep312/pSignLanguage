@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="160dp"
+        android:background="@drawable/bg_radius_8"
+        android:backgroundTint="@color/container2_bg"
+        android:layout_height="160dp">
+
+        <ImageView
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="-70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/vector_overlay"
+
+            >
+        </ImageView>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lexend_bold"
+            android:layout_marginBottom="40dp"
+            android:text="Sign Language"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.ptit.signlanguage.base.ProgressBarCustomView
+        android:layout_width="50dp"
+        android:layout_height="20dp"/>
+</layout>

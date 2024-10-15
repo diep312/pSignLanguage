@@ -17,7 +17,6 @@ import androidx.camera.core.ImageProxy
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.google.inject.Module
 import com.ptit.signlanguage.base.BaseViewModel
 import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.launch

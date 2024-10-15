@@ -40,4 +40,22 @@
     <color name="color_camera">#282a2e</color>
     <color name="blue_background">#143EC0</color>
     <color name="blue_button_filled">#0065de</color>
+
+<!--    Color palette for course -->
+    <color name="container1_bg">#0099d2</color>
+    <color name="container1_overlay">#143ec0</color>
+    <color name="container1_progressbar">#0099d2</color>
+
+    <color name="container2_bg">#d4a418</color>
+    <color name="container2_overlay">#d24139</color>
+    <color name="container2_progressbar">#d4a418</color>
+
+    <color name="container3_bg">#03b388</color>
+    <color name="container3_overlay">#007d56</color>
+    <color name="container3_progressbar">#03b388</color>
+
+    <color name="container4_bg">#0082e3</color>
+    <color name="container4_overlay">#2ac3ff</color>
+    <color name="container4_progressbar">#0082e3</color>
+
 </resources>
