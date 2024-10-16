@@ -14,29 +14,59 @@
         <ImageView
             android:id="@+id/overlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="-70dp"
+            android:layout_height="126dp"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/vector_overlay"
 
             >
         </ImageView>
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lexend_bold"
             android:layout_marginBottom="40dp"
+            android:fontFamily="@font/lexend_bold"
             android:text="Sign Language"
-            android:textSize="16sp"
+            android:layout_marginTop="32dp"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/overlay" />
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/lexend_medium"
+            android:text="10/30"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/progressBar2"
+            app:layout_constraintBottom_toTopOf="@id/progressBar2" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+
+            android:progressBackgroundTint="#d9d9d9"
+            android:indeterminateDrawable="@drawable/custom_progress_bar_progress"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:max="100"
+            android:progress="30"
+            android:progressTint="@color/container2_progressbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.ptit.signlanguage.base.ProgressBarCustomView
-        android:layout_width="50dp"
-        android:layout_height="20dp"/>
 </layout>
