@@ -1,6 +1,7 @@
 package com.ptit.signlanguage.ui.main.dialog
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,11 @@ class UserInformationEditDialog : DialogFragment() {
             }
         }
     }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
+        return Dialog(requireContext(), R.style.CustomUserEditDialog)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         calendar = Calendar.getInstance()
@@ -43,6 +49,9 @@ class UserInformationEditDialog : DialogFragment() {
         super.onResume()
         val window = dialog!!.window ?: return
         val params = window.attributes
+        window.apply {
+            decorView.setPadding(24,8,24,8)
+        }
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT
         window.attributes = params

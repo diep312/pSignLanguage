@@ -37,6 +37,11 @@
     <style name="buttonBarNegativeButtonStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:textColor">@color/color_primary</item> <!-- button text color -->
     </style>
+    <style name="CustomUserEditDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
     <style name="buttonBarPositiveButtonStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:textColor">@color/color_primary</item> <!-- button text color -->
     </style>
