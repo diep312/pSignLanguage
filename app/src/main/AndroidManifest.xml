@@ -70,7 +70,8 @@
         <activity
             android:name=".ui.score.VideoViewActivity"
             android:screenOrientation="fullSensor" />
-        <activity android:name=".ui.welcome.WelcomeActivity"
+        <activity
+            android:name=".ui.welcome.WelcomeActivity"
             android:screenOrientation="portrait"/>
     </application>
 
