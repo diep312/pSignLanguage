@@ -18,7 +18,7 @@ class WelcomeActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setColorForStatusBar(R.color.color_bg)
+        setColorForStatusBar(R.color.primary)
         setContentView(binding.root)
         onAction()
     }
