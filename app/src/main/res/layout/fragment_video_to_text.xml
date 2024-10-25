@@ -13,25 +13,24 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_action_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="86dp"
+                android:background="@color/color_bg"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lexend_bold"
-                    android:text="@string/str_video_to_text"
-                    android:textAlignment="center"
+                    android:text="@string/translate"
                     android:textColor="@color/blue_button_filled"
-                    android:textSize="34dp"
-                    android:layout_marginTop="32dp"
+                    android:textSize="@dimen/sp34"
                     android:layout_marginStart="24dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,10 +44,9 @@
 
                 <ImageView
                     android:id="@+id/iv_illu"
-                    android:layout_width="362dp"
-                    android:layout_height="315dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
                     android:padding="14dp"
-                    android:layout_marginTop="64dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -102,18 +100,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_record"
                     app:tint="@color/white" />
-
-                <VideoView
-                    android:id="@+id/vv_video"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="260dp"
-                    android:layout_marginTop="24dp"
-                    android:adjustViewBounds="true"
-                    app:layout_constraintVertical_bias="0.9"
-                    app:layout_constraintBottom_toBottomOf="@+id/iv_illu"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_record"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/iv_illu"
-                    app:layout_constraintTop_toTopOf="@+id/iv_illu" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_illu"
+                    android:clipToPadding="true">
+
+                    <VideoView
+                        android:id="@+id/vv_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="360dp"
+                        android:adjustViewBounds="true"
+                        android:layout_gravity="center_horizontal" />
+                </FrameLayout>
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

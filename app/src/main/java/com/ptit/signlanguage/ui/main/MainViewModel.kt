@@ -21,6 +21,7 @@ import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWith
 import com.ptit.signlanguage.network.model.response.score_with_subject.UserScore
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -131,6 +132,7 @@ open class MainViewModel(private val apiService: ApiService) : BaseViewModel() {
                     result = apiService.updateUser(updateUserRequest)
                 }
                 updateUserRes.postValue(result)
+
             } catch (e: Exception) {
                 handleApiError(e.cause)
             }

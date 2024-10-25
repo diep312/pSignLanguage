@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class GridItemDecoration(var offset : Int) : RecyclerView.ItemDecoration() {
+class GridItemDecoration(private var offset : Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -20,26 +20,26 @@ class GridItemDecoration(var offset : Int) : RecyclerView.ItemDecoration() {
             parent.getChildLayoutPosition(view) == 0-> {
                 outRect.top = offset
                 outRect.left = offset
-                outRect.right = offset / 2
-                outRect.bottom = offset / 2
+                outRect.right = offset
+                outRect.bottom = offset
             }
             parent.getChildLayoutPosition(view) == 1 -> {
                 outRect.top = offset
+                outRect.left = offset
                 outRect.right = offset
-                outRect.left = offset / 2
-                outRect.bottom = offset / 2
+                outRect.bottom = offset
             }
             else -> {
                 if(layoutParams.spanIndex % 2 == 0) {
-                    outRect.top = offset / 2
+                    outRect.top = offset
                     outRect.left = offset
-                    outRect.right = offset / 2
-                    outRect.bottom = offset / 2
-                } else {
-                    outRect.top = offset / 2
                     outRect.right = offset
-                    outRect.left = offset / 2
-                    outRect.bottom = offset / 2
+                    outRect.bottom = offset
+                } else {
+                    outRect.top = offset
+                    outRect.right = offset
+                    outRect.left = offset
+                    outRect.bottom = offset
                 }
             }
         }

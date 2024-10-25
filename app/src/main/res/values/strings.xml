@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">CoSign</string>
     <string name="str_loading">Đang xử lý...</string>
-
     <string name="api_default_error">Có lỗi xảy ra!</string>
     <string name="str_authe">Tài khoản không hợp lệ/Nhập sai mật khẩu</string>
     <string name="text_all_has_error_please_try">Có lỗi xảy ra, vui lòng thử lại!</string>
@@ -11,9 +10,8 @@
     <string name="str_ok">OK</string>
     <string name="str_cancel">Hủy</string>
     <string name="str_back_press">Nhấn lần nữa để thoát!</string>
-
-
     <string name="str_phone_number">Số điện thoại</string>
+
     <string name="str_pass">Mật khẩu</string>
     <string name="str_forgot_pass">Quên mật khẩu?</string>
     <string name="str_login">Đăng nhập</string>
@@ -68,25 +66,41 @@
     <string name="str_view_points">Xem điểm</string>
     <string name="str_back">Trở lại</string>
     <string name="str_average">Trung bình</string>
-    <string name="str_translate_desc">Use powerful AI-powered technology to help instantly translate VSL to written text.</string>
-    <string name="str_use_camera">Use my camera</string>
-    <string name="str_go_to_folder">Pick a file from my gallery</string>
-    <string name="str_again">Translate another word</string>
-    <string name="str_novid">No video found. Try recording one!</string>
-    <string name="translate">Translate</string>
-    <string name="str_slidetitle_1">Keep a distance</string>
-    <string name="str_slidedesc_1">For best accuracy prediction, it is recommended that your whole body be visible inside the camera frame.</string>
-    <string name="str_slidetitle_2">Use the indication</string>
-    <string name="str_slidedesc_2">Guide your head to the indication to measure the appropriate distance.</string>
-    <string name="str_slidetitle_3">Start recording!</string>
-    <string name="str_slidedesc_3">Once you’re in position press the record button and record a video.</string>
-    <string name="sample_video">Video demonstration</string>
-    <string name="video_not_available">Video not available</string>
+    <string name="str_translate_desc">Sử dụng công nghệ AI mạnh mẽ để dịch ngôn ngữ ký hiệu Việt Nam thành văn bản ngay lập tức.</string>
+    <string name="str_use_camera">Sử dụng camera của tôi</string>
+    <string name="str_go_to_folder">Chọn tệp từ thư viện</string>
+    <string name="str_again">Dịch từ khác</string>
+    <string name="str_novid">Không tìm thấy video. Hãy thử quay video!</string>
+    <string name="translate">Dịch</string>
+    <string name="str_slidetitle_1">Giữ khoảng cách</string>
+    <string name="str_slidedesc_1">Để có độ chính xác tốt nhất, nên để toàn bộ cơ thể bạn trong khung hình camera.</string>
+    <string name="str_slidetitle_2">Sử dụng chỉ báo</string>
+    <string name="str_slidedesc_2">Dẫn đầu của bạn vào chỉ báo để đo khoảng cách thích hợp.</string>
+    <string name="str_slidetitle_3">Bắt đầu quay!</string>
+    <string name="str_slidedesc_3">Khi bạn ở đúng vị trí, nhấn nút ghi và quay video.</string>
+    <string name="sample_video">Video minh họa</string>
+    <string name="video_not_available">Video không khả dụng</string>
     <string name="practice_your_sign_language">Luyện tập ngôn ngữ kí hiệu!</string>
     <string name="points">điểm</string>
-    <string name="welcome_piece">CoSign is an app for learning \nVietnamese Sign Language!</string>
-    <string name="let_s_start">Let\'s start</string>
-    <string name="apps_setting">Apps Setting</string>
-    <string name="language">Language</string>
-    <string name="recent_course">Recent_Course</string>
+    <string name="welcome_piece">CoSign là ứng dụng để học Ngôn ngữ ký hiệu Việt Nam!</string>
+    <string name="let_s_start">Bắt đầu</string>
+    <string name="apps_setting">Cài đặt ứng dụng</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="recent_courses">Khóa học gần đây</string>
+    <string name="searching">Tìm kiếm</string>
+    <string name="scores">Điểm</string>
+    <string name="see_more">Xem thêm</string>
+    <string name="saved_words">Từ đã lưu</string>
+    <string name="streaks">Chuỗi ngày</string>
+    <string name="signs">Dấu hiệu</string>
+    <string name="theme">Chủ đề</string>
+    <string name="account_settings">Cài đặt tài khoản</string>
+    <string name="edit_account_information">Chỉnh sửa thông tin tài khoản</string>
+    <string name="see_account_details">Xem chi tiết tài khoản</string>
+    <string name="delete_account">Xóa tài khoản</string>
+    <string name="privacy_amp_security"><![CDATA[Quyền riêng tư & Bảo mật]]></string>
+    <string name="see_privacy_policy">Xem chính sách quyền riêng tư</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="light">Sáng</string>
 </resources>
+

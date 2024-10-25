@@ -43,7 +43,6 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
     override fun observerLiveData() {
         viewModel.apply {
             updateUserRes.observe(this@AccountFragment) {
-                Log.d(TAG, it.toString())
                 val intent = Intent(this@AccountFragment.context, SplashActivity::class.java)
                 startActivity(intent)
                 this@AccountFragment.activity?.finishAffinity()
@@ -82,7 +81,7 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
             dialogUserEdit.show(ft, "dialog")
         }
         dataPrepareSpinner()
-        binding.languageSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+        binding.languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -93,19 +92,20 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
                 request.address = user!!.address
                 request.dateOfBirth = user!!.dateOfBirth
                 request.email = user!!.email
-                if (binding.languageSpinner.selectedItem.toString() == "English") {
+                if (id.toInt() == 1) {
                     request.language = "EN"
                 } else {
                     request.language = "VI"
                 }
                 request.name = user!!.name
                 request.phoneNumber = user!!.phoneNumber
+                Log.d("tagneh123", request.language.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-        })
+        }
     }
     private fun dataPrepareSpinner() {
         val language = arrayOf("Tiếng Việt", "English")

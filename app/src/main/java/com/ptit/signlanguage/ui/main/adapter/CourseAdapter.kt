@@ -51,7 +51,7 @@ class CourseAdapter(
                 ContextCompat.getColorStateList(context, colorChoose.background)
             binding.progressBar2.progressTintList =
                 ContextCompat.getColorStateList(context, colorChoose.progressbar)
-            (binding.overlay.drawable as (VectorDrawable)).setTint(
+            (binding.ivOverlay.drawable as (VectorDrawable)).setTint(
                 ContextCompat.getColor(context, colorChoose.overlay),
             )
             binding.parentLayout.setOnClickListener {

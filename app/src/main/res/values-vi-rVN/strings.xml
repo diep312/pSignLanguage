@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CoSign</string>
-    <string name="str_loading">Loading...</string>
+    <string name="str_loading">Đợi xíu...</string>
 
     <string name="api_default_error">Có lỗi xảy ra!</string>
     <string name="str_authe">Tài khoản không hợp lệ/Nhập sai mật khẩu</string>
@@ -84,6 +84,22 @@
     <string name="video_not_available">Video không có sẵn</string>
     <string name="practice_your_sign_language">Luyện tập ngôn ngữ kí hiệu!</string>
     <string name="points">điểm</string>
-    <string name="apps_setting">Apps Setting</string>
-    <string name="language">Language</string>
+    <string name="apps_setting">Cài đặt ứng dụng</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="searching">Tìm kiếm</string>
+    <string name="scores">Điểm</string>
+    <string name="recent_courses">Khoá gần đây</string>
+    <string name="see_more">Xem thêm</string>
+    <string name="saved_words">Từ đã lưu</string>
+    <string name="streaks">Chuỗi</string>
+    <string name="signs">Ký hiệu</string>
+    <string name="theme">Giao diện</string>
+    <string name="account_settings">Cài đặt tài khoản</string>
+    <string name="edit_account_information">Sửa thông tin</string>
+    <string name="see_account_details">Xem thông tin </string>
+    <string name="delete_account">Xoá tài khoản</string>
+    <string name="privacy_amp_security"><![CDATA[Bảo mật & riêng tư ]]></string>
+    <string name="see_privacy_policy">Xem chính sách bảo mật</string>
+    <string name="change_password">Thay đổi mật khẩu</string>
+    <string name="light">Sáng</string>
 </resources>

@@ -27,6 +27,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     private var player: ExoPlayer? = null
     private var playerState = MutableLiveData(false)
     private var replayState = true
+    private var isBookmarked = false
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -43,6 +44,16 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         if (!label.isNullOrEmpty()) {
             binding.tvWord.text = intent.getStringExtra("fix")
             viewModel.getVideo(label!!)
+        }
+
+        binding.bookmark.setOnClickListener(){
+            if(!isBookmarked){
+                binding.bookmark.setImageResource(R.drawable.bookmark_24dp_ffff55_fill1_wght400_grad0_opsz24)
+                isBookmarked = true
+            }else{
+                binding.bookmark.setImageResource(R.drawable.bookmark_24dp_efefef_fill0_wght400_grad0_opsz24)
+                isBookmarked = false
+            }
         }
 
     }

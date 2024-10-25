@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.main.fragment
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import com.ptit.signlanguage.network.model.response.User
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.CourseAdapter
 import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
+import com.ptit.signlanguage.ui.main.fragment.child_fragment.FullSubjectsFragment
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
@@ -83,6 +85,11 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             this.addItemDecoration(LinearItemDecoration(30, LinearLayoutManager.VERTICAL))
             this.hasFixedSize()
+        }
+        binding.tvSeeMoreCourses.setOnClickListener {
+            val intent = Intent(activity,FullSubjectsFragment::class.java)
+            intent.putExtra("language", user!!.language!!)
+            startActivity(intent)
         }
         viewModel.getListSubject()
         viewModel.getListLabel()

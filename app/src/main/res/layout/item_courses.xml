@@ -11,17 +11,37 @@
         android:backgroundTint="@color/container2_bg"
         android:layout_height="160dp">
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:id="@+id/overlay"
             android:layout_width="match_parent"
             android:layout_height="126dp"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/vector_overlay"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/ivOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="126dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/vector_overlay">
+            </ImageView>
+        </androidx.cardview.widget.CardView>
 
-            >
-        </ImageView>
 
+
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/lexend_medium"
+            android:text="10/30"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/progressBar2"
+            app:layout_constraintBottom_toTopOf="@id/progressBar2" />
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -37,19 +57,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/overlay" />
-
-        <TextView
-            android:id="@+id/tvProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/lexend_medium"
-            android:text="10/30"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/progressBar2"
-            app:layout_constraintBottom_toTopOf="@id/progressBar2" />
-
         <ProgressBar
             android:id="@+id/progressBar2"
             style="?android:attr/progressBarStyleHorizontal"
