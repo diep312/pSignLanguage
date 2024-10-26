@@ -3,7 +3,11 @@ package com.ptit.signlanguage.ui.main.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.VectorDrawable
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemCoursesBinding
 import com.ptit.signlanguage.network.model.response.Subject
-import com.ptit.signlanguage.ui.main.fragment.ListSubjectFragment.Color
 import com.ptit.signlanguage.ui.topic.TopicActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
@@ -22,7 +25,6 @@ class CourseAdapter(
     val language: String,
     val context: Context,
 ) : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
-    private val listColor: MutableList<Color> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     fun replace(listSubject: MutableList<Subject?>) {
@@ -30,9 +32,6 @@ class CourseAdapter(
         notifyDataSetChanged()
     }
 
-    init {
-        initListColor()
-    }
 
     inner class CourseViewHolder(
         var binding: ItemCoursesBinding,
@@ -46,14 +45,28 @@ class CourseAdapter(
             } else {
                 binding.title.text = subject?.name ?: EMPTY_STRING
             }
-            val colorChoose = listColor[position % listColor.size]
-            binding.parentLayout.backgroundTintList =
-                ContextCompat.getColorStateList(context, colorChoose.background)
-            binding.progressBar2.progressTintList =
-                ContextCompat.getColorStateList(context, colorChoose.progressbar)
-            (binding.overlay.drawable as (VectorDrawable)).setTint(
-                ContextCompat.getColor(context, colorChoose.overlay),
-            )
+
+            val styleResId = subject?.id?.let { getStyleByCourseId(context, it) } ?: R.style.DefaultCourseStyle
+            val styledAttributes = context.obtainStyledAttributes(styleResId, R.styleable.CourseStyle)
+
+            val courseColor = styledAttributes.getColor(R.styleable.CourseStyle_courseColor, Color.TRANSPARENT)
+            binding.parentLayout.backgroundTintList = ColorStateList.valueOf(courseColor)
+
+            val progressBarColor = styledAttributes.getColor(R.styleable.CourseStyle_courseProgressBarColor, Color.TRANSPARENT)
+            binding.progressBar2.progressTintList = ColorStateList.valueOf(progressBarColor)
+
+            val overlayColor = styledAttributes.getColor(R.styleable.CourseStyle_courseOverlayColor, Color.TRANSPARENT)
+            (binding.overlay.drawable as (VectorDrawable)).setTint(overlayColor)
+
+            val courseIcon = styledAttributes.getResourceId(R.styleable.CourseStyle_courseIcon, 0)
+            if (courseIcon != 0) {
+                binding.courseIcon.setImageResource(courseIcon)
+            }
+
+            // Recycle the attributes after use
+            styledAttributes.recycle()
+
+
             binding.parentLayout.setOnClickListener {
                 val intent = Intent(binding.root.context, TopicActivity::class.java)
                 intent.putExtra(Constants.KEY_SUBJECT, subject)
@@ -77,34 +90,29 @@ class CourseAdapter(
         return CourseViewHolder(item)
     }
 
-    private fun initListColor() {
-        repeat(5) {
-            listColor.addAll(
-                listOf(
-                    Color(
-                        background = R.color.container1_bg,
-                        overlay = R.color.container1_overlay,
-                        progressbar = R.color.container1_progressbar,
-                    ),
-                    Color(
-                        background = R.color.container2_bg,
-                        overlay = R.color.container2_overlay,
-                        progressbar = R.color.container2_progressbar,
-                    ),
-                    Color(
-                        background = R.color.container3_bg,
-                        overlay = R.color.container3_overlay,
-                        progressbar = R.color.container3_progressbar,
-                    ),
-                    Color(
-                        background = R.color.container4_bg,
-                        overlay = R.color.container4_overlay,
-                        progressbar = R.color.container4_progressbar,
-                    ),
-                ),
-            )
+
+    fun getStyleByCourseId(context: Context, courseId: Int): Int {
+        val typedArray = context.resources.obtainTypedArray(R.array.course_styles_array)
+        for (i in 0 until typedArray.length()) {
+            val styleResId = typedArray.getResourceId(i, 0)
+            if (styleResId != 0) {
+                val styledAttributes = context.obtainStyledAttributes(styleResId, R.styleable.CourseStyle)
+                val idFromXml = styledAttributes.getInt(R.styleable.CourseStyle_courseId, -1)
+
+                // Debugging logs
+                Log.d("CourseAdapter", "Checking style: $styleResId, ID from XML: $idFromXml, Input ID: $courseId")
+
+                if (idFromXml == courseId) {
+                    styledAttributes.recycle()
+                    typedArray.recycle()
+                    return styleResId // Return matching style resource
+                }
+                styledAttributes.recycle()
+            }
         }
+        typedArray.recycle()
     }
+
 
     override fun onBindViewHolder(
         holder: CourseViewHolder,

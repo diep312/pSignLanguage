@@ -18,12 +18,12 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/lexend_bold"
                 android:text="@string/str_search"
                 android:textColor="@color/primary"
                 android:textSize="34sp"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -45,6 +45,7 @@
             android:fontFamily="@font/roboto_regular"
             android:lines="1"
             android:maxLines="1"
+            android:textColorHint="@color/black"
             android:padding="@dimen/dp12"
             android:textSize="@dimen/sp13"
             app:layout_constraintBottom_toTopOf="@id/rv_label"

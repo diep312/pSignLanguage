@@ -84,6 +84,9 @@
     <string name="video_not_available">Video không có sẵn</string>
     <string name="practice_your_sign_language">Luyện tập ngôn ngữ kí hiệu!</string>
     <string name="points">điểm</string>
-    <string name="apps_setting">Apps Setting</string>
-    <string name="language">Language</string>
+    <string name="apps_setting">Cài đặt ứng dụng</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name='str_see_more'>Xem thêm</string>
+    <string name="str_saved_words">Những từ đã lưu</string>
+    <string name="str_recent_course">Khoá học gần đây</string>
 </resources>

@@ -82,7 +82,10 @@
     <string name="str_slidedesc_3">Once you’re in position press the record button and record a video.</string>
     <string name="video_not_available">Video not available</string>
     <string name="practice_your_sign_language">Practice your sign language!</string>
-    <string name="points">diee</string>
+    <string name="points">pts</string>
     <string name="apps_setting">Apps Setting</string>
     <string name="language">Language</string>
+    <string name='str_see_more'>See more</string>
+    <string name="str_saved_words">Saved words</string>
+    <string name="str_recent_course">Recent courses</string>
 </resources>

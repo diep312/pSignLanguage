@@ -41,7 +41,7 @@
     <color name="blue_background">#143EC0</color>
     <color name="blue_button_filled">#0065de</color>
 
-<!--    Color palette for course -->
+
     <color name="container1_bg">#0099d2</color>
     <color name="container1_overlay">#143ec0</color>
     <color name="container1_progressbar">#0099d2</color>

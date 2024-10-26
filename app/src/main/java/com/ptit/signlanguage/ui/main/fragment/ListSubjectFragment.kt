@@ -1,5 +1,6 @@
 package com.ptit.signlanguage.ui.main.fragment
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +17,7 @@ import com.ptit.signlanguage.databinding.FragmentCourseBinding
 import com.ptit.signlanguage.network.model.response.Course
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.ui.coursedetail.CourseDetaillActivity
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.CourseAdapter
 import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
@@ -63,7 +65,7 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         user = GsonUtils.deserialize(userJson, User::class.java)
 
         mAdapter = if(user?.language.equals(Constants.EN)) {
-            CourseAdapter(mutableListOf(), Constants.EN,requireContext())
+            CourseAdapter(mutableListOf(), Constants.EN, requireContext())
         } else {
             CourseAdapter(mutableListOf(), Constants.VI, requireContext())
         }
@@ -72,21 +74,30 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         } else {
             LabelAdapter(mutableListOf(), Constants.VI)
         }
+
         binding.rvRecentCourses.apply {
             this.adapter = mAdapter
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             this.addItemDecoration(LinearItemDecoration(50, LinearLayoutManager.HORIZONTAL))
             this.hasFixedSize()
         }
+
         binding.rvSavedWords.apply{
             adapter = mSavedLabelAdapter
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             this.addItemDecoration(LinearItemDecoration(30, LinearLayoutManager.VERTICAL))
             this.hasFixedSize()
         }
+
+        binding.tvSeeMoreCourses.setOnClickListener {
+            val intent = Intent(this@ListSubjectFragment.requireContext(), CourseDetaillActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
         viewModel.getListSubject()
         viewModel.getListLabel()
-
     }
 
     override fun initListener() {

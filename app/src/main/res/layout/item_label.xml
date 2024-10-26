@@ -13,31 +13,23 @@
         android:padding="@dimen/dp8"
         android:id="@+id/btn_next">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imv_label"
-            android:layout_width="@dimen/dp128"
-            android:layout_height="@dimen/dp90"
-            android:scaleType="centerCrop"
-            android:src="@drawable/im_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius="@dimen/dp8" />
+
 
         <TextView
             android:id="@+id/tv_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp24"
+            android:layout_marginStart="@dimen/dp16"
+            android:paddingVertical="@dimen/dp10"
             android:ellipsize="end"
-            android:fontFamily="@font/lexend_bold"
+            android:fontFamily="@font/lexend_regular"
             android:maxLines="3"
             android:text="Label"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imv_label"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/dp10"
             app:layout_constraintTop_toTopOf="parent" />
 
 

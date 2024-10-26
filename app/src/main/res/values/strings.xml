@@ -89,4 +89,7 @@
     <string name="apps_setting">Apps Setting</string>
     <string name="language">Language</string>
     <string name="recent_course">Recent_Course</string>
+    <string name='str_see_more'>Xem thêm</string>
+    <string name="str_saved_words">Những từ đã lưu</string>
+    <string name="str_recent_course">Khoá học gần đây</string>
 </resources>

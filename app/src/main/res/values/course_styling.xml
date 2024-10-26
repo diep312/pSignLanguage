@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Traffic">
+        <item name="courseId">7</item>
+        <item name="courseColor">@color/container1_bg</item>
+        <item name="courseIcon">@drawable/ic_traffic</item>
+        <item name="courseOverlayColor">@color/container1_overlay</item>
+        <item name="courseProgressBarColor">@color/container1_progressbar</item>
+    </style>
+
+
+    <style name="DailyCommunications">
+        <item name="courseId">11</item>
+        <item name="courseColor">@color/container2_bg</item>
+        <item name="courseIcon">@drawable/ic_daily_communication</item>
+        <item name="courseOverlayColor">@color/container2_overlay</item>
+        <item name="courseProgressBarColor">@color/container2_progressbar</item>
+    </style>
+
+
+    <style name="Medical">
+        <item name="courseId">9</item>
+        <item name="courseColor">@color/container3_bg</item>
+        <item name="courseIcon">@drawable/ic_health</item>
+        <item name="courseOverlayColor">@color/container3_overlay</item>
+        <item name="courseProgressBarColor">@color/container3_progressbar</item>
+    </style>
+
+
+    <style name="Time">
+        <item name="courseId">6</item>
+        <item name="courseColor">@color/container4_bg</item>
+        <item name="courseIcon">@drawable/ic_timer</item>
+        <item name="courseOverlayColor">@color/container4_overlay</item>
+        <item name="courseProgressBarColor">@color/container4_progressbar</item>
+    </style>
+
+
+    <style name="Emotion">
+        <item name="courseId">12</item>
+        <item name="courseColor">@color/container1_bg</item>
+        <item name="courseIcon">@drawable/ic_emotions</item>
+        <item name="courseOverlayColor">@color/container1_overlay</item>
+        <item name="courseProgressBarColor">@color/container1_progressbar</item>
+    </style>
+
+    <style name="School">
+        <item name="courseId">13</item>
+        <item name="courseColor">@color/container3_bg</item>
+        <item name="courseIcon">@drawable/ic_school</item>
+        <item name="courseOverlayColor">@color/container3_overlay</item>
+        <item name="courseProgressBarColor">@color/container3_progressbar</item>
+    </style>
+
+
+    <style name="Pronouns">
+        <item name="courseId">8</item>
+        <item name="courseColor">@color/container4_bg</item>
+        <item name="courseIcon">@drawable/ic_pronouns</item>
+        <item name="courseOverlayColor">@color/container4_overlay</item>
+        <item name="courseProgressBarColor">@color/container4_progressbar</item>
+    </style>
+
+
+    <style name="Adjectives">
+        <item name="courseId">14</item>
+        <item name="courseColor">@color/container2_bg</item>
+        <item name="courseIcon">@drawable/ic_adjective</item>
+        <item name="courseOverlayColor">@color/container2_overlay</item>
+        <item name="courseProgressBarColor">@color/container2_progressbar</item>
+    </style>
+
+    <style name="Number">
+        <item name="courseId">5</item>
+        <item name="courseColor">@color/container1_bg</item>
+        <item name="courseIcon">@drawable/ic_number</item>
+        <item name="courseOverlayColor">@color/container1_overlay</item>
+        <item name="courseProgressBarColor">@color/container1_progressbar</item>
+    </style>
+
+
+    <style name="Food">
+        <item name="courseId">10</item>
+        <item name="courseColor">@color/container4_bg</item>
+        <item name="courseIcon">@drawable/ic_food</item>
+        <item name="courseOverlayColor">@color/container4_overlay</item>
+        <item name="courseProgressBarColor">@color/container4_progressbar</item>
+    </style>
+
+
+    <style name="CommonWords">
+        <item name="courseId">2</item>
+        <item name="courseColor">@color/container2_bg</item>
+        <item name="courseIcon">@drawable/ic_common_words</item>
+        <item name="courseOverlayColor">@color/container2_overlay</item>
+        <item name="courseProgressBarColor">@color/container2_progressbar</item>
+    </style>
+
+
+    <style name="DailyActivities">
+        <item name="courseId">3</item>
+        <item name="courseColor">@color/container1_bg</item>
+        <item name="courseIcon">@drawable/ic_daily_activities</item>
+        <item name="courseOverlayColor">@color/container1_overlay</item>
+        <item name="courseProgressBarColor">@color/container1_progressbar</item>
+    </style>
+
+
+    <style name="Test">
+        <item name="courseId">19</item>
+        <item name="courseColor">@color/container3_bg</item>
+        <item name="courseIcon">@drawable/ic_test</item>
+        <item name="courseOverlayColor">@color/container3_overlay</item>
+        <item name="courseProgressBarColor">@color/container3_progressbar</item>
+    </style>
+
+
+    <style name="Cooking">
+        <item name="courseId">17</item>
+        <item name="courseColor">@color/container2_bg</item>
+        <item name="courseIcon">@drawable/ic_cooking</item>
+        <item name="courseOverlayColor">@color/container2_overlay</item>
+        <item name="courseProgressBarColor">@color/container2_progressbar</item>
+    </style>
+
+    <style name="Level">
+        <item name="courseId">18</item>
+        <item name="courseColor">@color/container4_bg</item>
+        <item name="courseIcon">@drawable/ic_levels</item>
+        <item name="courseOverlayColor">@color/container4_overlay</item>
+        <item name="courseProgressBarColor">@color/container4_progressbar</item>
+    </style>
+
+
+    <style name="DefaultCourseStyle">
+        <item name="courseColor">@color/container1_bg</item>
+        <item name="courseIcon">@drawable/ic_default</item>
+        <item name="courseOverlayColor">@color/container1_overlay</item>
+        <item name="courseProgressBarColor">@color/container1_progressbar</item>
+    </style>
+</resources>

@@ -100,15 +100,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             }
         })
 
-        if(binding.vp.currentItem == PAGE_0){
-            setLightIconStatusBar(false)
-            setColorForStatusBar(R.color.color_primary)
-        }
-        else{
-            setLightIconStatusBar(true)
-            setColorForStatusBar(R.color.color_bg)
-        }
-
+        setLightIconStatusBar(true)
+        setColorForStatusBar(R.color.color_bg)
     }
 
     override fun observerLiveData() {
