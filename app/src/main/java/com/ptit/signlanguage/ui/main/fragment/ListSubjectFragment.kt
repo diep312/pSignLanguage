@@ -4,6 +4,7 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ import com.ptit.signlanguage.ui.main.fragment.child_fragment.FullSubjectsFragmen
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
@@ -39,12 +41,11 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
     }
     override fun observerLiveData() {
         viewModel.apply {
-            listSubjectRes.observe(this@ListSubjectFragment) {
-                if(it?.body != null) {
-                    val list = it.body.toMutableList().apply {
-                        sortBy { it!!.id }
+            lifecycleScope.launch {
+                listSubjectWithProgress.collect{ subjects ->
+                    if(subjects.size > 3){
+                        mAdapter.replace(subjects.subList(0, 3).toMutableList())
                     }
-                    mAdapter.replace(list.subList(0,3))
                 }
             }
             errorMessage.observe(this@ListSubjectFragment) {
@@ -56,6 +57,13 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
                     // Assume recent labels fetch API
                     mSavedLabelAdapter.replace(list.subList(5, 17).also { it.add(Label(isShow = false)) })
                 }
+            }
+            userProgress.observe(this@ListSubjectFragment){
+                binding.tvScore.text = it.totalScore.toString()
+                binding.tvSigns.text = it.signs.toString()
+            }
+            userSubjectProgress.observe(this@ListSubjectFragment){
+                Log.d("TAG", it.toString())
             }
         }
     }
@@ -91,14 +99,17 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
             intent.putExtra("language", user!!.language!!)
             startActivity(intent)
         }
-        viewModel.getListSubject()
         viewModel.getListLabel()
-
+        viewModel.getUserProgress()
+        viewModel.getSubjectWithProgress()
     }
 
     override fun initListener() {
 
     }
+
+
+
     data class Color(
         val background: Int,
         val overlay: Int,

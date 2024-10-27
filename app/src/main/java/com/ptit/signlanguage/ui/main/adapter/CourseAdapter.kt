@@ -47,10 +47,15 @@ class CourseAdapter(
                 binding.title.text = subject?.name ?: EMPTY_STRING
             }
             val colorChoose = listColor[position % listColor.size]
+            binding.tvProgress.text = "${subject?.learnedLabels ?: 0}/${subject?.totalLabels ?: 0}"
             binding.parentLayout.backgroundTintList =
                 ContextCompat.getColorStateList(context, colorChoose.background)
-            binding.progressBar2.progressTintList =
-                ContextCompat.getColorStateList(context, colorChoose.progressbar)
+            binding.progressBar2.apply {
+                progressTintList =
+                    ContextCompat.getColorStateList(context, colorChoose.progressbar)
+                max = subject?.totalLabels ?: 0
+                progress = subject?.learnedLabels ?: 0
+            }
             (binding.ivOverlay.drawable as (VectorDrawable)).setTint(
                 ContextCompat.getColor(context, colorChoose.overlay),
             )
