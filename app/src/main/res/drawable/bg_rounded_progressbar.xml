@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!-- Background for the unloaded area -->
+    <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
+        <shape
+            android:shape="rectangle">
+            <corners android:radius="20dp" /> <!-- Rounded corners to match the border -->
+        </shape>
+        <color android:color="#d9d9d9"/>
+    </item>
+</layer-list>

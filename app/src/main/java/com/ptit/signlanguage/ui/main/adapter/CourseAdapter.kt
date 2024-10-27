@@ -1,61 +1,65 @@
 package com.ptit.signlanguage.ui.main.adapter
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.VectorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
-import com.ptit.signlanguage.databinding.ItemCourseBinding
+import com.ptit.signlanguage.databinding.ItemCoursesBinding
 import com.ptit.signlanguage.network.model.response.Subject
+import com.ptit.signlanguage.ui.main.fragment.ListSubjectFragment.Color
 import com.ptit.signlanguage.ui.topic.TopicActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 
 class CourseAdapter(
-    var litSubject: MutableList<Subject?>,
+    var listSubject: MutableList<Subject?>,
     val language: String,
+    val context: Context,
 ) : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
-    // Fix cứng sẽ xóa sau
-    private val listFixedImage: List<Int> =
-        listOf(
-            R.drawable.big5,
-            R.drawable.p1,
-            R.drawable.p10,
-            R.drawable.p5,
-            R.drawable.p2,
-            R.drawable.p3,
-            R.drawable.p4,
-            R.drawable.p8,
-            R.drawable.p11,
-            R.drawable.p7,
-            R.drawable.p9,
-            R.drawable.p6,
-        )
+    private val listColor: MutableList<Color> = mutableListOf()
 
-    fun replace(litSubject: MutableList<Subject?>) {
-        this.litSubject = litSubject
+    @SuppressLint("NotifyDataSetChanged")
+    fun replace(listSubject: MutableList<Subject?>) {
+        this.listSubject = listSubject
         notifyDataSetChanged()
     }
 
+    init {
+        initListColor()
+    }
+
     inner class CourseViewHolder(
-        var binding: ItemCourseBinding,
+        var binding: ItemCoursesBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
             subject: Subject?,
             position: Int,
         ) {
             if (language == Constants.EN) {
-                binding.tvCourselabel.text = subject?.name_en ?: EMPTY_STRING
+                binding.title.text = subject?.name_en ?: EMPTY_STRING
             } else {
-                binding.tvCourselabel.text = subject?.name ?: EMPTY_STRING
+                binding.title.text = subject?.name ?: EMPTY_STRING
             }
-            if(position < listFixedImage.size) {
-                binding.imvVideo.setImageResource(listFixedImage[position])
-            }else{
-                binding.imvVideo.setImageResource(R.drawable.demo)
+            val colorChoose = listColor[position % listColor.size]
+            binding.tvProgress.text = "${subject?.learnedLabels ?: 0}/${subject?.totalLabels ?: 0}"
+            binding.parentLayout.backgroundTintList =
+                ContextCompat.getColorStateList(context, colorChoose.background)
+            binding.progressBar2.apply {
+                progressTintList =
+                    ContextCompat.getColorStateList(context, colorChoose.progressbar)
+                max = subject?.totalLabels ?: 0
+                progress = subject?.learnedLabels ?: 0
             }
-            binding.btnJoin.setOnClickListener {
+            (binding.ivOverlay.drawable as (VectorDrawable)).setTint(
+                ContextCompat.getColor(context, colorChoose.overlay),
+            )
+            binding.parentLayout.setOnClickListener {
                 val intent = Intent(binding.root.context, TopicActivity::class.java)
                 intent.putExtra(Constants.KEY_SUBJECT, subject)
                 binding.root.context.startActivity(intent)
@@ -69,21 +73,50 @@ class CourseAdapter(
     ): CourseViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val item =
-            DataBindingUtil.inflate<ItemCourseBinding>(
+            DataBindingUtil.inflate<ItemCoursesBinding>(
                 layoutInflater,
-                R.layout.item_course,
+                R.layout.item_courses,
                 parent,
                 false,
             )
         return CourseViewHolder(item)
     }
 
+    private fun initListColor() {
+        repeat(5) {
+            listColor.addAll(
+                listOf(
+                    Color(
+                        background = R.color.container1_bg,
+                        overlay = R.color.container1_overlay,
+                        progressbar = R.color.container1_progressbar,
+                    ),
+                    Color(
+                        background = R.color.container2_bg,
+                        overlay = R.color.container2_overlay,
+                        progressbar = R.color.container2_progressbar,
+                    ),
+                    Color(
+                        background = R.color.container3_bg,
+                        overlay = R.color.container3_overlay,
+                        progressbar = R.color.container3_progressbar,
+                    ),
+                    Color(
+                        background = R.color.container4_bg,
+                        overlay = R.color.container4_overlay,
+                        progressbar = R.color.container4_progressbar,
+                    ),
+                ),
+            )
+        }
+    }
+
     override fun onBindViewHolder(
         holder: CourseViewHolder,
         position: Int,
     ) {
-        holder.bind(litSubject[position], position)
+        holder.bind(listSubject[position], position)
     }
 
-    override fun getItemCount(): Int = litSubject.size
+    override fun getItemCount(): Int = listSubject.size
 }

@@ -34,7 +34,7 @@
                         android:fontFamily="@font/lexend_bold"
                         android:text="@string/str_welcome_again"
                         android:textColor="@color/primary"
-                        android:textSize="48sp"
+                        android:textSize="36sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,6 +46,7 @@
                         android:background="@drawable/bg_btn"
                         android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
+                        android:fontFamily="@font/roboto_regular"
                         android:hint="@string/str_enter_email"
                         android:inputType="textEmailAddress"
                         android:lines="1"
@@ -54,7 +55,6 @@
                         android:padding="@dimen/dp12"
                         android:paddingStart="@dimen/dp56"
                         android:paddingEnd="@dimen/dp12"
-                        android:fontFamily="@font/roboto_regular"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color"
                         android:textSize="@dimen/sp14"
@@ -88,9 +88,9 @@
                         android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_btn"
-                        android:fontFamily="@font/roboto_regular"
                         android:backgroundTint="@color/color_gray"
                         android:ellipsize="end"
+                        android:fontFamily="@font/roboto_regular"
                         android:hint="@string/str_enter_pass"
                         android:inputType="textPassword"
                         android:lines="1"
@@ -140,15 +140,14 @@
                         android:id="@+id/tv_forgot_pass"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="28dp"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="@font/montserrat_bold"
-                        android:padding="@dimen/dp14"
+                        android:padding="@dimen/dp8"
                         android:text="@string/str_forgot_pass"
                         android:textColor="@color/color_highlight"
                         android:textSize="@dimen/sp14"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.937"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/edt_password" />
 
                     <Button
@@ -157,9 +156,9 @@
                         android:layout_height="42dp"
                         android:layout_marginTop="25dp"
                         android:background="@drawable/btn_login"
-                        app:backgroundTint="@color/button_login"
-                        android:text="@string/str_login"
                         android:fontFamily="@font/montserrat_semi_bold"
+                        android:text="@string/str_login"
+                        app:backgroundTint="@color/button_login"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass" />
@@ -169,8 +168,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
-                        android:text="@string/str_register_next"
                         android:fontFamily="@font/roboto_regular"
+                        android:text="@string/str_register_next"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -193,13 +192,12 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:src="@drawable/br_login2x"
-            android:layout_marginBottom="-10px"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_app_icon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent">
 
         </ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>

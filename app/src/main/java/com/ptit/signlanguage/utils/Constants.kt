@@ -30,7 +30,7 @@ object Constants {
 
     const val KEY_LABEL = "KEY_LABEL"
     const val KEY_SUBJECT = "KEY_SUBJECT"
-
+    const val MODELFILE = "model6e.tflite"
     const val EN = "EN"
     const val VI = "VI"
 

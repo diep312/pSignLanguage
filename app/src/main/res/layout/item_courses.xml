@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="160dp"
+        android:background="@drawable/bg_radius_8"
+        android:backgroundTint="@color/container2_bg"
+        android:layout_height="160dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/ivOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="126dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/vector_overlay">
+            </ImageView>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/lexend_medium"
+            android:text="10/30"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/progressBar2"
+            app:layout_constraintBottom_toTopOf="@id/progressBar2" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/lexend_bold"
+            android:text="Sign Language"
+            android:layout_marginTop="32dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/overlay" />
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+
+            android:progressBackgroundTint="#d9d9d9"
+            android:indeterminateDrawable="@drawable/custom_progress_bar_progress"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            tools:max="100"
+            tools:progress="30"
+            android:progressTint="@color/container2_progressbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -8,8 +8,10 @@ import com.ptit.signlanguage.network.model.response.check_video.CheckVideoRes
 import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWithSubject
 import com.ptit.signlanguage.network.model.response.score_with_subject.UserScore
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
+import com.ptit.signlanguage.ui.main.MainViewModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.http.*
 
 interface ApiService {
@@ -71,4 +73,13 @@ interface ApiService {
         @Field("levelIds") levelIds: Int,
         @Field("subjectIds") subjectIds: Int,
     ): BaseResponse<ScoreWithSubject?>?
+
+    @GET("/api/v1/user/score")
+    suspend fun getUserProgress(): BaseResponseV2<MainViewModel.ProgressTrack>
+
+
+    @GET("/api/v1/user/progress/subject/{subject}")
+    suspend fun getUserProgress(@Path("subject") subject: Int
+    ): BaseResponseV2<MainViewModel.SubjectResult>
+
 }

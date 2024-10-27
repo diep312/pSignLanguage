@@ -11,33 +11,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="176dp"
+            android:layout_width="wrap_content"
             android:layout_height="36dp"
+            android:paddingHorizontal="12dp"
             android:layout_marginStart="16dp"
             android:background="@drawable/bg_radius_30"
             android:backgroundTint="@color/color_gray"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="162dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/bg_btn_register_topic"
-                android:backgroundTint="@color/color_primary"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:paddingHorizontal="@dimen/dp12"
-                android:paddingVertical="@dimen/dp8"
-                android:text="@string/str_register"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp12"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_rank"
@@ -48,8 +30,6 @@
                 android:textSize="@dimen/sp16"
                 android:fontFamily="@font/roboto_regular"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_register"
-                app:layout_constraintHorizontal_bias="0.571"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.533" />

@@ -93,16 +93,16 @@
             android:id="@+id/time_seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
+            android:layout_marginTop="48dp"
             android:paddingHorizontal="40dp"
-            android:layout_marginTop="48dp">
+            app:layout_constraintTop_toBottomOf="@id/layout_video_guile">
 
             <SeekBar
+                android:id="@+id/seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/seek_bar"
                 android:layout_marginTop="10dp"
-                android:backgroundTint="@color/color_primary"/>
+                android:backgroundTint="@color/color_primary" />
 
             <TextView
                 android:id="@+id/tv_curtime"
@@ -123,10 +123,19 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_light"
-                android:textColor="#6f747c"
-                android:text="--:--"/>
+                android:text="--:--"
+                android:textColor="#6f747c" />
         </RelativeLayout>
 
+        <ImageView
+            android:id="@+id/bookmark"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/bookmark_24dp_efefef_fill0_wght400_grad0_opsz24"
+            app:layout_constraintBottom_toTopOf="@+id/time_seekbar"
+            app:layout_constraintEnd_toEndOf="@+id/time_seekbar"
+            app:layout_constraintTop_toBottomOf="@+id/layout_video_guile" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -156,6 +165,6 @@
                 android:src="@drawable/ic_play" />
 
         </RelativeLayout>
-
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

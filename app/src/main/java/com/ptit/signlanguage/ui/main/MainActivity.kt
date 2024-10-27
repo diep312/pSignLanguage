@@ -53,7 +53,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
         user = GsonUtils.deserialize(userJson, User::class.java)
         // config language
-        changeLanguage()
 
         myViewPagerAdapter = MainViewPagerAdapter(this)
         binding.vp.offscreenPageLimit = 4
@@ -130,14 +129,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         backPressedTime = System.currentTimeMillis()
     }
 
-    private fun changeLanguage() {
-        val resources: Resources = this@MainActivity.resources
-        val configuration: Configuration = resources.configuration
 
-        val locale = Locale(if(user?.language.equals("EN")) "en" else "vi")
-        configuration.setLocale(locale)
-        resources.updateConfiguration(configuration, resources.displayMetrics)
-    }
 
     private val REQUEST_EXTERNAL_STORAGE = 1
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
