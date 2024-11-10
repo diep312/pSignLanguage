@@ -6,5 +6,6 @@ class Label(
     val labelVn: String? = null,
     val levelId: Int? = null,
     val subjectId: Int? = null,
-    var isShow: Boolean = true
+    var isShow: Boolean = true,
+    var isExpanded: Boolean = false
 )

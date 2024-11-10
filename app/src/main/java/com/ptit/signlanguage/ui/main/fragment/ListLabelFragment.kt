@@ -17,6 +17,8 @@ import com.ptit.signlanguage.utils.Constants.EN
 import com.ptit.signlanguage.utils.Constants.VI
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 
 class ListLabelFragment : BaseFragment<MainViewModel, FragmentTextToVideoBinding>() {
     lateinit var adapter: LabelAdapter
@@ -50,9 +52,15 @@ class ListLabelFragment : BaseFragment<MainViewModel, FragmentTextToVideoBinding
         user = GsonUtils.deserialize(userJson, User::class.java)
 
         adapter = if(user?.language.equals(EN)) {
-            LabelAdapter(mutableListOf(), EN)
+            LabelAdapter(mutableListOf(), EN,requireContext())
         } else {
-            LabelAdapter(mutableListOf(), VI)
+            LabelAdapter(mutableListOf(), VI, requireContext())
+        }
+        adapter.getVideoCallback = { label ->
+            callbackFlow {
+                trySend(viewModel.getVideoFlow(label))
+                awaitClose()
+            }
         }
         binding.rvLabel.adapter = adapter
 //        binding.rvLabel.addItemDecoration(LinearItemDecoration(dpToPx(12), VERTICAL))

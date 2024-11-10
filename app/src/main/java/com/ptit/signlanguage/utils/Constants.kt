@@ -30,10 +30,10 @@ object Constants {
 
     const val KEY_LABEL = "KEY_LABEL"
     const val KEY_SUBJECT = "KEY_SUBJECT"
-    const val MODELFILE = "model6e.tflite"
     const val EN = "EN"
     const val VI = "VI"
 
     const val API_AI_URL = "http://ptitsignlanguage.edu.vn/"
     const val API_KEY = "W8W6K-3N7KK-PXB9H-8TD8W-BWTH9"
+    const val API_GEMINI = "AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc"
 }

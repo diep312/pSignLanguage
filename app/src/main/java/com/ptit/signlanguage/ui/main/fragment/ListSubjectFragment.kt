@@ -78,9 +78,9 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
             CourseAdapter(mutableListOf(), Constants.VI, requireContext())
         }
         mSavedLabelAdapter = if(user?.language.equals(Constants.EN)) {
-            LabelAdapter(mutableListOf(), Constants.EN)
+            LabelAdapter(mutableListOf(), Constants.EN, requireContext())
         } else {
-            LabelAdapter(mutableListOf(), Constants.VI)
+            LabelAdapter(mutableListOf(), Constants.VI, requireContext())
         }
         binding.rvRecentCourses.apply {
             this.adapter = mAdapter
@@ -96,7 +96,7 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         }
         binding.tvSeeMoreCourses.setOnClickListener {
             val intent = Intent(activity,FullSubjectsFragment::class.java)
-            intent.putExtra("language", user!!.language!!)
+            intent.putExtra("language", user?.language ?: Constants.VI)
             startActivity(intent)
         }
         viewModel.getListLabel()
