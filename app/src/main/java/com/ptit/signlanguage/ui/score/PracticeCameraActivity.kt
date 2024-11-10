@@ -282,9 +282,9 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                 if(it != null && it >= 0){
                     val dialog = ResultDialog()
                     dialog.setScore(it)
-//                    if(it > labelScore!!.toInt()){
+                    if(it > labelScore!!.toInt()){
                         viewModel.updateUserScore(labelId!!.toInt(), it.toFloat())
-//                    }
+                    }
                     dialog.show(supportFragmentManager, "Test")
                 }
             }

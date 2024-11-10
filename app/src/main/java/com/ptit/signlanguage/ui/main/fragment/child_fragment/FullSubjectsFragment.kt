@@ -66,6 +66,9 @@ class FullSubjectsFragment : AppCompatActivity() {
         } else {
             mAdapter = CourseAdapter(mutableListOf(), Constants.VI, this)
         }
+        mAdapter.addRecentCourse = {
+            viewModel.recentCourse.add(it)
+        }
         binding.rvsubject.apply {
             adapter = mAdapter
             layoutManager = GridLayoutManager(this@FullSubjectsFragment, 2)

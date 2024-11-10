@@ -34,7 +34,8 @@
                         android:fontFamily="@font/lexend_bold"
                         android:text="@string/str_create_account_here"
                         android:textColor="@color/primary"
-                        android:textSize="48dp"
+                        android:textSize="32dp"
+                        android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -287,7 +288,7 @@
                         android:layout_marginTop="@dimen/dp14"
                         android:paddingVertical="@dimen/dp12"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Bằng việc đăng ký, bạn đồng ý với điều khoản và chính sách"
+                        android:text="@string/b_ng_vi_c_ng_k_b_n_ng_v_i_i_u_kho_n_v_ch_nh_s_ch"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp14"
                         app:layout_constraintEnd_toEndOf="parent"
