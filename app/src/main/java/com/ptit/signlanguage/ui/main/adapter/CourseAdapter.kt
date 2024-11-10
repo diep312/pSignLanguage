@@ -24,6 +24,7 @@ class CourseAdapter(
 ) : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
     private val listColor: MutableList<Color> = mutableListOf()
 
+    var addRecentCourse: ((Int) -> Unit ) ? = null
     @SuppressLint("NotifyDataSetChanged")
     fun replace(listSubject: MutableList<Subject?>) {
         this.listSubject = listSubject
@@ -63,6 +64,7 @@ class CourseAdapter(
                 val intent = Intent(binding.root.context, TopicActivity::class.java)
                 intent.putExtra(Constants.KEY_SUBJECT, subject)
                 binding.root.context.startActivity(intent)
+                addRecentCourse?.invoke(subject!!.id)
             }
         }
     }

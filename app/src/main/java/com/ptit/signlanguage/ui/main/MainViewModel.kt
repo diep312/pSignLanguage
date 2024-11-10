@@ -124,7 +124,7 @@ open class MainViewModel(
         }
     }
 
-    suspend fun getVideoFlow(label: String): String{
+    suspend fun getVideoFlow(label: String): String {
         return apiService.getVideo(label)?.body?.video_url ?: ""
     }
 
@@ -313,15 +313,15 @@ open class MainViewModel(
             listSubjectWithProgress.value = listDetailSubject
             hideLoading()
         }
-    @OptIn(FlowPreview::class)
+
     fun getGeminiResponse(language: String, word: String) = callbackFlow<String> {
-        var inputEN = "What does $word means and give a sentence using it." +
+        val inputEN = "What does $word means and give a sentence using it." +
                 " The output same like: Meaning: To speak negatively or critically about someone or something, often in a malicious or hurtful way. It can also be used to mean slander or defame.\n" +
                 "\n" +
                 "Example:\n" +
                 "\n" +
                 "\"...\"\n"
-        var inputVN = "$word nghĩa là gì và cho một câu ví dụ về từ đó. " +
+        val inputVN = "$word nghĩa là gì và cho một câu ví dụ về từ đó. " +
                 "Câu trả lời dạng: Định nghĩa: Là ....\n" +
                 "\n" +
                 "Ví dụ:\n" +
@@ -337,38 +337,18 @@ open class MainViewModel(
                 maxOutputTokens = 4096
             },
         )
-        model.generateContentStream(if(language==Constants.EN) inputEN else inputVN)
+        model.generateContentStream(if (language == Constants.EN) inputEN else inputVN)
             .flowOn(Dispatchers.IO)
             .distinctUntilChanged()
             .collect { response ->
-                if(response.text?.isNotEmpty() ==true){
+                if (response.text?.isNotEmpty() == true) {
                     trySend(response.text ?: "")
                 }
             }
         awaitClose()
     }
-//    fun getSubjectWithProgress() = flow {
-//        showLoading()
-//        val subjects = apiService.getListSubject()?.body ?: emptyList()
-//        subjects.asFlow() // Convert list to flow
-//            .onEach { subject ->
-//                subject?.let {
-//                    val detailSubject = apiService.getUserProgress(it.id).body
-//                    emit(
-//                        subject.copy(
-//                            totalLabels = detailSubject.totalLabels,
-//                            learnedLabels = detailSubject.numLearnedLabel,
-//                        )
-//                    )
-//                }
-//            }
-//            .onCompletion {
-//                hideLoading()
-//            }
-//            .launchIn(viewModelScope)
-//    }.catch { e ->
-//        // Handle exceptions, or emit a state if needed
-//        hideLoading()
-//        println("Error occurred: ${e.message}")
-//    }
+
+    val recentCourse = mutableListOf<Int>()
+
+
 }

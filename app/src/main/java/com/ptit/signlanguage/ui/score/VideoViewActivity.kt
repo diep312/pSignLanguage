@@ -177,9 +177,9 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                             player!!.play()
                         },1000)
                     }else{
-                        playerState.postValue(false)
+                        player!!.seekBack()
                         player!!.pause()
-//                        player!!.seekBack()
+                        playerState.postValue(false)
                     }
                 }
             }

@@ -6,6 +6,10 @@ plugins {
 
 android {
     compileSdk 34
+    File file = getRootProject().file("local.properties")
+    Properties properties = new Properties()
+    properties.load(new FileInputStream(file))
+
 
     defaultConfig {
         applicationId "com.ptit.signlanguage"
@@ -13,7 +17,6 @@ android {
         targetSdk 33
         versionCode 1
         versionName "2.1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -21,8 +24,8 @@ android {
         debug {
             try {
                 minifyEnabled false
-                buildConfigField "String", "API_URL", "\"http://113.22.56.109:8089/\""
-                buildConfigField "String", "API_GEMINI", "\"AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc\""
+                buildConfigField("String", "API_URL", "\"http://113.22.56.109:8089/\"")
+                buildConfigField("String", "API_GEMINI", properties.getProperty("apiGeminiAPIKey"))
                 debuggable true
             } catch(e) {
                 throw e
@@ -30,8 +33,7 @@ android {
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "API_URL", "\"http://113.22.56.109:8089/\""
-            buildConfigField "String", "API_GEMINI", "\"AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc\""
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 

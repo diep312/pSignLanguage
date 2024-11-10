@@ -42,9 +42,11 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
     override fun observerLiveData() {
         viewModel.apply {
             lifecycleScope.launch {
-                listSubjectWithProgress.collect{ subjects ->
-                    if(subjects.size > 3){
-                        mAdapter.replace(subjects.subList(0, 3).toMutableList())
+                listSubjectWithProgress.collect { subjects ->
+                    if (subjects.isNotEmpty()) {
+                        mAdapter.replace(subjects.filter {
+                            viewModel.recentCourse.contains(it?.id)
+                        }.toMutableList())
                     }
                 }
             }
@@ -91,7 +93,7 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         binding.rvSavedWords.apply{
             adapter = mSavedLabelAdapter
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            this.addItemDecoration(LinearItemDecoration(30, LinearLayoutManager.VERTICAL))
+            this.addItemDecoration(LinearItemDecoration(20, LinearLayoutManager.VERTICAL))
             this.hasFixedSize()
         }
         binding.tvSeeMoreCourses.setOnClickListener {
