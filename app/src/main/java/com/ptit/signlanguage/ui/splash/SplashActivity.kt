@@ -56,7 +56,7 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         val resources: Resources = this@SplashActivity.resources
         val configuration: Configuration = resources.configuration
         Log.d("tagneh", user?.language.toString())
-        val locale = java.util.Locale(if (user?.language.equals("EN")) "en" else "vi")
+        val locale = java.util.Locale(if (user?.language.equals(Constants.EN)) "en" else "vi")
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }

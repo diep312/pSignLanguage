@@ -6,7 +6,10 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.generationConfig
 import com.google.gson.annotations.SerializedName
+import com.ptit.signlanguage.BuildConfig
 import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.network.api.ApiService
 import com.ptit.signlanguage.network.api.RetrofitBuilder
@@ -17,10 +20,17 @@ import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextRespo
 import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWithSubject
 import com.ptit.signlanguage.network.model.response.score_with_subject.UserScore
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
+import com.ptit.signlanguage.utils.Constants
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -112,6 +122,10 @@ open class MainViewModel(
             }
             hideLoading()
         }
+    }
+
+    suspend fun getVideoFlow(label: String): String{
+        return apiService.getVideo(label)?.body?.video_url ?: ""
     }
 
     val subjectInfoRes = MutableLiveData<BaseResponse<SubjectWrap?>?>()
@@ -299,6 +313,40 @@ open class MainViewModel(
             listSubjectWithProgress.value = listDetailSubject
             hideLoading()
         }
+    @OptIn(FlowPreview::class)
+    fun getGeminiResponse(language: String, word: String) = callbackFlow<String> {
+        var inputEN = "What does $word means and give a sentence using it." +
+                " The output same like: Meaning: To speak negatively or critically about someone or something, often in a malicious or hurtful way. It can also be used to mean slander or defame.\n" +
+                "\n" +
+                "Example:\n" +
+                "\n" +
+                "\"...\"\n"
+        var inputVN = "$word nghĩa là gì và cho một câu ví dụ về từ đó. " +
+                "Câu trả lời dạng: Định nghĩa: Là ....\n" +
+                "\n" +
+                "Ví dụ:\n" +
+                "\n" +
+                "\"...\"\n"
+        val model = GenerativeModel(
+            modelName = "gemini-1.5-pro",
+            apiKey = Constants.API_GEMINI,
+            generationConfig = generationConfig {
+                temperature = 0.15f
+                topK = 32
+                topP = 1f
+                maxOutputTokens = 4096
+            },
+        )
+        model.generateContentStream(if(language==Constants.EN) inputEN else inputVN)
+            .flowOn(Dispatchers.IO)
+            .distinctUntilChanged()
+            .collect { response ->
+                if(response.text?.isNotEmpty() ==true){
+                    trySend(response.text ?: "")
+                }
+            }
+        awaitClose()
+    }
 //    fun getSubjectWithProgress() = flow {
 //        showLoading()
 //        val subjects = apiService.getListSubject()?.body ?: emptyList()
