@@ -480,7 +480,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onKeepVideo() {
-//        viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
+        viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
         scoreLabel(currentVideoUri)
     }
 
