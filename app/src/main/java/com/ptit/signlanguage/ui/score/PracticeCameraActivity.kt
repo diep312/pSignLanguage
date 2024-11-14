@@ -90,7 +90,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
     private val videoCapture by lazy { VideoCapture.withOutput(recorder) }
 
-//    VIEW INITIALIZATION
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[PracticeViewModel::class.java]
     }
@@ -114,10 +113,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
             labelScore = "0"
         }
 
-        if (!label.isNullOrEmpty()) {
-            binding.translate.text = intent.getStringExtra("fix")
-            viewModel.getVideo(label!!)
-        }
+
 
         bottomSheetBehavior.peekHeight = 264
 
@@ -151,9 +147,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
         binding.apply {
             countDown.visibility = View.GONE
-            backbtn.setOnClickListener{
-                onBackPressedDispatcher.onBackPressed()
-            }
+
             getCameraPermission()
             if(permissionGranted){
                 cameraExecutor = Executors.newSingleThreadExecutor()

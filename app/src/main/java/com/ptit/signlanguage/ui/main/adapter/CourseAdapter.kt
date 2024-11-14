@@ -111,6 +111,7 @@ class CourseAdapter(
             }
         }
         typedArray.recycle()
+        return R.style.DefaultCourseStyle;
     }
 
 
