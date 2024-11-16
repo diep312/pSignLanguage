@@ -33,7 +33,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ui.main.fragment.child_fragment.FullSubjectsFragment"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait" />
@@ -63,7 +64,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.coursedetail.CourseDetaillActivity"
+            android:name=".ui.coursedetail.CourseDetailActivity"
             />
 
         <activity
@@ -73,7 +74,8 @@
         <activity
             android:name=".ui.score.VideoViewActivity"
             android:screenOrientation="fullSensor" />
-        <activity android:name=".ui.welcome.WelcomeActivity"
+        <activity
+            android:name=".ui.welcome.WelcomeActivity"
             android:screenOrientation="portrait"/>
     </application>
 

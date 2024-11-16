@@ -46,6 +46,8 @@ class CourseAdapter(
                 binding.title.text = subject?.name ?: EMPTY_STRING
             }
 
+            binding.tvProgress.text = "${subject?.learnedLabels ?: 0}/${subject?.totalLabels ?: 0}"
+
             val styleResId = subject?.id?.let { getStyleByCourseId(context, it) } ?: R.style.DefaultCourseStyle
             val styledAttributes = context.obtainStyledAttributes(styleResId, R.styleable.CourseStyle)
 
@@ -53,7 +55,11 @@ class CourseAdapter(
             binding.parentLayout.backgroundTintList = ColorStateList.valueOf(courseColor)
 
             val progressBarColor = styledAttributes.getColor(R.styleable.CourseStyle_courseProgressBarColor, Color.TRANSPARENT)
-            binding.progressBar2.progressTintList = ColorStateList.valueOf(progressBarColor)
+            binding.progressBar2.apply{
+                progressTintList = ColorStateList.valueOf(progressBarColor)
+                max = subject?.totalLabels ?: 0
+                progress = subject?.learnedLabels ?: 0
+            }
 
             val overlayColor = styledAttributes.getColor(R.styleable.CourseStyle_courseOverlayColor, Color.TRANSPARENT)
             (binding.overlay.drawable as (VectorDrawable)).setTint(overlayColor)
@@ -65,7 +71,6 @@ class CourseAdapter(
 
             // Recycle the attributes after use
             styledAttributes.recycle()
-
 
             binding.parentLayout.setOnClickListener {
                 val intent = Intent(binding.root.context, TopicActivity::class.java)

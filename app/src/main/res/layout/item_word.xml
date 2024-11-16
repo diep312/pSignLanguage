@@ -5,46 +5,39 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="16dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_radius_8"
         android:backgroundTint="@color/color_secondary"
         android:padding="@dimen/dp8">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imv_label"
-            android:layout_width="@dimen/dp65"
-            android:layout_height="@dimen/dp65"
-            android:scaleType="centerCrop"
-            android:src="@drawable/im_default"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius="@dimen/dp8" />
         <LinearLayout
             android:id="@+id/textLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imv_label"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="@dimen/dp13"
             android:orientation="vertical"
-            android:layout_marginHorizontal="@dimen/dp13">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <TextView
                 android:id="@+id/tv_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxWidth="@dimen/dp200"
+                android:layout_marginBottom="@dimen/dp6"
                 android:ellipsize="end"
+                android:maxWidth="@dimen/dp200"
                 android:maxLines="3"
-                android:textColor="@color/black"
-                android:textSize="20sp"
                 android:text="Label"
-                android:layout_marginBottom="@dimen/dp6"/>
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_highlight"
                 android:text="0 points"
+                android:textColor="@color/color_highlight"
                 android:textSize="@dimen/sp14" />
         </LinearLayout>
 
@@ -58,7 +51,7 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:textAllCaps="true"
-            android:drawableStart="@drawable/arrow_forward_ios_24dp_e8eaed_fill0_wght400_grad0_opsz24"
+            android:drawableStart="@drawable/ic_next_arrow"
             android:paddingStart="@dimen/dp8"
             android:paddingEnd="@dimen/dp8"
             android:textColor="@color/white"

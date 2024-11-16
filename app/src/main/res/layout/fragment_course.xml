@@ -94,7 +94,6 @@
                             app:layout_constraintStart_toStartOf="@+id/imgVector1"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <!-- Streaks TextView -->
                         <TextView
                             android:id="@+id/tvStreaks"
                             android:layout_width="wrap_content"
@@ -112,17 +111,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/lexend_regular"
-                            android:text="Streaks"
+                            android:text="@string/streaks"
                             android:textColor="@color/white"
                             app:layout_constraintTop_toBottomOf="@id/tvStreaks"
                             app:layout_constraintEnd_toEndOf="@+id/tvStreaks"
                             app:layout_constraintStart_toStartOf="@+id/tvStreaks" />
-                        <!-- Signs TextView -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/lexend_regular"
-                            android:text="Signs"
+                            android:text="@string/signs"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toTopOf="@+id/tvSigns"
                             app:layout_constraintEnd_toEndOf="@+id/tvSigns"
@@ -153,12 +151,11 @@
                         android:gravity="center_vertical"
                         android:paddingBottom="8dp">
 
-                        <!-- Recent courses TextView -->
                         <TextView
                             android:id="@+id/tvRecentCourses"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/str_recent_course"
+                            android:text="@string/recent_courses"
                             android:textSize="21sp"
                             android:textColor="#000000"
                             android:layout_weight="1"
@@ -169,7 +166,7 @@
                             android:id="@+id/tvSeeMoreCourses"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/str_see_more"
+                            android:text="@string/see_more"
                             android:textSize="14sp"
                             android:textColor="#0082e3"
                             android:layout_gravity="end|center_vertical"
@@ -188,7 +185,6 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         />
 
-                    <!-- Second LinearLayout for Saved words -->
                     <LinearLayout
                         android:id="@+id/containerSavedWord"
                         android:layout_width="match_parent"
@@ -199,23 +195,23 @@
                         android:gravity="center_vertical"
                         android:paddingBottom="8dp">
 
-                        <!-- Saved words TextView -->
                         <TextView
                             android:id="@+id/tvSavedWords"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/str_saved_words"
+                            android:text="@string/saved_words"
                             android:textSize="21sp"
                             android:textColor="#000000"
                             android:layout_weight="1"
                             android:textStyle="bold"
                             android:fontFamily="@font/lexend_regular" />
 
+                        <!-- See more TextView -->
                         <TextView
                             android:id="@+id/tvSeeMoreWords"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/str_see_more"
+                            android:text="@string/see_more"
                             android:textSize="14sp"
                             android:textColor="#0082e3"
                             android:layout_gravity="end|center_vertical"
@@ -223,7 +219,6 @@
 
                     </LinearLayout>
 
-                    <!-- Second RecyclerView for Saved words (Vertical) -->
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvSavedWords"
                         android:layout_width="match_parent"

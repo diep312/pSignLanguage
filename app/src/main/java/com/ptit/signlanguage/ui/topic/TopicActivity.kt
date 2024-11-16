@@ -46,6 +46,10 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
             TopicAdapter(mutableListOf(), Constants.VI, this)
         }
 
+        binding.progressBar.max = subject?.totalLabels ?: 0
+        binding.progressBar.progress = subject?.learnedLabels ?: 0
+        binding.tvProgressPercentage.text  = "${subject?.learnedLabels}/"+"${subject?.totalLabels}"
+
         binding.rvTopic.adapter = adapter
         subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
         subject?.let {
@@ -89,3 +93,5 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
         }
     }
 }
+
+

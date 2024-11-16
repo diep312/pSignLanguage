@@ -1,14 +1,23 @@
 package com.ptit.signlanguage.ui.score
+import android.content.res.ColorStateList
 import android.os.Handler
+import android.os.Looper
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.text.intl.Locale
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
@@ -18,15 +27,21 @@ import com.ptit.signlanguage.databinding.AcivityVideoViewBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.view_model.ViewModelFactory
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 
 class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>() {
     private var label: String? = null
+    private var language: String? = Constants.EN
     private var player: ExoPlayer? = null
     private var playerState = MutableLiveData(false)
     private var replayState = true
+    private var isBookmarked = false
+    private var responseGemini = ""
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -39,17 +54,60 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         btnPlay()
         binding.layout.setPadding(0, getStatusBarHeight(this@VideoViewActivity), 0, 0)
         label = intent.getStringExtra(Constants.KEY_LABEL)
+        language = intent.getStringExtra("Language")
 
         if (!label.isNullOrEmpty()) {
             binding.tvWord.text = intent.getStringExtra("fix")
             viewModel.getVideo(label!!)
         }
 
+        binding.btnSave.setOnClickListener(){
+            if(!isBookmarked){
+                binding.btnSave.setImageResource(R.drawable.ic_favourite)
+                isBookmarked = true
+                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
+            }else{
+                binding.btnSave.setImageResource(R.drawable.ic_favourite_filled)
+                Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show()
+                isBookmarked = false
+            }
+        }
+
+
+        binding.btnInfo.setOnClickListener {
+            binding.btnInfo.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_highlight))
+
+            val animation = AnimationUtils.loadAnimation(this, R.anim.fade_scale_pop)
+            binding.layoutGenText.startAnimation(animation)
+            binding.layoutGenText.visibility = View.VISIBLE
+
+            if (!TextUtils.isEmpty(responseGemini)) {
+                binding.tvGenText.text = responseGemini
+                binding.animTextLoader.visibility = View.GONE
+            } else {
+                lifecycleScope.launch {
+                    viewModel.getGeminiResponse(language!!, intent.getStringExtra("fix")!!)
+                        .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                        .collect {
+                            responseGemini += it
+                            binding.tvGenText.text = responseGemini
+                            binding.animTextLoader.visibility = View.GONE
+                        }
+                }
+            }
+        }
     }
     override fun initListener() {
         binding.imvBack.setOnClickListener { finish() }
     }
     override fun observerLiveData() {
+        playerState.observe(this@VideoViewActivity){
+            if(it){
+                binding.btnPlay.setImageResource(R.drawable.ic_pause)
+            }else{
+                binding.btnPlay.setImageResource(R.drawable.ic_play)
+            }
+        }
         viewModel.apply {
             videoRes.observe(this@VideoViewActivity) {
                 if (!it?.body?.video_url.isNullOrEmpty()) {
@@ -65,6 +123,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                 Log.d(TAG, it.toString())
             }
         }
+
     }
     private fun btnPlay(){
         binding.btnPlay.setOnClickListener(){
@@ -83,15 +142,14 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                 onBackPressed()
             }
         }
-//        binding.btnReplay.setOnClickListener(){
-//            if(replayState){
-//                replayState = false
-//                binding.btnReplay.setImageResource(R.drawable.ic_replay)
-//            }else{
-//                replayState = true
-//                binding.btnReplay.setImageResource(R.drawable.ic_replay_clicked)
-//            }
-//        }
+        binding.btnReplay.setOnClickListener(){
+            if(replayState){
+                replayState = false
+                binding.btnReplay.setImageResource(R.drawable.ic_replay)
+            }else{
+                replayState = true
+            }
+        }
     }
     @Synchronized
     private fun initializePlayer(uri: String) {
@@ -107,15 +165,8 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             exoPlayer.volume = 0f
         }
         player!!.prepare()
-        btnPlay()
-        playerState.observe(this@VideoViewActivity){
-            if(it){
-                binding.btnPlay.setImageResource(R.drawable.ic_pause)
-            }else{
-                binding.btnPlay.setImageResource(R.drawable.ic_play)
-            }
-        }
         playerState.postValue(false)
+        btnPlay()
         player!!.addListener(object : Player.Listener{
             override fun onPlaybackStateChanged(playbackState: Int) {
                 super.onPlaybackStateChanged(playbackState)
@@ -130,10 +181,14 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                 }
                 if(playbackState == Player.STATE_ENDED){
                     if(replayState){
-                        player!!.seekTo(0)
-                        player!!.play()
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            player!!.seekTo(0)
+                            player!!.play()
+                        },1000)
                     }else{
                         playerState.postValue(false)
+                        player!!.pause()
+//                        player!!.seekBack()
                     }
                 }
             }
@@ -141,7 +196,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if(fromUser) {
-                    player!!.seekTo((player!!.duration.toFloat() * (progress.toFloat() / 100)).toLong())
+                    player!!.seekTo((progress.toFloat()*1000).toLong())
                 }
             }
 

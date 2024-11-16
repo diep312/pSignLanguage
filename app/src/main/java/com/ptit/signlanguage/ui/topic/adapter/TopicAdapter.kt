@@ -29,11 +29,10 @@ class TopicAdapter(var listLevel: MutableList<Level?>, val language : String, va
 
     inner class TopicViewHolder(var binding: ItemTopicBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(level: Level?) {
-            // name level
             binding.tvRank.text = binding.root.context.getString(R.string.str_level, level?.levelId ?: EMPTY_STRING)
 
             // list label
-            val adapter = LessonAdapter(mutableListOf(), language)
+            val adapter = LessonAdapter(mutableListOf(), slanguage)
             val layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
             binding.rvLabel.layoutManager = layoutManager
             binding.rvLabel.adapter = adapter

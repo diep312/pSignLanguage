@@ -108,11 +108,17 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         label = intent.getStringExtra(Constants.KEY_LABEL)
         labelScore = intent.getStringExtra("SCORE")
         labelId = intent.getStringExtra("ID")
+
         Log.d("TAG", "onCreate: $labelId $label $labelScore")
         if (labelScore == null){
             labelScore = "0"
         }
 
+
+        if (!label.isNullOrEmpty()) {
+            binding.translate.text = intent.getStringExtra("fix")
+            viewModel.getVideo(label!!)
+        }
 
 
         bottomSheetBehavior.peekHeight = 264
@@ -474,7 +480,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onKeepVideo() {
-//        viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
+        viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
         scoreLabel(currentVideoUri)
     }
 

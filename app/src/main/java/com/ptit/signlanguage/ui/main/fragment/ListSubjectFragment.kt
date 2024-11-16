@@ -4,27 +4,23 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
-import com.ptit.signlanguage.base.GridItemDecoration
 import com.ptit.signlanguage.base.LinearItemDecoration
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.FragmentCourseBinding
-import com.ptit.signlanguage.network.model.response.Course
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.network.model.response.User
-import com.ptit.signlanguage.ui.coursedetail.CourseDetaillActivity
+import com.ptit.signlanguage.ui.coursedetail.CourseDetailActivity
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.CourseAdapter
 import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
-import kotlin.random.Random
+import kotlinx.coroutines.launch
 
 class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
     private lateinit var mAdapter: CourseAdapter
@@ -39,23 +35,30 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
     }
     override fun observerLiveData() {
         viewModel.apply {
-            listSubjectRes.observe(this@ListSubjectFragment) {
-                if(it?.body != null) {
-                    val list = it.body.toMutableList().apply {
-                        sortBy { it!!.id }
+            lifecycleScope.launch {
+                listSubjectWithProgress.collect{ subjects ->
+                    if(subjects.size > 3){
+                        mAdapter.replace(subjects.subList(0, 3).toMutableList())
                     }
-                    mAdapter.replace(list.subList(0,3))
                 }
             }
             errorMessage.observe(this@ListSubjectFragment) {
                 Toast.makeText(this@ListSubjectFragment.requireContext(), getString(it), Toast.LENGTH_LONG).show()
             }
+
             listLabelRes.observe(this@ListSubjectFragment){ result ->
                 if(result?.body != null) {
                     val list = result.body.toMutableList().also { it.sortBy { comparator -> comparator!!.id } }
-                    // Assume recent labels fetch API
                     mSavedLabelAdapter.replace(list.subList(5, 17).also { it.add(Label(isShow = false)) })
                 }
+            }
+
+            userProgress.observe(this@ListSubjectFragment){
+                binding.tvScore.text = it.totalScore.toString()
+                binding.tvSigns.text = it.signs.toString()
+            }
+            userSubjectProgress.observe(this@ListSubjectFragment){
+                Log.d("TAG", it.toString())
             }
         }
     }
@@ -70,9 +73,9 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
             CourseAdapter(mutableListOf(), Constants.VI, requireContext())
         }
         mSavedLabelAdapter = if(user?.language.equals(Constants.EN)) {
-            LabelAdapter(mutableListOf(), Constants.EN)
+            LabelAdapter(mutableListOf(), Constants.EN, requireContext())
         } else {
-            LabelAdapter(mutableListOf(), Constants.VI)
+            LabelAdapter(mutableListOf(), Constants.VI, requireContext())
         }
 
         binding.rvRecentCourses.apply {
@@ -90,19 +93,23 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         }
 
         binding.tvSeeMoreCourses.setOnClickListener {
-            val intent = Intent(this@ListSubjectFragment.requireContext(), CourseDetaillActivity::class.java)
+            val intent = Intent(activity,CourseDetailActivity::class.java)
+            intent.putExtra("language", user?.language ?: Constants.VI)
             startActivity(intent)
         }
 
-
-
         viewModel.getListSubject()
         viewModel.getListLabel()
+        viewModel.getUserProgress()
+        viewModel.getSubjectWithProgress()
     }
 
     override fun initListener() {
 
     }
+
+
+
     data class Color(
         val background: Int,
         val overlay: Int,

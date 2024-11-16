@@ -2,6 +2,8 @@ package com.ptit.signlanguage.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +19,8 @@ import com.ptit.signlanguage.ui.main.MainActivity
 import com.ptit.signlanguage.ui.welcome.WelcomeActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.GsonUtils
+import com.ptit.signlanguage.utils.Language
+import com.ptit.signlanguage.utils.Locale
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
 @SuppressLint("CustomSplashScreen")
@@ -48,6 +52,14 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         }
     }
 
+    private fun changeLanguage() {
+        val resources: Resources = this@SplashActivity.resources
+        val configuration: Configuration = resources.configuration
+        Log.d("tagneh", user?.language.toString())
+        val locale = java.util.Locale(if (user?.language.equals(Constants.EN)) "en" else "vi")
+        configuration.setLocale(locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+    }
     override fun initListener() {
 
     }
@@ -63,6 +75,7 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                     prefsHelper.save(Constants.KEY_PREF_DATA_LOGIN, dataLogin)
                     prefsHelper.save(Constants.KEY_TOKEN, it.body.token?.accessToken)
                     resetApiService()
+                    changeLanguage()
                     goToMain()
                 } else {
                     Toast.makeText(this@SplashActivity, it?.message.toString(), Toast.LENGTH_LONG).show()

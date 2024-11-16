@@ -2,7 +2,9 @@ package com.ptit.signlanguage.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseActivity
@@ -15,6 +17,8 @@ class WelcomeActivity : AppCompatActivity(){
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setColorForStatusBar(R.color.primary)
         setContentView(binding.root)
         onAction()
     }
@@ -25,5 +29,15 @@ class WelcomeActivity : AppCompatActivity(){
             startActivity(intent)
             finish()
         }
+    }
+    fun setColorForStatusBar(color: Int) {
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+        // finally change the color
+        window.statusBarColor = ContextCompat.getColor(this, color)
     }
 }

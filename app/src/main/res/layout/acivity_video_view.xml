@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Action Bar layout remains fixed at the top -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
@@ -50,139 +51,202 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/layout_video_guile"
-            android:layout_width="0dp"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="@dimen/dp12"
             android:layout_marginTop="60dp"
-            android:background="@color/transparent"
-            android:outlineProvider="background"
-            app:cardCornerRadius="@dimen/dp8"
-            app:layout_constraintDimensionRatio="1.76:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_action_bar">
+            app:layout_constraintTop_toBottomOf="@id/layout_action_bar"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <androidx.media3.ui.PlayerView
-                android:id="@+id/vv_guide"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@color/color_gray"
-                android:backgroundTint="@color/color_gray"
-                app:default_artwork="@color/color_gray"
-                app:use_artwork="true"
-                app:auto_show="false"/>
+                android:layout_height="wrap_content">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/anim_video_loader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="0.5"
-                android:scaleY="0.5"
-                app:lottie_rawRes="@raw/video_loader"
-                android:layout_gravity="center"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/layout_video_guile"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/dp12"
+                    android:background="@color/color_bg"
+                    app:cardCornerRadius="@dimen/dp8"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintDimensionRatio="1.76:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.cardview.widget.CardView>
+                    <androidx.media3.ui.PlayerView
+                        android:id="@+id/vv_guide"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@color/color_gray"
+                        android:backgroundTint="@color/color_gray"
+                        app:default_artwork="@color/color_gray"
+                        app:use_artwork="true"
+                        app:auto_show="false"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
-            android:layout_marginTop="@dimen/dp18"
-            android:paddingHorizontal="@dimen/dp20">
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/anim_video_loader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        app:lottie_rawRes="@raw/video_loader"
+                        android:layout_gravity="center"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        />
 
-            <ImageView
-                android:id="@+id/btn_info"
-                android:layout_width="@dimen/dp20"
-                android:layout_height="@dimen/dp20"
-                android:src="@drawable/ic_info"
-                android:layout_alignParentRight="true"/>
+                </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/btn_save"
-                android:layout_width="@dimen/dp20"
-                android:layout_height="@dimen/dp20"
-                android:src="@drawable/ic_favourite"
-                android:layout_toLeftOf="@id/btn_info"
-                android:layout_marginRight="@dimen/dp20"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
+                    android:layout_marginTop="@dimen/dp18"
+                    android:paddingHorizontal="@dimen/dp20">
 
-        </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/btn_info"
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:src="@drawable/ic_info"
+                        android:layout_alignParentRight="true"/>
 
-        <RelativeLayout
-            android:id="@+id/time_seekbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
-            android:paddingHorizontal="40dp"
-            android:layout_marginTop="48dp">
+                    <ImageView
+                        android:id="@+id/btn_save"
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:src="@drawable/ic_favourite"
+                        android:layout_toLeftOf="@id/btn_info"
+                        android:layout_marginRight="@dimen/dp20"/>
 
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/seek_bar"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/color_primary"/>
+                </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_curtime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/seek_bar"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/montserrat_light"
-                android:text="--:--"
-                android:textColor="#6f747c" />
+                <RelativeLayout
+                    android:id="@+id/time_seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/layout_video_guile"
+                    android:paddingHorizontal="40dp"
+                    android:layout_marginTop="48dp">
 
-            <TextView
-                android:id="@+id/tv_totaltime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/seek_bar"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/montserrat_light"
-                android:textColor="#6f747c"
-                android:text="--:--"/>
-        </RelativeLayout>
+                    <SeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/seek_bar"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/color_primary"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/time_seekbar"
-            android:layout_marginTop="45dp"
-            android:paddingHorizontal="60dp">
+                    <TextView
+                        android:id="@+id/tv_curtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/seek_bar"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="--:--"
+                        android:textColor="#6f747c" />
+
+                    <TextView
+                        android:id="@+id/tv_totaltime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/seek_bar"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="--:--"
+                        android:textColor="#6f747c" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:paddingHorizontal="60dp"
+                    app:layout_constraintTop_toBottomOf="@id/time_seekbar">
 
 
+                    <ImageView
+                        android:id="@+id/btn_replay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_replay"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="@color/colorYellow"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:padding="@dimen/dp10"
+                        android:scaleX='-1'
+                        />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_replay"
-                android:background="@drawable/bg_circle"
-                android:backgroundTint="@color/colorYellow"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:padding="@dimen/dp10"
-                android:scaleX='-1'
-                android:id="@+id/btn_replay"/>
+                    <ImageView
+                        android:id="@+id/btn_play"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="@color/colorRed"
+                        android:padding="20dp"
+                        android:src="@drawable/ic_play" />
 
-            <ImageView
-                android:id="@+id/btn_play"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/bg_circle"
-                android:backgroundTint="@color/colorRed"
-                android:padding="20dp"
-                android:src="@drawable/ic_play" />
+                </RelativeLayout>
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layout_gen_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginVertical="@dimen/dp16"
+                    android:layout_marginHorizontal="@dimen/dp16"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:paddingVertical="@dimen/dp12"
+                        android:paddingHorizontal="@dimen/dp8"
+                        android:text="@string/str_meaning"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textSize="@dimen/sp16"
+                        />
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp240"
+                        android:background="@drawable/bg_radius_20"
+                        android:paddingHorizontal="@dimen/dp20"
+                        android:paddingVertical="@dimen/dp13">
+                        <TextView
+                            android:id="@+id/tv_gen_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@color/white"
+                            />
+                    </ScrollView>
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/anim_text_loader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        app:lottie_rawRes="@raw/video_loader"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

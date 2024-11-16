@@ -11,26 +11,23 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp86"
-            android:padding="@dimen/dp8"
+            android:layout_height="86dp"
             android:background="@color/color_bg"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lexend_bold"
-                android:text="@string/str_search"
-                android:textColor="@color/primary"
-                android:textSize="34sp"
-                android:textAlignment="textStart"
+                android:text="@string/searching"
+                android:textColor="@color/blue_button_filled"
+                android:textSize="@dimen/sp34"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </TextView>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -40,12 +37,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp12"
             android:background="@drawable/bg_edit_search"
+            android:backgroundTint="#ece6f0"
             android:drawableEnd="@drawable/ic_search"
             android:hint="@string/str_search"
             android:fontFamily="@font/roboto_regular"
             android:lines="1"
             android:maxLines="1"
-            android:textColorHint="@color/black"
             android:padding="@dimen/dp12"
             android:textSize="@dimen/sp13"
             app:layout_constraintBottom_toTopOf="@id/rv_label"

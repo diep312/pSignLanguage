@@ -22,6 +22,7 @@ android {
             try {
                 minifyEnabled false
                 buildConfigField "String", "API_URL", "\"http://113.22.56.109:8089/\""
+                buildConfigField "String", "API_GEMINI", "\"AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc\""
                 debuggable true
             } catch(e) {
                 throw e
@@ -29,6 +30,8 @@ android {
         }
         release {
             minifyEnabled false
+            buildConfigField "String", "API_URL", "\"http://113.22.56.109:8089/\""
+            buildConfigField "String", "API_GEMINI", "\"AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -37,7 +40,6 @@ android {
                 variant.outputs.each{
                     output->
                         project.ext { appName = 'SignLanguage' }
-                        def formattedDate = new Date().format('yyyy-MM-dd_HH:mm:ss')
                         def newName = appName + "_v" + versionName + ".apk"
                         output.outputFileName  = newName
                 }
@@ -117,5 +119,7 @@ dependencies {
     implementation("androidx.camera:camera-extensions:${camerax_version}")
     //Lottie Animation
     implementation 'com.airbnb.android:lottie:6.4.1'
+    // Gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
 
 }

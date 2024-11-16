@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CoSign</string>
-    <string name="str_loading">Loading...</string>
+    <string name="str_loading">Đợi xíu...</string>
 
     <string name="api_default_error">Có lỗi xảy ra!</string>
     <string name="str_authe">Tài khoản không hợp lệ/Nhập sai mật khẩu</string>
@@ -68,7 +68,7 @@
     <string name="str_view_points">Điểm</string>
     <string name="str_back">Trở lại</string>
     <string name="str_average">Trung bình</string>
-    <string name="str_translate_desc">Sử dụng công nghệ AI để dịch ngôn ngữ VSL sang ngôn ngữ viết ngay lập tức.</string>
+    <string name="str_translate_desc">PTIT_IEC_COSIGN \n Dự án hợp tác giữa Học viện Công nghệ Bưu chính Viễn thông và Samsung Việt Nam.</string>
     <string name="str_use_camera">Sử dụng camera</string>
     <string name="str_go_to_folder">Chọn file từ album</string>
     <string name="str_again">Dịch một từ khác</string>
@@ -81,12 +81,27 @@
         <string name="str_slidedesc_2">Hướng đầu của bạn theo chỉ dẫn để có khoảng cách phù hợp.</string>
     <string name="str_slidetitle_3">Bắt đầu quay!</string>
     <string name="str_slidedesc_3">Khi khoảng cách phù hợp, ấn nút quay và quay video.</string>
+    <string name="str_meaning">Ý nghĩa</string>
+    <string name="str_progress">Tiến độ</string>
     <string name="video_not_available">Video không có sẵn</string>
     <string name="practice_your_sign_language">Luyện tập ngôn ngữ kí hiệu!</string>
     <string name="points">điểm</string>
     <string name="apps_setting">Cài đặt ứng dụng</string>
     <string name="language">Ngôn ngữ</string>
-    <string name='str_see_more'>Xem thêm</string>
-    <string name="str_saved_words">Những từ đã lưu</string>
-    <string name="str_recent_course">Khoá học gần đây</string>
+    <string name="searching">Tìm kiếm</string>
+    <string name="scores">Điểm</string>
+    <string name="recent_courses">Khoá học gần đây</string>
+    <string name="see_more">Xem thêm</string>
+    <string name="saved_words">Từ đã lưu</string>
+    <string name="streaks">Chuỗi</string>
+    <string name="signs">Ký hiệu</string>
+    <string name="theme">Giao diện</string>
+    <string name="account_settings">Cài đặt tài khoản</string>
+    <string name="edit_account_information">Sửa thông tin</string>
+    <string name="see_account_details">Xem thông tin </string>
+    <string name="delete_account">Xoá tài khoản</string>
+    <string name="privacy_amp_security"><![CDATA[Bảo mật & riêng tư ]]></string>
+    <string name="see_privacy_policy">Xem chính sách bảo mật</string>
+    <string name="change_password">Thay đổi mật khẩu</string>
+    <string name="light">Sáng</string>
 </resources>
