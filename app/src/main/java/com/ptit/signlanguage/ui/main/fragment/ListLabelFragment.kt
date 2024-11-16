@@ -3,6 +3,7 @@ package com.ptit.signlanguage.ui.main.fragment
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
@@ -26,7 +27,7 @@ class ListLabelFragment : BaseFragment<MainViewModel, FragmentTextToVideoBinding
     private lateinit var prefsHelper: PreferencesHelper
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[MainViewModel::class.java]
     }
 
     override fun getContentLayout(): Int {

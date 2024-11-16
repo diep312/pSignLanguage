@@ -37,7 +37,7 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
     private lateinit var prefsHelper: PreferencesHelper
     private var labelType: String = ""
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[MainViewModel::class.java]
     }
 
     override fun getContentLayout(): Int = R.layout.fragment_video_to_text
@@ -53,9 +53,9 @@ class VideoToTextFragment : BaseFragment<MainViewModel, FragmentVideoToTextBindi
                     binding.tvTranslatedesc.visibility = View.INVISIBLE
                     binding.btnRecord.text = getString(R.string.str_again)
                     if(user?.language.equals(EN)) {
-                        binding.tvLabel.text = getString(R.string.str_label, it.action_name + "\nScore: ${it.action_score}")
+                        binding.tvLabel.text = getString(R.string.str_label, it.prediction + "\nScore: ${it.accuracy}")
                     } else {
-                        binding.tvLabel.text = getString(R.string.str_label, it.action_name + "\nScore: ${it.action_score}")
+                        binding.tvLabel.text = getString(R.string.str_label, it.prediction + "\nScore: ${it.accuracy}")
                     }
                 }
                 else{

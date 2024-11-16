@@ -24,7 +24,7 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
     var user: User? = null
     var subject: Subject? = null
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[MainViewModel::class.java]
     }
 
     override fun getContentLayout(): Int {

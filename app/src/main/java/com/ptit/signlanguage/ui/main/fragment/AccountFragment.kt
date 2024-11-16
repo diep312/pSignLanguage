@@ -33,7 +33,7 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
 
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[MainViewModel::class.java]
         }
 
     override fun getContentLayout(): Int {

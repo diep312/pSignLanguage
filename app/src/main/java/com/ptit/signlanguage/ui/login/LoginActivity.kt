@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     private var isPassShowed = false
     private lateinit var prefsHelper: PreferencesHelper
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[LoginViewModel::class.java]
     }
 
     override fun getContentLayout(): Int {

@@ -46,32 +46,30 @@
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/str_full_name"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp14"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/edt_name"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_birthday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/str_date_of_birth"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp14"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/edt_birthday"
                         app:layout_constraintTop_toBottomOf="@id/edt_name" />
 
                     <TextView
                         android:id="@+id/edt_birthday"
-                        android:layout_width="319dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp6"
                         android:background="@drawable/bg_edt_v2"
@@ -83,27 +81,26 @@
                         android:textSize="@dimen/sp13"
                         app:drawableEndCompat="@drawable/ic_pick_date"
                         app:flow_verticalAlign="center"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/edt_name"
+                        app:layout_constraintStart_toStartOf="@+id/edt_name"
                         app:layout_constraintTop_toBottomOf="@id/tv_birthday" />
 
                     <TextView
                         android:id="@+id/tv_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/str_address"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp14"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/edt_address"
                         app:layout_constraintTop_toBottomOf="@id/edt_birthday" />
 
                     <EditText
                         android:id="@+id/edt_address"
-                        android:layout_width="319dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/bg_edt_v2"
@@ -113,15 +110,15 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color"
                         android:textSize="@dimen/sp13"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/edt_birthday"
                         app:layout_constraintHorizontal_bias="0.615"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/edt_birthday"
                         app:layout_constraintTop_toBottomOf="@id/tv_address" />
 
 
                     <EditText
                         android:id="@+id/edt_email"
-                        android:layout_width="319dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/bg_edt_v2"
@@ -132,41 +129,39 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color"
                         android:textSize="@dimen/sp13"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/edt_address"
+                        app:layout_constraintStart_toStartOf="@+id/edt_address"
                         app:layout_constraintTop_toBottomOf="@id/tv_email" />
 
                     <TextView
                         android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/str_email"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp14"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/edt_email"
                         app:layout_constraintTop_toBottomOf="@id/edt_address" />
 
                     <TextView
                         android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/str_phone_number"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp14"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/edt_phone"
                         app:layout_constraintTop_toBottomOf="@id/edt_email" />
 
                     <EditText
                         android:id="@+id/edt_phone"
-                        android:layout_width="319dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:background="@drawable/bg_edt_v2"
@@ -177,8 +172,8 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color"
                         android:textSize="@dimen/sp13"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/edt_email"
+                        app:layout_constraintStart_toStartOf="@+id/edt_email"
                         app:layout_constraintTop_toBottomOf="@id/tv_phone" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_save"

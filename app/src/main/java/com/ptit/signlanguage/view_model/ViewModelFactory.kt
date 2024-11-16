@@ -8,7 +8,7 @@ import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.predict.RealtimeDetectVM
 import com.ptit.signlanguage.ui.score.PracticeViewModel
 
-class ViewModelFactory() : ViewModelProvider.Factory {
+object ViewModelFactory : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {

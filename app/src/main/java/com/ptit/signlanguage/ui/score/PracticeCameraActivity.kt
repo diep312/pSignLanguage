@@ -92,7 +92,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
 //    VIEW INITIALIZATION
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[PracticeViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[PracticeViewModel::class.java]
     }
 
     override fun getContentLayout(): Int = R.layout.activity_practice
@@ -107,7 +107,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         binding.rootLayout.setPadding(0, getStatusBarHeight(this@PracticeCameraActivity), 0, 0)
 
         label = intent.getStringExtra(Constants.KEY_LABEL)
-        labelScore = intent.getStringExtra("SCORE")
+        labelScore = if (intent.getStringExtra("SCORE") == "null") "0" else intent.getStringExtra("SCORE")
         labelId = intent.getStringExtra("ID")
         Log.d("TAG", "onCreate: $labelId $label $labelScore")
         if (labelScore == null){
@@ -282,8 +282,12 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                 if(it != null && it >= 0){
                     val dialog = ResultDialog()
                     dialog.setScore(it)
-                    if(it > labelScore!!.toInt()){
-                        viewModel.updateUserScore(labelId!!.toInt(), it.toFloat())
+                    try {
+                        if(it < 100 && it > (labelScore?.toIntOrNull() ?: 0)) {
+                            viewModel.updateUserScore(labelId!!.toInt(), it.toFloat())
+                        }
+                    }catch (e: NumberFormatException){
+
                     }
                     dialog.show(supportFragmentManager, "Test")
                 }
@@ -455,12 +459,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    private fun scoreLabel(uri: Uri){
-        viewModel.apply {
-            predictVideo(File(parsePath(uri), ""), this@PracticeCameraActivity, label!!, labelId!!.toInt())
-        }
-    }
     private fun parsePath(uri: Uri?): String? {
         val projection = arrayOf(MediaStore.Video.Media.DATA)
         val cursor: Cursor? =
@@ -480,8 +478,10 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onKeepVideo() {
-        viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
-        scoreLabel(currentVideoUri)
+        Log.d(TAG, "onKeepVideo $currentVideoUri")
+        viewModel.apply {
+            predictVideo(File(parsePath(currentVideoUri), ""), this@PracticeCameraActivity, label!!, labelId!!.toInt())
+        }
     }
 
     override fun onDiscardVideo() {

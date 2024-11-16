@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.generationConfig
 import com.google.gson.annotations.SerializedName
+import com.google.gson.annotations.Since
 import com.ptit.signlanguage.BuildConfig
 import com.ptit.signlanguage.base.BaseViewModel
 import com.ptit.signlanguage.network.api.ApiService
@@ -21,6 +22,7 @@ import com.ptit.signlanguage.network.model.response.score_with_subject.ScoreWith
 import com.ptit.signlanguage.network.model.response.score_with_subject.UserScore
 import com.ptit.signlanguage.network.model.response.subjectWrap.SubjectWrap
 import com.ptit.signlanguage.utils.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
@@ -35,6 +37,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import javax.inject.Singleton
 import kotlin.system.measureTimeMillis
 
 open class MainViewModel(
@@ -69,25 +72,6 @@ open class MainViewModel(
             hideLoading()
         }
     }
-
-    val listSubjectRes = MutableLiveData<BaseArrayResponse<Subject?>?>()
-
-    fun getListSubject() {
-        viewModelScope.launch {
-            showLoading()
-            val result: BaseArrayResponse<Subject?>?
-            try {
-                withContext(Dispatchers.IO) {
-                    result = apiService.getListSubject()
-                }
-                listSubjectRes.postValue(result)
-            } catch (e: Exception) {
-                handleApiError(e.cause)
-            }
-            hideLoading()
-        }
-    }
-
     val listLabelRes = MutableLiveData<BaseArrayResponse<Label?>?>()
 
     fun getListLabel() {
@@ -194,7 +178,7 @@ open class MainViewModel(
             val result: BaseResponse<UserScore>
             try {
                 withContext(Dispatchers.IO) {
-                    Log.d("UserScore", "Updated " + score.toString())
+                    Log.d("UserScore", "Updated $score")
                     result = apiService.postUserScore(labelId, score)
                     Log.d("UserScore", "Updated " + result.body?.score.toString())
                 }
@@ -264,26 +248,6 @@ open class MainViewModel(
         val totalLabels: Int,
     )
 
-    val userSubjectProgress = MutableLiveData<SubjectResult>()
-
-    fun getUserSubjectProgress(subjectId: Int) {
-        viewModelScope.launch {
-            showLoading()
-            withContext(Dispatchers.IO) {
-                val result = apiService.getUserProgress(subjectId).body
-                result.let {
-                    userSubjectProgress.postValue(
-                        SubjectResult(
-                            numLearnedLabels = it.numLearnedLabels,
-                            totalLabels = it.totalLabels,
-                        ),
-                    )
-                }
-            }
-            hideLoading()
-        }
-    }
-
     val listSubjectWithProgress = MutableStateFlow<List<Subject?>>(listOf())
 
     fun getSubjectWithProgress() =
@@ -292,16 +256,14 @@ open class MainViewModel(
 
             val subjects = apiService.getListSubject()?.body ?: emptyList()
 
-            var listDetailSubject: MutableList<Subject?> = mutableListOf()
-
-            listDetailSubject =
-                subjects
+            val listDetailSubject: MutableList<Subject?> = subjects
                     .map { subject ->
                         async {
                             subject?.let {
                                 val detailSubject = apiService.getUserProgress(it.id).body
                                 // Return the updated subject with additional details
                                 val result = it.copy(
+                                    id = it.id,
                                     totalLabels = detailSubject.totalLabels,
                                     learnedLabels = detailSubject.numLearnedLabels,
                                 )
@@ -328,7 +290,7 @@ open class MainViewModel(
                 "\n" +
                 "\"...\"\n"
         val model = GenerativeModel(
-            modelName = "gemini-1.5-pro",
+            modelName = "gemini-1.5-flash-8b",
             apiKey = Constants.API_GEMINI,
             generationConfig = generationConfig {
                 temperature = 0.15f
@@ -337,18 +299,42 @@ open class MainViewModel(
                 maxOutputTokens = 4096
             },
         )
-        model.generateContentStream(if (language == Constants.EN) inputEN else inputVN)
-            .flowOn(Dispatchers.IO)
-            .distinctUntilChanged()
-            .collect { response ->
-                if (response.text?.isNotEmpty() == true) {
-                    trySend(response.text ?: "")
+        try {
+            model.generateContentStream(if (language == Constants.EN) inputEN else inputVN)
+                .flowOn(Dispatchers.IO)
+                .distinctUntilChanged()
+                .collect { response ->
+                    if (response.text?.isNotEmpty() == true) {
+                        trySend(response.text ?: "")
+                    }
                 }
-            }
+        }catch (e: Exception){
+            trySend("Server error, please try again")
+        }
         awaitClose()
     }
 
-    val recentCourse = mutableListOf<Int>()
 
-
+    protected suspend fun predictLabel(
+        file: File
+    ): Prediction? {
+        val part = toMultipartBody("video", file)
+        val result: Prediction
+        try {
+            withContext(Dispatchers.IO) {
+                measureTimeMillis {
+                    val response = RetrofitBuilder.apiAiSide!!.videoToText(part)
+                    result = Prediction(
+                        prediction = response?.prediction ?: "",
+                        accuracy = response?.score ?: 0.0
+                    )
+                }
+            }
+            return result
+        } catch (e: Exception) {
+            Log.d("TAG", "$e")
+            handleApiError(e.cause)
+        }
+        return null
+    }
 }

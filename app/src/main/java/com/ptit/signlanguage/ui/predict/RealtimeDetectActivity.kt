@@ -68,7 +68,7 @@ class RealtimeDetectActivity: BaseActivity<RealtimeDetectVM, ActivityPredictionB
     private val videoCapture by lazy { VideoCapture.withOutput(recorder) }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[RealtimeDetectVM::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[RealtimeDetectVM::class.java]
     }
 
     override fun getContentLayout(): Int = R.layout.activity_prediction

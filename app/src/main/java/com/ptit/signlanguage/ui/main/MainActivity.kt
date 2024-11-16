@@ -39,7 +39,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[MainViewModel::class.java]
    }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
