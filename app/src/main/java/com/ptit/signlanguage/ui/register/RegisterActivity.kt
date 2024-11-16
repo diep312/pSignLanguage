@@ -28,7 +28,7 @@ class RegisterActivity : BaseActivity<LoginViewModel, ActivityRegisterBinding>()
     private var isPassRepeatShowed = false
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[LoginViewModel::class.java]
     }
 
     override fun getContentLayout(): Int {

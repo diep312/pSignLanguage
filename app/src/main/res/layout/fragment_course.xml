@@ -186,9 +186,24 @@
                         android:orientation="horizontal"
                         android:layout_marginHorizontal="8dp"
                         android:layout_marginBottom="16dp"
+                        android:visibility="gone"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutNothing"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
 
+                        <TextView
+                            android:id="@+id/tvNothingShown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nothing shown"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <!-- Second LinearLayout for Saved words -->
                     <LinearLayout
                         android:id="@+id/containerSavedWord"
@@ -230,8 +245,24 @@
                         android:id="@+id/rvSavedWords"
                         android:layout_width="match_parent"
                         android:layout_height="480dp"
+                        android:visibility="gone"
                         android:orientation="vertical"
                         android:layout_marginHorizontal="8dp"/>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutNothing2"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:id="@+id/tvNothingShown2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nothing shown"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
             </ScrollView>

@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.databinding.ItemCoursesBinding
+import com.ptit.signlanguage.databinding.ItemNothingShownBinding
 import com.ptit.signlanguage.network.model.response.Subject
 import com.ptit.signlanguage.ui.main.fragment.ListSubjectFragment.Color
 import com.ptit.signlanguage.ui.topic.TopicActivity
@@ -21,7 +23,7 @@ class CourseAdapter(
     var listSubject: MutableList<Subject?>,
     val language: String,
     val context: Context,
-) : RecyclerView.Adapter<CourseAdapter.CourseViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val listColor: MutableList<Color> = mutableListOf()
 
     var addRecentCourse: ((Int) -> Unit ) ? = null
@@ -30,11 +32,9 @@ class CourseAdapter(
         this.listSubject = listSubject
         notifyDataSetChanged()
     }
-
     init {
         initListColor()
     }
-
     inner class CourseViewHolder(
         var binding: ItemCoursesBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -61,10 +61,10 @@ class CourseAdapter(
                 ContextCompat.getColor(context, colorChoose.overlay),
             )
             binding.parentLayout.setOnClickListener {
+                addRecentCourse?.invoke(subject!!.id)
                 val intent = Intent(binding.root.context, TopicActivity::class.java)
                 intent.putExtra(Constants.KEY_SUBJECT, subject)
                 binding.root.context.startActivity(intent)
-                addRecentCourse?.invoke(subject!!.id)
             }
         }
     }
@@ -72,7 +72,7 @@ class CourseAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): CourseViewHolder {
+    ): RecyclerView.ViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val item =
             DataBindingUtil.inflate<ItemCoursesBinding>(
@@ -84,6 +84,11 @@ class CourseAdapter(
         return CourseViewHolder(item)
     }
 
+
+    override fun getItemViewType(position: Int): Int {
+        super.getItemViewType(position)
+        return if(listSubject.isEmpty()) 1 else 0
+    }
     private fun initListColor() {
         repeat(5) {
             listColor.addAll(
@@ -113,11 +118,8 @@ class CourseAdapter(
         }
     }
 
-    override fun onBindViewHolder(
-        holder: CourseViewHolder,
-        position: Int,
-    ) {
-        holder.bind(listSubject[position], position)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as CourseViewHolder).bind(listSubject[position], position)
     }
 
     override fun getItemCount(): Int = listSubject.size

@@ -21,6 +21,7 @@ import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.utils.Language
 import com.ptit.signlanguage.utils.Locale
+import com.ptit.signlanguage.utils.ObjectLocator
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
 @SuppressLint("CustomSplashScreen")
@@ -28,7 +29,7 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     private lateinit var prefsHelper: PreferencesHelper
     private var user : User? =  null
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[LoginViewModel::class.java]
     }
 
     override fun getContentLayout(): Int {
@@ -38,6 +39,10 @@ class SplashActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     override fun initView() {
         setLightIconStatusBar(true)
         prefsHelper = PreferencesHelper(this@SplashActivity)
+        ObjectLocator.apply {
+            recentCourses.clear()
+            savedLabels.clear()
+        }
         autoLogin()
     }
 

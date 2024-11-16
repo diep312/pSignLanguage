@@ -25,6 +25,7 @@ import com.ptit.signlanguage.base.BaseActivity
 import com.ptit.signlanguage.databinding.AcivityVideoViewBinding
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.utils.Constants
+import com.ptit.signlanguage.utils.ObjectLocator
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -42,7 +43,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
     private var isBookmarked = false
     private var responseGemini = ""
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory)[MainViewModel::class.java]
     }
     override fun getContentLayout(): Int {
         return R.layout.acivity_video_view
@@ -51,37 +52,45 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_bg)
         btnPlay()
+
         binding.layout.setPadding(0, getStatusBarHeight(this@VideoViewActivity), 0, 0)
         label = intent.getStringExtra(Constants.KEY_LABEL)
         language = intent.getStringExtra("Language")
-
+        if(ObjectLocator.savedLabels.contains(label?.trim())){
+            isBookmarked = true
+            binding.bookMark.setImageResource(R.drawable.book_marked_24px)
+        }
         if (!label.isNullOrEmpty()) {
             binding.tvWord.text = intent.getStringExtra("fix")
-            viewModel.getVideo(label!!)
+            viewModel.getVideo(label!!.trim())
         }
 
         binding.bookMark.setOnClickListener(){
             if(!isBookmarked){
                 binding.bookMark.setImageResource(R.drawable.book_marked_24px)
                 isBookmarked = true
+                ObjectLocator.savedLabels.add(label!!.trim())
                 Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
             }else{
                 binding.bookMark.setImageResource(R.drawable.book_24px)
                 Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show()
+                ObjectLocator.savedLabels.remove(label!!.trim())
                 isBookmarked = false
             }
         }
         binding.genDef.setOnClickListener {
-            binding.genDef.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.color_highlight))
-            if(!TextUtils.isEmpty(responseGemini)){
-                binding.tvGenText.text = responseGemini
-            }else{
-                lifecycleScope.launch {
-                    viewModel.getGeminiResponse(language!!, intent.getStringExtra("fix")!!)
-                        .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                        .collect{
-                            responseGemini += it
-                            binding.tvGenText.text = responseGemini
+            if(!isDoubleClick()){
+                binding.genDef.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.color_highlight))
+                if(!TextUtils.isEmpty(responseGemini)){
+                    binding.tvGenText.text = responseGemini
+                }else{
+                    lifecycleScope.launch {
+                        viewModel.getGeminiResponse(language!!, intent.getStringExtra("fix")!!)
+                            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                            .collect{
+                                responseGemini += it
+                                binding.tvGenText.text = responseGemini
+                            }
                     }
                 }
             }
