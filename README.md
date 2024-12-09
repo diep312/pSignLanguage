@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/diep312/pSignLanguage">
-    <img src="preview_images/logo.png" alt="Logo" width="80" height="80">
+    <img src="preview_images/logo.png" alt="Logo" height="80">
   </a>
 
 <h3 align="center">CoSign</h3>
@@ -51,14 +51,14 @@
 <!-- ABOUT THE PROJECT -->
 ## Giới thiệu dự án
 
-[![Product Name Screen Shot][cosign-intro]]
+![Product Name Screen Shot][cosign-intro]
 
 Theo như điều tra quốc gia người khuyết tật Việt Nam năm 2016, Việt Nam có khoảng 6.3 triệu người câm và điếc, trong đó 2 triệu là người cả câm cả điếc. 
 Một số lượng lớn người này sinh sống ở những khu vực hẻo lánh và không có điều kiện được tiếp cận những dịch vụ giáo dục và khám bệnh. Dự án này sẽ hướng tới việc
 đưa ra một giải pháp giúp cho những người khuyết tật và những người thân của người khuyết tật giao tiếp với nhau 
 
 
-[![Product Funtions][cosign-function]]
+![Product Funtions][cosign-function]
 
 Những tính năng chính:
 * Sử dụng công nghệ AI và Computer Vision.
@@ -87,14 +87,14 @@ Những công nghệ phần mềm được sử dụng để xây dựng dự á
 
 <p align="right">(<a href="#readme-top">Lên đầu trang</a>)</p>
 
-[[Project Portfolio][cosign-portfolio]]
+![Project Portfolio][cosign-portfolio]
 
 <!-- GETTING STARTED -->
 ## Hướng dẫn cài đặt
 
 ### Yêu cầu hệ thống 
 Hiện tại ứng dụng chỉ hỗ trợ trên những điện thoại có nền tảng Android 8.0 trở lên
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Lên đầu trang</a>)</p>
 
 ### Cài đặt
 1. Trước tiên, hãy tải file ap của ứng dụng theo đường dẫn sau [File APK](https://drive.google.com/file/d/1P7t8kb0zNgm4AxR2r7y_gdbhs3OTslvo/view?usp=sharing)
@@ -103,11 +103,11 @@ Hiện tại ứng dụng chỉ hỗ trợ trên những điện thoại có n�
 4. Đợi trnh tải và cài ứng dụng chạy xong.
 5. Vào ứng dụng CoSign và bắt đầu sử dụng 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Lên đầu trang</a>)</p>
 
 ### Hướng dẫn sử dụng ứng dụng
 Bạn có thể xem hướng dẫn sử dụng ứng dụng chi tiết tại đây: [Hướng dẫn sử dụng](https://docs.google.com/document/d/1hQphQ-8gFcOnMCldUQvKa35wWC3TEU2NEvcsZx_-f0k/edit?usp=sharing)
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Lên đầu trang</a>)</p>
 
 
 <!-- CONTRIBUTING -->
@@ -119,7 +119,7 @@ Cảm ơn những thành viên sau vì những công sức đóng góp tới d�
     <li>Nguyễn Đăng Minh</li>
     <li>Và các thầy cô đã hướng dẫn cho dự án...</li>
 </ul>
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Lên đầu trang</a>)</p>
 
 
 
