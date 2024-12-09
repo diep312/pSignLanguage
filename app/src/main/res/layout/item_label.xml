@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp12"
         android:background="@drawable/bg_radius_8"
-        android:backgroundTint="@color/color_secondary"
+        android:backgroundTint="?attr/colorSecondaryVariant"
         android:paddingTop="@dimen/dp14"
         android:paddingBottom="@dimen/dp24"
         android:layout_marginBottom="@dimen/dp6"

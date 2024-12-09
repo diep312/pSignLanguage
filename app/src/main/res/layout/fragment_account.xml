@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_bg">
+        android:background="?attr/colorPrimary">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
@@ -78,7 +78,7 @@
                             android:layout_height="39dp"
                             android:fontFamily="@font/lexend_medium"
                             android:text=""
-                            android:textColor="@color/black"
+                            android:textColor="?attr/colorPrimary"
                             android:textSize="24sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +131,7 @@
                                 android:layout_marginStart="8dp"
                                 android:fontFamily="@font/lexend_bold"
                                 android:text="@string/apps_setting"
-                                android:textColor="@color/black"
+                                android:textColor="?attr/colorAccent"
                                 android:textSize="20sp" />
 
                         </LinearLayout>
@@ -154,7 +154,7 @@
                                 android:fontFamily="@font/lexend_medium"
                                 android:layout_weight="1"
                                 android:textSize="14sp"
-                                android:textColor="@android:color/black" />
+                                android:textColor="?attr/colorAccent" />
                             <androidx.appcompat.widget.AppCompatSpinner
                                 android:id="@+id/language_spinner"
                                 android:layout_width="wrap_content"
@@ -180,17 +180,16 @@
                                 android:fontFamily="@font/lexend_medium"
                                 android:layout_weight="1"
                                 android:textSize="14sp"
-                                android:textColor="@android:color/black" />
+                                android:textColor="?attr/colorAccent" />
 
-                            <TextView
-                                android:id="@+id/theme_value"
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/theme_spinner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity = "end"
-                                android:text="@string/light"
-                                android:layout_marginEnd="16dp"
-                                android:textSize="14sp"
-                                android:textColor="@android:color/darker_gray" />
+                                android:text="English"
+                                android:backgroundTint="@color/blue_button_filled"
+                                android:textColor="@android:color/darker_gray"
+                                android:layout_gravity = "end"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -222,7 +221,7 @@
                                 android:text="@string/account_settings"
                                 android:layout_marginStart="8dp"
                                 android:fontFamily="@font/lexend_bold"
-                                android:textColor="@color/black"
+                                android:textColor="?attr/colorAccent"
                                 android:textSize="20sp" />
 
                         </LinearLayout>
@@ -238,7 +237,7 @@
                             android:layout_marginStart="16dp"
                             android:fontFamily="@font/lexend_medium"
                             android:textSize="14sp"
-                            android:textColor="@android:color/black"
+                            android:textColor="?attr/colorAccent"
                             android:layout_marginTop="8dp" />
 
                         <TextView
@@ -250,7 +249,7 @@
 
                             android:layout_marginStart="16dp"
                             android:fontFamily="@font/lexend_medium"
-                            android:textColor="@android:color/black"
+                            android:textColor="?attr/colorAccent"
                             android:layout_marginTop="8dp" />
 
                         <TextView
@@ -293,7 +292,7 @@
                                 android:layout_marginStart="8dp"
                                 android:textSize="20sp"
                                 android:fontFamily="@font/lexend_bold"
-                                android:textColor="@color/black"
+                                android:textColor="?attr/colorAccent"
                                 android:id="@+id/privacy_security_title"
                                 android:text="@string/privacy_amp_security"
                                 android:textStyle="bold" />
@@ -311,18 +310,18 @@
                             android:text="@string/see_privacy_policy"
                             android:textSize="14sp"
                             android:layout_marginStart="16dp"
-                            android:textColor="@android:color/black"
+                            android:textColor="?attr/colorAccent"
                             android:layout_marginTop="8dp" />
 
                         <TextView
                             android:id="@+id/change_password"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/change_password"
-                            android:textSize="14sp"
                             android:layout_marginStart="16dp"
-                            android:textColor="@android:color/black"
-                            android:layout_marginTop="8dp" />
+                            android:layout_marginTop="8dp"
+                            android:text="@string/change_password"
+                            android:textColor="?attr/colorAccent"
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

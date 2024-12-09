@@ -7,4 +7,6 @@
         <attr name="courseOverlayColor" format="color" />
         <attr name="courseProgressBarColor" format="color" />
     </declare-styleable>
+
+    <attr name="secondaryButtonColor" format="color" />
 </resources>

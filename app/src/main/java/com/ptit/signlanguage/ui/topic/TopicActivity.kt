@@ -23,6 +23,7 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
     private lateinit var prefsHelper: PreferencesHelper
     var user: User? = null
     var subject: Subject? = null
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -48,9 +49,9 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
 
         binding.progressBar.max = subject?.totalLabels ?: 0
         binding.progressBar.progress = subject?.learnedLabels ?: 0
-        binding.tvProgressPercentage.text  = "${subject?.learnedLabels}/"+"${subject?.totalLabels}"
-
+        binding.tvProgressPercentage.text = "${subject?.learnedLabels ?: 0}/${subject?.totalLabels ?: 0}"
         binding.rvTopic.adapter = adapter
+
         subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
         subject?.let {
             if (user?.language.equals(Constants.EN)) {

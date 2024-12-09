@@ -8,6 +8,7 @@ import android.content.res.ColorStateList
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +58,11 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String, val
         fun bind(label: Label?) {
             var player : ExoPlayer? = null
             binding.expandedView.visibility = View.GONE
-            binding.btnNext.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.color_secondary))
+
+            val typedValue = TypedValue()
+            context.theme.resolveAttribute(R.attr.secondaryButtonColor, typedValue, true)
+            binding.btnNext.backgroundTintList = ColorStateList.valueOf(typedValue.data)
+
             binding.tvLabel.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black)))
 
             if (language == Constants.EN) {

@@ -6,7 +6,7 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_bg"
+        android:background="?attr/colorPrimary"
         tools:context=".ui.main.MainActivity">
 
         <androidx.viewpager2.widget.ViewPager2
@@ -26,7 +26,7 @@
             app:itemTextColor="@color/custom_color_bottom_nav"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/menu_bottom_navigation"
-            android:background="@color/color_secondary"
+            android:background="?attr/colorSecondaryVariant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

@@ -31,8 +31,7 @@ class TopicAdapter(var listLevel: MutableList<Level?>, val language : String, va
         fun bind(level: Level?) {
             binding.tvRank.text = binding.root.context.getString(R.string.str_level, level?.levelId ?: EMPTY_STRING)
 
-            // list label
-            val adapter = LessonAdapter(mutableListOf(), slanguage)
+            val adapter = LessonAdapter(mutableListOf(), language)
             val layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
             binding.rvLabel.layoutManager = layoutManager
             binding.rvLabel.adapter = adapter

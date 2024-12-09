@@ -6,7 +6,7 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_bg">
+        android:background="?attr/colorPrimary">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                         android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp20"
                         android:background="@drawable/bg_edt"
-                        android:backgroundTint="@color/color_gray"
+                        android:backgroundTint="?attr/colorPrimaryVariant"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_name_show"
                         android:inputType="text"
@@ -134,7 +134,7 @@
                         android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_edt"
-                        android:backgroundTint="@color/color_gray"
+                        android:backgroundTint="?attr/colorPrimaryVariant"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_email"
                         android:fontFamily="@font/roboto_regular"
@@ -178,7 +178,7 @@
                         android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_edt"
-                        android:backgroundTint="@color/color_gray"
+                        android:backgroundTint="?attr/colorPrimaryVariant"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_pass"
                         android:fontFamily="@font/roboto_regular"
@@ -233,7 +233,7 @@
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_edt"
                         android:fontFamily="@font/roboto_regular"
-                        android:backgroundTint="@color/color_gray"
+                        android:backgroundTint="?attr/colorPrimaryVariant"
                         android:ellipsize="end"
                         android:hint="@string/str_enter_pass_again"
                         android:inputType="textPassword"

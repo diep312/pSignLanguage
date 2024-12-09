@@ -7,7 +7,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_bg">
+    android:background="?attr/colorPrimary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_action_bar"
@@ -30,7 +30,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.111"
-            app:tint="@color/black" />
+            app:tint="?attr/colorAccent" />
 
         <TextView
             android:id="@+id/tv_name_topic"
@@ -69,7 +69,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:text="@string/str_progress"
                 android:textSize="@dimen/sp24"
                 android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -94,6 +94,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="97%"
+                android:textColor="@color/white"
                 android:fontFamily="@font/lexend_bold"
                 android:textAlignment="textEnd"
                 />

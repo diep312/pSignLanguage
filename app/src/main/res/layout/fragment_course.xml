@@ -8,7 +8,6 @@
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
             android:layout_height="86dp"
-            android:background="@color/color_bg"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView

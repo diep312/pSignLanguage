@@ -24,6 +24,7 @@ import com.ptit.signlanguage.utils.Constants.PAGE_1
 import com.ptit.signlanguage.utils.Constants.PAGE_2
 import com.ptit.signlanguage.utils.Constants.PAGE_3
 import com.ptit.signlanguage.utils.GsonUtils
+import com.ptit.signlanguage.utils.ThemeHelper
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import java.util.*
 
@@ -44,15 +45,14 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun initView() {
-        setLightIconStatusBar(true)
-        setColorForStatusBar(R.color.color_bg)
+        ThemeHelper.updateStatusBar(this)
         verifyStoragePermissions(this)
         binding.layout.setPadding(0, getStatusBarHeight(this@MainActivity) - 20, 0, 0)
 
         prefsHelper = PreferencesHelper(binding.root.context)
+        ThemeHelper.applyTheme(prefsHelper)
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
         user = GsonUtils.deserialize(userJson, User::class.java)
-        // config language
 
         myViewPagerAdapter = MainViewPagerAdapter(this)
         binding.vp.offscreenPageLimit = 4
@@ -98,9 +98,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                 }
             }
         })
-
-        setLightIconStatusBar(true)
-        setColorForStatusBar(R.color.color_bg)
     }
 
     override fun observerLiveData() {

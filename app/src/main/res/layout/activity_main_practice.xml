@@ -25,7 +25,7 @@
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="30dp"
-        android:tint="@color/black"
+        app:tint="?attr/colorAccent"
         android:layout_marginStart="20dp"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +55,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:text="0/0"
                 android:textSize="16sp"
-                android:textColor="#514F4F"/>
+                android:textColor="?attr/colorAccent"/>
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2

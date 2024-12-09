@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_radius_8"
-            android:backgroundTint="@color/color_accent"
+            android:backgroundTint="?attr/colorSecondaryVariant"
             android:padding="9dp">
 
             <com.makeramen.roundedimageview.RoundedImageView
