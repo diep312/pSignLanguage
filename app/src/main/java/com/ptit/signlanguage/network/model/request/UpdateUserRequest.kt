@@ -10,4 +10,5 @@ data class UpdateUserRequest(
     var registerType: String? = null,
     var supportedBy: String? = null,
     var profileNumber : String? = null
-)
+) {
+}

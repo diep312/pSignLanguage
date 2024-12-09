@@ -64,6 +64,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".ui.coursedetail.CourseDetailActivity"
+            />
+
+        <activity
             android:name=".ui.score.PracticeCameraActivity"
             android:screenOrientation="portrait" />
 

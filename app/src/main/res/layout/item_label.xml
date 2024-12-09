@@ -8,9 +8,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp12"
         android:background="@drawable/bg_radius_8"
-        android:backgroundTint="@color/color_secondary"
-        android:layout_marginBottom="@dimen/dp12"
-        android:padding="@dimen/dp8"
+        android:backgroundTint="?attr/colorSecondaryVariant"
+        android:paddingTop="@dimen/dp14"
+        android:paddingBottom="@dimen/dp24"
+        android:layout_marginBottom="@dimen/dp6"
         android:id="@+id/btn_next">
 
         <LinearLayout
@@ -21,41 +22,46 @@
             app:layout_constraintStart_toStartOf="parent"
             android:orientation="horizontal"
             android:gravity="center"
-
+            android:layout_marginTop="@dimen/dp4"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tv_label"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/lexend_bold"
+                android:gravity="left"
                 android:maxLines="3"
                 android:text="Label"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textColor="@color/blue_button_filled"
+                android:paddingHorizontal="@dimen/dp24"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/nextBtn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_next_arrow"
             android:visibility="visible"
+            android:padding="@dimen/dp6"
+            android:layout_marginRight="@dimen/dp10"
+            android:background="@drawable/bg_circle"
+            android:backgroundTint="@color/primary"
             app:layout_constraintBottom_toBottomOf="@+id/label_text"
             app:layout_constraintEnd_toEndOf="@+id/label_text"
             app:layout_constraintTop_toTopOf="@+id/label_text"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:rotation="90"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/expanded_view"
-            android:layout_width="300dp"
-            android:layout_height="160dp"
-            android:layout_marginTop="8dp"
-            android:paddingHorizontal="8dp"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dp16"
             app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone"
             tools:visibility="visible"
@@ -78,13 +84,12 @@
                     android:id="@+id/vv_guide"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
                     android:background="@color/color_gray"
                     android:backgroundTint="@color/color_gray"
                     app:auto_show="false"
                     app:repeat_toggle_modes="all"
                     app:default_artwork="@color/color_gray"
-                    app:use_artwork="true" />
+                    app:use_artwork="true"/>
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/anim_video_loader"
@@ -98,7 +103,7 @@
                     app:lottie_rawRes="@raw/video_loader" />
 
             </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

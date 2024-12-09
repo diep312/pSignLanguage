@@ -11,37 +11,28 @@
         android:backgroundTint="@color/container2_bg"
         android:layout_height="160dp">
 
-        <androidx.cardview.widget.CardView
+        <ImageView
+            android:id="@+id/course_icon"
+            android:layout_width="@dimen/dp30"
+            android:layout_height="@dimen/dp30"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginLeft="@dimen/dp10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            >
+        </ImageView>
+
+        <ImageView
             android:id="@+id/overlay"
             android:layout_width="match_parent"
-            android:layout_height="126dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            android:backgroundTint="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent">
-            <ImageView
-                android:id="@+id/ivOverlay"
-                android:layout_width="match_parent"
-                android:layout_height="126dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/vector_overlay">
-            </ImageView>
-        </androidx.cardview.widget.CardView>
-
-
-
-
-        <TextView
-            android:id="@+id/tvProgress"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/lexend_medium"
-            android:text="10/30"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/progressBar2"
-            app:layout_constraintBottom_toTopOf="@id/progressBar2" />
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/vector_overlay"
+
+            >
+        </ImageView>
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -54,9 +45,22 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/overlay" />
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/lexend_medium"
+            android:text="10/30"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/progressBar2"
+            app:layout_constraintBottom_toTopOf="@id/progressBar2" />
+
         <ProgressBar
             android:id="@+id/progressBar2"
             style="?android:attr/progressBarStyleHorizontal"
@@ -67,8 +71,8 @@
             android:indeterminateDrawable="@drawable/custom_progress_bar_progress"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="5dp"
-            tools:max="100"
-            tools:progress="30"
+            android:max="100"
+            android:progress="30"
             android:progressTint="@color/container2_progressbar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

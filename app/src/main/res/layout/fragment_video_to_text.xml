@@ -45,12 +45,12 @@
                 <ImageView
                     android:id="@+id/iv_illu"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="350dp"
                     android:padding="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/im_illustration" />
+                    app:srcCompat="@drawable/im_ai_illust" />
 
                 <TextView
                     android:id="@+id/tv_translatedesc"
@@ -112,8 +112,8 @@
                         android:id="@+id/vv_video"
                         android:layout_width="match_parent"
                         android:layout_height="360dp"
-                        android:adjustViewBounds="true"
-                        android:layout_gravity="center_horizontal" />
+                        android:layout_gravity="center_horizontal"
+                        android:adjustViewBounds="true" />
                 </FrameLayout>
 
 

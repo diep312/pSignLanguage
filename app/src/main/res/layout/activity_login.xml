@@ -7,7 +7,7 @@
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_bg">
+        android:background="?attr/colorPrimary">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
@@ -44,7 +44,7 @@
                         android:layout_height="56dp"
                         android:layout_marginTop="48dp"
                         android:background="@drawable/bg_btn"
-                        android:backgroundTint="@color/color_gray"
+                        android:backgroundTint="?attr/colorPrimaryVariant"
                         android:ellipsize="end"
                         android:fontFamily="@font/roboto_regular"
                         android:hint="@string/str_enter_email"
@@ -55,8 +55,8 @@
                         android:padding="@dimen/dp12"
                         android:paddingStart="@dimen/dp56"
                         android:paddingEnd="@dimen/dp12"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/text_color"
+                        android:textColor="?attr/colorAccent"
+                        android:textColorHint="?attr/colorAccent"
                         android:textSize="@dimen/sp14"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
                         android:layout_height="56dp"
                         android:layout_marginTop="@dimen/dp16"
                         android:background="@drawable/bg_btn"
-                        android:backgroundTint="@color/color_gray"
+                        android:backgroundTint="?attr/colorPrimaryVariant"
                         android:ellipsize="end"
                         android:fontFamily="@font/roboto_regular"
                         android:hint="@string/str_enter_pass"
@@ -99,8 +99,8 @@
                         android:padding="@dimen/dp12"
                         android:paddingStart="@dimen/dp56"
                         android:paddingEnd="@dimen/dp44"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/text_color"
+                        android:textColor="?attr/colorAccent"
+                        android:textColorHint="?attr/colorAccent"
                         android:textSize="@dimen/sp14"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

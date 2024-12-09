@@ -1,17 +1,20 @@
 package com.ptit.signlanguage.ui.main.adapter
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.graphics.Color
+import android.view.animation.DecelerateInterpolator
+import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -23,13 +26,10 @@ import com.ptit.signlanguage.databinding.ItemLabelBinding
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.ui.score.VideoViewActivity
 import com.ptit.signlanguage.utils.Constants
-import com.ptit.signlanguage.utils.Constants.KEY_LABEL
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.withContext
@@ -56,59 +56,81 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String, val
     inner class LabelViewHolder(var binding: ItemLabelBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(label: Label?) {
-
             var player : ExoPlayer? = null
             binding.expandedView.visibility = View.GONE
-            binding.nextBtn.visibility = View.GONE
-            binding.btnNext.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.color_secondary))
-            binding.tvLabel.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.blue_button_filled)))
+
+            val typedValue = TypedValue()
+            context.theme.resolveAttribute(R.attr.secondaryButtonColor, typedValue, true)
+            binding.btnNext.backgroundTintList = ColorStateList.valueOf(typedValue.data)
+
+            binding.tvLabel.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black)))
+
             if (language == Constants.EN) {
                 binding.tvLabel.text = label?.labelEn ?: Constants.EMPTY_STRING
             } else {
                 binding.tvLabel.text = label?.labelVn ?: Constants.EMPTY_STRING
             }
+
             binding.btnNext.setOnClickListener {
                 if (!label!!.isExpanded) {
                     label.isExpanded = true
-                    binding.expandedView.visibility = View.VISIBLE
-                    binding.btnNext.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.color_primary))
-                    binding.tvLabel.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.color_secondary)))
+
+                    val expandAnimator = ObjectAnimator.ofFloat(binding.expandedView, "scaleY", 0f, 1f).apply {
+                        duration = 300
+                        interpolator = DecelerateInterpolator()
+                        binding.expandedView.visibility = View.VISIBLE
+                    }
+
+                    val rotateAnimator = ObjectAnimator.ofFloat(binding.nextBtn, "rotation", 90f, 0f).apply {
+                        duration = 300
+                        interpolator = DecelerateInterpolator()
+                    }
+
+
+                    val fadeAnimator = ObjectAnimator.ofFloat(binding.vvGuide, "alpha", 0f, 1f).apply {
+                        duration = 300
+                    }
+
+                    AnimatorSet().apply {
+                        playTogether(expandAnimator, rotateAnimator, fadeAnimator)
+                        start()
+                    }
+
+                    binding.tvLabel.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.primary)))
+
                     val prefixURL = "http://ptitsignlanguage.edu.vn"
                     scope.launch {
-                        getVideoCallback?.invoke(label.labelVn ?: Constants.EMPTY_STRING)
-                            ?.collect {
-                                withContext(Dispatchers.Main) {
-                                    val videoPath = it.replace(prefixURL, "http://113.22.56.109:5005", true)
-                                    player =
-                                        ExoPlayer.Builder(context).build().also { exoPlayer ->
-                                            binding.vvGuide.player = exoPlayer
-                                            val mediaItem: MediaItem = MediaItem.fromUri(videoPath)
-                                            exoPlayer.setMediaItem(mediaItem)
-                                            exoPlayer.volume = 0f
-                                        }
-
-                                    player!!.prepare()
-                                    player!!.addListener(object : Player.Listener{
-                                        override fun onPlaybackStateChanged(playbackState: Int) {
-                                            super.onPlaybackStateChanged(playbackState)
-                                            if(playbackState == Player.STATE_READY){
-                                                binding.animVideoLoader.visibility = View.GONE
-                                                player!!.play()
-                                            }
-                                            if(playbackState == Player.STATE_ENDED){
-                                                Handler(Looper.getMainLooper()).postDelayed({
-                                                    player!!.seekTo(0)
-                                                    player!!.play()
-                                                },1000)
-                                            }
-                                        }
-                                    })
+                        getVideoCallback?.invoke(label.labelVn ?: Constants.EMPTY_STRING)?.collect {
+                            withContext(Dispatchers.Main) {
+                                val videoPath = it.replace(prefixURL, "http://113.22.56.109:5005", true)
+                                player = ExoPlayer.Builder(context).build().also { exoPlayer ->
+                                    binding.vvGuide.player = exoPlayer
+                                    val mediaItem: MediaItem = MediaItem.fromUri(videoPath)
+                                    exoPlayer.setMediaItem(mediaItem)
+                                    exoPlayer.volume = 0f
                                 }
+
+                                player!!.prepare()
+                                player!!.addListener(object : Player.Listener {
+                                    override fun onPlaybackStateChanged(playbackState: Int) {
+                                        super.onPlaybackStateChanged(playbackState)
+                                        if (playbackState == Player.STATE_READY) {
+                                            binding.animVideoLoader.visibility = View.GONE
+                                            player!!.play()
+                                        }
+                                        if (playbackState == Player.STATE_ENDED) {
+                                            Handler(Looper.getMainLooper()).postDelayed({
+                                                player!!.seekTo(0)
+                                                player!!.play()
+                                            }, 1000)
+                                        }
+                                    }
+                                })
                             }
+                        }
                     }
 
                     binding.nextBtn.apply {
-                        visibility = View.VISIBLE
                         setOnClickListener {
                             val intent = Intent(binding.root.context, VideoViewActivity::class.java)
                             intent.putExtra("Language", language)
@@ -124,10 +146,26 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String, val
                 } else {
                     player?.release()
                     label.isExpanded = false
-                    binding.expandedView.visibility = View.GONE
-                    binding.nextBtn.visibility = View.GONE
-                    binding.btnNext.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.color_secondary))
-                    binding.tvLabel.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.blue_button_filled)))
+
+                    val collapseAnimator = ObjectAnimator.ofFloat(binding.expandedView, "scaleY", 1f, 0f).apply {
+                        duration = 300
+                        interpolator = DecelerateInterpolator()
+                    }
+
+                    val rotateBackAnimator = ObjectAnimator.ofFloat(binding.nextBtn, "rotation", 0f, 90f).apply {
+                        duration = 300
+                        interpolator = DecelerateInterpolator()
+                    }
+
+                    AnimatorSet().apply {
+                        playTogether(collapseAnimator, rotateBackAnimator)
+                        start()
+                        doOnEnd {
+                            binding.expandedView.visibility = View.GONE
+                        }
+                    }
+
+                    binding.tvLabel.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black)))
                 }
             }
         }

@@ -5,28 +5,22 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ptit.signlanguage.R
 import com.ptit.signlanguage.base.BaseFragment
-import com.ptit.signlanguage.base.GridItemDecoration
 import com.ptit.signlanguage.base.LinearItemDecoration
 import com.ptit.signlanguage.data.prefs.PreferencesHelper
 import com.ptit.signlanguage.databinding.FragmentCourseBinding
-import com.ptit.signlanguage.network.model.response.Course
 import com.ptit.signlanguage.network.model.response.Label
 import com.ptit.signlanguage.network.model.response.User
+import com.ptit.signlanguage.ui.coursedetail.CourseDetailActivity
 import com.ptit.signlanguage.ui.main.MainViewModel
 import com.ptit.signlanguage.ui.main.adapter.CourseAdapter
 import com.ptit.signlanguage.ui.main.adapter.LabelAdapter
-import com.ptit.signlanguage.ui.main.fragment.child_fragment.FullSubjectsFragment
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.GsonUtils
 import com.ptit.signlanguage.view_model.ViewModelFactory
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>() {
     private lateinit var mAdapter: CourseAdapter
@@ -51,13 +45,14 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
             errorMessage.observe(this@ListSubjectFragment) {
                 Toast.makeText(this@ListSubjectFragment.requireContext(), getString(it), Toast.LENGTH_LONG).show()
             }
+
             listLabelRes.observe(this@ListSubjectFragment){ result ->
                 if(result?.body != null) {
                     val list = result.body.toMutableList().also { it.sortBy { comparator -> comparator!!.id } }
-                    // Assume recent labels fetch API
                     mSavedLabelAdapter.replace(list.subList(5, 17).also { it.add(Label(isShow = false)) })
                 }
             }
+
             userProgress.observe(this@ListSubjectFragment){
                 binding.tvScore.text = it.totalScore.toString()
                 binding.tvSigns.text = it.signs.toString()
@@ -73,7 +68,7 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         user = GsonUtils.deserialize(userJson, User::class.java)
 
         mAdapter = if(user?.language.equals(Constants.EN)) {
-            CourseAdapter(mutableListOf(), Constants.EN,requireContext())
+            CourseAdapter(mutableListOf(), Constants.EN, requireContext())
         } else {
             CourseAdapter(mutableListOf(), Constants.VI, requireContext())
         }
@@ -82,23 +77,28 @@ class ListSubjectFragment : BaseFragment<MainViewModel, FragmentCourseBinding>()
         } else {
             LabelAdapter(mutableListOf(), Constants.VI, requireContext())
         }
+
         binding.rvRecentCourses.apply {
             this.adapter = mAdapter
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             this.addItemDecoration(LinearItemDecoration(50, LinearLayoutManager.HORIZONTAL))
             this.hasFixedSize()
         }
+
         binding.rvSavedWords.apply{
             adapter = mSavedLabelAdapter
             this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             this.addItemDecoration(LinearItemDecoration(30, LinearLayoutManager.VERTICAL))
             this.hasFixedSize()
         }
+
         binding.tvSeeMoreCourses.setOnClickListener {
-            val intent = Intent(activity,FullSubjectsFragment::class.java)
+            val intent = Intent(activity,CourseDetailActivity::class.java)
             intent.putExtra("language", user?.language ?: Constants.VI)
             startActivity(intent)
         }
+
+        viewModel.getListSubject()
         viewModel.getListLabel()
         viewModel.getUserProgress()
         viewModel.getSubjectWithProgress()

@@ -5,6 +5,7 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
@@ -60,29 +61,38 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
             viewModel.getVideo(label!!)
         }
 
-        binding.bookMark.setOnClickListener(){
+        binding.btnSave.setOnClickListener(){
             if(!isBookmarked){
-                binding.bookMark.setImageResource(R.drawable.book_marked_24px)
+                binding.btnSave.setImageResource(R.drawable.ic_favourite)
                 isBookmarked = true
                 Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
             }else{
-                binding.bookMark.setImageResource(R.drawable.book_24px)
+                binding.btnSave.setImageResource(R.drawable.ic_favourite_filled)
                 Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show()
                 isBookmarked = false
             }
         }
-        binding.genDef.setOnClickListener {
-            binding.genDef.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.color_highlight))
-            if(!TextUtils.isEmpty(responseGemini)){
+
+
+        binding.btnInfo.setOnClickListener {
+            binding.btnInfo.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_highlight))
+
+            val animation = AnimationUtils.loadAnimation(this, R.anim.fade_scale_pop)
+            binding.layoutGenText.startAnimation(animation)
+            binding.layoutGenText.visibility = View.VISIBLE
+
+            if (!TextUtils.isEmpty(responseGemini)) {
                 binding.tvGenText.text = responseGemini
-            }else{
+                binding.animTextLoader.visibility = View.GONE
+            } else {
                 lifecycleScope.launch {
                     viewModel.getGeminiResponse(language!!, intent.getStringExtra("fix")!!)
                         .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                        .collect{
+                        .collect {
                             responseGemini += it
                             binding.tvGenText.text = responseGemini
-                    }
+                            binding.animTextLoader.visibility = View.GONE
+                        }
                 }
             }
         }
@@ -138,7 +148,6 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                 binding.btnReplay.setImageResource(R.drawable.ic_replay)
             }else{
                 replayState = true
-                binding.btnReplay.setImageResource(R.drawable.ic_replay_clicked)
             }
         }
     }

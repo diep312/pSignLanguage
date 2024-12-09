@@ -8,7 +8,6 @@
             android:id="@+id/layout_action_bar"
             android:layout_width="match_parent"
             android:layout_height="86dp"
-            android:background="@color/color_bg"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -72,7 +71,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/lexend_regular"
-                            android:text="@string/scores"
+                            android:text="Scores"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toTopOf="@+id/tvScore"
                             app:layout_constraintEnd_toEndOf="@+id/tvScore"
@@ -94,7 +93,6 @@
                             app:layout_constraintStart_toStartOf="@+id/imgVector1"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <!-- Streaks TextView -->
                         <TextView
                             android:id="@+id/tvStreaks"
                             android:layout_width="wrap_content"
@@ -117,7 +115,6 @@
                             app:layout_constraintTop_toBottomOf="@id/tvStreaks"
                             app:layout_constraintEnd_toEndOf="@+id/tvStreaks"
                             app:layout_constraintStart_toStartOf="@+id/tvStreaks" />
-                        <!-- Signs TextView -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -153,7 +150,6 @@
                         android:gravity="center_vertical"
                         android:paddingBottom="8dp">
 
-                        <!-- Recent courses TextView -->
                         <TextView
                             android:id="@+id/tvRecentCourses"
                             android:layout_width="wrap_content"
@@ -165,7 +161,6 @@
                             android:textStyle="bold"
                             android:fontFamily="@font/lexend_regular" />
 
-                        <!-- See more TextView -->
                         <TextView
                             android:id="@+id/tvSeeMoreCourses"
                             android:layout_width="wrap_content"
@@ -189,7 +184,6 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         />
 
-                    <!-- Second LinearLayout for Saved words -->
                     <LinearLayout
                         android:id="@+id/containerSavedWord"
                         android:layout_width="match_parent"
@@ -200,7 +194,6 @@
                         android:gravity="center_vertical"
                         android:paddingBottom="8dp">
 
-                        <!-- Saved words TextView -->
                         <TextView
                             android:id="@+id/tvSavedWords"
                             android:layout_width="wrap_content"
@@ -225,7 +218,6 @@
 
                     </LinearLayout>
 
-                    <!-- Second RecyclerView for Saved words (Vertical) -->
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvSavedWords"
                         android:layout_width="match_parent"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="course_styles_array">
+        <item>@style/Traffic</item>
+        <item>@style/Adjectives</item>
+        <item>@style/Number</item>
+        <item>@style/Time</item>
+        <item>@style/CommonWords</item>
+        <item>@style/Cooking</item>
+        <item>@style/DailyActivities</item>
+        <item>@style/DailyCommunications</item>
+        <item>@style/Emotion</item>
+        <item>@style/Food</item>
+        <item>@style/Level</item>
+        <item>@style/Medical</item>
+        <item>@style/Pronouns</item>
+        <item>@style/School</item>
+        <item>@style/Test</item>
+    </array>
+</resources>

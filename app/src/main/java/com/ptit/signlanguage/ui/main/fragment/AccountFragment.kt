@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.ptit.signlanguage.R
@@ -21,6 +22,7 @@ import com.ptit.signlanguage.ui.splash.SplashActivity
 import com.ptit.signlanguage.utils.Constants
 import com.ptit.signlanguage.utils.Constants.EMPTY_STRING
 import com.ptit.signlanguage.utils.GsonUtils
+import com.ptit.signlanguage.utils.ThemeHelper
 import com.ptit.signlanguage.view_model.ViewModelFactory
 
 
@@ -34,7 +36,7 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
-        }
+    }
 
     override fun getContentLayout(): Int {
         return R.layout.fragment_account
@@ -56,9 +58,19 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
     override fun initView() {
         prefsHelper = PreferencesHelper(binding.root.context)
         val userJson = prefsHelper.getString(Constants.KEY_PREF_DATA_LOGIN)
+        val themePref = prefsHelper.getString(Constants.THEME)
+
         user = GsonUtils.deserialize(userJson, User::class.java)
-        user?.apply {
-            binding.tvShowName.text = this.name?: EMPTY_STRING
+
+        if (user != null) {
+            user?.apply {
+                binding.tvShowName.text = this.name ?: EMPTY_STRING
+            }
+
+            dataPrepareSpinner()
+            setupThemeSpinner()
+        } else {
+            Log.e("AccountFragment", "User data is null")
         }
     }
 
@@ -80,7 +92,6 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
             }
             dialogUserEdit.show(ft, "dialog")
         }
-        dataPrepareSpinner()
         binding.languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -107,6 +118,40 @@ class AccountFragment : BaseFragment<MainViewModel, FragmentAccountBinding>() {
 
         }
     }
+
+    private fun setupThemeSpinner() {
+        val themes = arrayOf("Light", "Dark")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, themes)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.themeSpinner.adapter = adapter
+
+        val currentTheme = prefsHelper.getString(Constants.THEME) ?: Constants.LIGHT_THEME
+        binding.themeSpinner.setSelection(if (currentTheme == Constants.DARK_THEME) 1 else 0)
+
+        binding.themeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedTheme = if (position == 1) Constants.DARK_THEME else Constants.LIGHT_THEME
+
+                if (selectedTheme != currentTheme) {
+                    prefsHelper.save(Constants.THEME, selectedTheme)
+
+                    if (selectedTheme == Constants.DARK_THEME) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }
+
+                    activity?.let {
+                        ThemeHelper.updateStatusBar(it)
+                        it.recreate()
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
     private fun dataPrepareSpinner() {
         val language = arrayOf("Tiếng Việt", "English")
         val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, language)

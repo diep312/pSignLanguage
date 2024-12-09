@@ -7,78 +7,78 @@
 
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="@dimen/dp120"
-            android:layout_height="@dimen/dp190"
-            android:layout_marginStart="16dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/dp120"
+        android:layout_height="@dimen/dp190"
+        android:layout_marginStart="16dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp160"
-                android:background="@drawable/bg_radius_8"
-                android:backgroundTint="#0065DE"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp160"
+            android:background="@drawable/bg_radius_8"
+            android:backgroundTint="#0065DE"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-            <View
-                android:id="@+id/v_circle"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/bg_btn_register_topic"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <ImageView
-                android:id="@+id/status"
-                android:layout_width="@dimen/dp75"
-                android:layout_height="@dimen/dp75"
-                app:layout_constraintStart_toStartOf="@id/v_circle"
-                app:layout_constraintEnd_toEndOf="@id/v_circle"
-                app:layout_constraintTop_toTopOf="@id/v_circle"
-                app:layout_constraintBottom_toBottomOf="@id/v_circle"
-                tools:src="@drawable/icons8_accept"/>
-            <LinearLayout
+        <View
+            android:id="@+id/v_circle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/bg_btn_register_topic"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/status"
+            android:layout_width="@dimen/dp75"
+            android:layout_height="@dimen/dp75"
+            app:layout_constraintStart_toStartOf="@id/v_circle"
+            app:layout_constraintEnd_toEndOf="@id/v_circle"
+            app:layout_constraintTop_toTopOf="@id/v_circle"
+            app:layout_constraintBottom_toBottomOf="@id/v_circle"
+            tools:src="@drawable/icons8_accept"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/cvView"
+            app:layout_constraintTop_toBottomOf="@+id/v_circle"
+            android:paddingHorizontal="@dimen/dp15"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tv_lesson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/cvView"
-                app:layout_constraintTop_toBottomOf="@+id/v_circle"
-                android:paddingHorizontal="@dimen/dp15"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:id="@+id/tv_lesson"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxLines="3"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp16"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp20"/>
-                <TextView
-                    android:id="@+id/tvPoints"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp12"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/points"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"
-                    />
-            </LinearLayout>
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="3"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp20"/>
+            <TextView
+                android:id="@+id/tvPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp12"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/points"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                />
+        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

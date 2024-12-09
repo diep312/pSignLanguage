@@ -33,6 +33,10 @@ object Constants {
     const val EN = "EN"
     const val VI = "VI"
 
+    const val THEME = "THEME"
+    const val LIGHT_THEME = "LIGHT"
+    const val DARK_THEME = "DARK"
+
     const val API_AI_URL = "http://ptitsignlanguage.edu.vn/"
     const val API_KEY = "W8W6K-3N7KK-PXB9H-8TD8W-BWTH9"
     const val API_GEMINI = "AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc"

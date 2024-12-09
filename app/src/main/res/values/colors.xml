@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_app">#324A59</color>
     <color name="color_primary">#143EC0</color>
+    <color name="color_secondary">#0082E3</color>
     <color name="color_highlight">#0099D2</color>
-    <color name="color_secondary">#E0E0FA</color>
-    <color name="color_accent">#CBF2FF</color>
-    <color name="color_additional">#292B2F</color>
-    <color name="color_gray">#D9D9D9</color>
 
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="color_light_1">#EEEEEE</color>
+    <color name="color_light_2">#FFF0FF</color>
+    <color name="color_light_3">#CBF2FF</color>
+    <color name="color_light_4">#E0E0FA</color>
+
+    <color name="color_dark_1">#202225</color>
+    <color name="color_dark_2">#292B2F</color>
+    <color name="color_dark_3">#3A394F</color>
+    <color name="color_dark_4">#40444B</color>
+
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
     <color name="blue">#3D5CFF</color>
     <color name="blue_">#143D5CFF</color>
+    <color name="color_gray">#D9D9D9</color>
+
 
     <color name="transparent">#00000000</color>
     <color name="text_color">#858597</color>
@@ -41,7 +46,7 @@
     <color name="blue_background">#143EC0</color>
     <color name="blue_button_filled">#0065de</color>
 
-<!--    Color palette for course -->
+
     <color name="container1_bg">#0099d2</color>
     <color name="container1_overlay">#143ec0</color>
     <color name="container1_progressbar">#0099d2</color>
