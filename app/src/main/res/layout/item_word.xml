@@ -51,7 +51,7 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:textAllCaps="true"
-            android:drawableStart="@drawable/arrow_forward_ios_24dp_e8eaed_fill0_wght400_grad0_opsz24"
+            android:drawableStart="@drawable/ic_next_arrow"
             android:paddingStart="@dimen/dp8"
             android:paddingEnd="@dimen/dp8"
             android:textColor="@color/white"

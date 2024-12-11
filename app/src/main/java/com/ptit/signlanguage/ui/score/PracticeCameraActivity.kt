@@ -485,7 +485,9 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     }
 
     override fun onDiscardVideo() {
-        contentResolver.delete(currentVideoUri, null, null)
+        try{
+            contentResolver.delete(currentVideoUri, null, null)
+        }catch (e: Exception){}
         Toast.makeText(this, "Video discarded", Toast.LENGTH_SHORT).show()
     }
 

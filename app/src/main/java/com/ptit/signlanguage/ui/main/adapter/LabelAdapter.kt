@@ -30,6 +30,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.withContext
@@ -76,9 +78,9 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String, val
                     val prefixURL = "http://ptitsignlanguage.edu.vn"
                     scope.launch {
                         getVideoCallback?.invoke(label.labelVn ?: Constants.EMPTY_STRING)
-                            ?.collect {
-                                withContext(Dispatchers.Main) {
-                                    val videoPath = it.replace(prefixURL, "http://113.22.56.109:5005", true)
+                            ?.onEach {
+                                val videoPath = it.replace(prefixURL, "http://113.22.56.109:5005", true)
+                                withContext(Dispatchers.Main){
                                     player =
                                         ExoPlayer.Builder(context).build().also { exoPlayer ->
                                             binding.vvGuide.player = exoPlayer
@@ -104,7 +106,7 @@ class LabelAdapter(var listLabel: MutableList<Label?>, val language: String, val
                                         }
                                     })
                                 }
-                            }
+                            }?.launchIn(scope)
                     }
 
                     binding.nextBtn.apply {

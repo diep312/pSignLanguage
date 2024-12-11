@@ -5,6 +5,7 @@ import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
@@ -58,40 +59,47 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
         language = intent.getStringExtra("Language")
         if(ObjectLocator.savedLabels.contains(label?.trim())){
             isBookmarked = true
-            binding.bookMark.setImageResource(R.drawable.book_marked_24px)
+            binding.btnSave.setImageResource(R.drawable.book_marked_24px)
         }
         if (!label.isNullOrEmpty()) {
             binding.tvWord.text = intent.getStringExtra("fix")
             viewModel.getVideo(label!!.trim())
         }
 
-        binding.bookMark.setOnClickListener(){
+        binding.btnSave.setOnClickListener(){
             if(!isBookmarked){
-                binding.bookMark.setImageResource(R.drawable.book_marked_24px)
+                binding.btnSave.setImageResource(R.drawable.ic_favourite)
                 isBookmarked = true
                 ObjectLocator.savedLabels.add(label!!.trim())
                 Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
             }else{
-                binding.bookMark.setImageResource(R.drawable.book_24px)
+                binding.btnSave.setImageResource(R.drawable.ic_favourite_filled)
                 Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show()
                 ObjectLocator.savedLabels.remove(label!!.trim())
                 isBookmarked = false
             }
         }
-        binding.genDef.setOnClickListener {
-            if(!isDoubleClick()){
-                binding.genDef.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.color_highlight))
-                if(!TextUtils.isEmpty(responseGemini)){
-                    binding.tvGenText.text = responseGemini
-                }else{
-                    lifecycleScope.launch {
-                        viewModel.getGeminiResponse(language!!, intent.getStringExtra("fix")!!)
-                            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                            .collect{
-                                responseGemini += it
-                                binding.tvGenText.text = responseGemini
-                            }
-                    }
+
+
+        binding.btnInfo.setOnClickListener {
+            binding.btnInfo.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.color_highlight))
+
+            val animation = AnimationUtils.loadAnimation(this, R.anim.fade_scale_pop)
+            binding.layoutGenText.startAnimation(animation)
+            binding.layoutGenText.visibility = View.VISIBLE
+
+            if (!TextUtils.isEmpty(responseGemini)) {
+                binding.tvGenText.text = responseGemini
+                binding.animTextLoader.visibility = View.GONE
+            } else {
+                lifecycleScope.launch {
+                    viewModel.getGeminiResponse(language!!, intent.getStringExtra("fix")!!)
+                        .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                        .collect {
+                            responseGemini += it
+                            binding.tvGenText.text = responseGemini
+                            binding.animTextLoader.visibility = View.GONE
+                        }
                 }
             }
         }
@@ -147,7 +155,7 @@ class VideoViewActivity : BaseActivity<MainViewModel, AcivityVideoViewBinding>()
                 binding.btnReplay.setImageResource(R.drawable.ic_replay)
             }else{
                 replayState = true
-                binding.btnReplay.setImageResource(R.drawable.ic_replay_clicked)
+                binding.btnReplay.setImageResource(R.drawable.ic_replay)
             }
         }
     }

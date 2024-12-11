@@ -288,7 +288,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:scaleX='-1'
-                        android:src="@drawable/ic_replay_clicked"
+                        android:src="@drawable/ic_replay"
                         app:tint="@color/white" />
 
                     <ImageView
