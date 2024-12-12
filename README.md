@@ -97,7 +97,7 @@ Hiện tại ứng dụng chỉ hỗ trợ trên những điện thoại có n�
 <p align="right">(<a href="#readme-top">Lên đầu trang</a>)</p>
 
 ### Cài đặt
-1. Trước tiên, hãy tải file ap của ứng dụng theo đường dẫn sau [File APK]([https://drive.google.com/file/d/1P7t8kb0zNgm4AxR2r7y_gdbhs3OTslvo/view?usp=sharing](https://ptiteduvn-my.sharepoint.com/:u:/r/personal/anhnt_b21cn149_stu_ptit_edu_vn/Documents/%5BPTIT_IEC%20x%20Samsung%20VN%5D%20Sign%20Language%20Project%20Sources/SignLanguage_v2.1.0.apk?csf=1&web=1&e=8ZSoDn)
+1. Trước tiên, hãy tải file ap của ứng dụng theo đường dẫn sau [File APK](https://ptiteduvn-my.sharepoint.com/:u:/r/personal/anhnt_b21cn149_stu_ptit_edu_vn/Documents/%5BPTIT_IEC%20x%20Samsung%20VN%5D%20Sign%20Language%20Project%20Sources/SignLanguage_v2.1.0.apk?csf=1&web=1&e=bbi9wG)
 2. Sau đó hãy định vị tới file APK có trên điện thoại Android.
 3. Nhấn vào file APK, tùy vào nền tảng điện thoại thìì người dùng có cần phải thêm quyền cài đặt ứng dụng
 4. Đợi trnh tải và cài ứng dụng chạy xong.
