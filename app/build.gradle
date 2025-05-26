@@ -21,7 +21,7 @@ android {
         debug {
             try {
                 minifyEnabled false
-                buildConfigField "String", "API_URL", "\"http://113.22.56.109:8089/\""
+                buildConfigField "String", "API_URL", "\"https://api-sign-language.ptitiec.xyz/\""
                 buildConfigField "String", "API_GEMINI", "\"AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc\""
                 debuggable true
             } catch(e) {
@@ -30,7 +30,7 @@ android {
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "API_URL", "\"http://113.22.56.109:8089/\""
+            buildConfigField "String", "API_URL", "\"https://api-sign-language.ptitiec.xyz/\""
             buildConfigField "String", "API_GEMINI", "\"AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
