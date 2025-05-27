@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimary">
+        android:background="@color/color_bg">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action_bar"
