@@ -5,5 +5,6 @@ data class VideoToTextResponse(
     val error: String,
     val prediction: String,
     val status: Boolean,
-    val video_path: String
+    val video_path: String,
+    val accuracy: Float
 )

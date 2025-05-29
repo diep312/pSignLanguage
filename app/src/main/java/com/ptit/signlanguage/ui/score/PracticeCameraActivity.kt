@@ -73,7 +73,9 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     private var playerState = MutableLiveData(false)
     private lateinit var player: ExoPlayer
     private var replayState = true
-
+    private val dialog by lazy {
+        ConfirmationDialogFragment()
+    }
 
 
     private val selector by lazy {
@@ -282,9 +284,9 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
                 if(it != null && it >= 0){
                     val dialog = ResultDialog()
                     dialog.setScore(it)
-//                    if(it > labelScore!!.toInt()){
+                    if(it > labelScore!!.toInt()){
                         viewModel.updateUserScore(labelId!!.toInt(), it.toFloat())
-//                    }
+                    }
                     dialog.show(supportFragmentManager, "Test")
                 }
             }
@@ -455,12 +457,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    private fun scoreLabel(uri: Uri){
-        viewModel.apply {
-            predictVideo(File(parsePath(uri), ""), this@PracticeCameraActivity, label!!, labelId!!.toInt())
-        }
-    }
     private fun parsePath(uri: Uri?): String? {
         val projection = arrayOf(MediaStore.Video.Media.DATA)
         val cursor: Cursor? =
@@ -473,7 +469,6 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
         } else null
     }
     private fun showVideoPreviewDialog(videoUri: Uri) {
-        val dialog = ConfirmationDialogFragment()
         dialog.setVideoUri(videoUri)
         dialog.show(supportFragmentManager, "VideoPreview")
     }
@@ -481,7 +476,7 @@ class PracticeCameraActivity : BaseActivity<PracticeViewModel, ActivityPracticeB
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onKeepVideo() {
         viewModel.resultString.postValue(PracticeViewModel.AnalysisResult(currentVideoUri.path ?: "null"))
-        scoreLabel(currentVideoUri)
+        viewModel.predictVideo(File(parsePath(currentVideoUri), ""), this@PracticeCameraActivity, label!!, labelId!!.toInt())
     }
 
     override fun onDiscardVideo() {
