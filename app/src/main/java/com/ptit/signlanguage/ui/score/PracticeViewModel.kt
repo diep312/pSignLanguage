@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ptit.signlanguage.network.api.ApiService
+import com.ptit.signlanguage.network.model.response.VideoToText.VideoToTextResponse
 import com.ptit.signlanguage.ui.main.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,17 +59,17 @@ class PracticeViewModel(
         )
     }
 
-//    private fun setScore(
-//        prediction: Prediction,
-//        labelChosen: String,
-//    ) {
-//        if(prediction.label.lowercase(Locale.ROOT).trim() == labelChosen.lowercase(Locale.ROOT).trim()) {
-//            _score.postValue( (prediction.score * 100).toInt())
-//        }
-//        else{
-//            _score.postValue(0)
-//        }
-//    }
+    private fun setScore(
+        prediction: VideoToTextResponse,
+        labelChosen: String,
+    ) {
+        if(prediction.prediction.lowercase(Locale.ROOT).trim() == labelChosen.lowercase(Locale.ROOT).trim()) {
+            _score.postValue(prediction.accuracy.toInt())
+        }
+        else{
+            _score.postValue(0)
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.P)
     fun predictVideo(
@@ -80,10 +81,10 @@ class PracticeViewModel(
         viewModelScope.launch {
             showLoading()
             withContext(Dispatchers.Default){
-//                val predict = predictLabel(file, context, "labels.txt")
-//                setScore(predict, label)
+                val predict = getPrediction(file)
+                setScore(predict!!, label)
+//                updateUserScore(labelId,predict.accuracy )
             }
-//            updateUserScore(labelId, predict.score)
             hideLoading()
         }
     }

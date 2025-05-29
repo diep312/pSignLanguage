@@ -70,6 +70,20 @@ open class MainViewModel(
         }
     }
 
+    suspend fun getPrediction(
+        file: File,
+    ): VideoToTextResponse?{
+        val part = toMultipartBody("video", file)
+        try {
+            return RetrofitBuilder.apiAiSide!!.videoToText(part)
+        } catch (e: Exception) {
+            Log.d("TAG", "$e")
+            handleApiError(e.cause)
+        }
+        return null
+    }
+
+
     val listSubjectRes = MutableLiveData<BaseArrayResponse<Subject?>?>()
 
     fun getListSubject() {
