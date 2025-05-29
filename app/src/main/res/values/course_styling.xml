@@ -131,6 +131,22 @@
         <item name="courseProgressBarColor">@color/container4_progressbar</item>
     </style>
 
+    <style name="Animals">
+        <item name="courseId">4</item>
+        <item name="courseColor">@color/container3_bg</item>
+        <item name="courseIcon">@drawable/ic_cat</item>
+        <item name="courseOverlayColor">@color/container3_overlay</item>
+        <item name="courseProgressBarColor">@color/container3_progressbar</item>
+    </style>
+
+    <style name="Places">
+        <item name="courseId">1</item>
+        <item name="courseColor">@color/container2_bg</item>
+        <item name="courseIcon">@drawable/ic_globe</item>
+        <item name="courseOverlayColor">@color/container2_overlay</item>
+        <item name="courseProgressBarColor">@color/container2_progressbar</item>
+    </style>
+
 
     <style name="DefaultCourseStyle">
         <item name="courseColor">@color/container1_bg</item>

@@ -315,13 +315,13 @@ open class MainViewModel(
         }
     @OptIn(FlowPreview::class)
     fun getGeminiResponse(language: String, word: String) = callbackFlow<String> {
-        var inputEN = "What does $word means and give a sentence using it." +
+        var inputEN = "What does $word means and give a sentence using it. Remove all special character markdown, explain shortly and briefly" +
                 " The output same like: Meaning: To speak negatively or critically about someone or something, often in a malicious or hurtful way. It can also be used to mean slander or defame.\n" +
                 "\n" +
                 "Example:\n" +
                 "\n" +
                 "\"...\"\n"
-        var inputVN = "$word nghĩa là gì và cho một câu ví dụ về từ đó. " +
+        var inputVN = "$word nghĩa là gì và cho một câu ví dụ về từ đó. Hãy loại bỏ bất kỳ những dấu markdown cho câu trả lời và giải thích xúc tích ngắn gọn" +
                 "Câu trả lời dạng: Định nghĩa: Là ....\n" +
                 "\n" +
                 "Ví dụ:\n" +

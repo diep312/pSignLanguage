@@ -33,6 +33,9 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
     }
 
     override fun initView() {
+        val totalLabels = subject?.totalLabels ?: 0
+        val learnedLabels = subject?.learnedLabels ?: 0
+
         setLightIconStatusBar(true)
         setColorForStatusBar(R.color.color_bg)
         binding.layout.setPadding(0, getStatusBarHeight(this@TopicActivity), 0, 0)
@@ -47,10 +50,18 @@ class TopicActivity : BaseActivity<MainViewModel, ActivityTopicBinding>(), Topic
             TopicAdapter(mutableListOf(), Constants.VI, this)
         }
 
-        binding.progressBar.max = subject?.totalLabels ?: 0
-        binding.progressBar.progress = subject?.learnedLabels ?: 0
-        binding.tvProgressPercentage.text = "${subject?.learnedLabels ?: 0}/${subject?.totalLabels ?: 0}"
+        binding.progressBar.max = totalLabels
+        binding.progressBar.progress = learnedLabels
+        val percentage = if (totalLabels == 0) {
+            0
+        } else {
+            (learnedLabels * 100 / totalLabels)
+        }
+
+        binding.tvProgressPercentage.text = "$percentage%"
+
         binding.rvTopic.adapter = adapter
+
 
         subject = intent.getSerializableExtra(Constants.KEY_SUBJECT) as Subject?
         subject?.let {

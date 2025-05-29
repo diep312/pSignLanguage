@@ -39,5 +39,5 @@ object Constants {
 
     const val API_AI_URL = "https://api-ai-signlanguage.ptitiec.xyz/"
     const val API_KEY = "W8W6K-3N7KK-PXB9H-8TD8W-BWTH9"
-    const val API_GEMINI = "AIzaSyBzTes7YE1ekqPYCDNTN0zSgdE5MoELpcc"
+    const val API_GEMINI = "AIzaSyCEeWO3BHfVnhZgv_-M-8AvI_ZOMvVfPx8"
 }

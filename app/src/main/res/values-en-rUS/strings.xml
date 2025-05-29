@@ -67,7 +67,7 @@
     <string name="str_view_points">Points</string>
     <string name="str_back">Back</string>
     <string name="str_average">Average</string>
-    <string name="str_translate_desc">PTIT_IEC_COSIGN \n A collaborative project between Postal and Telecommunications Institute of Technology and Samsung Vietnam.</string>
+    <string name="str_translate_desc">Translate from Sign Language to Vietnamese using AI technology.</string>
     <string name="str_use_camera">Use my camera</string>
     <string name="str_go_to_folder">Pick a file from my gallery</string>
     <string name="str_again">Translate another word</string>

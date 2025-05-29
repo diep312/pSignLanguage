@@ -6,10 +6,10 @@
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parent_layout"
-        android:layout_width="160dp"
+        android:layout_width="@dimen/dp150"
         android:background="@drawable/bg_radius_8"
         android:backgroundTint="@color/container2_bg"
-        android:layout_height="160dp">
+        android:layout_height="@dimen/dp150">
 
         <ImageView
             android:id="@+id/course_icon"
